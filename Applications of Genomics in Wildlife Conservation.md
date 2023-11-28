@@ -6,6 +6,10 @@
 - File System Structure
 - Shell Scripting
 
+## Day 1 - Session 2
+- Command Line Interface
+- File System Structure
+- Shell Scripting
 ## Features
 
 - Import a HTML file and watch it magically convert to Markdown
