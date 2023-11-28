@@ -1,26 +1,38 @@
-![Workshop-logo](./LOGO_new.png)
+![Workshop-logo](./IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
 
-## Day 1 - Session 1
+## Day 1 - Overview
+Basic concepts of command line programing.
+#### Session 1
+- Accessing cloud server (ssh)
 - Command Line Interface
 - File System Structure
+- Manipulating text files
+
+#### Session 2
+- Variables and arguments
 - Shell Scripting
+- Transferring files (sftp)
 
-## Day 1 - Session 2
-- Command Line Interface
-- File System Structure
-- Shell Scripting
-## Features
 
-- Import a HTML file and watch it magically convert to Markdown
-- Drag and drop images (requires your Dropbox account be linked)
-- Import and save files from GitHub, Dropbox, Google Drive and One Drive
-- Drag and drop markdown and HTML files into Dillinger
-- Export documents as Markdown, HTML and PDF
+## Day 2 - Overview
+NGS data preparation for genomic analyses.
 
-Markdown is a lightweight markup language based on the formatting conventions
-that people naturally use in email.
-As [John Gruber] writes on the [Markdown site][df1]
+#### Session 1
+- Introduction to commonly used bioinformatic file formats
+- Assessing the quality of sequencing results
+- Aligning reads to reference genomes
+
+#### Session 2
+- Manipulating alignment files (bam)
+- Estimating coverage, endogenous content, and percentage of duplicates
+
+#### Session 3
+- Parallelization strategies
+- Variant calling
+
+## Day 3 - Overview
+
 
 > The overriding design goal for Markdown's
 > formatting syntax is to make it as readable
