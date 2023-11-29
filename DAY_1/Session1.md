@@ -1,8 +1,8 @@
-![Workshop-logo](./IM/LOGO_new.png)
+![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
 please do not modify these first two lines of the .md file
 use the same syntax to add pictures: 
-placeholder name within square brackets and ./IM/file_name.png within parentheses
+placeholder name within square brackets and ../IM/file_name.png within parentheses
 
 ## Session Title
 please add a few sentences here to introduce your session of the tutorial.
@@ -22,3 +22,4 @@ plink --bfile file_name --recode
 
 see below the syntax for tables:
 
+you can also use the quote env for exercises and tips:
