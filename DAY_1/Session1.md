@@ -27,9 +27,9 @@ see below the syntax for tables:
 
 you can also use the quote env for exercises and tips:
 > Exercise 1 
+
 > Modify the command above to ...
 
 Or even:
 > Best practice:
 > never use spaces in file names
-`--capt-add=SYS-ADMIN` is required for PDF rendering.
