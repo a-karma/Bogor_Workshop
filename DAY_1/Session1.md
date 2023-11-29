@@ -1,7 +1,9 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
 please do not modify these first two lines of the .md file
-use the same syntax to add pictures: 
+
+use the same syntax to add pictures:
+
 placeholder name within square brackets and ../IM/file_name.png within parentheses
 
 ## Session Title
@@ -20,6 +22,14 @@ conda activate Day_1
 plink --bfile file_name --recode
 ```
 
+you can instead use `this syntax` to highlight an in-line command, software name or something you think it's important
 see below the syntax for tables:
 
 you can also use the quote env for exercises and tips:
+> Exercise 1 
+> Modify the command above to ...
+
+Or even:
+> Best practice:
+> never use spaces in file names
+`--capt-add=SYS-ADMIN` is required for PDF rendering.
