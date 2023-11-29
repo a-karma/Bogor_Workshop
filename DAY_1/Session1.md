@@ -23,9 +23,10 @@ plink --bfile file_name --recode
 ```
 
 you can instead use `this syntax` to highlight an in-line command, software name or something you think it's important
+
 see below the syntax for tables:
 
-you can also use the quote env for exercises and tips:
+you can also use this env for exercises and tips:
 > Exercise 1 
 > 
 > Modify the command above to ...
@@ -34,3 +35,5 @@ Or even:
 > Best practice:
 > 
 > never use spaces in file names
+
+note the empty line in the quoted env (looks nicer this way on github) 
