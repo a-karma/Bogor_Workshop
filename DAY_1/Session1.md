@@ -3,8 +3,11 @@
 
 ## Day 1 - Session 1 - Basic concepts of command line programming
 
+### 1. Working from terminal and remote servers
+In this section we will revise the procedure to connect to our cloud server and we will provide you with some preliminary definitions.
 
-### 1. The filesystem 
+
+### 2. The filesystem 
 In this section we will revise basic commands to navigate filesystems and create a series of directories and sub-directories for a research project. Naming file and directory is more important than you may think; a clear and consistent structure will make your life way much easier when you’ll have to deal with complex projects and pipelines. Feel free to adjust and customize this template structure as you please but keep this criteria in mind.
 
 We should start with creating a parent directory for our project. 
@@ -102,7 +105,7 @@ done
 ```
 Now we should move each of these file to the corresponding `Stage_{i}/Output` directory.
 
-> Exercise 3
+> `Exercise 3`
 >
 > Use a for foop to move each of the output_file_{i} ∀i ∈ {1, 2, 3} to its own directory.
 > 
@@ -111,6 +114,35 @@ Now we should move each of these file to the corresponding `Stage_{i}/Output` di
 
 If you now run the `tree` command from the Project_BASH directory, you should get:
 
-![Workshop-logo](../IM/bash_tree.png)
+![File-system-structure](../IM/bash_tree.png)
 
+### 3. Regular expressions & file manipulations
+In this section we are going to apply what we already know about variables, conditional and loops to explore text files. 
+We will mostly focus on file manipulation using regular expressions, using `grep`, `sed` and `awk`.
+
+Let’s start with opening a new terminal, connecting to the VM and look at the file called `random.fasta`:
+```sh
+cd Bash_Crash_Course/Data/
+less random.fasta
+Press Q to exit.
+```
+
+As the name suggests, this file contains some random DNA sequences of different length stored in a commonly used format for this kind of data. 
+As you can see, each entry consists of two lines: an header (with the sequence identifier) and a second line containing the actual sequence.
+Thus, if we were wondering how many reads 1 are in that file, we can just run:
+```sh
+wc -l random.fasta
+```
+and divide this number by two.
+
+Now, let’s look at the first 7 entries which correspond to the first 14 lines of the file.
+We can easily print them on screen using:
+```sh
+head -14 random.fasta
+```
+
+If instead we were interested in the last 4 entries, we could have run:
+```sh
+tail -8 random.fasta
+```
 
