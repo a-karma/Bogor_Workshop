@@ -156,11 +156,28 @@ Specifically, it redirects the standard output of the first command which then s
 Piping the output of head into tail or vice versa is a simple way to extract a block of lines
 but it becomes very slow if the file you are dealing with is huge. An alternative is using
 sed. Let’s consider the following commands:
+
+```sh
 sed -n '9,12p' random.fasta
 sed -n '9,+3p' random.fasta
+```
 These are alternative ways of printing a range of lines. In this case we are printing lines
 from 9 to 12 which of course correspond to our 5th and 6th entry.
 
+It is unlikely though that we will know in advance the line numbers of the entries that are
+relevant to our analysis. Most of the time will have to parse the file and look for patterns.
+That’s when regular expressions (`regex`) become very useful.
+
+As you may have noticed, all header lines in random.fasta start with `>seq` followed by a
+number, `Hg`, and a letter, separated by underscores. The string `Hg` stands for haplogroup
+(A,B,or C) and we might be interested in knowing how many reads we have for each
+group. We can retrieve these number by running:
+
+```sh
+grep '>seq.*_Hg_A' random.fasta | wc -l
+```
+Let's unpack this command
+`grep` stands for "global regular expression print" and it has the following sintax 
 
 
 
