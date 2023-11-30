@@ -129,7 +129,7 @@ Press Q to exit.
 
 As the name suggests, this file contains some random DNA sequences of different length stored in a commonly used format for this kind of data. 
 As you can see, each entry consists of two lines: an header (with the sequence identifier) and a second line containing the actual sequence.
-Thus, if we were wondering how many reads 1 are in that file, we can just run:
+Thus, if we were wondering how many DNA sequences are in that file, we can just run:
 ```sh
 wc -l random.fasta
 ```
