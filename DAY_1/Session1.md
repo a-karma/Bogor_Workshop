@@ -149,7 +149,7 @@ Or we could a combination of these two commands to extract a contiguous block of
 ```sh
 head -20 random.fasta | tail -4
 ```
-With the last command we have selected the 9th and 10th entries corresponding to the 17th up to the 20th line in our fasta file.
+With the last command we have selected the 9th and 10th entries corresponding to the lines from 17 to 20 in our fasta file.
 The vertical bar (`|`) is called `pipe` and it is used to connect the two commands (`head` and `tail` in this case). 
 Specifically, it redirects the standard output of the first command which then serves as input for the second command.
 
@@ -176,9 +176,13 @@ group. We can retrieve these number by running:
 ```sh
 grep '>seq.*_Hg_A' random.fasta | wc -l
 ```
-Let's unpack this command
-`grep` stands for "global regular expression print" and it has the following sintax 
+Let's unpack this command:
 
+`grep` stands for "global regular expression print" and it has the following syntax
+```sh
+grep 'regex' target_file
+```
+In our example the regex or the pattern that we are looking is obviously `>seq.*_Hg_A` 
 
 
 
