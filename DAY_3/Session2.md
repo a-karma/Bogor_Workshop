@@ -112,29 +112,35 @@ This should give us two new output files:
 
 In the next session we will copy these files to our local computer and visualise in RStudio. But now we will move on to the admixture analysis.
 
+### Tutorial three - admixture analysis
+Admixture XXX 
+
+##### In this tutorial we will:
+- run ADMIXTURE 
+
+Again, make sure you are still in the the correct conda environment for this session (the same as tutorial one). If not, reactivate with:
+
+```sh
+conda activate Day_3_b
+```
+Next make a new directory within session two for this tutorial e.g `tutorial3_admixture`
+Enter this directory
+The program ADMIXTURE runs directly from a `.bed` file. We already have this in the right format.
+
+### Lets quickly check up on the IQtree before having coffee...
+Activate your screen session. To see which screens you have running, list them
+```sh 
+screen -ls
+```
+and then activate the one running IQtree
+```sh 
+screen -r [name_of_screen]
+```
+If it has not finished running leave it for longer while we have a break. Deattach the screen using `ctrl`+`a`+`d`
+If it has finished - great :) 
+When it has finished, check the files in your `tutorial1_tree` directory. You should have these output files: 
+- file 1
+- file 2
+- file 3 ...
 
 
-
-
-
-
-
-
-
-see below the syntax for tables:
-
-| column A | column B |
-| ------ | ------ |
-| row 1a | row 1b |
-| row 2a | row 2b |
-| you can also leave cells blank | |
-
-you can also use this env for exercises and tips:
-> Exercise 1 
-> 
-> Modify the command above to ...
-
-Or even:
-> Best practice: never use spaces in file names
-
-note the empty line in the first quoted env (it seems to make it look nicer on github) 
