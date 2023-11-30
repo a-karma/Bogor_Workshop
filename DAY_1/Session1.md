@@ -82,7 +82,7 @@ ls Stage_1
 ls Stage_1/Input
 ls Raw_Data
 ```
-The first command is just to pupulate the `Raw_Data` folder with a file (`input_zero.txt`). By running the second command you should see that an Input folder has been created via the `ln` command. Now the Stage 1 directory contains all three elements required. The output of the third and fourth commands should be just `input_zero.txt`.
+The first command is just to pupulate the Raw_Data folder with a file (`input_zero.txt`). By running the second command you should see that an Input folder has been created via the `ln` command. Now the Stage_1 directory contains all three elements required. The output of the third and fourth commands should be just `input_zero.txt`.
 
 > `Exercise 2`
 >
