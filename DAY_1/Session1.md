@@ -102,8 +102,8 @@ Now we should move each of these file to the corresponding `Stage_{i}/Output` di
 
 > Exercise 3
 >
-> Use a for foop to move each of the output_file_{i} ∀i ∈ {1, 2, 3}.
-To do so, you should use the `mv` command which has the following syntax: `mv target_file_name path/to/destination`.
+> Use a for foop to move each of the output_file_{i} ∀i ∈ {1, 2, 3} to its own directory.
+> To do so, you should use the `mv` command which has the following syntax: `mv target_file_name path/to/destination`.
 
 If you now run the `tree` command from the Project_BASH directory, you should get:
 ![Workshop-logo](../IM/bash_tree.png)
