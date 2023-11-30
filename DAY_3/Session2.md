@@ -6,29 +6,82 @@ use the same syntax to add pictures:
 
 placeholder name within square brackets and ../IM/file_name.png within parentheses
 
-## Day two - Session two and three
-In these sessions we are going to explore the population genetic structure and ancestry in the babirusa dataset. We assign the populations as XXXX
+## Day two - Session two
+In this session we are going to explore the population genetic structure and ancestry in the babirusa dataset.
+We assign the populations as XXXX
 Explained in the lecture XXXX
-In session two - we will run the anaysles on the virtual machine, building maximum likelihood tress in IQtree, a principal components analysis in smartpca and finally run ADMIXTURE with several values of K. 
-In session three - we will export the data from the virtual machine and work in RStudio to visualise the results from the PCA and ADMIXTURE, and we will use the browser tool iTOL for tree visualisation.
+First, we will run all three analyses on the virtual machine, building maximum likelihood tress in IQtree, a principal components analysis in smartpca and finally run ADMIXTURE with several values of K. 
+Then in session three - we will export the data from the virtual machine and work in RStudio to visualise the results from the PCA and ADMIXTURE, and we will use the browser tool iTOL for tree visualisation.
 
 ### Tutorial one - IQtree
 IQTREE XXXXXX
 read the docs XXXXXX
 
 ##### In this tutorial we will:
-- use `screen`
 - convert the files to phylip format 
+- use `screen` to run commands in the background
 - use IQtree to make an unrooted tree
 
-Make session two directory 
-conda env 
-tutorial one 
-screen 
-vcf2phylip 
-iqtree - without ASC 
-iqtree - with ASC 
-close screen 
+First in your home directory we need to make a new directory for this session. Call it something sensible and enter this directory. 
+
+Next we will activate the correct conda environment for the day
+> Hint - this will be the same as the one you were using this morning
+
+Its good to keep all the output files for each analysis in their own directory. So make a directory for this tutorial (call it something like e.g. `tutorial1_tree`) and enter into it 
+
+##### 1. Convert to phylip format
+The program we will use to make the tree is called `iqtree`. This program needs an alignment as the input but this can take several format. 
+We will be using the `.phylip` alignment format. To generate this, we need to use a script called `vcf2phylip.py`. You should be able to find this under `/home/DATA/Day_3_b/scripts/`. We want to use this script to convert our vcf panel into phylip format. So we can assign a variable the path to the panel, and supply this in the command with the `-i` option.
+
+```sh 
+PANEL=/home/DATA/Day_3_b/babirusa_panel
+/home/DATA/Day_3_b/scripts/vcf2phylip.py -i $PANEL.vcf --output-prefix babirusa_panel
+```
+When it is finished you should see a new file in your directory, and that with default settings the file has been named `[name_of_panel].min4.phy`
+This is because it applies a filter of a minimum number of samples per SNP and as default this is four individuals. You can change this using the option `-m`
+> there are also some other options that can be changed, see https://github.com/edgardomortiz/vcf2phylip 
+
+##### 2. Basics of using `screen` in linux
+Now we have our input file for `iqtree`. Because the command we are going to run can take a while to complete, we are going to use a program called `screen` to allow it to run in the background as we continue with the other analyses. 
+So to activate and name a new session we run: 
+```sh 
+screen -S [tree]
+```
+> To detach a session you press `ctrl`+`a`+`d` at the same time 
+> To see what session are open you run: 
+```sh 
+screen -ls
+```
+> To reopen a session run: 
+```sh 
+screen -r [name_of_session]
+```
+> To kill a session run: 
+```sh 
+screen -XS [name_of_session] quit
+```
+
+##### 3. Running iqtree
+Now we have the basics. Reopen the screen you made for running `iqtree`
+You should see that you have to reactivate the conda environment as well, when you enter a new session. 
+
+IQtree is a very versatile program with many options but is very simple to use. 
+To run it we are going to specify some parameters:
+> 1. The phylip alignment (`-s`)
+> 2. The sequence type (`-st`)
+> 3. The substitution model (`-m`) - if you omit this option iqtree runs an automatic model test. But it can take a while so we will specify this. 
+> 4. The output file prefix (`-pre`)
+
+So the command is: 
+```sh 
+iqtree -s babirusa_panel.min4.phy -st DNA -pre babirusa_panel_tree1 -m GTR+ASC
+```
+
+This should actually throw up an error and generate a new file for us. This is because `+ASC` model is specifiying the ascertainment bias correction, which is appropriate for SNP data. However there are invarible sites in the panel. The output file generated only contains variable sites. 
+
+> How would you modify the original command to rerun iqtree using this new file? "babirusa_panel_tree1.varsites.phy"
+
+If that is running well. You can let it run in the background by deattaching the session (`ctrl`+`a`+`d`). We will come back to it later.
 
 ### Tutorial two - exploring population structure with PCA
 PCAs are used to XXXX
@@ -118,14 +171,37 @@ Admixture XXX
 ##### In this tutorial we will:
 - run ADMIXTURE 
 
-Again, make sure you are still in the the correct conda environment for this session (the same as tutorial one). If not, reactivate with:
+Again, make sure you are still in the the correct conda environment for this session (the same as tutorial one and two). If not, reactivate it.
 
-```sh
-conda activate Day_3_b
-```
 Next make a new directory within session two for this tutorial e.g `tutorial3_admixture`
 Enter this directory
 The program ADMIXTURE runs directly from a `.bed` file. We already have this in the right format.
+
+First lets assign a variable for the path to the `.bed` file 
+```sh
+ADMIX=/home/DATA/Day_3_b/babirusa_panel.bed
+```
+
+Then the program is very simple its just
+```sh 
+admixture [path_to_bed] [number_of_ks]
+```
+Can you run this for k=2? 
+
+However we can also calculate the cross validation errors (cv). These are XXXXXX
+To do this we will set up a loop to run through several values of k while calculating the cv errors and outputting it to a log file. 
+```sh 
+for k in {1..5} 
+do
+    admixture $ADMIX --cv $k | tee babirusa_k_$k.log
+done
+```
+
+When this has finished running, we can use `grep` on the log files to extract the cv values, which we can later visualise
+
+```sh 
+grep CV *.log > cv_errors.txt
+```
 
 ### Lets quickly check up on the IQtree before having coffee...
 Activate your screen session. To see which screens you have running, list them
