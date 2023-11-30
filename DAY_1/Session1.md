@@ -1,7 +1,7 @@
 ![Workshop-logo](../IM/LOGO_new.png)
-# Applications of Genomics in Wildlife Conservation - Day 1 - Session 1
+# Applications of Genomics in Wildlife Conservation
 
-## Basics concepts of command line programming
+## Day 1 - Session 1 - Basic concepts of command line programming
 
 
 ### Part 1: The filesystem 
