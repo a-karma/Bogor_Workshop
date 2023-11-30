@@ -90,7 +90,7 @@ The first command is just to pupulate the `Raw_Data` folder with a file (`input_
 > by linking each `Stage_{i}/Output` to an Input folder inside the `Stage_{i+1}` directory.
 > Note that in our example Stage 4 is actually termed Results.
 
-> `Hacker Tips`: if you have made a mistake with links, do not panic. You can alwayse remove them with `rm` or with the unlink command.
+If you have made a mistake with links, do not panic. You can alwayse remove them with `rm` or with the `unlink` command.
 
 Now that we have a good structure we can start populating our directories. Let's create some files in the `Project_BASH` directory.
 
@@ -108,7 +108,9 @@ Now we should move each of these file to the corresponding `Stage_{i}/Output` di
 > 
 > To do so, you should use the `mv` command which has the following syntax: `mv target_file_name path/to/destination`.
 
+
 If you now run the `tree` command from the Project_BASH directory, you should get:
+
 ![Workshop-logo](../IM/bash_tree.png)
 
 
