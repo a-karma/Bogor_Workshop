@@ -53,6 +53,7 @@ In principles, you could navigate to the each Stage directory using the `cd` com
 ```sh
 ls -d Stage* > dir_list.txt
 ```
+Note the use of the `>`. This symbol in bash has a special meaning: redirect the output of the command that precedes it to a file.
 
 Now that we have the list, we can easily implement another type of loop using the reserved word `while`:
 ```sh
@@ -61,8 +62,51 @@ do
 touch $line/What_I_Did.txt
 done < dir_list.txt
 ```
+note again the use of the `$` sign in front of the word `line` which is the syntax for variables in bash. This is because at each iteration the content of the variable `line` will change while we go through the list of directories contained in the `dir_list.txt` file. the loop will end when the variable `$line` is empty i.e. when we reach the end of the file.
+
+> `Exercise 1`
+>
+> use a similar while loop to create a sub-directory called `Output` inside each Stage dir
+
 If your pipeline is run sequentially, the output of the first step will serve as input for the second step and so on and so forth. Therefore, the content of `Stage 1/Output` and `Stage 2/Input` will be exactly the same. Avoiding redundancies and data duplication is a good way of saving space on disk though, thus, we don’t want to copy all the files from one directory to another: we are going to create a symbolic link instead.
+```sh
+ln -s ~/Project_BASH/Raw_Data/ ~/Project_BASH/Stage_1/Input
+```
+The `ln` command stands for ”link” and it has this general syntax:
+```sh
+ln full/path/to/source full/path/to/destination/link_name
+```
+Here we have used the `-s` flag to specify a symbolic link between the `Raw_Data` directory and a new `Input` folder (link name) inside the `Stage_1 directory`. This means that the content of `Raw_Data` is now accessible from `Stage_1/Input`. Let’s double-check it:
+```sh
+touch Raw_Data/input_zero.txt
+ls Stage_1
+ls Stage_1/Input
+ls Raw_Data
+```
+The first command is just to pupulate the `Raw_Data` folder with a file (`input_zero.txt`). By running the second command you should see that an Input folder has been created via the `ln` command. Now the Stage 1 directory contains all three elements required. The output of the third and fourth commands should be just `input_zero.txt`.
 
+> `Exercise 2`
+>
+> Use the ln command to complete our file system structure by linking each Stage_{i}/Output to an Input folder inside the Stage_{i+1} directory. Note that in our example Stage 4 is actually termed Results.
 
+> `Hacker Tips`: if you have made a mistake with links, do not panic. You can alwayse remove them with `rm` or with the unlink command.
+
+Now that we have a good structure we can start populating our directories. Let's create some files in the `Project_BASH` directory.
+
+```sh
+for i in $(seq 3)
+do
+touch output_file_$1
+done
+```
+Now we should move each of these file to the corresponding `Stage_{i}/Output` directory.
+
+> Exercise 3
+>
+> Use a for foop to move each of the output_file_{i} ∀i ∈ {1, 2, 3}.
+To do so, you should use the `mv` command which has the following syntax: `mv target_file_name path/to/destination`.
+
+If you now run the `tree` command from the Project_BASH directory, you should get:
+![Workshop-logo](../IM/bash_tree.png)
 
 
