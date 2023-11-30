@@ -122,14 +122,14 @@ We will mostly focus on file manipulation using regular expressions, using `grep
 
 Let’s start with opening a new terminal, connecting to the VM and look at the file called `random.fasta`:
 ```sh
-cd Bash_Crash_Course/Data/
+cd /home/Data/Day_1/
 less random.fasta
 Press Q to exit.
 ```
 
 As the name suggests, this file contains some random DNA sequences of different length stored in a commonly used format for this kind of data. 
-As you can see, each entry consists of two lines: an header (with the sequence identifier) and a second line containing the actual sequence.
-Thus, if we were wondering how many DNA sequences are in that file, we can just run:
+As you can see, each entry consists of two lines: a header (with the sequence identifier) and a second line containing the actual sequence.
+Thus, if we were wondering how many DNA sequences are present in that file, we can just run:
 ```sh
 wc -l random.fasta
 ```
@@ -145,4 +145,23 @@ If instead we were interested in the last 4 entries, we could have run:
 ```sh
 tail -8 random.fasta
 ```
+Or we could a combination of these two commands to extract a contiguous block of sequence:
+```sh
+head -20 random.fasta | tail -4
+```
+With the last command we have selected the 9th and 10th entries corresponding to the 17th up to the 20th line in our fasta file.
+The vertical bar (`|`) is called `pipe` and it is used to connect the two commands (`head` and `tail` in this case). 
+Specifically, it redirects the standard output of the first command which then serves as input for the second command.
+
+Piping the output of head into tail or vice versa is a simple way to extract a block of lines
+but it becomes very slow if the file you are dealing with is huge. An alternative is using
+sed. Let’s consider the following commands:
+sed -n '9,12p' random.fasta
+sed -n '9,+3p' random.fasta
+These are alternative ways of printing a range of lines. In this case we are printing lines
+from 9 to 12 which of course correspond to our 5th and 6th entry.
+
+
+
+
 
