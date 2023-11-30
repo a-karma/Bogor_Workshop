@@ -6,14 +6,18 @@ use the same syntax to add pictures:
 
 placeholder name within square brackets and ../IM/file_name.png within parentheses
 
-## Session Title
-please add a few sentences here to introduce your session of the tutorial.
+## Day two - Session two and three
+In these sessions we are going to explore the population genetic structure and ancestry in the babirusa dataset. We assign the populations as XXXX
+Explained in the lecture XXXX
+In session two - we will run the anaysles on the virtual machine, building maximum likelihood tress in IQtree, a principal components analysis in smartpca and finally run ADMIXTURE with several values of K. 
+In session three - we will export the data from the virtual machine and work in RStudio to visualise the results from the PCA and ADMIXTURE, and we will use the browser tool iTOL for tree visualisation.
 
-### Example of section title 
-##### Example of sub-section title 
-- this is how you define bullet point
-- in case you want to make more explicit 
-- the series of steps required to accomplish a task 
+### Tutorial two - exploring population structure with PCA
+PCAs are used to
+
+##### In this tutorial we will:
+- get the files into the correct format
+- run smartpca
 
 See example below on how to format commands that the participants will have to run
 
