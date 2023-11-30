@@ -1,11 +1,10 @@
 ![Workshop-logo](../IM/LOGO_new.png)
-# Applications of Genomics in Wildlife Conservation
+# Applications of Genomics in Wildlife Conservation - Day 1 - Session 1
 
-## Day 1 - Basics concepts of command line programming
-This session is diveded into three parts
+## Basics concepts of command line programming
 
 
-#### 1. The filesystem 
+### Part 1: The filesystem 
 In this section we will revise basic commands to navigate filesystems and create a series of directories and sub-directories for a research project. Naming file and directory is more important than you may think; a clear and consistent structure will make your life way much easier when you’ll have to deal with complex projects and pipelines. Feel free to adjust and customize this template structure as you please but keep this criteria in mind.
 
 We should start with creating a parent directory for our project. 
