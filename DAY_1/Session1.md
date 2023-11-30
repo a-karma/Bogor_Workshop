@@ -86,8 +86,8 @@ The first command is just to pupulate the `Raw_Data` folder with a file (`input_
 
 > `Exercise 2`
 >
-> Use the ln command to complete our file system structure by linking each Stage_{i}/Output to an Input folder inside the Stage_{i+1} directory.
->
+> Use the ln command to complete our file system structure
+> by linking each `Stage_{i}/Output` to an Input folder inside the `Stage_{i+1}` directory.
 > Note that in our example Stage 4 is actually termed Results.
 
 > `Hacker Tips`: if you have made a mistake with links, do not panic. You can alwayse remove them with `rm` or with the unlink command.
