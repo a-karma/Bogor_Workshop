@@ -1,43 +1,22 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
-please do not modify these first two lines of the .md file
 
-use the same syntax to add pictures:
+## Day three - Session three - Analysis visualisation
+In this session we are going to visualise all our results from the previous session. We will be working mainly on our local computers in RStudio and the browser.
 
-placeholder name within square brackets and ../IM/file_name.png within parentheses
+We will:
+- download our output files via `sftp`
+- generate figures in RStudio for the PCA and ADMIXTURE results
+- Visualise the phylogenetic tree in iTOL (https://itol.embl.de/) 
 
-## Session Title - hello does this work 
-please add a few sentences here to introduce your session of the tutorial.
+### 1. Downloading the output files 
+On your local computer we will use `sftp` to connect to the remote server and download the files.
+Open a new terminal and navigate to the directory where you would like to run the analysis on your local computer
 
-### Example of section title 
-##### Example of sub-section title 
-- this is how you define bullet point
-- in case you want to make more explicit 
-- the series of steps required to accomplish a task 
-
-See example below on how to format commands that the participants will have to run
-
+Then run `sftp` - this stands for secure file transfer protocol. We need to tell it where the ssh key is, and which remote server to connect using your username and the IP address. Therefore enter: 
 ```sh
-conda activate Day_1
-plink --bfile file_name --recode
+sftp -i ~/path/to/ssh/key [your_username]@138.246.238.65
 ```
+This will now show the 
 
-you can instead use `this syntax` to highlight an in-line command, software name or something you think it's important
 
-see below the syntax for tables:
-
-| column A | column B |
-| ------ | ------ |
-| row 1a | row 1b |
-| row 2a | row 2b |
-| you can also leave cells blank | |
-
-you can also use this env for exercises and tips:
-> Exercise 1 
-> 
-> Modify the command above to ...
-
-Or even:
-> Best practice: never use spaces in file names
-
-note the empty line in the first quoted env (it seems to make it look nicer on github) 
