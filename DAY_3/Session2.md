@@ -3,6 +3,7 @@
 
 ## Day two - Session two - Population genetic analysis
 In this session we are going to explore the population genetic structure and ancestry using the babirusa dataset.
+
 We will run the three analyses discussed in the introduction:
 -1. PCA analysis
 First, we will run all three analyses on the virtual machine, building maximum likelihood tress in IQtree, a principal components analysis in smartpca and finally run ADMIXTURE with several values of K. 
