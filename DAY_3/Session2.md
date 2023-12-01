@@ -2,13 +2,12 @@
 # Applications of Genomics in Wildlife Conservation
 
 ## Day two - Session two - Population genetic analysis
-In this session we are going to explore the population genetic structure and ancestry using the babirusa dataset.
+In this session we are going to explore the population genetic structure and ancestry using the babirusa dataset. As explained, we are going to use these analyses to explore whether all these babirusa come from a homogeneous population, or whether we see population structure based on the location of the sample.  
 
-We will run the three analyses discussed in the introduction using the remote servers:
+We will run the three analyses using the remote server:
 - building maximum likelihood tress in IQtree
 - principal components analysis in smartpca
 - ADMIXTURE with different values of K
-
 
 Then in session three - we will export the data from the virtual machine and work in RStudio to visualise the results from the PCA and ADMIXTURE, and we will use the browser tool iTOL for tree visualisation.
 
