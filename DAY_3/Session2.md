@@ -11,18 +11,14 @@ We will run the three analyses using the remote server:
 
 Then in session three - we will export the data from the virtual machine and work in RStudio to visualise the results from the PCA and ADMIXTURE, and we will use the browser tool iTOL for tree visualisation.
 
-### Tutorial one - IQtree
-#### In this tutorial we will:
-- convert the files to phylip format 
-- use `screen` to run commands in the background
-- use IQtree to make an unrooted tree
+### 1. Building phylogenetic trees with IQtree
 
-First in your home directory we need to make a new directory for this session. Call it something sensible and enter this directory. 
+First in your home directory we need to make a new directory for this session. Call it something sensible and navigate into this directory
 
 Next we will activate the correct conda environment for the day
 > Hint - this will be the same as the one you were using this morning
 
-Its good to keep all the output files for each analysis in their own directory. So make a directory for this tutorial (call it something like e.g. `tutorial1_tree`) and enter into it 
+We will keep the output files for each analysis in their own directory. So make a directory for this analysis and navigate to it. 
 
 #### 1. Convert to phylip format
 The program we will use to make the tree is called `iqtree`. This program needs an alignment as the input but this can take several format. 
