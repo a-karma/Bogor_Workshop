@@ -16,13 +16,15 @@ Then in session three - we will export the data from the virtual machine and wor
 First in your home directory we need to make a new directory for this session. Call it something sensible and navigate into this directory
 
 Next we will activate the correct conda environment for the day
-> Hint - this will be the same as the one you were using this morning
+> `Hint` - this will be the same as the one you were using this morning
 
-We will keep the output files for each analysis in their own directory. So make a directory for this analysis and navigate to it. 
+We will keep the output files for each analysis in their own directory, so make a directory for this analysis and navigate to it
 
-#### 1. Convert to phylip format
-The program we will use to make the tree is called `iqtree`. This program needs an alignment as the input but this can take several format. 
-We will be using the `.phylip` alignment format. To generate this, we need to use a script called `vcf2phylip.py`. You should be able to find this under `/home/DATA/Day_3_b/scripts/`. We want to use this script to convert our vcf panel into phylip format. So we can assign a variable the path to the panel, and supply this in the command with the `-i` option.
+### Convert to phylip format
+The program we will use to make the tree is called `iqtree`. `iqtree` requires an alignment file as an input but this can take several formats. 
+We will be using the `.phylip` alignment format. To generate this from our vcf file, we need to use a script called `vcf2phylip.py`. 
+
+You should be able to find this under `/home/DATA/Day_3_b/scripts/`. We want to use this script to convert our vcf panel into phylip format. So we can assign a variable the path to the panel, and supply this in the command with the `-i` option.
 
 ```sh 
 PANEL=/home/DATA/Day_3_b/babirusa_panel
