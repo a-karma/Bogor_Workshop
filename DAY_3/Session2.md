@@ -176,28 +176,23 @@ The final analysis we will run is ADMIXTURE. This will calculate individual ance
 
 Make a new directory within your project folder for session two and navigate to it
 
-The program `ADMIXTURE` runs directly from a `.bed` file. Great, we already have this in the right format.
-
-First lets assign a variable for the path to the `.bed` file 
-```sh
-ADMIX=/home/DATA/Day_3_b/babirusa_panel.bed
-```
-
-Then the program is very simple its just
+The program `ADMIXTURE` runs directly from a `.bed` file. Great, we already have this in the right format. So the command is very simple.
 ```sh 
 admixture [path_to_bed] [number_of_ks]
 ```
+This program can also calculate the cross validation errors using the option (`-cv`).
+
 > `Exercise four`
 >
-> Run ADMIXTURE for k = 2
+> Run ADMIXTURE for k = 2 with thr cross validation error calculation
 
-This program can also calculate the cross validation errors using the option (`-cv`)
+Next you can use a loop to run through several values of k, calculate the cv errors and output the results to a log file.
+First lets assign a variable for the path to the `.bed` file.
 
-
-
-
-
-To do this you will set up a loop to run through several values of k while calculating the cv errors and outputting it to a log file. 
+```sh
+ADMIX=/home/DATA/Day_3_b/babirusa_panel.bed
+```
+Then make the for loop for k = 1-5
 ```sh 
 for k in {1..5} 
 do
@@ -205,14 +200,15 @@ do
 done
 ```
 
-When this has finished running, we can use `grep` on the log files to extract the cv values, which we can later visualise
+When this has finished running, use `grep` on the log files to extract the cv values, which we can later visualise
 
 ```sh 
 grep CV *.log > cv_errors.txt
 ```
 
-### Lets quickly check up on the IQtree before having coffee...
-Activate your screen session. To see which screens you have running, list them
+### Lets quickly check on the IQtree before having coffee...
+
+Reactivate your screen session. To see which screens you have running, list them first:
 ```sh 
 screen -ls
 ```
@@ -221,10 +217,13 @@ and then activate the one running IQtree
 screen -r [name_of_screen]
 ```
 If it has not finished running leave it for longer while we have a break. Deattach the screen using `ctrl`+`a`+`d`
-If it has finished - great :) 
-When it has finished, check the files in your `tutorial1_tree` directory. You should have these output files: 
-- file 1
-- file 2
-- file 3 ...
+If it has finished - great. You can check the files in the directory for this analysis. You should have these output files: 
+- .iqtree - the report file
+- .treefile - the ML tree in NEWICK format (this is the file we will need to visualise in the next session)
+- .log - the log file
+- .ckp.gz - this is a check point file, if a run is interrupted and you need to resume
+- .mldist -
+- .bionj -
 
+If you see these files, you can close the screen session.
 
