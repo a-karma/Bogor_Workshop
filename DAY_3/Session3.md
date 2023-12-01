@@ -1,7 +1,7 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
 
-## Day three - Session three - Analysis visualisation
+## Day three - Session three - Visualisation 
 In this session we are going to visualise all our results from the previous session. We will be working mainly on our local computers in RStudio and the browser.
 
 We will:
