@@ -38,9 +38,10 @@ NGS data preparation for genomic analyses.
 Analysing genetic variations.
 
 #### Session 1
-- segregating sites
-- two or three bullet point will suffice
-- see my examples above
+- Understanding the .vcf file
+- Calculating segregating sites, average number of pairwise differences, heterozygosity
+- Hypothesis for the observed genetic diversity
+- Discuss how to test these hypothesis
 
 #### Session 2
 - add some content here please
