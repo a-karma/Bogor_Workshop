@@ -276,6 +276,8 @@ data. Note also the -o to specify the output file which must precede the input.
 Our table is now ready to be analysed. Hurray!!!
 
 > `Bonus Exercise`
+> 
 > How many coding regions (CDS) on the X chromosome are listed in our bed file?
+> 
 > Use the commands you have learn to find out   
 
