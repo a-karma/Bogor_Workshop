@@ -201,6 +201,7 @@ here we have specified a pattern (`/seq_3_/`) and asked the program to print eac
 Finally, we have redirected the output to store this information into a file called third_seq_all_Hg.fasta.
 
 > `Exercise 5`
+> 
 > Now navigate to your `Raw_Data` directory and visualise the content of the file on screen using the command `cat name-of-the-file`.
 
 Let’s have a look at a different file format and keep on experimenting with regex. 
