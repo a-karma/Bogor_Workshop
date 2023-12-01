@@ -158,6 +158,13 @@ sftp -i <path_to_identity_file> username@138.246.238.65
 > get babirusa_* .
 ```
 
+The plot should look somewhat like this:
+![RD44 and RD71 run with coarse parameter](../IM/babirusa_chr1_coarse.png)
+
+![RD44 and RD71 run with the first fine parameter](../IM/babirusa_chr1_fine_a.png)
+
+![RD44 and RD71 run with the second fine parameter](../IM/babirusa_chr1_fine_b.png)
+
 > Exercise 4.2:
 >
 > Re-run commands from Task 3 and 4 to the resulting whole genome psmc you did in Task 2. Compare the result of this coarse pattern. How are they different?
