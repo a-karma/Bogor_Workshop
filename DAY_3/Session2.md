@@ -85,32 +85,26 @@ iqtree -s babirusa_panel.min4.phy -st DNA -pre babirusa_panel_tree1 -m GTR+ASC
 
 This should actually throw up an error and generate a new file for us. This is because `+ASC` model is specifiying the ascertainment bias correction, which is appropriate for SNP data. However there are invarible sites in the panel. The output file generated only contains variable sites. 
 
-> How would you modify the original command to rerun iqtree using this new file? "babirusa_panel_tree1.varsites.phy"
+> `Exercise two`
+>
+> How would you modify the original command to rerun iqtree using this new file?
 
-If that is running well. You can let it run in the background by deattaching the session (`ctrl`+`a`+`d`). We will come back to it later.
+If that is running, we will now let it in the background by deattaching the session (`ctrl`+`a`+`d`) and we will come back to it later.
 
-### Tutorial two - exploring population structure with PCA
-PCAs are used to XXXX
+### 2. Principal components analysis (PCA) in smartpca
+Next we are going to look at the possible population structure in the dataset using `smartpca` to make a PCA. 
 
-#### In this tutorial we will:
-- get the files into the correct format
-- run smartpca
+Make a new directory in your session two directory and navigate to it. 
 
-Make sure you are still in the the correct conda environment for this session.
+### Convert files to the correct format
+The first thing we need to do is convert our plink fileset into an eignstrat format which is used by the eigensoft set of programs - including smartpca. To do this we use a program called `convertf`
 
-Next make a new directory within session two for this tutorial and navigate to it
+To run `convertf` we need to make a parameter file, or par file, which contains the information on where the files we want to convert are located. We can change between several different formats, our current files are in the .ped format and would like the EIGENSTRAT format as the output. 
+> `hint` - take a look at the format and additional options here - https://github.com/chrchang/eigensoft/blob/master/CONVERTF/README
 
-#### 1. Convert files to the correct format
-The first thing we need to do is convert our plink fileset into an eignstrat format which is used by the eigensoft set of programs - including smartpca. And to do this we use a program called `convertf`
+Make an empty text file and enter the text editor (`nano`).
 
-Here we are going to generate a parameter file which contains the information that the program needs to correctly convert the files
-> Make an empty text file and enter the text editor
-
-
-Convertf can change between several different format, we have the .ped format and would like the EIGENSTRAT format as the output. 
-> take a look at the format and additional options here - https://github.com/chrchang/eigensoft/blob/master/CONVERTF/README
-
-So first you specific the location of your original plink ped and map file, define the outputformat that you require and then you want to generate the new eigenstrat files in your working directory.
+You need to specify the location of your original plink .ped and .map file, define the output format that you require and then specify where you want to generate the new eigenstrat files. For us this will be in your working directory.
 
 ```sh
 genotypename:   /home/DATA/Day_3_b/babirusa_panel.ped
@@ -121,7 +115,7 @@ genotypeoutname: babirusa_panel.eigenstratgeno
 snpoutname:      babirusa_panel.snp
 indivoutname:    babirusa_panel.ind
 ```
-> save with an informative name (e.g par.convertf_PEDtoEIGENSTRAT) and exit the editor
+> save with an informative name (e.g `par.convertf_PEDtoEIGENSTRAT`) and exit the editor
 
 Now we can run convertf using 
 ```sh 
