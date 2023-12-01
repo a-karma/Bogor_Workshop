@@ -6,7 +6,7 @@ use the same syntax to add pictures:
 
 placeholder name within square brackets and ../IM/file_name.png within parentheses
 
-## Session Title
+## Session Title - hello does this work 
 please add a few sentences here to introduce your session of the tutorial.
 
 ### Example of section title 
