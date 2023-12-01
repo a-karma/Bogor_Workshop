@@ -159,11 +159,10 @@ sftp -i <path_to_identity_file> username@138.246.238.65
 ```
 
 The plot should look somewhat like this:
-![RD44 and RD71 run with coarse parameter](../IM/babirusa_chr1_coarse.png)
 
-![RD44 and RD71 run with the first fine parameter](../IM/babirusa_chr1_fine_a.png)
-
-![RD44 and RD71 run with the second fine parameter](../IM/babirusa_chr1_fine_b.png)
+Babirusa PSMC with coarse parameter           |  Babirusa PSMC with fine parameter (4 + 10*2 + 4 + 6)                | Babirusa PSMC with fine parameter (4 + 25*2 + 4 + 6)
+:--------------------------------------------:|:---------------------------------------------------:|:---------------------------------:|
+![RD44 and RD71 run with coarse parameter](../IM/babirusa_chr1_coarse.png)  |  ![RD44 and RD71 run with the first fine parameter](../IM/babirusa_chr1_fine_a.png) | ![RD44 and RD71 run with the second fine parameter](../IM/babirusa_chr1_fine_b.png)
 
 > Exercise 4.2:
 >
