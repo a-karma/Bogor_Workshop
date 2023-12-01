@@ -38,7 +38,7 @@ NGS data preparation for genomic analyses.
 Analysing genetic variations.
 
 #### Session 1
-- add some content here please
+- segregating sites
 - two or three bullet point will suffice
 - see my examples above
 
