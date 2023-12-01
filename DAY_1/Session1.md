@@ -184,15 +184,34 @@ grep 'regex' target_file
 ```
 In our example the regex or the pattern that we are looking is obviously `>seq.*_Hg_A`. 
 This regular expression is designed not to match a unique sequence of character but rather a series of sequences that are similar to each another.
-In fact, this regex will match any string containing '>seq' followed by any character (represented by the `.` symbol) that appears zero or more times (`*`), 
-followed by the string`_Hg_A`. Thus, `grep` will print all the header lines in the random.fasta corresponding to haplogroup A and this output is the piped (|) 
+In fact, this regex will match any line containing the string `>seq` followed by any character (represented by the `.` symbol) that appears zero or more times (`*`), 
+followed by the string `_Hg_A`. Thus, `grep` will print all the header lines in the random.fasta corresponding to haplogroup A and this output is the piped (|) 
 into the command `wc -l` which simply counts the number of matching lines.
 
 > `Exercise 4`
 >
 > Find out how many sequences we have for each group by modifying the pattern of the grep command above.
 
+We can also use regex inside a sed command. For example, let's extract the 3rd sequence of each haplogroup:
+```sh
+sed -n '/seq_3_/,+1p' random.fasta > /home/your-user-id/Project_BASH/Raw_Data/third_seq_all_Hg.fasta
+```
+As you can see, it looks very similar to the sed command we used before with the exception that instead of providing sed with specific line number, 
+here we have specified a pattern (`/seq_3_/`) and asked the program to print eachh matching line plus and the following one: (+1p). 
+Finally, we have redirected the output to store this information into a file called third_seq_all_Hg.fasta.
+Now navigate to your `Raw_Data` directory and visualise the content of the file on screen using the command `cat name-of-the-file`.
 
+
+Let’s have a look at a different file format and keep on experimenting with regex. 
+In the`/home/Data/Day_1` folder you should see a file called `dog_genes.gtf`  
+which is a tab separated file containing annotations for some coding sequences in the dog genome.
+We can have a look at the header (lines starting with #) by running:
+```sh
+grep '^#' /home/Data/Day_1/dog_genes.gtf
+```
+> `Exercise 5`
+>
+> Create an headerless version of this file called dog_genes_no_H.tsv using the ”select non matching lines” option of grep (-v flag).
 
 
 
