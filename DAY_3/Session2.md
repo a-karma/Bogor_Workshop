@@ -37,6 +37,7 @@ Then we run the vcf2phylip script, we need to specify the vcf file as the input 
 When it is finished you should see a your output file in your directory, and that with default settings the file has been named `[name_of_panel].min4.phy`
 
 >  `Exercise one`
+> 
 >  Can you use the help file to find out what the addition of "min4" in the file name means? How would you change this option?
 
 ### Basics of using `screen` in linux
@@ -64,11 +65,11 @@ screen -XS [name_of_session] quit
 ```
 
 ### Running iqtree
-Now we have the basics we will run iqtree 
+Now we have the basics we will run iqtree. 
 
 > `Exercise two`
-> 
-
+>
+> Open a named screen and access the help file for iqtree, why do you think it 
 
 Reopen the screen you made for running `iqtree`
 You should see that you have to reactivate the conda environment as well, when you enter a new session. 
