@@ -154,27 +154,29 @@ evaloutname:   babirusa_panel_PCA.eval
 ```
 > save with an informative name (e.g `par.smartpca_babirusa`) and exit the editor
 
-There are many other options we could add to the par file, which will depend on your data and the analysis you are conducting 
+There are many other options to add to the par file, which will depend on your data and the analysis you are conducting 
 > `Hint` take a look at the documentation here: https://github.com/chrchang/eigensoft/blob/master/POPGEN/README
 
-Now we run `smartpca` and save the output to a log file
+Now run `smartpca` and save the output to a log file
 ```sh 
 smartpca -p [name_of_your_par_file] > [name_of_your_logfile].log
 ```
-This should give us two new output files, look at the contents of these files: 
+This should give you two new output files, look at the contents of these files: 
 - babirusa_panel_PCA.evec - this is the position of where each individual falls along the eigenvectors (columns 2:11) 
 - babirusa_panel_PCA.eval - this contains the eigenvalues for each of the principal components (the importance of each axis)
 
+> `Exercise three`
+>
+> Can you modify the par file and generate new outputs for 15 eigenvectors?
+
 In the next session you will copy these files to your local computer and visualise in RStudio. But now lets move on to the admixture analysis.
 
-### Tutorial three - admixture analysis
-Admixture XXX 
+### 3. ADMIXTURE analysis
+The final analysis we will run is ADMIXTURE. This will calculate individual ancestry proportions for each of the babirusa.
 
-#### In this tutorial we will:
-- run ADMIXTURE 
+Make a new directory within your project folder for session two and navigate to it
 
-Next make a new directory within session two for this tutorial and navigate to it
-The program ADMIXTURE runs directly from a `.bed` file. We already have this in the right format.
+The program `ADMIXTURE` runs directly from a `.bed` file. Great, we already have this in the right format.
 
 First lets assign a variable for the path to the `.bed` file 
 ```sh
@@ -185,10 +187,17 @@ Then the program is very simple its just
 ```sh 
 admixture [path_to_bed] [number_of_ks]
 ```
-Can you run this for k=2? 
+> `Exercise four`
+>
+> Run ADMIXTURE for k = 2
 
-However we can also calculate the cross validation errors (cv). These are XXXXXX
-To do this we will set up a loop to run through several values of k while calculating the cv errors and outputting it to a log file. 
+This program can also calculate the cross validation errors using the option (`-cv`)
+
+
+
+
+
+To do this you will set up a loop to run through several values of k while calculating the cv errors and outputting it to a log file. 
 ```sh 
 for k in {1..5} 
 do
