@@ -1,10 +1,5 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
-please do not modify these first two lines of the .md file
-
-use the same syntax to add pictures:
-
-placeholder name within square brackets and ../IM/file_name.png within parentheses
 
 ## Day two - Session two
 In this session we are going to explore the population genetic structure and ancestry in the babirusa dataset.
