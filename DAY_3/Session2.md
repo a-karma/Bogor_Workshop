@@ -13,7 +13,7 @@ Then in session three - we will export the data from the virtual machine and wor
 
 ### 1. Building phylogenetic trees with IQtree
 
-First in your home directory we need to make a new directory for this session. Call it something sensible and navigate into this directory
+First in your home directory we need to make a new directory for this session. Call it something sensible and navigate into this directory.
 
 Next we will activate the correct conda environment for the day
 > `Hint` - this will be the same as the one you were using this morning
@@ -67,14 +67,11 @@ screen -XS [name_of_session] quit
 ### Running iqtree
 Now we have the basics we will run iqtree. 
 
-> `Exercise two`
->
-> Open a named screen and access the help file for iqtree, why do you think it 
-
 Reopen the screen you made for running `iqtree`
-You should see that you have to reactivate the conda environment as well, when you enter a new session. 
+You should see that you have to reactivate the conda environment when you enter a new session. 
 
 IQtree is a very versatile program with many options but is very simple to use. 
+
 To run it we are going to specify some parameters:
 > 1. The phylip alignment (`-s`)
 > 2. The sequence type (`-st`)
