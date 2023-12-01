@@ -246,24 +246,36 @@ we replaced this with `chr_`. You can check whether the substitution
 worked or not by examining the first 10 lines of the table with head.
 
 The next thing we would like to do is switching the order of the columns in our table:
--1. Chromosome
--2. Starting Position
--3. Ending Position
--4. Feature Type
+- 1. Chromosome
+- 2. Starting Position
+- 3. Ending Position
+- 4. Feature Type
 This requires a simple awk command:
 ```sh
-awk 'BEGIN {OFS="\t"};{print $1,$3,$4,$2}' Stage_1/Output/dog_genes_table.tsv > d_g_tab_cfp.tsv
+awk 'BEGIN {OFS="\t"};{print $1,$3,$4,$2}' Stage_2/Output/dog_genes_table.tsv > Stage_3/Output/d_g_tab_cfp.tsv
+```
+
 The OFS option before the print command stands for ”Output Filed Separator” and we set
-it to Tab (\t) to ensure our table has the correct delimiter for a ”tab separated file” (TSV).
-As you learnt in Part 4, awk stores each field in a different variable which is accessible
-via the $ symbol. We made use of this feature to put the columns in the rigth order.
+it to Tab (`\t`) to ensure our table has the correct delimiter for a ”tab separated file” (TSV).
+`awk` stores each field in a different variable which is accessible via the `$` symbol. 
+We made use of this feature to put the columns in the rigth order.
 
 We are almost done with pre-processing our data but there’s still something that’s not
 quite right with it. Have a look at the first column:
+```sh
+cd Stage_3/Output
 cat d_g_tab_cfp.tsv | cut -f 1
+```
 Have you noticed that the chromosomes are not in the right order? Let’s fix it!
-sort -V -o d_g_sorted_table.bed d_g_tab_cfp.tsv
+```sh
+sort -V -o ../../Results/d_g_sorted_table.bed d_g_tab_cfp.tsv
+```
+
 Here we used the -V option because we are dealing with a mixture of numerical and string
 data. Note also the -o to specify the output file which must precede the input.
 Our table is now ready to be analysed. Hurray!!!
+
+> `Bonus Exercise`
+> How many coding regions (CDS) on the X chromosome are listed in our bed file?
+> Use the commands you have learn to find out   
 
