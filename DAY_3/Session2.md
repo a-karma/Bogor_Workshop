@@ -2,34 +2,34 @@
 # Applications of Genomics in Wildlife Conservation
 
 ## Day two - Session two - Population genetic analysis
-In this session we are going to explore the population genetic structure and ancestry using the babirusa dataset. As explained, we are going to use these analyses to explore whether all these babirusa come from a homogeneous population, or whether we see population structure based on the location of the sample.  
+In this session we are going to explore the population genetic structure and ancestry using the babirusa dataset. As explained, we will use these analyses to explore whether all the babirusa come from a homogeneous population, or whether we can see evidence of population structure based on the location of the sample.  
 
-We will run the three analyses using the remote server:
+In this tutorial you will run the three analyses using the remote server:
 - building maximum likelihood tress in IQtree
 - principal components analysis in smartpca
 - ADMIXTURE with different values of K
 
-Then in session three - we will export the data from the virtual machine and work in RStudio to visualise the results from the PCA and ADMIXTURE, and we will use the browser tool iTOL for tree visualisation.
+Then in session three - you will export the data from the virtual machine and work in RStudio to visualise the results from the PCA and ADMIXTURE, and you will use the browser tool iTOL for tree visualisation.
 
 ### 1. Building phylogenetic trees with IQtree
 
-First in your home directory we need to make a new directory for this session. Call it something sensible and navigate into this directory.
+First in your home directory, make a new directory for this session. Call it something sensible and navigate into this directory.
 
-Next we will activate the correct conda environment for the day
+Next activate the correct conda environment for the day
 > `Hint` - this will be the same as the one you were using this morning
 
-We will keep the output files for each analysis in their own directory, so make a directory for this analysis and navigate to it
+We will keep the output files for each analysis in their own directory, so make a directory for this analysis and navigate to it. This is your working directory
 
 ### Convert to phylip format
-The program we will use to make the tree is called `iqtree`. `iqtree` requires an alignment file as an input but this can take several formats. 
-We will be using the `.phylip` alignment format. To generate this from our vcf file, we need to use a script called `vcf2phylip.py`. 
+The program you will use to make the tree is called `iqtree`. `iqtree` requires an alignment file as an input but this can take several formats. 
+We will be using the `.phylip` alignment format. To generate this from the vcf file, you need to use a script called `vcf2phylip.py`. 
 
-You should be able to find this under `/home/DATA/Day_3_b/scripts/`. We want to use this script to convert our vcf into phylip format. To do this, first we can assign the path to the panel variable.
+You should be able to find this under `/home/DATA/Day_3_b/scripts/`. We want to use this script to convert our vcf into phylip format. To do this, first assign the path to the panel as a variable.
 
 ```sh 
 PANEL=/home/DATA/Day_3_b/babirusa_panel
 ```
-Then we run the vcf2phylip script, we need to specify the vcf file as the input (`-i`) and the output name we want in our working directory (`--out-prefix`)
+Then run the vcf2phylip script by specifying the vcf file as the input (`-i`) and the output name you want in your current working directory (`--out-prefix`)
 
 ```sh
 /home/DATA/Day_3_b/scripts/vcf2phylip.py -i $PANEL.vcf --output-prefix babirusa_panel
@@ -65,7 +65,7 @@ screen -XS [name_of_session] quit
 ```
 
 ### Running iqtree
-Now we have the basics we will run iqtree. 
+Now we have our input file and the basic understanding of screen we will run iqtree. 
 
 Reopen the screen you made for running `iqtree`
 You should see that you have to reactivate the conda environment when you enter a new session. 
@@ -97,10 +97,10 @@ Next we are going to look at the possible population structure in the dataset us
 Make a new directory in your session two directory and navigate to it. 
 
 ### Convert files to the correct format
-The first thing we need to do is convert our plink fileset into an eignstrat format which is used by the eigensoft set of programs - including smartpca. To do this we use a program called `convertf`
+The first thing to do is convert our plink fileset into an eignstrat format which is used by the eigensoft set of programs - including smartpca. To do this we use a program called `convertf`
 
-To run `convertf` we need to make a parameter file, or par file, which contains the information on where the files we want to convert are located. We can change between several different formats, our current files are in the .ped format and would like the EIGENSTRAT format as the output. 
-> `hint` - take a look at the format and additional options here - https://github.com/chrchang/eigensoft/blob/master/CONVERTF/README
+To run `convertf` you need to make a parameter file, or par file, which contains the information on where the files we want to convert are located. The program can change between several different formats, for example - the current files are in the .ped format and would like the EIGENSTRAT format as the output. 
+> `Hint` - take a look at the format and additional options here - https://github.com/chrchang/eigensoft/blob/master/CONVERTF/README
 
 Make an empty text file and enter the text editor (`nano`).
 
@@ -117,28 +117,34 @@ indivoutname:    babirusa_panel.ind
 ```
 > save with an informative name (e.g `par.convertf_PEDtoEIGENSTRAT`) and exit the editor
 
-Now we can run convertf using 
+Now run convertf using 
 ```sh 
 convertf -p [name_of_par_file]
 ```
 Once completed, you should see the new files in your working directory
 
-#### 2. Reassign the populations
-Now check the first few lines of the `.ind` file. What do you see? The second column is sex (U = unknown) and the third is population. But because we dont want to make prior assumptions about the population membership of the individuals we want to rename this column so each individual is in a unique population. The easiest way is to copt the first column to the third. This can be done using `awk`
+### Redefining the populations
+Check the first few lines of the `.ind` file. What do you see? 
+Column one should be the sample name, column two is sex (U = unknown) and column three is population. Currently the third colummn will be filled with `???`. We dont want to make prior assumptions about the population membership of the individuals, therefore we want to rename this column so each individual is in a unique population before we run the pca. The easiest way is to copy the first column to the third. This can be done using `awk`
 
 ```sh
 cat babirusa_panel.ind | awk 'BEGIN {OFS="\t"};{print $1,"U",$1}' > babirusa_panel.ind_new
 ```
-We then need to remove the original `.ind` file and rename `.ind_new`
+
+This command reads the .ind file with cat, this is then piped to awk which is printing the first field, followed by the "U" of the second field and then printing the first field again (i.e. the sample names). The output is written to a new .ind file. 
+
+Then the original `.ind` file can be removed and rename the updated `.ind_new` file. Like this:
 ```sh 
 rm babirusa_panel.ind
 mv babirusa_panel.ind_new babirusa_panel.ind
 ```
-#### 3. Run smartpca
-Our data is now ready to run `smartpca`. Like `convertf` we need to make a parameter file to supply to the program to make the output files. 
-> Make an empty text file and enter the text editor 
 
-The same as the previous par file - we add the path of the input files followed by the output files
+### Run smartpca
+Our data is now ready to run `smartpca`. Like `convertf` we make a parameter file to supply to the program to generate the output files.
+
+Again, make an empty text file and enter the text editor.
+The same as the previous par file - specify the path to the input files (in eigenstrat format generated by the convertf command), followed by the path we want for the two output files.
+
 ```sh 
 genotypename:  babirusa_panel.eigenstratgeno
 snpname:       babirusa_panel.snp
@@ -146,20 +152,20 @@ indivname:     babirusa_panel.ind
 evecoutname:   babirusa_panel_PCA.evec
 evaloutname:   babirusa_panel_PCA.eval
 ```
-> save with an informative name (e.g par.smartpca_babirusa) and exit the editor
+> save with an informative name (e.g `par.smartpca_babirusa`) and exit the editor
 
 There are many other options we could add to the par file, which will depend on your data and the analysis you are conducting 
-> Take a look at the documentation here: https://github.com/chrchang/eigensoft/blob/master/POPGEN/README
+> `Hint` take a look at the documentation here: https://github.com/chrchang/eigensoft/blob/master/POPGEN/README
 
 Now we run `smartpca` and save the output to a log file
 ```sh 
 smartpca -p [name_of_your_par_file] > [name_of_your_logfile].log
 ```
-This should give us two new output files:
-- babirusa_panel_PCA.evec - this contains the XXXX
+This should give us two new output files, look at the contents of these files: 
+- babirusa_panel_PCA.evec - this is the position of where each individual falls along the eigenvectors (columns 2:11) 
 - babirusa_panel_PCA.eval - this contains the eigenvalues for each of the principal components (the importance of each axis)
 
-In the next session we will copy these files to our local computer and visualise in RStudio. But now we will move on to the admixture analysis.
+In the next session you will copy these files to your local computer and visualise in RStudio. But now lets move on to the admixture analysis.
 
 ### Tutorial three - admixture analysis
 Admixture XXX 
