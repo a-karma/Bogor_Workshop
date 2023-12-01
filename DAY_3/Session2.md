@@ -24,38 +24,53 @@ We will keep the output files for each analysis in their own directory, so make 
 The program we will use to make the tree is called `iqtree`. `iqtree` requires an alignment file as an input but this can take several formats. 
 We will be using the `.phylip` alignment format. To generate this from our vcf file, we need to use a script called `vcf2phylip.py`. 
 
-You should be able to find this under `/home/DATA/Day_3_b/scripts/`. We want to use this script to convert our vcf panel into phylip format. So we can assign a variable the path to the panel, and supply this in the command with the `-i` option.
+You should be able to find this under `/home/DATA/Day_3_b/scripts/`. We want to use this script to convert our vcf into phylip format. To do this, first we can assign the path to the panel variable.
 
 ```sh 
 PANEL=/home/DATA/Day_3_b/babirusa_panel
+```
+Then we run the vcf2phylip script, we need to specify the vcf file as the input (`-i`) and the output name we want in our working directory (`--out-prefix`)
+
+```sh
 /home/DATA/Day_3_b/scripts/vcf2phylip.py -i $PANEL.vcf --output-prefix babirusa_panel
 ```
-When it is finished you should see a new file in your directory, and that with default settings the file has been named `[name_of_panel].min4.phy`
-This is because it applies a filter of a minimum number of samples per SNP and as default this is four individuals. You can change this using the option `-m`
-> there are also some other options that can be changed, see https://github.com/edgardomortiz/vcf2phylip 
+When it is finished you should see a your output file in your directory, and that with default settings the file has been named `[name_of_panel].min4.phy`
 
-#### 2. Basics of using `screen` in linux
-Now we have our input file for `iqtree`. Because the command we are going to run can take a while to complete, we are going to use a program called `screen` to allow it to run in the background as we continue with the other analyses. 
-So to activate and name a new session we run: 
+>  `Exercise one`
+>  Can you use the help file to find out what the addition of "min4" in the file name means? How would you change this option?
+
+### Basics of using `screen` in linux
+Now we have our input file in the correct format for `iqtree`. Because the command we are going to run can take a while to complete, we are going to use a program called `screen` to allow us to run commands in a different session in the background as we continue with the other analyses. Below are some of commands we will need for interacting with `screen`.
+
+To activate new session with a specific name: 
 ```sh 
-screen -S [tree]
+screen -S [name_of_session]
 ```
-> To detach a session you press `ctrl`+`a`+`d` at the same time 
-> To see what session are open you run: 
+To detach a session you press `ctrl`+`a`+`d` at the same time 
+
+To see what sessions are open use: 
 ```sh 
 screen -ls
 ```
-> To reopen a session run: 
+
+To reopen a session use: 
 ```sh 
 screen -r [name_of_session]
 ```
-> To kill a session run: 
+
+To kill a session use: 
 ```sh 
 screen -XS [name_of_session] quit
 ```
 
-#### 3. Running iqtree
-Now we have the basics. Reopen the screen you made for running `iqtree`
+### Running iqtree
+Now we have the basics we will run iqtree 
+
+> `Exercise two`
+> 
+
+
+Reopen the screen you made for running `iqtree`
 You should see that you have to reactivate the conda environment as well, when you enter a new session. 
 
 IQtree is a very versatile program with many options but is very simple to use. 
