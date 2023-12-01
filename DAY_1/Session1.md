@@ -182,7 +182,17 @@ Let's unpack this command:
 ```sh
 grep 'regex' target_file
 ```
-In our example the regex or the pattern that we are looking is obviously `>seq.*_Hg_A` 
+In our example the regex or the pattern that we are looking is obviously `>seq.*_Hg_A`. 
+This regular expression is designed not to match a unique sequence of character but rather a series of sequences that are similar to each another.
+In fact, this regex will match any string containing '>seq' followed by any character (represented by the `.` symbol) that appears zero or more times (`*`), 
+followed by the string`_Hg_A`. Thus, `grep` will print all the header lines in the random.fasta corresponding to haplogroup A and this output is the piped (|) 
+into the command `wc -l` which simply counts the number of matching lines.
+
+> `Exercise 4`
+>
+> Find out how many sequences we have for each group by modifying the pattern of the grep command above.
+
+
 
 
 
