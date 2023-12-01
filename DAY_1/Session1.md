@@ -203,7 +203,7 @@ Now navigate to your `Raw_Data` directory and visualise the content of the file 
 
 
 Let’s have a look at a different file format and keep on experimenting with regex. 
-In the`/home/Data/Day_1` folder you should see a file called `dog_genes.gtf`  
+In the`/home/Data/Day_1` folder you should see a file called `dog_genes.gtf` 
 which is a tab separated file containing annotations for some coding sequences in the dog genome.
 We can have a look at the header (lines starting with #) by running:
 ```sh
