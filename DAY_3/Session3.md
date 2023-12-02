@@ -29,7 +29,7 @@ You need to download your output files
 
 - .evec and .eval for the PCA
 - .Q for the admixture
-- .treefile for the tree
+- .treefile and the .iqtree files for the tree
   
 using something like this:
 ```sh
@@ -47,6 +47,19 @@ sftp> bye
 ```
 
 ### 2. Visualising and comparing the trees
+You should have two trees now - the one the you make (unrooted) and the one from the shared directory (rooted).
+
+The rooting of the tree requires an outgroup and to save time we did this for you. Briefly we used the same panel to call SNPs at the same location in the outgroup - which is the pygmy hog. This is then merged with the original fileset. The tree is reran in iqtree, and it is easy to specify this sample in the command with the option (`-o`).
+
+Open your browser and navigate to: https://itol.embl.de/
+
+Then open the .iqtree file in a text editor and copy the NEWICK format tree at the bottom of the file 
+![NEWICK_tree](../IM/NEWICK_tree.png)
+
+Paste it into the box on the site, and press upload. 
+
+ADD THE INSTRUCTIONS FOR THE UNROOTING
+ADD THE ROOTED TREE
 
 ### 3. Visualising the PCA analysis
 What do you think this tells us about the number of populations
