@@ -115,7 +115,7 @@ head(samplelist)
 ```
 
 
-
+```sh
 # rename regions - condense into N/S/TO for babi
 samplelist$region2 <- rep(NA, length(samplelist$region))
 samplelist$region2[samplelist$region == "NW"] <- "North"
@@ -187,7 +187,7 @@ ggplot(data = evec_merge) +
 
 # save the file
 # ggsave(plot = a1, "output_figures/PCA_babirusa_finalSet_qualFilt_geno0_maf0.05_LD0.1.pdf")
-
+```
 
 
 What do you think this tells us about the number of populations
