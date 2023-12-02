@@ -17,7 +17,12 @@ Then run `sftp` - this stands for secure file transfer protocol. We need to tell
 ```sh
 sftp -i ~/path/to/ssh/key [your_username]@138.246.238.65
 ```
-You will now be in your home directory in the server, you can navigate through your directories like normal. 
+You will now be in your home directory in the server, it should show this: 
+```sh
+sftp>
+```
+
+You are now connected to the server and can navigate through your directories like normal. 
 If you add an `l` in front of your commands you should see you local computer file structure. Using the command `get` will download your files to your location on the local computer. 
 
 You need to download your output files
@@ -28,8 +33,32 @@ You need to download your output files
   
 using something like this:
 ```sh
+ls
 get tutorial_PCA/*ev* .
 ```
+
+You will also need to download some files from the shared directory `/home/DATA/Day_3_b/`
+- you need the population_file.txt
+- and the rooted tree file `XXXX.treefile
+When you have done this, type this to close the connection.
+
+```sh
+sftp> bye
+```
+
+### 2. Visualising and comparing the trees
+
+### 3. Visualising the PCA analysis
+What do you think this tells us about the number of populations
+
+### 4. Visualising the ADMIXTURE analysis
+Based on these 
+
+
+
+
+
+
 
 
 
