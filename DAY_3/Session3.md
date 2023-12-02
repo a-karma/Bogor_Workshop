@@ -17,6 +17,20 @@ Then run `sftp` - this stands for secure file transfer protocol. We need to tell
 ```sh
 sftp -i ~/path/to/ssh/key [your_username]@138.246.238.65
 ```
-This will now show the 
+You will now be in your home directory in the server, you can navigate through your directories like normal. 
+If you add an `l` in front of your commands you should see you local computer file structure. Using the command `get` will download your files to your location on the local computer. 
+
+You need to download your output files
+
+- .evec and .eval for the PCA
+- .Q for the admixture
+- .treefile for the tree
+  
+using something like this:
+```sh
+get tutorial_PCA/*ev* .
+```
+
+
 
 
