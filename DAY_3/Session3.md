@@ -222,6 +222,7 @@ Lets look at this
 - the function `bind_cols()` is similar to the base R function we used early `cbind()` adds columns together. And here we add a column to specify the value of K
 - the function `pivot_longer()` converts it to long form - the number of colums relating to the number of columns in the .Q matrix
 
+![Long_df](../IM/Long_df.png)
 
 > Exercise
 >
@@ -229,83 +230,58 @@ Lets look at this
 
 Now we should have a long form data frame object for every cluster with the metadata (samples and regions) attached. 
 
-Using this we 
+Using this we will make the stacked barplots using `geom_col`, this will mean that the bars add up to 1.
+We build it up like the ggplot for the PCA. 
 
+```sh
+admix_plot_k2 <- ggplot(data = babik2_L) +
+    geom_col(aes(x=sample, y=value, fill=name)) +
+    scale_y_continuous(expand = c(0,0))
+```
+- start with specifying the data
+- then the geom and the aesthestics for the bar plot
+- the final option (`scale_y_continuous(expand = c(0,0))`) extends the bars to the bottom of the yaxis
 
+Take a look at the plot, does this look right? Probably not quite. 
+We need to split up the regions, we do this we facets. 
+So to the base plot add this line: 
+```sh
+admix_plot_k2 <- admix_plot_k2 + facet_wrap(~region, scales = "free", nrow = 1)
+```
 
-PLOTTING THE CV ERRORS
+Finally to make the names readable and label the y axis correctly we can add: 
+```sh
+admix_plot_k2 <- admix_plot_k2 + theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+ ylab("Admixture proportion")
+```
+![ADMIX_K2](../IM/ADMIX_K2.png)
 
+> Exercise
+>
+> Save this plot and generate the remaining plots for your clusters? 
 
+When you have made the plots of all the values of k, we can visualise them ontop of each other using a function called `ggarrange` in the `ggpubr` package.
 
-( admix.bark2 = ggplot(data=babik2_L, aes(x=sample, y=value, fill=name))+
-    geom_bar(stat = "identity")+
-    scale_y_continuous(expand = c(0,0))+
-    facet_wrap(~region2, scales = "free", nrow = 1)+
-    ylab("Admixture proportion") +
-    theme(axis.text.x = element_text(angle = 60, hjust = 1)) )
+You specify the plots you would like to view together, and then the option `ncol = 1` indicates you want them all in one column i.e. ontop of each other.
+```sh
+ggarrange(admix_plot_k2, admix_plot_k3, admix_plot_k4, admix_plot_k5, ncol = 1)
+```
+> Hint
+>
+> If you give this to an object, you can then save the plot as a pdf using `ggsave`
 
-( admix.bark3 = ggplot(data=babik3_L, aes(x=sample, y=value, fill=name))+
-    geom_bar(stat = "identity")+
-    scale_y_continuous(expand = c(0,0))+
-    facet_wrap(~region2, scales = "free", nrow = 1)+
-    ylab("Admixture proportion") +
-    theme(axis.text.x = element_text(angle = 60, hjust = 1)) )
+Do not forget to save your script as you go.
 
-( admix.bark4 = ggplot(data=babik4_L, aes(x=sample, y=value, fill=name))+
-    geom_bar(stat = "identity")+
-    scale_y_continuous(expand = c(0,0))+
-    facet_wrap(~region2, scales = "free", nrow = 1)+
-    ylab("Admixture proportion") +
-    theme(axis.text.x = element_text(angle = 60, hjust = 1)) )
+Now you have all your admixture results together: 
+- what do you think this shows?
+- are there any individuals that look like they are admixed, i.e. show evidence of multiple ancestries?
+- does this support or contest the PCA results?
+- how many population groups do you think there might be in the babirusa? 
 
-( admix.bark5 = ggplot(data=babik5_L, aes(x=sample, y=value, fill=name))+
-    geom_bar(stat = "identity")+
-    scale_y_continuous(expand = c(0,0))+
-    facet_wrap(~region2, scales = "free", nrow = 1)+
-    ylab("Admixture proportion") +
-    theme(axis.text.x = element_text(angle = 60, hjust = 1)) )
+PLOTTING THE CV ERRORS - MAYBE TOO MUCH??? 
 
-(admix_TOG <- ggarrange(admix.bark2, admix.bark3, admix.bark4, admix.bark5, ncol = 1) )
-#ggsave(plot= admix_TOG, "output_figures/admix_TOG.pdf")
-
-##############################################################################
-( admix.bark2_split = ggplot(data=babik2_L, aes(x=sample, y=value, fill=name))+
-    geom_bar(stat = "identity")+
-    scale_y_continuous(expand = c(0,0))+
-    facet_wrap(~region, scales = "free", nrow = 1)+
-    ylab("Admixture proportion") +
-    theme(axis.text.x = element_text(angle = 60, hjust = 1)) )
-
-( admix.bark3_split = ggplot(data=babik3_L, aes(x=sample, y=value, fill=name))+
-    geom_bar(stat = "identity")+
-    scale_y_continuous(expand = c(0,0))+
-    facet_wrap(~region, scales = "free", nrow = 1)+
-    ylab("Admixture proportion") +
-    theme(axis.text.x = element_text(angle = 60, hjust = 1)) )
-
-( admix.bark4_split = ggplot(data=babik4_L, aes(x=sample, y=value, fill=name))+
-    geom_bar(stat = "identity")+
-    scale_y_continuous(expand = c(0,0))+
-    facet_wrap(~region, scales = "free", nrow = 1)+
-    ylab("Admixture proportion") +
-    theme(axis.text.x = element_text(angle = 60, hjust = 1)) )
-
-( admix.bark5_split = ggplot(data=babik5_L, aes(x=sample, y=value, fill=name))+
-    geom_bar(stat = "identity")+
-    scale_y_continuous(expand = c(0,0))+
-    facet_wrap(~region, scales = "free", nrow = 1)+
-    ylab("Admixture proportion") +
-    theme(axis.text.x = element_text(angle = 60, hjust = 1)) )
-
-(admix_split_tog <- ggarrange(admix.bark2_split, admix.bark3_split, admix.bark4_split, admix.bark5_split, ncol = 1) )
-#ggsave(plot= admix_split_tog, "output_figures/admix_split_TOG.pdf")
-
- #############################################################################
-
-
-
-
-> Extra PCA exercises
+### 5. Extra exercises
+Extra PCA exercises
 >
 > Can you add the sample names to the plot using the function `geom_text_repel()`
 > 
@@ -313,8 +289,7 @@ PLOTTING THE CV ERRORS
 > 
 > Can you use scale_colour_manual() to choose your own colour palette?
 >
-> Extra ADMIXTURE exercise 
 
-
-
-
+Extra ADMIXTURE exercise
+>
+> could you change the plots to be a better representation of the population clusters
