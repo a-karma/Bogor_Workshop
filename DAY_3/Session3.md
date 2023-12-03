@@ -128,6 +128,8 @@ samplelist$region2[samplelist$region == "SE"] <- "South"
 >
 > Rename the Togean babirusa to a group called "Island" and then assign both the Northwest and Westcentral babirusa to a "North" group.
 
+SAVE THE FILE FOR THE ADMIXTURE?
+
 Next you will read in the datafiles, for the pca there are two files we need, `.evec` and `.eval`.
 ```sh
 eval <- read.table("PATH/TO/FILE.eval")
@@ -159,60 +161,42 @@ The style of plot is determined by the `geom` functions. As we want a scatted pl
 First lets make a basic scatter plot:
 ```sh
 ggplot(data = evec_merge) + 
-  geom_point(aes(V2, V3, colour = region), size = 4))
+  geom_point(aes(x = V2, y = V3, colour = region), size = 4))
 ```
-This command tells ggplot to use the merged dataframe,
+Lets unpack this
+- the inital ggplot command determines the dataframe to be used
+Then we need to specify the aesthetics (`aes`) within the geom function. These are the required values to build the plot correctly.
+- the x-axis is specified as the second column which are the values for PC1
+- the y-axis is specified as the third column which are the values for PC2
+- the points will be coloured by the region factor
+- size determines the size of the point
 
-
-
+Lets make this an object called `pca_plot`
 
 ```sh
-all_pal<-c("#55b7a6", "#f25f5c","#f0b185","#50514f") # North, East, SE, Buton/Togian, other
-all_pal_region<-c("#55b7a6","#9372C0", "#f25f5c","#f0b185","#50514f") # splits
-
-
-
-#---------------------------------------------------------------------------------------------------------
-## Set up the plot
-
-# basic plot - remember it is the second and third column for the first and second PC 
-# first column is the sample names
-plot1 <- ggplot(data = evec_merge) + 
-  geom_point(aes(V2, V3, colour = region), size = 4))
-
-plot1
-
-plot1 <- plot1 + xlab(paste0("PC1 (", evec.pc1, "%)")) + ylab(paste0("PC2 (", evec.pc2, "%)")) 
-
-plot1
-
-
-ggplot(data = evec_merge) + 
-  geom_point(aes(V2, V3, +
-  xlab(paste0("PC1 (", evec.pc1, "%)")) + ylab(paste0("PC2 (", evec.pc2, "%)")) 
-
-
-ggplot(data = evec_merge) + 
-  geom_point(aes(V2, V3, colour = region), size = 4) + 
-  coord_equal() + # maintains the correct axis ratio between points
-  theme_bw()
-
-
-
-( a1 <- ggplot(evec_merge, aes(V2, V3, col = region)) + geom_point(size = 3) + 
-    scale_colour_manual(values = all_pal_region) +
-
-    ggtitle("babirusa_finalSet_qualFilt_geno0_maf0.05_LD0.1") +
-
-    geom_text_repel(aes(label=sample), size = 3, max.overlaps = 50) +
-    theme(text = element_text(size =10)) ) 
-
-# save the file
-# ggsave(plot = a1, "output_figures/PCA_babirusa_finalSet_qualFilt_geno0_maf0.05_LD0.1.pdf")
+pca_plot <- ggplot(data = evec_merge) + 
+  geom_point(aes(x = V2, y = V3, colour = region), size = 4))
 ```
+And now to this we can add additional layers and make it look pretty
+Lets add the percentage contribution to each axis
+```sh
+pca_plot <- pca_plot + xlab(paste0("PC1 (", evec.pc1, "%)")) + ylab(paste0("PC2 (", evec.pc2, "%)")) 
+```
+Finally lets make the plot look a little cleaner.
+```sh
+pca_plot <- pca_plot + theme_bw()
+```
+To see how it looks we need to just call the named object. 
+ggplot has a huge amount of flexibility and there is alot of documentation online. You can also use `?ggplot` or `?geom_point` to read the help file.
 
+![Final_PCA](../IM/Final_PCA.png)
 
-What do you think this tells us about the number of populations
+Now when you look at the PCA, do you think that there is evidence of population structure? How many populations do you this these samples form?
+
+You can save the plot with
+```sh
+ggsave(plot = PLOT_NAME, "PATH/TO/FILE.pdf")
+```
 
 ### 4. Visualising the ADMIXTURE analysis
 Based on these 
@@ -222,6 +206,12 @@ Based on these
 
 
 
+> Extra PCA exercises
+>
+> Can you add the sample names to the plot using the function `geom_text_repel()`
+> Can you re-colour the points based the three clusters inside of four?
+> Can you use scale_colour_manual() to choose your own colour palette?
+> 
 
 
 
