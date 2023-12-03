@@ -45,7 +45,7 @@ You will also need to download some files from the shared directory `/home/DATA/
 When you have done this, type this to close the connection.
 
 ```sh
-sftp> bye
+bye
 ```
 
 ### 2. Visualising and comparing the trees
@@ -109,37 +109,47 @@ samplelist <- read_tsv("pop_file.txt", col_names = c("sample", "region"))
 ```
 > `Hint` - if your file is in your working directory the you just type the name of the file. But you can use `tab` to navigate to where your file is. 
 
-Check the top of your dataframe:
+Check the top of your dataframe, you want to see the two columns
 ```sh
 head(samplelist)
 ```
 
+Next you want to make a new column which groups the samples from the north together.
+First you make an empty column that is the length of the dataframe
+```sh
+samplelist$region2 <- rep(NA, length(samplelist$region))
+```
+
+Then you want to assign a new group based on the original grouping. So for the Southeast lets rename it to a group called "South" 
+```sh
+samplelist$region2[samplelist$region == "SE"] <- "South"
+```
+> Exercise
+>
+> Rename the Togean babirusa to a group called "Island" and then assign both the Northwest and Westcentral babirusa to a "North" group.
+
+Next you will read in the datafiles, for the pca there are two files we need, `.evec` and `.eval`.
+```sh
+eval <- read.table("PATH/TO/FILE.eval")
+```
+> Exercise
+>
+> Can you read in the `.evec` file and check that they have be correctly loaded
+
+Using the eigenvalues, we can calculate the percent contribution of each PC axis to the variation in the samples.
+```sh
+evec.pc1 <- round(eval[1,1]/sum(eval)*100,digits=2)
+evec.pc2 <- round(eval[2,1]/sum(eval)*100,digits=2)
+```
+
 
 ```sh
-# rename regions - condense into N/S/TO for babi
-samplelist$region2 <- rep(NA, length(samplelist$region))
-samplelist$region2[samplelist$region == "NW"] <- "North"
-samplelist$region2[samplelist$region == "WC"] <- "North"
-samplelist$region2[samplelist$region == "SE"] <- "South"
-samplelist$region2[samplelist$region == "TO"] <- "Island"
-
 all_pal<-c("#55b7a6", "#f25f5c","#f0b185","#50514f") # North, East, SE, Buton/Togian, other
 all_pal_region<-c("#55b7a6","#9372C0", "#f25f5c","#f0b185","#50514f") # splits
 
 #---------------------------------------------------------------------------------------------------------
-## Load the output files from smartpca
-
-# the eigenvalues
-eval <- read.table("output_smartpca/babirusa_finalSet_qualFilt_geno0_maf0.05_LD0.1_sort_newNames.eval")
-head(eval)
-
-# the eigenvectors 
-evec <- read.table("output_smartpca/babirusa_finalSet_qualFilt_geno0_maf0.05_LD0.1_sort_newNames.evec")
-head(evec)
-
 # calculate the percentage contribution of each PC axis
-evec.pc1 <- round(eval[1,1]/sum(eval)*100,digits=2)
-evec.pc2 <- round(eval[2,1]/sum(eval)*100,digits=2)
+
 
 # clean up - removing the sample names from the end
 evec2 <- evec[,-12]
