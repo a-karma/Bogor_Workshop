@@ -30,7 +30,7 @@ If you add an `l` in front of your commands you should see you local computer fi
 You need to download your output files
 
 - .evec and .eval for the PCA
-- .Q for the admixture
+- .Q and cv_errors.txt for the admixture
 - .treefile and the .iqtree files for the tree
   
 using something like this:
@@ -175,7 +175,7 @@ Lets make this an object called `pca_plot`
 
 ```sh
 pca_plot <- ggplot(data = evec_merge) + 
-  geom_point(aes(x = V2, y = V3, colour = region), size = 4))
+  geom_point(aes(x = V2, y = V3, colour = region), size = 4)
 ```
 And now to this we can add additional layers and make it look pretty
 Lets add the percentage contribution to each axis
@@ -199,9 +199,108 @@ ggsave(plot = PLOT_NAME, "PATH/TO/FILE.pdf")
 ```
 
 ### 4. Visualising the ADMIXTURE analysis
-Based on these 
+Great, now lets move on to plotting the admixture results. We can use the same metadata file as for the PCA, and then we also need to use the `.Q` files we downloaded from the server. 
+
+```sh
+K2 <- read.table("PATH/TO/FILE.Q")
+```
+
+> Exercise
+>
+> Can you read in the additional Q files for the each of the clusters you ran?
+
+To visualise the results we will make a stacked barplot and split this by region, using facets. First we need to get our dataframe in the correct format. We need a long format data, this can be achieved using this code:
+```sh
+K2_long <- K2 %>% bind_cols(samplelist, k = "k2") %>% 
+  pivot_longer(cols = 1:2)
+head(K2_long)
+```
+
+Lets look at this
+- first we call the data (`K2)
+- `%>%` is a way of XXXXXX
+- the function `bind_cols()` is similar to the base R function we used early `cbind()` adds columns together. And here we add a column to specify the value of K
+- the function `pivot_longer()` converts it to long form - the number of colums relating to the number of columns in the .Q matrix
 
 
+> Exercise
+>
+> Can you modify this code now for your other values of k?
+
+Now we should have a long form data frame object for every cluster with the metadata (samples and regions) attached. 
+
+Using this we 
+
+
+
+PLOTTING THE CV ERRORS
+
+
+
+( admix.bark2 = ggplot(data=babik2_L, aes(x=sample, y=value, fill=name))+
+    geom_bar(stat = "identity")+
+    scale_y_continuous(expand = c(0,0))+
+    facet_wrap(~region2, scales = "free", nrow = 1)+
+    ylab("Admixture proportion") +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1)) )
+
+( admix.bark3 = ggplot(data=babik3_L, aes(x=sample, y=value, fill=name))+
+    geom_bar(stat = "identity")+
+    scale_y_continuous(expand = c(0,0))+
+    facet_wrap(~region2, scales = "free", nrow = 1)+
+    ylab("Admixture proportion") +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1)) )
+
+( admix.bark4 = ggplot(data=babik4_L, aes(x=sample, y=value, fill=name))+
+    geom_bar(stat = "identity")+
+    scale_y_continuous(expand = c(0,0))+
+    facet_wrap(~region2, scales = "free", nrow = 1)+
+    ylab("Admixture proportion") +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1)) )
+
+( admix.bark5 = ggplot(data=babik5_L, aes(x=sample, y=value, fill=name))+
+    geom_bar(stat = "identity")+
+    scale_y_continuous(expand = c(0,0))+
+    facet_wrap(~region2, scales = "free", nrow = 1)+
+    ylab("Admixture proportion") +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1)) )
+
+(admix_TOG <- ggarrange(admix.bark2, admix.bark3, admix.bark4, admix.bark5, ncol = 1) )
+#ggsave(plot= admix_TOG, "output_figures/admix_TOG.pdf")
+
+##############################################################################
+( admix.bark2_split = ggplot(data=babik2_L, aes(x=sample, y=value, fill=name))+
+    geom_bar(stat = "identity")+
+    scale_y_continuous(expand = c(0,0))+
+    facet_wrap(~region, scales = "free", nrow = 1)+
+    ylab("Admixture proportion") +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1)) )
+
+( admix.bark3_split = ggplot(data=babik3_L, aes(x=sample, y=value, fill=name))+
+    geom_bar(stat = "identity")+
+    scale_y_continuous(expand = c(0,0))+
+    facet_wrap(~region, scales = "free", nrow = 1)+
+    ylab("Admixture proportion") +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1)) )
+
+( admix.bark4_split = ggplot(data=babik4_L, aes(x=sample, y=value, fill=name))+
+    geom_bar(stat = "identity")+
+    scale_y_continuous(expand = c(0,0))+
+    facet_wrap(~region, scales = "free", nrow = 1)+
+    ylab("Admixture proportion") +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1)) )
+
+( admix.bark5_split = ggplot(data=babik5_L, aes(x=sample, y=value, fill=name))+
+    geom_bar(stat = "identity")+
+    scale_y_continuous(expand = c(0,0))+
+    facet_wrap(~region, scales = "free", nrow = 1)+
+    ylab("Admixture proportion") +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1)) )
+
+(admix_split_tog <- ggarrange(admix.bark2_split, admix.bark3_split, admix.bark4_split, admix.bark5_split, ncol = 1) )
+#ggsave(plot= admix_split_tog, "output_figures/admix_split_TOG.pdf")
+
+ #############################################################################
 
 
 
@@ -209,9 +308,12 @@ Based on these
 > Extra PCA exercises
 >
 > Can you add the sample names to the plot using the function `geom_text_repel()`
-> Can you re-colour the points based the three clusters inside of four?
-> Can you use scale_colour_manual() to choose your own colour palette?
 > 
+> Can you re-colour the points based the three clusters inside of four?
+> 
+> Can you use scale_colour_manual() to choose your own colour palette?
+>
+> Extra ADMIXTURE exercise 
 
 
 
