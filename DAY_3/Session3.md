@@ -136,29 +136,41 @@ eval <- read.table("PATH/TO/FILE.eval")
 >
 > Can you read in the `.evec` file and check that they have be correctly loaded
 
-Using the eigenvalues, we can calculate the percent contribution of each PC axis to the variation in the samples.
+Using the eigenvalues, we can calculate the percent contribution of each PC axis to the variation in the samples. This is for the first two axis.
 ```sh
 evec.pc1 <- round(eval[1,1]/sum(eval)*100,digits=2)
 evec.pc2 <- round(eval[2,1]/sum(eval)*100,digits=2)
 ```
+> Extra exercise
+>
+> Can you calculate the percentages for the remaining 8 PCs?
+> 
+
+We will plot the PCA using ggplot and its easier to plot if everything is contained within the same dataframe. So we can add the metadata information to the eigenvectors. 
+
+```sh
+evec_merge <- as.data.frame(cbind(evec, sample = samplelist$sample, region = samplelist$region, region2 = samplelist$region2))
+```
+This command takes your eigenvalues, and adds the columns (`cbind()`) from the samplelist dataframe and names the columns. `as.data.frame()` ensures that the new dataframe is in the correct format.
+
+Now we are ready for plotting using the function ggplot. ggplot is built in layers, with each layer being added to the basic plot using (`+`). 
+The style of plot is determined by the `geom` functions. As we want a scatted plot we are using 
+
+First lets make a basic scatter plot:
+```sh
+ggplot(data = evec_merge) + 
+  geom_point(aes(V2, V3, colour = region), size = 4))
+```
+This command tells ggplot to use the merged dataframe,
+
+
 
 
 ```sh
 all_pal<-c("#55b7a6", "#f25f5c","#f0b185","#50514f") # North, East, SE, Buton/Togian, other
 all_pal_region<-c("#55b7a6","#9372C0", "#f25f5c","#f0b185","#50514f") # splits
 
-#---------------------------------------------------------------------------------------------------------
-# calculate the percentage contribution of each PC axis
 
-
-# clean up - removing the sample names from the end
-evec2 <- evec[,-12]
-head(evec2)
-
-# add the regions for colouring the plot 
-# ggplot requires everything to be in the same data frame 
-evec_merge <- as.data.frame(cbind(evec2, sample = samplelist$sample, 
-                                  region = samplelist$region, region2 = samplelist$region2))
 
 #---------------------------------------------------------------------------------------------------------
 ## Set up the plot
