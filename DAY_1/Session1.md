@@ -43,7 +43,7 @@ The letter `i` is our iterator, the loop will stop when this variable has taken 
 
 In order to make this sequence available to the for loop, so that the machine will know when to stop, we use the bash syntax `$(command)` which roughly speaking means "insert here the output of the command in brackets". 
 
-We then used the iterator (i) to name our directories. Because at each iteration i is going to assume a different value, we used the standard notation for variables in our mkdir command: $i.
+We then used the iterator (i) to name our directories. Because at each iteration i is going to assume a different value, we used the standard notation for variables in our mkdir command: `$i`.
 
 Now let's look at what we have done: to list the content of a directory use the command `ls`.
 
@@ -73,7 +73,7 @@ note again the use of the `$` sign in front of the word `line` which is the synt
 >
 > use a similar while loop to create a sub-directory called `Output` inside each Stage dir
 
-If your pipeline is run sequentially, the output of the first step will serve as input for the second step and so on and so forth. Therefore, the content of `Stage 1/Output` and `Stage 2/Input` will be exactly the same. Avoiding redundancies and data duplication is a good way of saving space on disk though, thus, we don’t want to copy all the files from one directory to another: we are going to create a symbolic link instead.
+If your pipeline is run sequentially, the output of the first step will serve as input for the second step and so on and so forth. Therefore, the content of `stage 1/output` and `stage 2/input` will be exactly the same. Avoiding redundancies and data duplication is a good way of saving space on disk though, thus, we don’t want to copy all the files from one directory to another: we are going to create a symbolic link instead.
 ```sh
 ln -s ~/project_bash/raw_data/ ~/project_bash/stage_1/input
 ```
