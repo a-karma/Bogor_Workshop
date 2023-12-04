@@ -2,12 +2,11 @@
 # Applications of Genomics in Wildlife Conservation
 
 ## Day three - Session three - Visualisation 
-In this session we are going to visualise all our results from the previous session. We will be working mainly on our local computers in RStudio and the browser.
-
+In this session the aim is to visualise the results of the analyses we just completed on the server. We will be working mainly on our local computers in RStudio and the browser.
 We will:
-- download our output files via `sftp`
-- generate figures in RStudio for the PCA and ADMIXTURE results
-- Visualise the phylogenetic tree in iTOL (https://itol.embl.de/) 
+1. download our output files via `sftp`
+2. visualise the phylogenetic tree in iTOL (https://itol.embl.de/)
+3. generate figures in RStudio for the PCA and ADMIXTURE results
 
 ### 1. Downloading the output files 
 On your local computer we will use `sftp` to connect to the remote server and download the files.
