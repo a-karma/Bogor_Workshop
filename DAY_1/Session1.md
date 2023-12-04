@@ -178,7 +178,7 @@ If instead we were interested in the last 4 entries, we would use:
 ```sh
 tail -8 random.fasta
 ```
-The tail command is a versatile tool in Bash scripting used to display the last portion of a file's contents. It's commonly used to quickly review the end of a file, check for recent changes, or monitor log files in real time.
+The `tail` command is a versatile tool in Bash scripting used to display the last portion of a file's contents. It's commonly used to quickly review the end of a file, check for recent changes, or monitor log files in real time.
 
 We could a combination of these two commands to extract set of sequence in the middle of the file:
 ```sh
@@ -208,6 +208,11 @@ As you may have noticed, all header lines in random.fasta start with `>seq` foll
 
 `grep` is a powerful tool for searching for patterns in text files. It is commonly used in Bash scripting to locate specific text strings, analyze log files, and perform text-based searches.
 
+`grep` stands for "global regular expression print" and it has the following syntax
+```sh
+grep 'regex' target_file
+```
+
 Let's consider the following command:
 
 ```sh
@@ -215,15 +220,10 @@ grep '>seq.*_Hg_A' random.fasta | wc -l
 ```
 Let's unpack this command:
 
-`grep` stands for "global regular expression print" and it has the following syntax
-```sh
-grep 'regex' target_file
-```
-In our example the regex or the pattern that we are looking is obviously `>seq.*_Hg_A`. 
-This regular expression is designed not to match a unique sequence of character but rather a series of sequences that are similar to each another.
-In fact, this regex will match any line containing the string `>seq` followed by any character (represented by the `.` symbol) that appears zero or more times (`*`), 
-followed by the string `_Hg_A`. Thus, `grep` will print all the header lines in the random.fasta corresponding to haplogroup A and this output is the piped (|) 
-into the command `wc -l` which simply counts the number of matching lines.
+In our example the regex or the pattern that we are looking is `>seq.*_Hg_A`. 
+
+This regular expression is designed not to match a unique sequence of character but rather a series of sequences that possess similar features.
+The regular expression `>seq.*` matches any line containing the string >seq followed by any character (represented by the `.` symbol) that appears zero or more times (`*`). This means that the regex will match any line that starts with the exact sequence `>seq` and is followed by any combination of characters followed by the string `_Hg_A`. Thus, `grep` will print all the header lines in the random.fasta corresponding to haplogroup A and this output is the piped (|) into the command `wc -l` which simply counts the number of matching lines.
 
 > `Exercise 4`
 >
