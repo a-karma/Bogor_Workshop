@@ -19,8 +19,13 @@ We need to tell it where the ssh key is, and which remote server to connect usin
 sftp -i ~/path/to/ssh/key [your_username]@138.246.238.65
 ```
 You will now be in your home directory in the server. 
-If you list the files (`ls`) you should see the files in your home directory.
-If you add an `l` infront you should see the file structure for your local computer. Below is mine, `pwd` shows the working directory in the server while `lpwd` shows the working directory on your local computer. 
+
+In the screenshot you can see: 
+- If you list the files (`ls`) you should see the files in your home directory
+- If you add an `l` infront, so `lls` you should see the file structure for your local computer
+- `pwd` shows the working directory in the server
+- while `lpwd` shows the working directory on your local computer
+ 
 ![SFTP_connection](../IM/SFTP_connection.png)
 
 We need to download your output files:
@@ -53,17 +58,31 @@ You should have two trees now - the one the you make (unrooted) and the one from
 The rooting of the tree requires an outgroup and to save time we did this for you. Briefly we used the same panel to call SNPs at the same location in the outgroup - which is the pygmy hog. This is then merged with the original fileset. The tree is reran in iqtree, and it is easy to specify this sample in the command with the option (`-o`).
 
 Open your browser and navigate to: https://itol.embl.de/
+L
+Scroll down a little and click on the upload tree button
 
-Then open the .iqtree file in a text editor and copy the NEWICK format tree at the bottom of the file 
-![NEWICK_tree](../IM/NEWICK_tree.png)
+#### Unrooted tree
+First we will look at the unrooted tree you generated. So under the tree file box, navigate to your unrooted `.treefile` and click upload.
 
-Paste it into the box on the site, and press upload. 
+The initial display should look something like this: 
+![iTOL_display](../IM/iTOL_display.png)
 
-ADD THE INSTRUCTIONS FOR THE UNROOTING
+> Exercise
+>
+> Can you use the control panel on the right to make a better visualisation of the tree - so you should try options like "Unrooted", "Branch lengths ignore", "Labels at tips"
 
-ADD THE ROOTED TREE
+#### Rooted tree
+Now lets do the same for the rooted tree, in a different browser window so you can compare. The first thing to do is specify the root
+> Exercise
+>
+> By hovering over the samples, can you root the tree by the correct sample?
 
-WHAT ARE THE DIFFERENCES
+It is possible to add colours for regions, change and format lines etc, but for speed we will just compare the clustes we see on our tree to the metadata file. Open your population metadata file, which contains the sample IDs and regions
+
+> Exercise
+>
+> Is there evidence of phylogenetic clustering based on region?
+> What is the difference between the tree with and without the outgroup?
 
 ### 3. Visualising the PCA analysis
 Next we will look at the results of the PCA using RStudio.
@@ -280,6 +299,13 @@ Now you have all your admixture results together:
 PLOTTING THE CV ERRORS - MAYBE TOO MUCH??? 
 
 ### 5. Extra exercises
+Extra tree exercises 
+>
+> Can you add the regions and colours to the tree?
+>
+> Why do we ignore the branch lengths?
+>
+
 Extra PCA exercises
 >
 > Can you add the sample names to the plot using the function `geom_text_repel()`
