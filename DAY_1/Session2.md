@@ -9,14 +9,14 @@ In the previous session we have seen some
 ### 2. Working with bioinformatic softwares using conda
 In Session 1 we have seen three examples of text file that are commonly used in bioinformatics:
 
-- The `fasta` format to store DNA sequences
+- The `fasta` format to store DNA sequence information
 - The `GTF` (General Transfer Format) developed for the Ensembl genome browser
 - The `BED` (Browser Extensible Data) format developed at UCSC for the Genome Browser tool
 
-The `GTF` and the `BED` format are both TAB-separated files used to store genomic regions as coordinates and associated annotations. 
+The `GTF` and the `BED` format are both TAB-separated files used to store genomic regions as coordinates and their associated annotations. 
 Although in principles we could manually edit these files using standard text editors this becomes very unpractical when dealing with very large files.
-Alternatively, we could use command line tools (like `sed` and `awk`) to make the process more efficient but   
-
+Alternatively, we could combine command line tools (like `sed`, `awk`, or `grep`) to make this process more efficient but performing complex tasks using only these tools is not straightforward and often require a deep understanding of programming. Luckly for us, bioinformaticians have created various software specifically designed to manipulate these file formats. 
+Let's have a look at `bedtools` a powerful toolset for genome arithmetic. 
 In your terminal, please type: 
 ```sh
 bedtools --help
