@@ -13,9 +13,9 @@ In Session 1 we have seen three examples of text file that are commonly used in 
 - The `GTF` (General Transfer Format) developed for the Ensembl genome browser
 - The `BED` (Browser Extensible Data) format developed at UCSC for the Genome Browser tool
 
-The `GTF` and the `BED` format are both TAB-separated files used to store genomic regions as coordinates and their associated annotations. 
+The `GTF` and the `BED` format are both TAB-separated files used to store genomic regions as coordinates along with their associated annotations. 
 Although in principles we could manually edit these files using standard text editors this becomes very unpractical when dealing with very large files.
-Alternatively, we could combine command line tools (like `sed`, `awk`, or `grep`) to make this process more efficient but performing complex tasks using only these tools is not straightforward and often require a deep understanding of programming. Luckly for us, bioinformaticians have created various software specifically designed to manipulate these file formats. 
+A more efficient option would be combinig command line tools (like `sed`, `awk`, or `grep`) but performing complex tasks using only these tools is not straightforward and often require a deep understanding of programming. Luckly for us, bioinformaticians have created various software specifically designed to manipulate these file formats. 
 
 Let's have a look at `bedtools` a powerful toolset for genome arithmetic. 
 
@@ -27,7 +27,7 @@ bedtools --help
 
 Looks like the program is not installed :( 
 
-To protect the integrity of the file system on a server, normal user do not have permissions to directly install softwares.   
+To protect the integrity of the file system on a server, normal user do not have permissions to directly install softwares. Moreover, almost any bioinformatic tool will rely on specific libraries or package versions that might create conflicts or even impeed the functionality of other programs. To circumvent these issues, we need to make sure that the software we need are installed in a "confined space" maintaini
 You can read more about conda [here](https://docs.conda.io/en/latest/)
 
 
