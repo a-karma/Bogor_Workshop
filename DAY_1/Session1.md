@@ -78,12 +78,12 @@ To ensure the directories have been indeed created.
 
 Maintaining a detailed record of executed commands is an essential practice for reproducibility and debugging purposes. By keeping a log of your actions, you can easily retrace your steps, identify potential errors, and effectively reproduce your work, even after a significant time gap.
 
-To facilitate efficient command logging, it's recommended to adopt a consistent naming convention for your log files. In this case, we'll use the file name "What_I_did.txt" to store our command history. To create this empty log file, simply utilize the touch command:
+To facilitate efficient command logging, it's recommended to adopt a consistent naming convention for your log files. In this case, we'll use the file name "what_i_did.txt" to store our command history. To create this empty log file, simply utilize the touch command:
 
-```touch What_I_did.txt```
+```touch what_i_did.txt```
 
 For our purpose today we will create a simple directory structure for our research project. Each of our `stage` directories should contain three items:
-- a What_I_Did.txt file.
+- a what_i_did.txt file.
 - an output sub-directory
 - a sub-directory called input
 
