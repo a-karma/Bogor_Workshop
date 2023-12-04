@@ -175,12 +175,12 @@ Regular expressions, also known as regex or regexp, are a powerful tool for mani
 
 Let’s start with opening a new terminal, connecting to the server and look at the file called `random.fasta`:
 ```sh
-cd /home/Data/Day_1/
+cd /home/DATA/Day_1/
 less random.fasta
 Press Q to exit.
 ```
 
-As the name suggests, this file contains some random DNA sequences of different length stored in a fasta format (a very common format DNA analysis).
+As the name suggests, this file contains some random DNA sequences of different length stored in a fasta format (a very common format for DNA analysis).
 
 As you can see, each entry consists of two lines: a header (with the sequence identifier) and a second line containing the actual sequence.
 Lets calculate how many lines are in this fasta file:
