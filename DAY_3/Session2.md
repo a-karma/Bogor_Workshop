@@ -38,7 +38,7 @@ When it is finished you should see a your output file in your directory, and tha
 
 >  `Exercise one`
 > 
->  Can you use the help file to find out what the addition of "min4" in the file name means? How would you change this option?
+>  Can you use the help file to find out what the addition of "min4" in the file name means? Now how would you run the command and change this option?
 
 ### Basics of using `screen` in linux
 Now we have our input file in the correct format for `iqtree`. Because the command we are going to run can take a while to complete, we are going to use a program called `screen` to allow us to run commands in a different session in the background as we continue with the other analyses. Below are some of commands we will need for interacting with `screen`.
@@ -222,8 +222,8 @@ If it has finished - great. You can check the files in the directory for this an
 - .treefile - the ML tree in NEWICK format (this is the file we will need to visualise in the next session)
 - .log - the log file
 - .ckp.gz - this is a check point file, if a run is interrupted and you need to resume
-- .mldist -
-- .bionj -
+- .mldist - maximum likelihood distance matrix
+- .bionj - contains the BIONJ tree, related to the neighbour joining tree
 
 If you see these files, you can close the screen session.
 
