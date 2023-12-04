@@ -26,12 +26,14 @@ We will be using the `.phylip` alignment format. To generate this from the vcf f
 
 `iq-tree` is program to reconstruct phylogenetic tree based on genetic data - it uses maximum likelihood (see here if you want more details about tree reconstruction methods: https://en.wikipedia.org/wiki/Computational_phylogenetics). 
 
-You should be able to find this under `/home/DATA/Day_3_b/scripts/`. We want to use this script to convert our vcf into phylip format. To do this, first assign the path to the panel as a variable.
+The data for this exercise can be found here `/home/DATA/Day_3_b/scripts/`. 
+
+First we need to to use `vcf2phylip.py` to convert our vcf (https://en.wikipedia.org/wiki/Variant_Call_Format) into a phylip (https://en.wikipedia.org/wiki/PHYLIP) format. To do this, first create a shell variable we call `PANEL` which contains the path the panel.
 
 ```sh 
 PANEL=/home/DATA/Day_3_b/babirusa_panel
 ```
-Then run the vcf2phylip script by specifying the vcf file as the input (`-i`) and the output name you want in your current working directory (`--out-prefix`)
+Then we we can run vcf2phylip  by specifying the vcf file as the input (`-i`) and the output name you want in your current working directory (`--out-prefix`)
 
 ```sh
 /home/DATA/Day_3_b/scripts/vcf2phylip.py -i $PANEL.vcf --output-prefix babirusa_panel
