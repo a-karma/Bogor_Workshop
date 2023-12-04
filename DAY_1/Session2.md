@@ -36,6 +36,55 @@ You can read more about conda [here](https://docs.conda.io/en/latest/)
 conda activate Day_1
 plink --bfile file_name --recode
 ```
+now that bedtools is accessible let's see what it can do.
+
+Suppose you are interested in analysing only neutral evolving sites. Thus, you may want to remove sites that are likely to be under selective pressures. 
+As a first approximation you can start to analyse SNPs that do not fall inside CDS. You can just run the following commands:
+
+```sh 
+bedtools intersect -a snps_panel.bed -b genes_chr30.gtf -v > snp_filtered.bed
+```
+The `-v` flag tells `intersect` to report all lines in the target file (specified using the `-a` flag) that do not overlap with the genomic intervals listed in the bed file (-b flag).
+
+There is a lot more that you can do with genome arithmetic. Let’s picture a more complex
+scenario: suppose you are interested in studying the promoter regions of various genes
+on this chromosome. You have a fasta file with the entire chromosome sequence (see
+the ptw_ch30.fa file) and you would like to examine 10 kb upstream the starting codon
+of each gene. How can you get that information?
+
+First of all you need to get the coordinates of the starting codons. This is very easy using grep:
+```sh
+grep 'start_codon' genes_chr30.gtf > CDS_start
+```
+
+Now you need to modify this file using the function `flank` implemented in bedtools which will flanking intervals for each region in a BED/GFF/VCF file.
+This function requires also a genome file defining the length of each chromosome, so let’s create this file first.
+```sh
+echo -e "chr30\t150000000" > ch30_length.bed
+```
+
+The above command `echo` would normally output on screen whatever string you type after it. 
+The `-e` option tells the software to enable the interpretation of backslash escapes and `\t` stands for TAB.
+Now we can run:
+
+```sh
+bedtools flank -i CDS_start -g ch30_length.bed -l 10000 -r 0 > promoter.bed
+```
+Finally we can use the `getfasta` function in bedtools to extract the sequences of the promoter regions:
+
+```sh
+bedtools getfasta -fi ptw_ch30.fa -bed promoter -fo ptw_prom_sequences
+```
+
+In the command above the `-fi` flag stands for file input, the `-bed` indicates the coordinate file while the `-fo` option stands for file output. 
+You can examine the first output line using: 
+```sh
+cat ptw_prom_sequences | head -1
+```
+> Exercise 2:
+>
+> Try to combine the intersect and flank functions in order to filter the `snp_ch30.bed` file
+> by excluding CDS and all reagions that are 5 kb form the starting and the stop codon of each CDS.
 
 ### 3. Transferring files
 see below the syntax for tables:
