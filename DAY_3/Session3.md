@@ -18,27 +18,29 @@ We need to tell it where the ssh key is, and which remote server to connect usin
 ```sh
 sftp -i ~/path/to/ssh/key [your_username]@138.246.238.65
 ```
-You will now be in your home directory in the server, it should show this: 
+You will now be in your home directory in the server. 
+If you list the files (`ls`) you should see the files in your home directory.
+If you add an `l` infront you should see the file structure for your local computer. Below is mine, `pwd` shows the working directory in the server while `lpwd` shows the working directory on your local computer. 
 ![SFTP_connection](../IM/SFTP_connection.png)
 
-You are now connected to the server and can navigate through your directories like normal. 
-If you add an `l` in front of your commands you should see you local computer file structure. Using the command `get` will download your files to your location on the local computer. 
+We need to download your output files:
 
-You need to download your output files
+- From the PCA = `.evec` and `.eval`
+- From the ADMIXTURE = all the `.Q` files and `cv_errors.txt`
+- For the trees = `.treefile` and the `.iqtree`
 
-- .evec and .eval for the PCA
-- .Q and cv_errors.txt for the admixture
-- .treefile and the .iqtree files for the tree
-  
-using something like this:
-```sh
-ls
-get tutorial_PCA/*ev* .
+Using the command `get` will download your files to your location on the local computer. 
+The structure is like this: 
+ ```sh
+get [PATH/TO/REMOTE/FILE] [LOCATION/TO/PUT/FILE/IN/LOCAL]
 ```
+> Hints - You can use `get -r ` to get the whole directory
+> 
+> If you are in the desired location on your local you can just use a `.`
 
 You will also need to download some files from the shared directory `/home/DATA/Day_3_b/`
-- you need the population_file.txt
-- and the rooted tree file `XXXX.treefile
+- you need the `population_file.txt`
+- and the rooted tree file `babirusa_rooted.treefile`
 When you have done this, type this to close the connection.
 
 ```sh
