@@ -4,20 +4,24 @@
 ## Day 1 - Session 1 - Basic concepts of command line programming
 
 ### 1. Working from terminal and remote servers
-In this section, we will outline the procedure for connecting to our cloud server and provide you with some essential preliminary definitions.
+In this section, we will outline the procedure for connecting to our cloud server and provide you with some essential preliminary definitions. 
+
+`OS` is short for Operating System which is the program that manages all other applications in a computer. windows, Linux and macOS are all examples of Operating SystemsUsers can interact directly with the operating system through a user interface, such as a command-line interface (CLI) or a graphical UI (GUI). You have 
+
+In the guide we've sent you, you've seen how to install putty (Windows users) or how to connect from terminal 
 
 ### 2. The filesystem 
 This section outlines the basic commands for navigating file systems and creating a structured directory hierarchy for research projects. The naming of files and directories is more crucial than you might realize; a clear and consistent structure will significantly streamline your workflow, especially when dealing with complex projects and pipelines. While you can adapt and customize this template structure to your specific needs, adhering to these principles will greatly enhance project organization and accessibility.
 
 We will start with creating a parent directory for our project. 
 ```sh
-mkdir Project_BASH 
-cd Project_BASH
+mkdir project_bash
+cd project_bash
 ```
 The first command (`mkdir`) creates the required folder while the `cd` command is used to move from your home directory to the new directory. Now we need to create one directory where we are going to store our scripts, one for the raw data, and one for our results:
 
 ```sh
-mkdir Scripts; mkdir Raw_Data; mkdir Results
+mkdir scripts; mkdir raw_data; mkdir results
 ```
 note the use of the semicolon (;) to separate different commands on the same line.
 > `Tip`: never use white spaces when naming files or directories
@@ -28,7 +32,7 @@ convention when it comes to your research. Given that typing the same command ov
 ```sh
 for i in $(seq 3)
 do
-mkdir Stage_$i
+mkdir stage_$i
 done
 ```
 Let's unpack this programming structure:
@@ -47,12 +51,12 @@ For the sake of reproducibility, it is always a good idea to keep track of every
 
 Each of our `Stage` directories should contain at least three items:
 - a What_I_Did.txt file.
-- an Output sub-directory
-- a sub-directory called Input
+- an output sub-directory
+- a sub-directory called input
 
 In principles, you could navigate to the each Stage directory using the `cd` command and create these objects manually but that involves a lot of typing. You should instead use a loop to avoid this tedious task. An efficient way to do this from a shell terminal requires to create a list of parent directories and then create the child directories only where we need them.
 ```sh
-ls -d Stage* > dir_list.txt
+ls -d stage* > dir_list.txt
 ```
 Note the use of the `>`. This symbol in bash has a special meaning: redirect the output of the command that precedes it to a file.
 
@@ -71,7 +75,7 @@ note again the use of the `$` sign in front of the word `line` which is the synt
 
 If your pipeline is run sequentially, the output of the first step will serve as input for the second step and so on and so forth. Therefore, the content of `Stage 1/Output` and `Stage 2/Input` will be exactly the same. Avoiding redundancies and data duplication is a good way of saving space on disk though, thus, we don’t want to copy all the files from one directory to another: we are going to create a symbolic link instead.
 ```sh
-ln -s ~/Project_BASH/Raw_Data/ ~/Project_BASH/Stage_1/Input
+ln -s ~/project_bash/raw_data/ ~/project_bash/stage_1/input
 ```
 The `ln` command stands for ”link” and it has this general syntax:
 ```sh
@@ -79,10 +83,10 @@ ln full/path/to/source full/path/to/destination/link_name
 ```
 Here we have used the `-s` flag to specify a symbolic link between the `Raw_Data` directory and a new `Input` folder (link name) inside the `Stage_1 directory`. This means that the content of `Raw_Data` is now accessible from `Stage_1/Input`. Let’s double-check it:
 ```sh
-touch Raw_Data/input_zero.txt
-ls Stage_1
-ls Stage_1/Input
-ls Raw_Data
+touch raw_data/input_zero.txt
+ls stage_1
+ls stage_1/input
+ls raw_data
 ```
 The first command is just to pupulate the Raw_Data folder with a file (`input_zero.txt`). By running the second command you should see that an Input folder has been created via the `ln` command. Now the Stage_1 directory contains all three elements required. The output of the third and fourth commands should be just `input_zero.txt`.
 
