@@ -84,15 +84,18 @@ When you consider the babirusa region of origin, do you think there is evidence 
 ### 3. Visualising the PCA analysis
 Next we will look at the results of the PCA using RStudio.
 
-Start by opening RStudio and open a new script
+Start by opening RStudio and open a new script (pink arrow in the screenshot).
 ![RStudio_opening](../IM/RStudio_opening.png)
 
-We will write our code into the script window (top left), where we can save everything we write. 
-The code will run in the terminal (bottom left). You can also run commands here, but they will not be saved.
-The environment on the top right is where all your data, objects and variables are stored. 
-Plots are viewed on the bottom right. 
+- we will write our code into the source window (top left), where we can edit and save everything we write. 
+- the code will run in the terminal (bottom left). You can also run commands here, but they will not be saved.
+- the environment on the top right is where all your data, objects and variables are stored. 
+- plots etc are viewed on the bottom right. 
 
-TYPE SOMETHING IN THE TERMINAL AND RUN - HOW DO YOU RUN ON A WINDOWS VS MAC
+When we write something in the script, it is not run until you source it. 
+First highlight the code you want to run then:
+- mac - press `cmd` + `entr`
+- windows - press `ctrl` + `entr`
 
 Ok so now, its good practice to clean your environment, set your working directory and load the correct libraries you need at the top of your script. Like this: 
 
@@ -107,13 +110,15 @@ We then need to set the working directory - this should be the path to the proje
 setwd("~/PATH/TO/PROJECT/DIRECTORY/")
 getwd() # this should show your working directory location in the terminal
 ```
+You can see above that anything your write with a `#` will not be run - it is a comment
 
 Now you load the libraries you need for this section.
-> These will have needed to be installed first with install.packages(), this only needs to be done once
+> Hint - These will have needed to be installed first with install.packages(), and this only needs to be done once
 
 ```sh
 library(tidyverse)
 library(ggrepel)
+library(ggpubr)
 ```
 
 Now we will load in the metadata file we need for PCA. This contains the sample names and the region of Sulawesi that the sample comes from. 
@@ -143,75 +148,93 @@ samplelist$region2[samplelist$region == "SE"] <- "South"
 >
 > Rename the Togean babirusa to a group called "Island" and then assign both the Northwest and Westcentral babirusa to a "North" group.
 
-SAVE THE FILE FOR THE ADMIXTURE?
-
 Next you will read in the datafiles, for the pca there are two files we need, `.evec` and `.eval`.
 ```sh
 eval <- read.table("PATH/TO/FILE.eval")
+head(eval)
 ```
 > Exercise
 >
-> Can you read in the `.evec` file and check that they have be correctly loaded
+> Can you read in the `.evec` file and check that it has been correctly loaded - there should be 12 columns
 
 Using the eigenvalues, we can calculate the percent contribution of each PC axis to the variation in the samples. This is for the first two axis.
 ```sh
 evec.pc1 <- round(eval[1,1]/sum(eval)*100,digits=2)
 evec.pc2 <- round(eval[2,1]/sum(eval)*100,digits=2)
 ```
-> Extra exercise
->
-> Can you calculate the percentages for the remaining 8 PCs?
-> 
 
-We will plot the PCA using ggplot and its easier to plot if everything is contained within the same dataframe. So we can add the metadata information to the eigenvectors. 
+We will plot the PCA using ggplot and first we will add the metadata information to the eigenvectors dataframe.  
 
 ```sh
-evec_merge <- as.data.frame(cbind(evec, sample = samplelist$sample, region = samplelist$region, region2 = samplelist$region2))
+evec_merge <- as.data.frame(cbind(evec[,-12],
+                                  sample = samplelist$sample,
+                                  region = samplelist$region,
+                                  region2 = samplelist$region2))
 ```
-This command takes your eigenvalues, and adds the columns (`cbind()`) from the samplelist dataframe and names the columns. `as.data.frame()` ensures that the new dataframe is in the correct format.
+- `cbind()` function binds the columns together
+- we take all but the last column of the eigenvector df (this was an additional sample name column)
+- plus the metadata columns we want - the formate is `[name_of_column] = [location_of_column]`
+- `as.data.frame()` function ensures that it stays in a data frame format
 
-Now we are ready for plotting using the function ggplot. ggplot is built in layers, with each layer being added to the basic plot using (`+`). 
-The style of plot is determined by the `geom` functions. As we want a scatted plot we are using 
+Now we are ready for plotting using the function ggplot. ggplot is a very comprehensive package with many options. We will just try and keep it simple but if you have experience with it, go ahead and add options ontop. 
+The plots are built in layers, with each layer being added to the basic plot using (`+`). 
+The style of plot is determined by the `geom` functions - for a scatter plot we want to use `geom_point()`
 
 First lets make a basic scatter plot:
 ```sh
 ggplot(data = evec_merge) + 
-  geom_point(aes(x = V2, y = V3, colour = region), size = 4))
+  geom_point(aes(x = V2, y = V3, colour = region), size = 4)
 ```
 Lets unpack this
-- the inital ggplot command determines the dataframe to be used
-Then we need to specify the aesthetics (`aes`) within the geom function. These are the required values to build the plot correctly.
+- the inital ggplot command determines the dataframe (`data = evec_merge`) to be used
+- 
+Then we specify the aesthetics (`aes`) within the geom function. These are the necessary values to build the plot correctly.
 - the x-axis is specified as the second column which are the values for PC1
 - the y-axis is specified as the third column which are the values for PC2
-- the points will be coloured by the region factor
+- the points will be coloured by the region factor - this is important so we can see if there are any distinctive clusters
 - size determines the size of the point
 
 Lets make this an object called `pca_plot`
 
+Do the same thing again but specify an object name. 
 ```sh
 pca_plot <- ggplot(data = evec_merge) + 
   geom_point(aes(x = V2, y = V3, colour = region), size = 4)
+
+pca_plot
 ```
-And now to this we can add additional layers and make it look pretty
-Lets add the percentage contribution to each axis
+
+This is your basic PCA plot. You could stop here - but there are many other options that we could add, and just adding a couple can make the figure much clearer for the reader.
+First lets add the percentage contribution to each axis, this gives an indication of how important each axis is to the genetic structure.
 ```sh
 pca_plot <- pca_plot + xlab(paste0("PC1 (", evec.pc1, "%)")) + ylab(paste0("PC2 (", evec.pc2, "%)")) 
 ```
-Finally lets make the plot look a little cleaner.
+
+Next lets make the plot look a little cleaner. ggplot has lots of built in `theme` options.
 ```sh
 pca_plot <- pca_plot + theme_bw()
 ```
-To see how it looks we need to just call the named object. 
-ggplot has a huge amount of flexibility and there is alot of documentation online. You can also use `?ggplot` or `?geom_point` to read the help file.
+> Hint - start typing `theme_` and then use the tab to see the different options
 
+You are saving the layer ontop of the initial object, so be warned if you want to make changes or clear something you will have to run the code from the beginning.
+
+Finally - we will add the sample names. This is useful so that we can identify any outliers in the data or interesting individuals. Because this needs a new geom, we will give this to a new object so we do not confuse R.
+
+```sh
+pca_plot_names <- pca_plot + geom_text_repel(aes(x = V2, y = V3, colour = region, label=sample))
+
+pca_plot_names
+```
 ![Final_PCA](../IM/Final_PCA.png)
 
-Now when you look at the PCA, do you think that there is evidence of population structure? How many populations do you this these samples form?
+> Hint - use `?ggplot` or `?geom_point` to read the help files and there is alot of help online
 
-You can save the plot with
+You save the plot using:
 ```sh
 ggsave(plot = PLOT_NAME, "PATH/TO/FILE.pdf")
 ```
+
+Now when you look at the PCA, what do you see and what do you think this means for the babirusa population? Do you think that there is evidence of population structure and how many populations do you this these samples from?
 
 ### 4. Visualising the ADMIXTURE analysis
 Great, now lets move on to plotting the admixture results. We can use the same metadata file as for the PCA, and then we also need to use the `.Q` files we downloaded from the server. 
@@ -311,6 +334,8 @@ Extra PCA exercises
 > Can you re-colour the points based the three clusters inside of four?
 > 
 > Can you use scale_colour_manual() to choose your own colour palette?
+>
+> Plot on the different PC axis and calculate the variation for these
 >
 
 Extra ADMIXTURE exercise
