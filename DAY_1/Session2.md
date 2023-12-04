@@ -27,7 +27,7 @@ bedtools --help
 
 Looks like the program is not installed :( 
 
-On servers you often do not have permissions to install softwares directly. This is because 
+To protect the integrity of the file system on a server, normal user do not have permissions to directly install softwares.   
 You can read more about conda [here](https://docs.conda.io/en/latest/)
 
 
