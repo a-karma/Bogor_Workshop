@@ -64,26 +64,22 @@ Scroll down a little and click on the upload tree button
 ### Unrooted tree
 First we will look at the unrooted tree you generated. So under the tree file box, navigate to your unrooted `.treefile` and click upload.
 
-The initial display should look something like this: 
-![iTOL_display](../IM/iTOL_display.png)
-
 > Exercise
 >
-> Can you use the control panel on the right to make a better visualisation of the tree - so you should try options like "Unrooted", "Branch lengths ignore", "Labels at tips"
+> Use the control panel on the right to make your unrooted tree look like this example below
+
+![iTOL_unrooted](../IM/iTOL_unrooted.png)
 
 ### Rooted tree
-Now lets do the same for the rooted tree, in a different browser window so you can compare. The first thing to do is specify the root
+Now lets do the same for the rooted tree, in a different browser window so you can compare. The first thing to do is specify the root.
+
 > Exercise
 >
-> By hovering over the samples, can you root the tree by the correct sample?
+> By hovering over the samples, root the tree by the correct sample
 
 It is possible to add colours for regions, change and format lines etc, but for speed we will just compare the clustes we see on our tree to the metadata file. If you finish the session, this is something you can play around with. But for now, open your population metadata file, which contains the sample IDs and regions
 
-> Exercise
->
-> Is there evidence of phylogenetic clustering based on region?
-> 
-> What is the difference between the tree with and without the outgroup?
+When you consider the babirusa region of origin, do you think there is evidence of geographic clustering? What is the difference between the tree with and without the outgroup?
 
 ### 3. Visualising the PCA analysis
 Next we will look at the results of the PCA using RStudio.
