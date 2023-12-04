@@ -60,7 +60,7 @@ The `for` loop is a fundamental programming construct that allows you to execute
 
 The `seq` command produces a sequence of integers, and in this case, it generates the numbers from 1 to 3.
 
-The `do` command marks the beginning of the block of code that will be executed repeatedly for each value of the iterator variable
+The `do` command marks the beginning of the block of code that will be executed repeatedly for each value of the iterator variable.
 
 The variable `i` serves as the iterator, keeping track of the current position in the sequence. With each iteration, the value of `i` changes to the next number in the sequence, until it reaches the end of the sequence.
 
