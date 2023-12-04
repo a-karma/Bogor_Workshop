@@ -9,8 +9,8 @@
 ### 2. conda
 In Session 1 we have seen three examples of text file that are commonly used in bioinformatics:
 
-- `fasta`
-- `GTF`
+- The `fasta` format to store DNA sequences
+- The `GTF`
 - `BED`
 
 
