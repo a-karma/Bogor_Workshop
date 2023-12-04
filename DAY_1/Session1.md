@@ -120,7 +120,7 @@ The first command is just to pupulate the `raw_data` folder with a file (`input_
 >
 > Use the ln command to complete our file system structure
 > by linking each `stage_{i}/output` to an input folder inside the `stage_{i+1}` directory.
-> Note that in our example Stage 4 is actually termed Results.
+> Note that in our example stage 4 is actually termed Results.
 
 If you have made a mistake with links, do not panic. You can alwayse remove them with `rm` or with the `unlink` command.
 
@@ -132,7 +132,7 @@ do
 touch output_file_$1
 done
 ```
-Now we should move each of these file to the corresponding `Stage_{i}/Output` directory.
+Now we should move each of these file to the corresponding `stage_{i}/Output` directory.
 
 > `Exercise 3`
 >
@@ -149,6 +149,8 @@ If you now run the `tree` command from the Project_BASH directory, you should ge
 In this section we are going to apply what we already know about variables, conditional and loops to explore text files. 
 We will mostly focus on file manipulation using regular expressions, using `grep`, `sed` and `awk`.
 
+Regular expressions, also known as regex or regexp, are a powerful tool for manipulating text. They allow you to search for, extract, and modify patterns in text data. In Bash scripting, regular expressions are particularly useful for processing text files and automating tasks that involve text manipulation.
+
 Let’s start with opening a new terminal, connecting to the VM and look at the file called `random.fasta`:
 ```sh
 cd /home/Data/Day_1/
@@ -156,25 +158,29 @@ less random.fasta
 Press Q to exit.
 ```
 
-As the name suggests, this file contains some random DNA sequences of different length stored in a commonly used format for this kind of data. 
+As the name suggests, this file contains some random DNA sequences of different length stored in a fasta format (a very common format DNA analysis).
+
 As you can see, each entry consists of two lines: a header (with the sequence identifier) and a second line containing the actual sequence.
-Thus, if we were wondering how many DNA sequences are present in that file, we can just run:
+Lets calculate how many lines are in this fasta file:
 ```sh
 wc -l random.fasta
 ```
-and divide this number by two.
+This gives us the total number of lines. Divide this number by two and you'll get the number of sequences.
 
-Now, let’s look at the first 7 entries which correspond to the first 14 lines of the file.
+Now, let’s look at the first 7 sequences which correspond to the first 14 lines of the file.
 We can easily print them on screen using:
 ```sh
 head -14 random.fasta
 ```
+The `head` command is a fundamental tool in Bash scripting used to display the first portion of a file's contents. It's commonly used to quickly preview the beginning of a file or check for specific information at the start.
 
-If instead we were interested in the last 4 entries, we could have run:
+If instead we were interested in the last 4 entries, we would use:
 ```sh
 tail -8 random.fasta
 ```
-Or we could a combination of these two commands to extract a contiguous block of sequence:
+The tail command is a versatile tool in Bash scripting used to display the last portion of a file's contents. It's commonly used to quickly review the end of a file, check for recent changes, or monitor log files in real time.
+
+We could a combination of these two commands to extract set of sequence in the middle of the file:
 ```sh
 head -20 random.fasta | tail -4
 ```
@@ -182,25 +188,27 @@ With the last command we have selected the 9th and 10th entries corresponding to
 The vertical bar (`|`) is called `pipe` and it is used to connect the two commands (`head` and `tail` in this case). 
 Specifically, it redirects the standard output of the first command which then serves as input for the second command.
 
-Piping the output of head into tail or vice versa is a simple way to extract a block of lines
-but it becomes very slow if the file you are dealing with is huge. An alternative is using
-sed. Let’s consider the following commands:
+Standard output, also known as stdout, is the default output stream of a process in a Unix-like operating system. It is the channel through which a process (here `head`) sends its output to another process (here `tail`).
+
+Piping the output of head into tail or vice versa is a simple way to extract a block of lines but it becomes very slow if the file you are dealing with is huge. An alternative is using `sed`. 
+
+`sed` is a stream editor, a powerful tool for manipulating text data. It allows you to search, replace, insert, and delete text within files or data streams. sed is commonly used in Bash scripting for tasks like processing log files, cleaning up text files, and performing text-based transformations.
+
+Let’s consider the following commands:
 
 ```sh
 sed -n '9,12p' random.fasta
 sed -n '9,+3p' random.fasta
 ```
-These are alternative ways of printing a range of lines. In this case we are printing lines
-from 9 to 12 which of course correspond to our 5th and 6th entry.
+These are alternative ways of printing a range of lines. In this case we are printing lines from 9 to 12 which of course correspond to our 5th and 6th entry.
 
-It is unlikely though that we will know in advance the line numbers of the entries that are
-relevant to our analysis. Most of the time will have to parse the file and look for patterns.
-That’s when regular expressions (`regex`) become very useful.
+It is unlikely though that we will know in advance the line numbers of the entries that are relevant to our analysis. Most of the time will have to parse the file and look for patterns. That’s when regular expressions (`regex`) become very useful.
 
-As you may have noticed, all header lines in random.fasta start with `>seq` followed by a
-number, `Hg`, and a letter, separated by underscores. The string `Hg` stands for haplogroup
-(A,B,or C) and we might be interested in knowing how many reads we have for each
-group. We can retrieve these number by running:
+As you may have noticed, all header lines in random.fasta start with `>seq` followed by a number, `Hg`, and a letter, separated by underscores. The string `Hg` stands for haplogroup (A,B,or C) and we might be interested in knowing how many reads we have for each group. We can calculate this using `grep`.
+
+`grep` is a powerful tool for searching for patterns in text files. It is commonly used in Bash scripting to locate specific text strings, analyze log files, and perform text-based searches.
+
+Let's consider the following command:
 
 ```sh
 grep '>seq.*_Hg_A' random.fasta | wc -l
