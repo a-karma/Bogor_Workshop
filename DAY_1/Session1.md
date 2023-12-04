@@ -229,47 +229,45 @@ The regular expression `>seq.*` matches any line containing the string >seq foll
 >
 > Find out how many sequences we have for each group by modifying the pattern of the grep command above.
 
-We can also use regex inside a sed command. For example, let's extract the 3rd sequence of each haplogroup:
+We can also use a regex inside a sed command. For example, let's extract the 3rd sequence of each haplogroup:
 ```sh
 sed -n '/seq_3_/,+1p' random.fasta > /home/your-user-id/Project_BASH/Raw_Data/third_seq_all_Hg.fasta
 ```
 As you can see, it looks very similar to the sed command we used before with the exception that instead of providing sed with specific line number, 
-here we have specified a pattern (`/seq_3_/`) and asked the program to print eachh matching line plus and the following one: (+1p). 
+here we have specified a pattern (`/seq_3_/`) and asked the program to print each matching line plus and the following one: (+1p). 
 Finally, we have redirected the output to store this information into a file called third_seq_all_Hg.fasta.
 
 > `Exercise 5`
 > 
 > Now navigate to your `Raw_Data` directory and visualise the content of the file on screen using the command `cat name-of-the-file`.
 
-Let’s have a look at a different file format and keep on experimenting with regex. 
-In the`/home/Data/Day_1` folder you should see a file called `dog_genes.gtf` 
-which is a tab separated file containing annotations for some coding sequences in the dog genome.
-We can have a look at the header (lines starting with #) by running:
+Let’s have a look at a different file format and keep  experimenting with regex. In the`/home/Data/Day_1` folder you should see a file called `dog_genes.gtf`.
+
+A GTF (Gene Transfer Format) file is a text-based file format used to store information about the genomic structure of genes and their features. It is commonly used in genomics research to annotate and analyze genome sequences. It is a tab separated file containing annotations for coding sequences in the dog genome.
+
+We can extract the header if of this file (lines starting with #) by running:
 ```sh
 grep '^#' /home/Data/Day_1/dog_genes.gtf
 ```
 > `Exercise 6`
 >
-> Create an headerless version of this file using the ”select non matching lines” option of grep (-v flag)
-> and redirect the output to a file called `dog_genes_no_H.tsv` inside the Stage_1/output directory.
+> Remove the header of this file using the ”select non matching lines” option of grep (-v flag) and redirect the output to a file called `dog_genes_no_H.tsv` inside the Stage_1/output directory.
 
-The first line of your headerless file should be as follows:
+The first line of your file without a header should look like:
 `X ensembl gene 1575 5716 . + . gene_id "ENSCAFG00000010935"; gene_version "3"; gene_source "ensembl"; gene_biotype "protein_coding"`
 It contains a lot of information that is not relevant for us at the moment. 
 The fields that we are interested in are:
 - The chromosome (X: 1st field)
+- ensembl (a genomebrowzer site which conducted the annotation: see www.ensembl.com). 
 - The type of the feature (gene: 3rd field)
 - The starting position of the feature (1575: 4th field)
 - The ending position of the feature (5716: 5th field)
 
 > `Exercise 7`
 > 
-> Use `cut` to extract the required fields from dog_genes_no_H.tsv.
-> Then redirect the output to a file called `dog_genes_table.tsv` inside your `Stage_2/Output/` directory.
-> See cut --help to identify the option for fields
+> Use `cut` to extract the required fields from dog_genes_no_H.tsv. Then redirect the output to a file called `dog_genes_table.tsv` inside your `Stage_2/Output/` directory. See cut --help to identify the option for fields
 
-Now that we have extracted the relevant information, we would like to make a few adjust-
-ments to our table. Let’s start with adding a string at the beginning of each line:
+Now that we have extracted the relevant information, we would like to make a few adjustments to our table. Let’s start with adding a string at the beginning of each line:
 ```sh
 cd Stage_2/Output/
 sed -i 's/^/chr_/' dog_genes_table.tsv
@@ -279,39 +277,35 @@ The substitution command has the following syntax:
 ```sh
 sed 's/target/replacement/'
 ```
-In our example, the caret symbol (^) denotes the beginning of a line and 
-we replaced this with `chr_`. You can check whether the substitution
-worked or not by examining the first 10 lines of the table with head.
+In our example, the caret symbol (^) is a regex which denotes the beginning of a line and we replaced this with `chr_`. You can check whether the substitution worked or not by examining the first 10 lines of the table with head.
 
 The next thing we would like to do is switching the order of the columns in our table:
 - 1. Chromosome
 - 2. Starting Position
 - 3. Ending Position
 - 4. Feature Type
+
 This requires a simple awk command:
 ```sh
 awk 'BEGIN {OFS="\t"};{print $1,$3,$4,$2}' Stage_2/Output/dog_genes_table.tsv > Stage_3/Output/d_g_tab_cfp.tsv
 ```
+`awk` is a powerful scripting language designed for processing text files. It is commonly used in Bash scripting to manipulate, analyze, and transform text data. `awk` is particularly well-suited for tasks like parsing log files, extracting information from text files, and performing text-based calculations.
 
-The OFS option before the print command stands for ”Output Filed Separator” and we set
-it to Tab (`\t`) to ensure our table has the correct delimiter for a ”tab separated file” (TSV).
-`awk` stores each field in a different variable which is accessible via the `$` symbol. 
-We made use of this feature to put the columns in the rigth order.
+The OFS option before the print command stands for ”Output Filed Separator” and we set it to Tab (`\t`) to ensure our table has the correct delimiter for a ”tab separated file” (TSV). `awk` stores each field in a different variable which is accessible via the `$` symbol.  We made use of this feature to put the columns in the rigth order.
 
-We are almost done with pre-processing our data but there’s still something that’s not
-quite right with it. Have a look at the first column:
+We are almost done with pre-processing our data but there’s still something that’s not quite right with it. Have a look at the first column:
+
 ```sh
-cd Stage_3/Output
+cd stage_3/Output
 cat d_g_tab_cfp.tsv | cut -f 1
 ```
 Have you noticed that the chromosomes are not in the right order? Let’s fix it!
 ```sh
 sort -V -o ../../Results/d_g_sorted_table.bed d_g_tab_cfp.tsv
 ```
+The `sort` command is a fundamental tool in Bash scripting used to organize and rearrange data based on specified criteria. It is commonly used to `sort` text files numerically or alphabetically, making it a versatile tool for data manipulation and analysis.
 
-Here we used the -V option because we are dealing with a mixture of numerical and string
-data. Note also the -o to specify the output file which must precede the input.
-Our table is now ready to be analysed. Hurray!!!
+Here we used the -V option because we are dealing with a mixture of numerical and string data. Note also the -o to specify the output file which must precede the input. Our table is now ready to be analysed.
 
 > `Bonus Exercise`
 > 
