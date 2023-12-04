@@ -89,8 +89,7 @@ You can then edit this file manually using any text editor, such as for example 
 nano what_i_did.txt
 ```
 
-
-For our purpose today we will create a simple directory structure for our research project. Each of our `stage` directories should contain three items:
+Today we will create a very simple directory structure for our research project just to illustrate the principle. Each of our `stage` directories should contain three items:
 - a what_i_did.txt file.
 - an output sub-directory
 - a sub-directory called input
