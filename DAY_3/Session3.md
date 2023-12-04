@@ -19,9 +19,7 @@ We need to tell it where the ssh key is, and which remote server to connect usin
 sftp -i ~/path/to/ssh/key [your_username]@138.246.238.65
 ```
 You will now be in your home directory in the server, it should show this: 
-```sh
-sftp>
-```
+![SFTP_connection](../IM/SFTP_connection.png)
 
 You are now connected to the server and can navigate through your directories like normal. 
 If you add an `l` in front of your commands you should see you local computer file structure. Using the command `get` will download your files to your location on the local computer. 
