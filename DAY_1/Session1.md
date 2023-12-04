@@ -80,7 +80,15 @@ Maintaining a detailed record of executed commands is an essential practice for 
 
 To facilitate efficient command logging, it's recommended to adopt a consistent naming convention for your log files. In this case, we'll use the file name "what_i_did.txt" to store our command history. To create this empty log file, simply utilize the touch command:
 
-```touch what_i_did.txt```
+```sh
+touch what_i_did.txt
+```
+You can then edit this file manually using any text editor, such as for example `nano`.
+
+```sh
+nano what_i_did.txt
+```
+
 
 For our purpose today we will create a simple directory structure for our research project. Each of our `stage` directories should contain three items:
 - a what_i_did.txt file.
