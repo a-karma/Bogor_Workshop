@@ -163,7 +163,7 @@ Now we should move each of these file to the corresponding `stage_{i}/output` di
 > To do so, you should use the `mv` command which has the following syntax: `mv target_file_name path/to/destination`.
 
 
-If you now run the `tree` command from the project_bASH directory, you should get:
+If you now run the `tree` command from the project_bash directory, you should get:
 
 ![File-system-structure](../IM/bash_tree.png)
 
