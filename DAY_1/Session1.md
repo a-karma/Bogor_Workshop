@@ -6,7 +6,7 @@
 ### 1. Working from terminal and remote servers
 In this section, we will outline the procedure for connecting to our cloud server and provide you with some essential preliminary definitions. 
 
-- `OS` (short for Operating System) is the program that manages all other applications in a computer. Windows, Linux and macOS are all examples of Operating SystemsUsers can interact directly with the operating system through a user interface, such as a command-line interface (CLI) or a graphical UI (GUI).
+- `OS` (short for Operating System) is the program that manages all other applications in a computer. Windows, Linux and macOS are all examples of Operating Systems. Users can interact directly with the operating system through a user interface, such as a command-line interface (CLI) or a graphical UI (GUI).
 - `terminal` 
 - `shell`
 - `file system`
