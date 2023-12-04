@@ -97,7 +97,7 @@ Now that we have the list, we can easily implement another type of loop using th
 ```sh
 while read -r line
 do
-touch $line/What_I_Did.txt
+touch $line/what_i_did.txt
 done < dir_list.txt
 ```
 
