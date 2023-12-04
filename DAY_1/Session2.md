@@ -1,29 +1,27 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
-please do not modify these first two lines of the .md file
+## Day 1 - Basic concepts of command line programming - Session 2
 
-use the same syntax to add pictures:
+### 1. Shell Scripting
 
-placeholder name within square brackets and ../IM/file_name.png within parentheses
 
-## Session Title
-please add a few sentences here to introduce your session of the tutorial.
 
-### Example of section title 
-##### Example of sub-section title 
-- this is how you define bullet point
-- in case you want to make more explicit 
-- the series of steps required to accomplish a task 
+### 2. conda
+In Session 1 we have seen three examples of text file that are commonly used in bioinformatics:
 
-See example below on how to format commands that the participants will have to run
+- `fasta`
+- `GTF`
+- `BED`
+
+
+You can read more about conda [here](https://docs.conda.io/en/latest/)
 
 ```sh
 conda activate Day_1
 plink --bfile file_name --recode
 ```
 
-you can instead use `this syntax` to highlight an in-line command, software name or something you think it's important
-
+### 3. Transferring files
 see below the syntax for tables:
 
 | column A | column B |
