@@ -2,27 +2,29 @@
 # Applications of Genomics in Wildlife Conservation
 
 ## Day two - Session two - Population genetic analysis
-In this session we are going to explore the population genetic structure and ancestry using the babirusa dataset. As explained, we will use these analyses to explore whether all the babirusa come from a homogeneous population, or whether we can see evidence of population structure based on the location of the sample.  
+In this session we are going to learn the basics of population genomics analyses using the babirusa dataset. As explained, we will use these analyses to explore whether all the babirusa come from a panmictic population, or whether we can see evidence of population structure and whether this structure correlates with geography.
 
 In this tutorial you will run the three analyses using the remote server:
 - building maximum likelihood tress in IQtree
 - principal components analysis in smartpca
 - ADMIXTURE with different values of K
 
-Then in session three - you will export the data from the virtual machine and work in RStudio to visualise the results from the PCA and ADMIXTURE, and you will use the browser tool iTOL for tree visualisation.
+In session three - you will export the data from the virtual machine and work in RStudio to visualise the results from the PCA and ADMIXTURE, and you will use the browser tool iTOL for tree visualisation.
 
 ### 1. Building phylogenetic trees with IQtree
 
-First in your home directory, make a new directory for this session. Call it something sensible and navigate into this directory.
+First create a new directory for this session in your home directory (`~/`). Recall the guidelines with went through on day 1.
 
 Next activate the correct conda environment for the day
 > `Hint` - this will be the same as the one you were using this morning
 
-We will keep the output files for each analysis in their own directory, so make a directory for this analysis and navigate to it. This is your working directory
+We will keep the output files for each analysis in their own directory, so make a directory for this analysis and navigate to it. This is your working directory.
 
 ### Convert to phylip format
 The program you will use to make the tree is called `iqtree`. `iqtree` requires an alignment file as an input but this can take several formats. 
 We will be using the `.phylip` alignment format. To generate this from the vcf file, you need to use a script called `vcf2phylip.py`. 
+
+`iq-tree` is program to reconstruct phylogenetic tree based on genetic data - it uses maximum likelihood (see here if you want more details about tree reconstruction methods: https://en.wikipedia.org/wiki/Computational_phylogenetics). 
 
 You should be able to find this under `/home/DATA/Day_3_b/scripts/`. We want to use this script to convert our vcf into phylip format. To do this, first assign the path to the panel as a variable.
 
