@@ -61,7 +61,7 @@ Open your browser and navigate to: https://itol.embl.de/
 L
 Scroll down a little and click on the upload tree button
 
-#### Unrooted tree
+### Unrooted tree
 First we will look at the unrooted tree you generated. So under the tree file box, navigate to your unrooted `.treefile` and click upload.
 
 The initial display should look something like this: 
@@ -71,17 +71,18 @@ The initial display should look something like this:
 >
 > Can you use the control panel on the right to make a better visualisation of the tree - so you should try options like "Unrooted", "Branch lengths ignore", "Labels at tips"
 
-#### Rooted tree
+### Rooted tree
 Now lets do the same for the rooted tree, in a different browser window so you can compare. The first thing to do is specify the root
 > Exercise
 >
 > By hovering over the samples, can you root the tree by the correct sample?
 
-It is possible to add colours for regions, change and format lines etc, but for speed we will just compare the clustes we see on our tree to the metadata file. Open your population metadata file, which contains the sample IDs and regions
+It is possible to add colours for regions, change and format lines etc, but for speed we will just compare the clustes we see on our tree to the metadata file. If you finish the session, this is something you can play around with. But for now, open your population metadata file, which contains the sample IDs and regions
 
 > Exercise
 >
 > Is there evidence of phylogenetic clustering based on region?
+> 
 > What is the difference between the tree with and without the outgroup?
 
 ### 3. Visualising the PCA analysis
@@ -290,11 +291,12 @@ ggarrange(admix_plot_k2, admix_plot_k3, admix_plot_k4, admix_plot_k5, ncol = 1)
 
 Do not forget to save your script as you go.
 
-Now you have all your admixture results together: 
+Now that you have the results of all three exercises: 
 - what do you think this shows?
+- do the analyses agree?
+- how many population groups do you think there might be in the babirusa?
+- which region is the most genetically distinct and why might this be?
 - are there any individuals that look like they are admixed, i.e. show evidence of multiple ancestries?
-- does this support or contest the PCA results?
-- how many population groups do you think there might be in the babirusa? 
 
 PLOTTING THE CV ERRORS - MAYBE TOO MUCH??? 
 
