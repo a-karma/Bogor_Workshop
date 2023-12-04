@@ -142,7 +142,7 @@ The first command is just to pupulate the `raw_data` folder with a file (`input_
 >
 > Use the ln command to complete our file system structure
 > by linking each `stage_{i}/output` to an input folder inside the `stage_{i+1}` directory.
-> Note that in our example stage 4 is actually termed Results.
+> Note that in our example stage_4 is actually termed results.
 
 If you have made a mistake with links, do not panic. You can alwayse remove them with `rm` or with the `unlink` command.
 
@@ -154,7 +154,7 @@ do
 touch output_file_$1
 done
 ```
-Now we should move each of these file to the corresponding `stage_{i}/Output` directory.
+Now we should move each of these file to the corresponding `stage_{i}/output` directory.
 
 > `Exercise 3`
 >
@@ -163,7 +163,7 @@ Now we should move each of these file to the corresponding `stage_{i}/Output` di
 > To do so, you should use the `mv` command which has the following syntax: `mv target_file_name path/to/destination`.
 
 
-If you now run the `tree` command from the Project_BASH directory, you should get:
+If you now run the `tree` command from the project_bASH directory, you should get:
 
 ![File-system-structure](../IM/bash_tree.png)
 
@@ -173,7 +173,7 @@ We will mostly focus on file manipulation using regular expressions, using `grep
 
 Regular expressions, also known as regex or regexp, are a powerful tool for manipulating text. They allow you to search for, extract, and modify patterns in text data. In Bash scripting, regular expressions are particularly useful for processing text files and automating tasks that involve text manipulation.
 
-Let’s start with opening a new terminal, connecting to the VM and look at the file called `random.fasta`:
+Let’s start with opening a new terminal, connecting to the server and look at the file called `random.fasta`:
 ```sh
 cd /home/Data/Day_1/
 less random.fasta
