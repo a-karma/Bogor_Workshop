@@ -16,8 +16,11 @@ In Session 1 we have seen three examples of text file that are commonly used in 
 The `GTF` and the `BED` format are both TAB-separated files used to store genomic regions as coordinates and their associated annotations. 
 Although in principles we could manually edit these files using standard text editors this becomes very unpractical when dealing with very large files.
 Alternatively, we could combine command line tools (like `sed`, `awk`, or `grep`) to make this process more efficient but performing complex tasks using only these tools is not straightforward and often require a deep understanding of programming. Luckly for us, bioinformaticians have created various software specifically designed to manipulate these file formats. 
+
 Let's have a look at `bedtools` a powerful toolset for genome arithmetic. 
+
 In your terminal, please type: 
+
 ```sh
 bedtools --help
 ```
