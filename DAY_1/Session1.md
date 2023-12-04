@@ -81,24 +81,24 @@ The `ln` command stands for ”link” and it has this general syntax:
 ```sh
 ln full/path/to/source full/path/to/destination/link_name
 ```
-Here we have used the `-s` flag to specify a symbolic link between the `Raw_Data` directory and a new `Input` folder (link name) inside the `Stage_1 directory`. This means that the content of `Raw_Data` is now accessible from `Stage_1/Input`. Let’s double-check it:
+Here we have used the `-s` flag to specify a symbolic link between the `raw_data` directory and a new `input` folder (link name) inside the `stage_1 directory`. This means that the content of `raw_data` is now accessible from `stage_1/input`. Let’s double-check it:
 ```sh
 touch raw_data/input_zero.txt
 ls stage_1
 ls stage_1/input
 ls raw_data
 ```
-The first command is just to pupulate the Raw_Data folder with a file (`input_zero.txt`). By running the second command you should see that an Input folder has been created via the `ln` command. Now the Stage_1 directory contains all three elements required. The output of the third and fourth commands should be just `input_zero.txt`.
+The first command is just to pupulate the `raw_data` folder with a file (`input_zero.txt`). By running the second command you should see that an `input` folder has been created via the `ln` command. Now the `stage_1` directory contains all three elements required. The output of the third and fourth commands should be just `input_zero.txt`.
 
 > `Exercise 2`
 >
 > Use the ln command to complete our file system structure
-> by linking each `Stage_{i}/Output` to an Input folder inside the `Stage_{i+1}` directory.
+> by linking each `stage_{i}/output` to an input folder inside the `stage_{i+1}` directory.
 > Note that in our example Stage 4 is actually termed Results.
 
 If you have made a mistake with links, do not panic. You can alwayse remove them with `rm` or with the `unlink` command.
 
-Now that we have a good structure we can start populating our directories. Let's create some files in the `Project_BASH` directory.
+Now that we have a good structure we can start populating our directories. Let's create some files in the `project_bash` directory.
 
 ```sh
 for i in $(seq 3)
