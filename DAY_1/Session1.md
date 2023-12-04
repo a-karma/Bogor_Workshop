@@ -13,7 +13,21 @@ In this section, we will outline the procedure for connecting to our cloud serve
 - A `file system` is the structure and logic rules used by the OS to control how data is stored and retrieved.
 - A `script` is a series of instructions that automate computer tasks  Here we will focus on shell-scripting meaning executable files interpreted by the shell. 
 
-In the guide we've sent you, you've seen how to install putty (Windows users) or how to connect from terminal 
+
+##### Windows Users
+In the guide we've sent you, you've seen how to install putty and how to connect to our cloud server using this program. 
+ - open the putty app
+ - under the Saved Session box, click on `Bogor_Workshop` then on the `Open` button.
+ - In the terminal window type your user_ID and press enter
+ - You should be now asked for the key-passphrase, please type it and press enter
+
+##### Linux & macOS user
+Please open a terminal and then run:
+
+```sh
+ssh -i ./.ssh/workshop_key -l user_ID 138.246.238.65
+```
+where user_ID needs to be replaced by the credentials we sent you.
 
 ### 2. The filesystem 
 This section outlines the basic commands for navigating file systems and creating a structured directory hierarchy for research projects. The naming of files and directories is more crucial than you might realize; a clear and consistent structure will significantly streamline your workflow, especially when dealing with complex projects and pipelines. While you can adapt and customize this template structure to your specific needs, adhering to these principles will greatly enhance project organization and accessibility.
