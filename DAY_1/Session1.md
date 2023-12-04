@@ -55,16 +55,24 @@ The `done` command marks the end of the for loop, indicating that the loop shoul
 
 This will create 3 directories called: `stage_1`, `stage_2`, `stage_3`.
 
-Now let's look at what we have done: to list the content of a directory use the command `ls`.
+Now type:
 
-For the sake of reproducibility, it is always a good idea to keep track of everything we do. I recommend you always log your command to a file keeping a consitent naming convention. Here we are going to call our log files `What_I_did.txt` and in order to create such files we will use the command `touch`. 
+```ls```
 
-Each of our `Stage` directories should contain at least three items:
+To ensure the directories have been indeed created.
+
+Maintaining a detailed record of executed commands is an essential practice for reproducibility and debugging purposes. By keeping a log of your actions, you can easily retrace your steps, identify potential errors, and effectively reproduce your work, even after a significant time gap.
+
+To facilitate efficient command logging, it's recommended to adopt a consistent naming convention for your log files. In this case, we'll use the file name "What_I_did.txt" to store our command history. To create this empty log file, simply utilize the touch command:
+
+```touch What_I_did.txt```
+
+For our purpose today we will create a simple directory structure for our research project. Each of our `stage` directories should contain three items:
 - a What_I_Did.txt file.
 - an output sub-directory
 - a sub-directory called input
 
-In principles, you could navigate to the each Stage directory using the `cd` command and create these objects manually but that involves a lot of typing. You should instead use a loop to avoid this tedious task. An efficient way to do this from a shell terminal requires to create a list of parent directories and then create the child directories only where we need them.
+In principles, you could navigate to the each stage directory using the `cd` command and create these objects manually but that involves a lot of typing. You should instead use a loop to avoid this tedious task. An efficient way to do this from a shell terminal requires to create a list of parent directories and then create the child directories only where we need them.
 ```sh
 ls -d stage* > dir_list.txt
 ```
@@ -77,13 +85,21 @@ do
 touch $line/What_I_Did.txt
 done < dir_list.txt
 ```
-note again the use of the `$` sign in front of the word `line` which is the syntax for variables in bash. This is because at each iteration the content of the variable `line` will change while we go through the list of directories contained in the `dir_list.txt` file. The loop will end when the variable `$line` is empty i.e. when we reach the end of the file.
+
+The `$` sign preceding the variable named `line` is crucial in this context because it indicates that we are referencing the actual value stored in the variable, rather than the variable name itself. During each iteration of the loop, the read command reads a line from the `dir_list.txt` file and assigns it to the `$line` variable.
 
 > `Exercise 1`
 >
-> use a similar while loop to create a sub-directory called `Output` inside each Stage dir
+> use a similar while loop to create a sub-directory called `output` inside each stage directory
 
-If your pipeline is run sequentially, the output of the first step will serve as input for the second step and so on and so forth. Therefore, the content of `stage 1/output` and `stage 2/input` will be exactly the same. Avoiding redundancies and data duplication is a good way of saving space on disk though, thus, we don’t want to copy all the files from one directory to another: we are going to create a symbolic link instead.
+In data processing pipelines, where the output of one step becomes the input for the next, it's often necessary to transfer data between directories. However, blindly copying files can lead to inefficient storage usage and unnecessary data duplication. A more effective approach is to utilize symbolic links, which provide a pointer to the original data rather than creating a new copy.
+
+Consider the scenario where `stage_1/output` and `stage_1/input` contain identical data. Copying the entire contents from `stage_1/output` to `stage_1/input` would result in redundant storage of the same data, consuming unnecessary disk space.
+
+Symbolic links offer a solution to this issue. Instead of replicating the data, a symbolic link is created in `stage_1/input`, pointing to the original data in `stage_1/output`. This link acts as a shortcut, directing the system to the actual data location whenever the input directory is accessed.
+
+Here is an example of symbolic links:
+
 ```sh
 ln -s ~/project_bash/raw_data/ ~/project_bash/stage_1/input
 ```
@@ -91,7 +107,7 @@ The `ln` command stands for ”link” and it has this general syntax:
 ```sh
 ln full/path/to/source full/path/to/destination/link_name
 ```
-Here we have used the `-s` flag to specify a symbolic link between the `raw_data` directory and a new `input` folder (link name) inside the `stage_1 directory`. This means that the content of `raw_data` is now accessible from `stage_1/input`. Let’s double-check it:
+Here we have used the `-s` flag to specify a symbolic link between the `raw_data` directory and a new `input` folder (link name) inside the `stage_1 directory`. This means that the content of `raw_data` is now accessible from `stage_1/input`. Let’s double-check:
 ```sh
 touch raw_data/input_zero.txt
 ls stage_1
