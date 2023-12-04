@@ -4,24 +4,23 @@
 ## Day 1 - Session 1 - Basic concepts of command line programming
 
 ### 1. Working from terminal and remote servers
-In this section we will revise the procedure to connect to our cloud server and we will provide you with some preliminary definitions.
-
+In this section, we will outline the procedure for connecting to our cloud server and provide you with some essential preliminary definitions.
 
 ### 2. The filesystem 
-In this section we will revise basic commands to navigate filesystems and create a series of directories and sub-directories for a research project. Naming file and directory is more important than you may think; a clear and consistent structure will make your life way much easier when you’ll have to deal with complex projects and pipelines. Feel free to adjust and customize this template structure as you please but keep this criteria in mind.
+This section outlines the basic commands for navigating file systems and creating a structured directory hierarchy for research projects. The naming of files and directories is more crucial than you might realize; a clear and consistent structure will significantly streamline your workflow, especially when dealing with complex projects and pipelines. While you can adapt and customize this template structure to your specific needs, adhering to these principles will greatly enhance project organization and accessibility.
 
-We should start with creating a parent directory for our project. 
+We will start with creating a parent directory for our project. 
 ```sh
 mkdir Project_BASH 
 cd Project_BASH
 ```
-The first command (`mkdir`) creates the required folder while the `cd` command is used to move from your home directory to the newly created one. Now we need to create one directory where we are going to store our scripts, one for the raw data, and finally one for our results:
+The first command (`mkdir`) creates the required folder while the `cd` command is used to move from your home directory to the new directory. Now we need to create one directory where we are going to store our scripts, one for the raw data, and one for our results:
 
 ```sh
 mkdir Scripts; mkdir Raw_Data; mkdir Results
 ```
 note the use of the semicolon (;) to separate different commands on the same line.
-> `Hacker Tips`: never use white spaces when naming files or directories
+> `Tip`: never use white spaces when naming files or directories
 
 Then, we need to create a separate directory for each stage of our pipeline/analysis. Because of my lack of immagination, each directory will be termed as `Stage` and we are going to number them sequentially but I would encourage you to use a better naming
 convention when it comes to your research. Given that typing the same command over and over is tedious, we are going to use one of the basics building blocks of any programming language: a loop.  
