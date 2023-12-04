@@ -63,7 +63,7 @@ do
 touch $line/What_I_Did.txt
 done < dir_list.txt
 ```
-note again the use of the `$` sign in front of the word `line` which is the syntax for variables in bash. This is because at each iteration the content of the variable `line` will change while we go through the list of directories contained in the `dir_list.txt` file. the loop will end when the variable `$line` is empty i.e. when we reach the end of the file.
+note again the use of the `$` sign in front of the word `line` which is the syntax for variables in bash. This is because at each iteration the content of the variable `line` will change while we go through the list of directories contained in the `dir_list.txt` file. The loop will end when the variable `$line` is empty i.e. when we reach the end of the file.
 
 > `Exercise 1`
 >
