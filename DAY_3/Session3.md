@@ -79,7 +79,9 @@ Now lets do the same for the rooted tree, in a different browser window so you c
 
 It is possible to add colours for regions, change and format lines etc, but for speed we will just compare the clustes we see on our tree to the metadata file. If you finish the session, this is something you can play around with. But for now, open your population metadata file, which contains the sample IDs and regions
 
-When you consider the babirusa region of origin, do you think there is evidence of geographic clustering? What is the difference between the tree with and without the outgroup?
+### Questions:
+- when you consider the region of origin for each individual, do you think there is evidence of geographic clustering?
+- what is the difference between the tree with and without the outgroup?
 
 ### 3. Visualising the PCA analysis
 Next we will look at the results of the PCA using RStudio.
@@ -231,34 +233,38 @@ pca_plot_names
 
 You save the plot using:
 ```sh
-ggsave(plot = PLOT_NAME, "PATH/TO/FILE.pdf")
+ggsave(plot = PLOT_NAME, "PATH/TO/FILE.png")
 ```
-
-Now when you look at the PCA, what do you see and what do you think this means for the babirusa population? Do you think that there is evidence of population structure and how many populations do you this these samples from?
+### Questions:
+- when you look at the PCA, what do you see and what do you think this means for the babirusa population?
+- do you think that there is evidence of population structure and how many populations do you this these samples from?
 
 ### 4. Visualising the ADMIXTURE analysis
-Great, now lets move on to plotting the admixture results. We can use the same metadata file as for the PCA, and then we also need to use the `.Q` files we downloaded from the server. 
+Great, now lets move on to plotting the admixture results. You can keep going in the script, but remember to save it every so ofter. 
+We want to use the same metadata file as for the PCA, so lets not clear our environment. 
 
+First we need to read in the `.Q` files we downloaded from the server. 
 ```sh
-K2 <- read.table("PATH/TO/FILE.Q")
+k2 <- read.table("PATH/TO/FILE.Q")
+head(k2) # you should see two columns "V1" and "V2" 
 ```
-
+The columns V1 and V2 correspond to the ancestry proportions, and the number of columns will change with the values of K
 > Exercise
 >
 > Can you read in the additional Q files for the each of the clusters you ran?
 
-To visualise the results we will make a stacked barplot and split this by region, using facets. First we need to get our dataframe in the correct format. We need a long format data, this can be achieved using this code:
+Again, the first thing we need to do is get the dataframe in the correct format. We can use the `cbind()` function from before, or because we also need to get the data into longform format, we can achieve this using the `tidyverse` (of which ggplot is part of). Long form means that each row in the dataframe only has one value, whereas our data is currently in wide form - there are two values for each individual on each row (V1 & V2). 
+We do this using:
 ```sh
-K2_long <- K2 %>% bind_cols(samplelist, k = "k2") %>% 
+k2_long <- k2 %>% bind_cols(samplelist, k = "k2") %>% 
   pivot_longer(cols = 1:2)
 head(K2_long)
 ```
-
 Lets look at this
-- first we call the data (`K2)
-- `%>%` is a way of XXXXXX
-- the function `bind_cols()` is similar to the base R function we used early `cbind()` adds columns together. And here we add a column to specify the value of K
-- the function `pivot_longer()` converts it to long form - the number of colums relating to the number of columns in the .Q matrix
+- first we call the data (`k2)
+- `%>%` is a way of piping from one command to the next in the package `tidyverse` - similar to the `|` in UNIX
+- the function `bind_cols()` is similar to the base R function we used earlier `cbind()` and adds columns together. At the same time we can add a column to specify the value of K
+- the function `pivot_longer()` converts it to long form - the number of columns relates to the number of columns in the .Q matrix
 
 ![Long_df](../IM/Long_df.png)
 
@@ -268,24 +274,27 @@ Lets look at this
 
 Now we should have a long form data frame object for every cluster with the metadata (samples and regions) attached. 
 
-Using this we will make the stacked barplots using `geom_col`, this will mean that the bars add up to 1.
-We build it up like the ggplot for the PCA. 
-
+Using this we will make the stacked barplots using `geom_col()`, this is for a barchart where the bars will mean that the bars add up to 1.
+We plot in ggplot using the same process as before. First we can make the basic plot:
 ```sh
 admix_plot_k2 <- ggplot(data = babik2_L) +
     geom_col(aes(x=sample, y=value, fill=name)) +
     scale_y_continuous(expand = c(0,0))
 ```
 - start with specifying the data
-- then the geom and the aesthestics for the bar plot
-- the final option (`scale_y_continuous(expand = c(0,0))`) extends the bars to the bottom of the yaxis
+- then we specify the geom and the aesthestics for the bar plot
+- the final option (`scale_y_continuous(expand = c(0,0))`) is just to make the bars extend to the bottom of the x-axis
 
-Take a look at the plot, does this look right? Probably not quite. 
-We need to split up the regions, we do this we facets. 
-So to the base plot add this line: 
+Take a look at the plot, can you tell anything about whether the babirusa from the same region show the same patterns of ancestry? Probably not quite yet as the bars are just in the order R has read the sample column in the metadata. 
+We need to split up the columns by the regions, the quick way to do this is with facets. 
+To the base plot add this line: 
 ```sh
 admix_plot_k2 <- admix_plot_k2 + facet_wrap(~region, scales = "free", nrow = 1)
 ```
+- this is the function `facet_wrap()` where we specify we want it to be split by region
+- `scales = "free"` stops R trying to plot every sample in every region
+- and `nrow = 1` makes sure they are in a line, and not in a square
+> Hint - try running it without these options, what do you see?
 
 Finally to make the names readable and label the y axis correctly we can add: 
 ```sh
@@ -302,22 +311,22 @@ When you have made the plots of all the values of k, we can visualise them ontop
 
 You specify the plots you would like to view together, and then the option `ncol = 1` indicates you want them all in one column i.e. ontop of each other.
 ```sh
-ggarrange(admix_plot_k2, admix_plot_k3, admix_plot_k4, admix_plot_k5, ncol = 1)
+admix_all_plots <- ggarrange(admix_plot_k2, admix_plot_k3, admix_plot_k4, admix_plot_k5, ncol = 1)
+
+admix_all_plots
 ```
-> Hint
->
-> If you give this to an object, you can then save the plot as a pdf using `ggsave`
 
 Do not forget to save your script as you go.
 
-Now that you have the results of all three exercises: 
-- what do you think this shows?
-- do the analyses agree?
-- how many population groups do you think there might be in the babirusa?
-- which region is the most genetically distinct and why might this be?
+### Questions: 
+- what do you think this analysis tells us about the ancestry of the babirusa?
+- open up the cv.errors.txt file - what does this suggest is the most fitting number of clusters? Why might this be?
 - are there any individuals that look like they are admixed, i.e. show evidence of multiple ancestries?
 
-PLOTTING THE CV ERRORS - MAYBE TOO MUCH??? 
+### Now that you have the results of all three exercises: 
+1. do the analyses agree?
+2. what do you think we can conclude overall about the population structure of these babirusa?
+3. which region is the most genetically distinct and why might this be?
 
 ### 5. Extra exercises
 Extra tree exercises 
