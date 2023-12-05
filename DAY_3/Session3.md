@@ -189,7 +189,8 @@ ggplot(data = evec_merge) +
 ```
 Lets unpack this
 - the inital ggplot command determines the dataframe (`data = evec_merge`) to be used
-- 
+- the `geom_point()` specifies the point or scatter plot we want
+  
 Then we specify the aesthetics (`aes`) within the geom function. These are the necessary values to build the plot correctly.
 - the x-axis is specified as the second column which are the values for PC1
 - the y-axis is specified as the third column which are the values for PC2
