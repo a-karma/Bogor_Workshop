@@ -21,7 +21,7 @@ In this tutorial, we will use the most commonly used method: PLINK. PLINK is pro
 >
 > Prepare your working directory for this session by following all the steps in Task 0 of Day 4 Session 1, but with data from /home/DATA/Day_4/Session_2
 
-You should have a working directory in your home folder now named `day_4_inbreeding` containing a symbolic link of `babirusa_workshop_set.vcf.gz`.
+You should have a working directory in your home folder now named `day_4_inbreeding` containing a symbolic link of `babirusa_workshop_set.vcf.gz`, `babirusa_workshop_metadata.txt`, and 18 files of a ROH run results ending with `.hmmrohl.gz`. We will work with these results a bit later in the session.
 
 ### Task 1 Detecting ROH with PLINK
 
@@ -139,7 +139,42 @@ Let's go back to the server and do Exercise 2.4.
 
 > Exercise 2.4.
 >
-> We have run the default PLINK option that was based on human genome. Try to run PLINK with minimum SNP count 20, minimal ROH segment length 10 kb, 1 SNP per 1 Mbp, and scanning window consists of 20 SNP with 0.25 portion of the overlapping windows must be called homozygous to define any given SNP as 'in a homozygous segment'.
+> We have run the default PLINK option that was based on human genome. Try to run PLINK with minimum SNP count 20, minimal ROH segment length 10 kb, 1 SNP per 1 Mbp, and scanning window consists of 20 SNP with 0.25 portion of the overlapping windows must be called homozygous to define any given SNP as 'in a homozygous segment'. Name the output files of this new run with `_PLINK_B` suffix.
 > Hint: Read the documentation for PLINK --homozyg here https://zzz.bwh.harvard.edu/plink/ibdibs.shtml#homo
 >
 > Compare the result of Exercise 2.4 with the result from the default. Which has more ROHs per sample? Which set of parameters do you trust more?
+
+<!---
+I just added this, might not be a good idea? Just intense plotting session.
+--->
+
+### Task 3: Comparing observational method with model-based method
+
+The many input parameters required by observational method such as PLINK makes ROH results volatile. Another way to detect ROH is to use a model-based method, i.e., given a certain model on how to detect a homozygous genotypes, how likely is a segment a ROH. Such model-based method can be really long to run (~6 hours with 18 threads per sample!), so we have run the model for you and we will focus on analysing the results instead. The model was run using ROHan (Renaud et al., 2018) with only the mutation rate in ROH parameter set to 0.0001.
+
+If you have done Exercise 0.1, these results should have been in your `day_4_inbreeding` directory. Let's have a look on one of the results using `zcat` and `head`.
+```sh
+#ROH_ID	CHROM	BEGIN	END	ROH_LENGTH	VALIDATED_SITES
+1	1	67000001	68000000	1000000	726880
+2	1	94000001	96000000	2000000	1420468
+3	1	117000001	118000000	1000000	688128
+4	1	122000001	123000000	1000000	637574
+5	1	126000001	128000000	2000000	1238786
+6	1	173000001	181000000	8000000	5120675
+7	1	192000001	195000000	3000000	2066042
+8	1	208000001	209000000	1000000	767864
+9	1	214000001	217000000	3000000	1924849
+```
+This looks similar to our PLINK `.hom` results. This means we can plot them similarly.
+
+> Exercise 3.1.
+>
+> Download these results into your R project so that it is on the same directory with your PLINK results. Then, read the files into R using `read.tables()`, add a column containing Sample ID, and concatenate all files into one file to make a similar dataframe as we have with PLINK where it contain all details of the ROH of all samples.
+
+> Exercise 3.2.
+>
+> Plot the segment distribution using `geom_segment()`, the FROH boxplot, and the frequency of segment length classes as you have done with PLINK. How similar it is with the PLINK results?
+
+### Task 4 (Optional): Intersect your results
+
+Try to look the similarity between PLINK_B results and the ROHan. How much of the ROH segments is reproducible between the two software?
