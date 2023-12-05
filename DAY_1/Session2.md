@@ -36,7 +36,7 @@ source /home/anaconda3/bin/activate
 conda init
 ```
 You need to run this command only once and you should see a change in your prompt: the word `(base)` appears on the left.
-This is telling us that you are now in the conda base environment which represent the default space. 
+This is signalling that you are now in the conda base environment which represent the default space. 
 To activate the environment for this session, please run:
 
 ```sh
@@ -45,8 +45,15 @@ conda activate Day_1
 
 > Question: Have a look at your prompt again, what do you see? 
 
+After activating an environment all software installed in it become immediately accessible. let's check whether we can use bedtools now:
 
-Now that bedtools is accessible let's see what it can do.
+```sh
+bedtools --help
+```
+
+Hurray! Now that bedtools is accessible let's see what it can do.
+
+
 
 Suppose you are interested in analysing only neutral evolving sites. Thus, you may want to remove sites that are likely to be under selective pressures. 
 As a first approximation you can start to analyse SNPs that do not fall inside CDS. You can just run the following commands:
