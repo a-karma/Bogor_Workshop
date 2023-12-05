@@ -169,14 +169,70 @@ If you have done Exercise 0.1, these results should have been in your `day_4_inb
 ```
 This looks similar to our PLINK `.hom` results. This means we can plot them similarly.
 
-> Exercise 3.1.
->
-> Download these results into your R project so that it is on the same directory with your PLINK results. Then, read the files into R using `read.tables()`, add a column containing Sample ID, and concatenate all files into one file to make a similar dataframe as we have with PLINK where it contain all details of the ROH of all samples.
+Download these results into your R project so that it is on the same directory with your PLINK results. Then, read the files into R using `read.tables()`, add a column containing Sample ID, and concatenate all files into one file to make a similar dataframe as we have with PLINK where it contain all details of the ROH of all samples.
+
+For example:
+```{r}
+s1<-read.table("input/RD1_mdup_1e-4.mid.hmmrohl.gz")
+colnames(s1)<-c("rohID","chr","start","end","length","validatedSites")
+s1$SampleID<-"RD1"
+```
+
+> Challenge: How can you make your task faster with R? Hint: make a list of the file paths.
+
+If you do not feel challenged, feel free to repeat the commands manually or run the following code (Warning: it needs you to install an optional package `janitor` and `gtools`).
+```r
+library(gtools)
+library(janitor)
+
+s<-list.files(path="input/",pattern="*.mid.hmmrohl.gz",full.names = T)
+
+rohan_df<-function(temp) {
+  temp<-mixedsort(temp) 
+  list<-lapply(temp,read.delim)
+  ID_list<-unlist(regmatches(temp,gregexpr("[A-Z]+[0-9]+",temp)))
+  for(i in 1:length(list)){
+    list[[i]]$SampleID <- rep(ID_list[i],nrow(list[[i]]))
+  }
+  df<-do.call(rbind,list)
+  return(df)
+}
+
+s_df<-rohan_df(s)
+s_df<-clean_names(s_df, "lower_camel")
+```
+
+The resulting file should look like more or less like this:
+```
+> head(s_df)
+  xRohId chrom    begin      end rohLength validatedSites sampleId
+1      1     1 39000001 46000000   7000000        4918042      RD1
+2      2     1 57000001 58000000   1000000         644816      RD1
+3      3     1 59000001 65000000   6000000        4217317      RD1
+4      4     1 68000001 69000000   1000000         752473      RD1
+5      5     1 71000001 78000000   7000000        4562652      RD1
+6      6     1 87000001 92000000   5000000        3000020      RD1
+```
 
 > Exercise 3.2.
 >
 > Plot the segment distribution using `geom_segment()`, the FROH boxplot, and the frequency of segment length classes as you have done with PLINK. How similar it is with the PLINK results?
 
-### Task 4 (Optional): Intersect your results
+### Task 4: Calculating the number generations since the last inbreeding
 
-Try to look the similarity between PLINK_B results and the ROHan. How much of the ROH segments is reproducible between the two software?
+The useful part of directly observing recent inbreeding is that you will be able to know when is the recent inbreeding given the rate of recombination rate within the species' genome. As the recombination rate of the babirusa genome is unknown, we will work with 1 cM ~ 1 Mb.
+
+Here, we will make an additional column containing the number of generations represented by each ROH segment.
+```
+library(dplyr)
+s_df<-s_df %>% mutate(generations=100/(rohLength*2))
+```
+Note that the formula in the new column `generations` is 100 divided by rohLength multiplied twice. This comes from the expectation of ROH segment length to follow an exponential distribution with mean equals to 100 / ( 2 * g * c ), with g is generation and c is recombination rate.
+
+> Exercise 4.1.
+>
+> How will the distribution of generation time change if the recombination rate in pig genome is known to be 0.76 cM/Mb ? Modify the above command accordingly and plot the results using `geom_histogram()`.
+
+### Challenge (Optional): Intersect your results
+
+Try to look the similarity between PLINK_B results and the ROHan. How much of the ROH segments is reproducible between the two software? Use R programming or other tools you think will work with the data set in hand.
