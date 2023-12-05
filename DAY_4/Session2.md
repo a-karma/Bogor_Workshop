@@ -13,9 +13,7 @@ placeholder name within square brackets and ../IM/file_name.png within parenthes
 
 In the last decade, ROH analyses have become the state-of-the-art method for inbreeding assessment. There are many ways to detect segments of ROH in a whole genome sequence. We can do it straight from BAM file (ROHan), but most do it from a VCF file. The principle is to slide a "window" across the VCF file and see whether there are subsequent homozygous genotypes stretches unbroken across the genome of each sample.
 
-In this tutorial, we will use the most commonly used method: PLINK in VCF and BCFtools ROH. PLINK is probably the most used program for analyzing SNP genotypes and ROH in human and animal populations.  In PLINK, the --homozyg function is used to perform ROH analyses and relies on several input settings.
-
-While the first use observational method relying on counting homozygous and heterozygous genotypes across certain base pair range, the second detects regions of autozygosity in sequencing data using a hidden Markov model. 
+In this tutorial, we will use the most commonly used method: PLINK. PLINK is probably the most used program for analyzing SNP genotypes and ROH in human and animal populations.  In PLINK, the --homozyg function is used to perform ROH analyses and relies on several input settings.
 
 ### Task 0: Preparing your working directory
 
