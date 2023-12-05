@@ -223,7 +223,7 @@ where the `-l` and `-r` flags stand for left (or upstream) and right (or downstr
 Finally we can use the `getfasta` function in bedtools to extract the actual sequences of the promoter regions:
 
 ```sh
-bedtools getfasta -fi ./raw_data/Day_1/ptw_ch30.fa -bed ./raw_data/ch30_promoter.gtf -fo ./results/ptw_prom_sequences.fa
+bedtools getfasta -fi ./raw_data/Day_1/ptw_ch30.fa -bed ./raw_data/ch30_promoters.gtf -fo ./results/ptw_prom_sequences.fa
 ```
 
 where the `-fi` flag stands for file input, the `-bed` indicates the coordinate file while the `-fo` option stands for file output. 
