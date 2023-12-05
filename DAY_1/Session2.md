@@ -240,20 +240,39 @@ cat ./results/ptw_prom_sequences.fa | head -1
 
 
 ### 3. Transferring files
-see below the syntax for tables:
+We conclude today's tutorials with some basic commands to transfer files between you local machime and our server.
+You can download or upload files using the Secure File Transfer Protocol (SFTP) which essentially creates a secure connection between your laptop and the cloud server.
 
-| column A | column B |
-| ------ | ------ |
-| row 1a | row 1b |
-| row 2a | row 2b |
-| you can also leave cells blank | |
+##### Windows Users
+In the guide we've sent you, you've seen how to install putty and how to connect to our cloud server using this program. 
+You are going to use a different component of putty to open an sftp connection. In the search bar please type 'PSFTP'.
+ - open the PSFTP app like in figure
+ - In the terminal window type `open Bogor_Workshop` 
+ - You should be now asked to insert the log-in name, please insert your user_ID
+ - Finally you should be asked for your key-passphrase, please type the same one you have use for ssh connection and press enter
 
-you can also use this env for exercises and tips:
-> Exercise 1 
-> 
-> Modify the command above to ...
+![psftp](../IM/psftp.png)
 
-Or even:
-> Best practice: never use spaces in file names
+##### Linux & macOS user
+Please open a terminal and then run:
 
-note the empty line in the first quoted env (it seems to make it look nicer on github) 
+```sh
+sftp -i ./.ssh/workshop_key user_ID@138.246.238.65
+```
+where user_ID needs to be replaced by the credentials we sent you.
+
+##### Commonly used sftp commands
+After establyshing an sftp connection you can use `lcd` to change directory on your local machine while you can use the standard `cd` command
+to navigate the cloud server file system. 
+
+In order to upload a file on the server simply type:
+```sh
+put file_name
+```
+If instead you want to download a file from the server use:
+```
+get file_name
+```
+To close the sftp connection, simply type `bye`
+
+
