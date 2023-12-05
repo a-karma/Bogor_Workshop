@@ -9,31 +9,33 @@ In this section we will revise what we have learn about variables in Bash and we
 Before we start, let's run some preliminary commads to create the directory structure for this session:
 
 ```sh
-mkdir session2; cd session2; mkdir raw_data; mkdir script; mkdir results 
+mkdir session2; cd session2; mkdir raw_data; mkdir scripts; mkdir results 
 ```
 
 > Exercise 1
 >
 > Create a link between the `/home/DATA/Day_1` folder and your newly created `raw_data` directory 
 
-If you now move into your raw_data directory and run `ls Day_1` you should see two files having the .txt extension. 
+If you now move into your raw_data directory and run `ls Day_1` you should see two files having the .txt extension:
+```sh
+instructors_list.txt
+```
 
 Let's have a look at `instructors_list.txt` first, you can print the content on screen using `cat`.
 
 As the name suggests, this files contains the list of the workshop instructors along with their affiliations and their status. 
 Unfortunately, the fields are not well defined because each word is separated by a space. let's try to fix these formatting issues.
 
-First of all we need to separate the last two fields (affiliation and status). 
+First of all we need to separate the last two fields (affiliation and status) from the instructors' names.
 We can do this in `awk` and make use of variable `NF` which is set to the total number of fields in the input record:
 ```sh
 awk '{print $(NF-1),"\t",$NF}' ./Day_1/instructors_list.txt
 ```
-
 Now let's redirect the output to a file:
 ```sh
 awk '{print $(NF-1),"\t",$NF}' ./Day_1/instructors_list.txt > aff_status.txt
 ```
-Let's now deal with the names. We should start by printing all but the last two fields:
+Let's now deal with the names. Given that we don't know how many words each names consit of, we should start by printing all but the last two fields of the original input file:
 
 ```sh
 awk 'NF-=2 {print $0}' ./Day_1/instructors_list.txt
@@ -44,14 +46,81 @@ Then we can pipe this into `sed` and replace all white spaces with the character
 ```
 awk 'NF-=2 {print $0}' ./Day_1/instructors_list.txt | sed -e 's/ /_/g'
 ```
-Finally we redirect the output to a file:
+Note the use of the `g` at the end of the substitution command. Finally we redirect the output to a file:
 
 ```
 awk 'NF-=2 {print $0}' ./Day_1/instructors_list.txt | sed -e 's/ /_/g' > names.txt
 ```
 
-Now that we have created we can paste the two files back together
-that we want to extract the first word of eac line
+Now that we have created these two intermediate files we can stitch them together to reconstruct the initial information correctly formatted:
+```sh
+paste names.txt aff_status.txt > corrected_instructors_list.tsv
+```
+
+The series of commands presented above acts as a single unit to accomplish the required task. Therefore we can transform them into a script that we can re-use.
+```sh
+cd ..
+touch ./scripts/formatting.sh
+```
+Note `..` in the `cd` command which moves the user up one directory (i.e. from `raw_data` to `session2`).
+
+Now we need to transform into an executable file. to do so run:
+```sh
+chmod 770 ./scripts/formatting.sh
+```
+now let's use nano to edit our script and add this code-block to its content:
+
+```sh
+#!/usr/bib/bash
+awk '{print $(NF-1),"\t",$NF}' ~/session2/raw_data/Day_1/instructors_list.txt > aff_status.txt
+awk 'NF-=2 {print $0}' session2/raw_data/raw_data/Day_1/instructors_list.txt | sed -e 's/ /_/g' > names.txt
+paste names.txt aff_status.txt >  ~/session2/results/corrected_instructors_list.tsv
+```
+
+This version of the script formatting.sh is not very useful because it can work only on the `instructor_list.txt` input file.
+If we want to re-use to format a different input file we would have to open it and edit the file name every time which is not convenient.
+Let's modify it to allow for more flexibility in the usage by transforming input and output into variables:
+
+```sh
+#!/usr/bib/bash
+
+INPUT_FILE=~/session2/raw_data/Day_1/instructors_list.txt
+OUTPUT_FILE=~/session2/results/corrected_instructors_list.txt
+
+awk '{print $(NF-1),"\t",$NF}' $INPUT_FILE > aff_status.txt
+awk 'NF-=2 {print $0}' $INPUT_FILE | sed -e 's/ /_/g' > names.txt
+paste names.txt aff_status.txt > $OUTPUT_FILE
+rm names.txt
+rm aff_status.txt
+```
+Note that we have added two lines to delete the intermediate files (names.txt and aff_status.txt) that we don't need anymore.
+
+this version looks slightly better but the input and output are still hard-coded inside the script. 
+Ideally, we would like to supply the input and output at the call (meaning when we execute the script). To do so we can make use of positional arguments.
+The indexing of the arguments starts at one, and the first argument can be accessed inside the script using $1. Similarly, the second argument can be accessed using $2, and so on.
+Thus our final version of `formatting.sh` should be:
+```sh
+#!/usr/bib/bash
+
+INPUT_FILE=$1
+OUTPUT_FILE=$2
+
+awk '{print $(NF-1),"\t",$NF}' $INPUT_FILE > aff_status.txt
+awk 'NF-=2 {print $0}' $INPUT_FILE | sed -e 's/ /_/g' > names.txt
+paste names.txt aff_status.txt > $OUTPUT_FILE
+rm names.txt
+rm aff_status.txt
+```
+now we can execute the script from the `session 2` directory and provide the correct input and output at the call:
+
+```sh
+./scripts/formatting.sh ./raw_data/Day_1/instructors_list.txt ./results/corrected_instructors_list.txt
+```
+
+> exercise
+>
+> use this script to correctly format the 
+
 
 ### 2. Working with bioinformatic softwares using conda
 In Session 1 we have seen three examples of text file that are commonly used in bioinformatics:
