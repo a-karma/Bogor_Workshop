@@ -11,7 +11,7 @@ its quality score. Each entry consists of four lines as shown in the box below.
 @HiSeq 4000:1:FCX:4:15:66:165 2:N:0:7
 ATTTAGTACCATGACATGACACATACTACAATTGACGACATCAATCA
 +
-IGHFDEC@;;?=>B=?<;A:?@>9<>9756867544312*+*),&)’
+IGHFDEC@;;?=>B=?<;A:?@>9<>9756867544312*,*)'&)+
 ```
 
 The first line (a.k.a header_line) starts with `@` and contains a series of characters which uniquely identify the read. 
@@ -81,9 +81,7 @@ Table 2.2: Illumina Phred-score encoding
 |4|19||I|40|
 |5|20||
 
-> Question:  
-> 
-> Modify the command above to ...
+> Question: What's the accuracy of the last base call in the example above? 
 
 Or even:
 > Best practice: never use spaces in file names
