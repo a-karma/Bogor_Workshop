@@ -43,7 +43,9 @@ Now we are good to go.
 
 ### Task 1: Preparing input file for PSMC
 
-PSMC works on a psmcfa file of a single diploid sample. A psmcfa file is a fasta representation of the genome (or part of a genome), where each entry (letter) represents if there exists a heterozygous variant in a fixed size window. Let us try and understand this by converting our vcf file to a psmcfa file. 
+PSMC works on a psmcfa file of a single diploid sample. A psmcfa file is a fasta-like representation of the genome which keeps track of where heterozygous variant are located in the genome. 
+
+Lets look at how we convert our vcf file into a psmcfa file. 
 
 As we have a multisample VCF, we need to first extract a single diploid sample from this VCF. In this example, we will work with sample RD44 and RD71. The command for sample RD44 has been given; the command for sample RD71 is left for participants for their exercise.
 ```sh
