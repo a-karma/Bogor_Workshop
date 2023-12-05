@@ -2,7 +2,22 @@
 # Applications of Genomics in Wildlife Conservation
 ## Day 1 - Basic concepts of command line programming - Session 2
 
-### 1. Working with bioinformatic softwares using conda
+### 1. Shell Scripting
+In Session 1 we have seen how to navigate a Unix-like file system and how to manipulate text files. 
+In this section we will revise what we have learn about variables in Bash and we wil introduce the concept of scripts and arguments.
+Before we start, let's run some preliminary commads to create the directory structure for this session
+
+```sh
+mkdir session2; cd session2; mkdir raw_data; mkdir script; mkdir clean_input; mkdir results 
+```
+
+> Exercise 1
+>
+> Create a link between your newly created `raw_data` directory and the `/home/DATA/Day_1` folder
+
+
+
+### 2. Working with bioinformatic softwares using conda
 In Session 1 we have seen three examples of text file that are commonly used in bioinformatics:
 
 - The `fasta` format to store DNA sequence information
