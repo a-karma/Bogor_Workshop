@@ -18,55 +18,23 @@ The first line starts with @ and contains a series of characters which uniquely 
 the read. When dealing with Illumina data, the identifier includes 7 fields encoding
 information about the sequencing process plus 4 fields about the read itself (see tab2.1).
 Fileds are separated by a : and the two groups are separated by a space.
+
 Table 2.1: Fastq format – Fields in the Sequence ID line
-Field
-Instrument used for sequencing
-Run Number on that instrument
-flow cell ID
-lane number
-tile number
-X coordinate of cluster
-Y coordinate of cluster
-read number
-is filtered
-control number
-sample number
-Frantz-Lab, QMUL, 2020
-Example
-HiSeq 4000
-1
-FCX
-4
-15
-66
-165
-2 (2 nd read of the pair)
-N (Y did not pass, N otherwise)
-always zero on HiSeq X
-7 (the 7 th sample in the list)
-
-### Example of section title 
-##### Example of sub-section title 
-- this is how you define bullet point
-- in case you want to make more explicit 
-- the series of steps required to accomplish a task 
-
-See example below on how to format commands that the participants will have to run
-
-```sh
-conda activate Day_1
-plink --bfile file_name --recode
-```
-
-you can instead use `this syntax` to highlight an in-line command, software name or something you think it's important
-
-see below the syntax for tables:
-
-| column A | column B |
+| Field | example|
 | ------ | ------ |
-| row 1a | row 1b |
-| row 2a | row 2b |
-| you can also leave cells blank | |
+| Instrument used for sequencing|HiSeq 400|
+| Run Number on that instrument|1|
+| flow cell ID | FCX |
+| lane number | 4 |
+| tile number | 15 |
+| X coordinate of cluster| 66 |
+| Y coordinate of cluster| 165 |
+| read number | 2 (2 nd read of the pair) |
+| is filtered | N (Y did not pass, N otherwise) |
+|control number| always zero on HiSeq X |
+|sample number| 7 (the 7 th sample in the pool) |
+
+
 
 you can also use this env for exercises and tips:
 > Exercise 1 
