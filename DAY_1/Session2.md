@@ -29,7 +29,7 @@ Looks like the program is not installed :(
 
 To protect the integrity of the file system on a server, normal user do not have permissions to directly install softwares. Moreover, almost any bioinformatic tool will rely on specific libraries or package versions that might create conflicts or even impeed the functionality of other programs. To circumvent these issues, we need to make sure that the software we need are installed in a "confined space" (a.k.a an environment) containing all the necessary dependencies that can become accessible only when we need it. This can be esily implemented using `conda` which is a package, dependency, and environment manager for any programming language. You can read more about conda [here](https://docs.conda.io/en/latest/).
 
-We have already installed conda on our server and we have created a different environment for each day of the workshop. In order to have access to conda you need to run:
+We have already installed conda on our server and we have created a different environment for each day of the workshop. In order to have access to conda please run:
 
 ```sh
 source /home/anaconda3/bin/activate
@@ -37,7 +37,7 @@ conda init
 ```
 You need to run this command only once and you should see a change in your prompt: the word `(base)` appears on the left.
 This is signalling that you are now in the conda base environment which represent the default space. 
-To activate the environment for this session, please run:
+To activate the environment for this session, simply run:
 
 ```sh
 conda activate Day_1
@@ -45,7 +45,7 @@ conda activate Day_1
 
 > Question: Have a look at your prompt again, what do you see? 
 
-After activating an environment all software installed in it become immediately accessible. let's check whether we can use bedtools now:
+After activating an environment all software installed in it become immediately accessible. Let's check whether we can use bedtools now:
 
 ```sh
 bedtools --help
@@ -53,14 +53,21 @@ bedtools --help
 
 Hurray! Now that bedtools is accessible let's see what it can do.
 
+The `snp_ch30.bed` file in the folder `/home/DATA/Day_1/` is an example of a "customized" bed format. It contains the three mandatory fields (chromosome, start,
+end) plus an unusual 4th field. In that column I have stored the genotype of 4 individuals at that position. If the 4 th column is empty, that particular site is monomorphic.
+You can have a look at it using `less` or inspect just three lines with a combination of head and tail, see for example what you get by running:
 
+```
+head -65 snp_ch30.bed | tail -3
+```
 
 Suppose you are interested in analysing only neutral evolving sites. Thus, you may want to remove sites that are likely to be under selective pressures. 
-As a first approximation you can start to analyse SNPs that do not fall inside CDS. You can just run the following commands:
+As a first approximation you can start to analyse polymorphic sites (SNPs) that do not fall inside CDS. You can just run the following commands:
 
 ```sh 
 bedtools intersect -a snps_panel.bed -b genes_chr30.gtf -v > snp_filtered.bed
 ```
+
 The `-v` flag tells `intersect` to report all lines in the target file (specified using the `-a` flag) that do not overlap with the genomic intervals listed in the bed file (-b flag).
 
 There is a lot more that you can do with genome arithmetic. Let’s picture a more complex
@@ -87,11 +94,11 @@ Now we can run:
 ```sh
 bedtools flank -i CDS_start.gtf -g ch30_length.bed -l 10000 -r 0 > ch30_promoters.gtf
 ```
-The command above creates a new 
+The command above creates a new file 
 Finally we can use the `getfasta` function in bedtools to extract the sequences of the promoter regions:
 
 ```sh
-bedtools getfasta -fi ptw_ch30.fa -bed promoter.bed -fo ptw_prom_sequences
+bedtools getfasta -fi ptw_ch30.fa -bed ch30_promoter.gtf -fo ptw_prom_sequences.fa
 ```
 
 In the command above the `-fi` flag stands for file input, the `-bed` indicates the coordinate file while the `-fo` option stands for file output. 
