@@ -183,6 +183,8 @@ ggplot(l)+
   theme_minimal()
 ```
 
+####Rasmus comment: I would avoid the term "region", as it is ambiguous (could mean a genomic region).#######
+
 Question: Which region has the highest homozygous load? Which has the lowest?
 
 ### Task 6 (Optional)
