@@ -150,7 +150,9 @@ I just added this, might not be a good idea? Just intense plotting session.
 
 ### Task 3: Comparing observational method with model-based method
 
-The many input parameters required by observational method such as PLINK makes ROH results volatile. Another way to detect ROH is to use a model-based method, i.e., given a certain model on how to detect a homozygous genotypes, how likely is a segment a ROH. Such model-based method can be really long to run (~6 hours with 18 threads per sample!), so we have run the model for you and we will focus on analysing the results instead. The model was run using ROHan (Renaud et al., 2018) with only the mutation rate in ROH parameter set to 0.0001.
+The many input parameters required by observational method such as PLINK makes ROH results volatile. Another way to detect ROH is to use a model-based method, i.e., given a certain model on how to detect a homozygous genotypes, how likely is a segment a ROH. Such model-based method can be really long to run (~6 hours with 18 threads per sample!), so we have run the model for you and we will focus on analysing the results instead. 
+
+The model was run using ROHan (Renaud et al., 2018) with only the mutation rate in ROH parameter set to 0.0001. We will discuss more about this method during the tutorial's wrap up session.
 
 If you have done Exercise 0.1, these results should have been in your `day_4_inbreeding` directory. Let's have a look on one of the results using `zcat` and `head`.
 ```sh
