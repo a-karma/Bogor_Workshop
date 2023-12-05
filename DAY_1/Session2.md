@@ -81,7 +81,7 @@ paste names.txt aff_status.txt >  ~/session2/results/corrected_instructors_list.
 ```
 
 This version of the script formatting.sh is not very useful because it can work only on the `instructor_list.txt` input file.
-If we want to re-use to format a different input file we would have to open it and edit the file name every time which is not convenient.
+If we want to re-use it to format a different input file we would have to open it and edit the file name every time which is not convenient.
 Let's modify it to allow for more flexibility in the usage by transforming input and output into variables:
 
 ```sh
