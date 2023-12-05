@@ -63,13 +63,15 @@ The series of commands presented above acts as a single unit to accomplish the r
 cd ..
 touch ./scripts/formatting.sh
 ```
-Note `..` in the `cd` command which moves the user up one directory (i.e. from `raw_data` to `session2`).
+Note the `cd ..` command which moves the user up one directory (i.e. from `raw_data` to `session2` in this case).
 
 Now we need to transform into an executable file. to do so run:
 ```sh
 chmod 770 ./scripts/formatting.sh
 ```
-now let's use nano to edit our script and add this code-block to its content:
+In unix-like systms, `chmod` is the command and used to change the access permissions. In this case the owner of the file (i.e. you) should now be able to read (4), write (2), and execute (1) this file, hence the first 7 which is the sum of the three permission granted. The same is true for other users in the group (the second 7) while external user do not have any permission (0). 
+
+Now let's use nano to edit our script and add this code-block to its content:
 
 ```sh
 #!/usr/bib/bash
@@ -96,7 +98,7 @@ rm aff_status.txt
 ```
 Note that we have added two lines to delete the intermediate files (names.txt and aff_status.txt) that we don't need anymore.
 
-this version looks slightly better but the input and output are still hard-coded inside the script. 
+This version looks slightly better but the input and output are still hard-coded inside the script. 
 Ideally, we would like to supply the input and output at the call (meaning when we execute the script). To do so we can make use of positional arguments.
 The indexing of the arguments starts at one, and the first argument can be accessed inside the script using $1. Similarly, the second argument can be accessed using $2, and so on.
 Thus our final version of `formatting.sh` should be:
