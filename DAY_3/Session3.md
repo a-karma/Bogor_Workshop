@@ -57,10 +57,12 @@ bye
 ### 2. Visualising and comparing the trees
 You should have two trees now - the one the you make (unrooted) and the one from the shared directory (rooted).
 
-The rooting of the tree requires an outgroup and to save time we did this for you. Briefly we used the same panel to call SNPs at the same location in the outgroup - which is the pygmy hog. This is then merged with the original fileset. The tree is reran in iqtree, and it is easy to specify this sample in the command with the option (`-o`).
+The tree are in a newick format, a text-based format used to represent phylogenetic trees. It is widely used in bioinformatics and evolutionary biology to store and share tree data. For more information check out this wikipedia: https://en.wikipedia.org/wiki/Newick_format
+
+The rooting of the tree requires an outgroup and to save time we did this for you. Briefly we added the genotype of an outgroup (pygmy hog) to the SNP panel before computing the tree.
 
 Open your browser and navigate to: https://itol.embl.de/
-L
+
 Scroll down a little and click on the upload tree button
 
 ### Unrooted tree
