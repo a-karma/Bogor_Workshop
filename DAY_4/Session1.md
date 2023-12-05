@@ -13,6 +13,9 @@
 
 The Pairwise Sequentially Markovian Coalescent (PSMC) is a statistical method used to infer demographic history from genomic data. It is a powerful tool that can be used to estimate changes in population size over time, as well as to identify ancient population bottlenecks and expansions. In this tutorial, we walk through the steps to generate the necessary input data for PSMC and run it on our babirusa data set to see how well we can estimate effective population size changes through time.
 
+`Quick Exercise`
+How many time intervals and free effective population size parameters are you expecting when specifying -p "4+25*2+4+6"
+
 We will use the `psmc` tool to estimate the effective population size for our data. We will use a variant calling format (vcf) file as the starting point. 
 
 ### Task 0: Preparing your working directory
