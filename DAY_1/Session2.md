@@ -27,16 +27,26 @@ bedtools --help
 
 Looks like the program is not installed :( 
 
-To protect the integrity of the file system on a server, normal user do not have permissions to directly install softwares. Moreover, almost any bioinformatic tool will rely on specific libraries or package versions that might create conflicts or even impeed the functionality of other programs. To circumvent these issues, we need to make sure that the software we need are installed in a "confined space" maintaini
-You can read more about conda [here](https://docs.conda.io/en/latest/)
+To protect the integrity of the file system on a server, normal user do not have permissions to directly install softwares. Moreover, almost any bioinformatic tool will rely on specific libraries or package versions that might create conflicts or even impeed the functionality of other programs. To circumvent these issues, we need to make sure that the software we need are installed in a "confined space" (a.k.a an environment) containing all the necessary dependencies that can become accessible only when we need it. This can be esily implemented using `conda` which is a package, dependency, and environment manager for any programming language. You can read more about conda [here](https://docs.conda.io/en/latest/).
 
+We have already installed conda on our server and we have created a different environment for each day of the workshop. In order to have access to conda you need to run:
 
+```sh
+source /home/anaconda3/bin/activate
+conda init
+```
+You need to run this command only once and you should see a change in your prompt: the word `(base)` appears on the left.
+This is telling us that you are now in the conda base environment which represent the default space. 
+To activate the environment for this session, please run:
 
 ```sh
 conda activate Day_1
-plink --bfile file_name --recode
 ```
-now that bedtools is accessible let's see what it can do.
+
+> Question: Have a look at your prompt again, what do you see? 
+
+
+Now that bedtools is accessible let's see what it can do.
 
 Suppose you are interested in analysing only neutral evolving sites. Thus, you may want to remove sites that are likely to be under selective pressures. 
 As a first approximation you can start to analyse SNPs that do not fall inside CDS. You can just run the following commands:
@@ -54,7 +64,7 @@ of each gene. How can you get that information?
 
 First of all you need to get the coordinates of the starting codons. This is very easy using grep:
 ```sh
-grep 'start_codon' genes_chr30.gtf > CDS_start
+grep 'start_codon' genes_chr30.gtf > CDS_start.gtf
 ```
 
 Now you need to modify this file using the function `flank` implemented in bedtools which will flanking intervals for each region in a BED/GFF/VCF file.
@@ -68,12 +78,13 @@ The `-e` option tells the software to enable the interpretation of backslash esc
 Now we can run:
 
 ```sh
-bedtools flank -i CDS_start -g ch30_length.bed -l 10000 -r 0 > promoter.bed
+bedtools flank -i CDS_start.gtf -g ch30_length.bed -l 10000 -r 0 > ch30_promoters.gtf
 ```
+The command above creates a new 
 Finally we can use the `getfasta` function in bedtools to extract the sequences of the promoter regions:
 
 ```sh
-bedtools getfasta -fi ptw_ch30.fa -bed promoter -fo ptw_prom_sequences
+bedtools getfasta -fi ptw_ch30.fa -bed promoter.bed -fo ptw_prom_sequences
 ```
 
 In the command above the `-fi` flag stands for file input, the `-bed` indicates the coordinate file while the `-fo` option stands for file output. 
