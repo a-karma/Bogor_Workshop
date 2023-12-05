@@ -45,9 +45,9 @@ are a measure of how confident we are in calling a given base.
 
 Let P denote the probability of identifying the wrong nucleotide. Then, the Phred quality
 scores Q are defined as:
-```sh
+
 Q = −10 log<sub>10</sub> P
-```
+
 Thus, if a base has an assigned Q-score of 20, it means that the chance that we have
 called the wrong base are 1 in 100 i.e. the base call accuracy is 99%.
 
