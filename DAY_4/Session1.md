@@ -13,6 +13,8 @@
 
 The Pairwise Sequentially Markovian Coalescent (PSMC) is a statistical method used to infer demographic history from genomic data. It is a powerful tool that can be used to estimate changes in population size over time, as well as to identify ancient population bottlenecks and expansions. In this tutorial, we walk through the steps to generate the necessary input data for PSMC and run it on our babirusa data set to see how well we can estimate effective population size changes through time.
 
+###Rasmus comment: I think this question is premature, and you revisit it later after having explained how to answer it#####
+
 `Quick Exercise`
 How many time intervals and free effective population size parameters are you expecting when specifying -p "4+25*2+4+6"
 
@@ -166,6 +168,9 @@ sftp -i <path_to_identity_file> username@138.246.238.65
 > get babirusa_* .
 ```
 
+###Rasmus comment: I would show the whole time axis in these plots. 1st because at present you are only showing a small subset of the free parameters that are being estimated, which may not be pedagogic given that you ask them to play around with the number of free parameters. 2nd because it allows you to make an important point: that although PSMC gives you a population size estimate over a long time scale, one should be careful about interpreting it in the recent and old parts of the history.######
+
+
 The plot should look somewhat like this:
 
 Babirusa PSMC with coarse parameter           |  Babirusa PSMC with fine parameter (4 + 10*2 + 4 + 6)                | Babirusa PSMC with fine parameter (4 + 25*2 + 4 + 6)
@@ -175,6 +180,8 @@ Babirusa PSMC with coarse parameter           |  Babirusa PSMC with fine paramet
 > Exercise 4.2:
 >
 > Re-run commands from Task 3 and 4 to the resulting whole genome psmc you did in Task 2. Compare the result of this coarse pattern. How are they different?
+
+####Rasmus comment: maybe finish off with a question that forces them to interpret the results and think of Babirusa biology? Such as: "What would you conclude regarding the population size history of the two populations of babirusa - did they have large or small populations, and were their population sizes similar over time?". This question would maybe be even more interesting if you add another species into the plot, either human or cattle or something else that has a very different history (larger pop size)########## 
 
 ### Challenge (Optional)
 
