@@ -55,7 +55,7 @@ bye
 ```
 
 ### 2. Visualising and comparing the trees
-You should have two trees now - the one the you make (unrooted) and the one from the shared directory (rooted).
+You should have two trees now - the one the you built (unrooted) and the one from the shared directory (rooted).
 
 The tree are in a newick format, a text-based format used to represent phylogenetic trees. It is widely used in bioinformatics and evolutionary biology to store and share tree data. For more information check out this wikipedia: https://en.wikipedia.org/wiki/Newick_format
 
@@ -116,7 +116,7 @@ We then need to set the working directory - this should be the path to the proje
 setwd("~/PATH/TO/PROJECT/DIRECTORY/")
 getwd() # this should show your working directory location in the terminal
 ```
-You can see above that anything your write with a `#` will not be run - it is a comment
+You can see above that anything your write with a `#` will not be run - it is a comment. In programming, a commented line is a line of code that is intentionally excluded from execution. Comments are typically used to explain the purpose of code, document functionality, or provide additional information for programmers who may need to understand or modify the code in the future.
 
 Now you load the libraries you need for this section.
 > Hint - These will have needed to be installed first with install.packages(), and this only needs to be done once
@@ -127,13 +127,15 @@ library(ggrepel)
 library(ggpubr)
 ```
 
-Now we will load in the metadata file we need for PCA. This contains the sample names and the region of Sulawesi that the sample comes from. 
+Now we will load in the metadata file we need for PCA, which contains the sample names and the region of Sulawesi that the sample comes from. 
 
 Load the metadata file and name the columns:
 ```sh
 samplelist <- read_tsv("pop_file.txt", col_names = c("sample", "region"))
+In R, the read_tsv() function is used to import tab-separated values (TSV) files into R data frames. TSV files are a common format for storing tabular data, with each line representing a record and each column representing a variable. The columns are separated by tab characters, hence the name "tab-separated values".
+
 ```
-> `Hint` - if your file is in your working directory the you just type the name of the file. But you can use `tab` to navigate to where your file is. 
+> `Hint` - if your file is in your working directory the you just type the name of the file. But you can use `tab` to navigate to where your file is.
 
 Check the top of your dataframe, you want to see the two columns
 ```sh
