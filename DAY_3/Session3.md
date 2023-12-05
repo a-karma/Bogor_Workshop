@@ -40,7 +40,7 @@ The structure is like this:
  ```sh
 get [PATH/TO/REMOTE/FILE] [LOCATION/TO/PUT/FILE/IN/LOCAL]
 ```
-> Hints - You can use `get -r ` to get the whole directory
+> Hints - You can use `get -r ` to get the whole directory.
 > The -r flag, also known as --recursive, is a powerful option used in various shell commands to operate on files and directories in a nested manner. It instructs the command to process not only the specified target but also all of its contents, including subdirectories and their contents, recursively.
 > 
 > If you are in the desired location on your local you can just use a `.` instead of `[LOCATION/TO/PUT/FILE/IN/LOCAL]`
