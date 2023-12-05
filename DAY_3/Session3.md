@@ -319,6 +319,8 @@ admix_all_plots
 
 Do not forget to save your script as you go.
 
+![ADMIX_ALL](../IM/ADMIX_ALL.png)
+
 ### Questions: 
 - what do you think this analysis tells us about the ancestry of the babirusa?
 - open up the cv.errors.txt file - what does this suggest is the most fitting number of clusters? Why might this be?
