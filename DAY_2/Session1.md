@@ -1,13 +1,50 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
-please do not modify these first two lines of the .md file
 
-use the same syntax to add pictures:
+##  
 
-placeholder name within square brackets and ../IM/file_name.png within parentheses
+Fastq Format
+Genomic information from high-throughput sequencing are stored in text-based files called
+FASTQ. These files comprise a series of entries containing not only the sequence but also
+its quality score. Each entry consists of four lines as shown in the box below.
 
-## Session Title
-please add a few sentences here to introduce your session of the tutorial.
+```sh
+@HiSeq 4000:1:FCX:4:15:66:165 2:N:0:7
+ATTTAGTACCATGACATGACACATACTACAATTGACGACATCAATCA
++
+IGHFDEC@;;?=>B=?<;A:?@>9<>9756867544312*+*),&)’
+```
+
+The first line starts with @ and contains a series of characters which uniquely identify
+the read. When dealing with Illumina data, the identifier includes 7 fields encoding
+information about the sequencing process plus 4 fields about the read itself (see tab2.1).
+Fileds are separated by a : and the two groups are separated by a space.
+Table 2.1: Fastq format – Fields in the Sequence ID line
+Field
+Instrument used for sequencing
+Run Number on that instrument
+flow cell ID
+lane number
+tile number
+X coordinate of cluster
+Y coordinate of cluster
+read number
+is filtered
+control number
+sample number
+Frantz-Lab, QMUL, 2020
+Example
+HiSeq 4000
+1
+FCX
+4
+15
+66
+165
+2 (2 nd read of the pair)
+N (Y did not pass, N otherwise)
+always zero on HiSeq X
+7 (the 7 th sample in the list)
 
 ### Example of section title 
 ##### Example of sub-section title 
