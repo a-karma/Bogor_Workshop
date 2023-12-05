@@ -47,7 +47,7 @@ PSMC works on a psmcfa file of a single diploid sample. A psmcfa file is a fasta
 
 Lets look at how we convert our vcf file into a psmcfa file. 
 
-As we have a multisample VCF, we need to first extract a single diploid sample from this VCF. In this example, we will work with sample RD44 and RD71. The command for sample RD44 has been given; the command for sample RD71 is left for participants for their exercise.
+######LAURENT COMMENT: CHANGE THIS TO A SINGLE SAMPLE VCF####### As we have a multisample VCF, we need to first extract a single diploid sample from this VCF. In this example, we will work with sample RD44 and RD71. The command for sample RD44 has been given; the command for sample RD71 is left for participants for their exercise.
 ```sh
 bcftools view -s RD44 babirusa_workshop_set.vcf.gz > RD44.vcf
 bgzip RD44.vcf
@@ -62,7 +62,6 @@ Then, we create a consensus sequence using `samtools faidx` and `bcftools consen
 REF=/home/DATA/Day_3_b/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa
 samtools faidx $REF -r chr_autosomes.txt | bcftools consensus RD44.vcf.gz > RD44.fa
 ```
-
 > Food for thought: Why don't we use mitochondrial and sex chromosome?
 
 After getting our consensus fasta, we construct our psmcfa file using `fq2psmcfa`.
@@ -76,7 +75,7 @@ fq2psmcfa RD44.fa > RD44.psmcfa
 It appears to be a regular fasta file, with only "T" and "K". Here a "T" represents a 100 bp window without any heterozygous sites in it, whereas a "K" represents a 100 bp window with at least 1 heterozygous site in it.
 </details>
 
-By this stage, you should already have RD44.psmcfa and RD71.psmcfa to run.
+Lets repeat the same procedure for RD71.
 
 ### Task 2: Running PSMC
 
@@ -86,9 +85,11 @@ Now it is time for us to run our first psmc analysis. Let us first look at the o
 psmc
 ```
 
-In particular, note the -p option, which allows us to specify a pattern of parameters. This parameters allow us to divide up time into discrete bins, and the pattern we specify in -p option allows us to estimate the same parameter for multiple consecutive time bins. 
+PSMC reconstruct population changes over time in accross time intervals. The number and length of these interval is controlled by the -p option. This option allows us to divide up time into discrete time intervals. 
 
-For example - the default pattern "4+5*3+4" splits time up into 23 bins (4+15+4), where only 1 parameter is estimated for the first 4 bins, then 1 parameter is estimmated for the next 5 triples of bins, and 1 parameter for the last 4 bins. So the total number of paramters we are estimating is 7 (1+5+1). Note this also in the plots for the effective population size, when we plot them.
+For example, the default pattern "4+5*3+4" splits time into 23 intervals (4+15+4). The first 4 time intervals will have the same effective population size parameter, then the next 3 intervals will be allowed to have a different parameter. This is repeated 5 times (5*3 time intervals = 15 parameters) then the last 4 intervals will have one effective population size parameter. In total with have 23 time intervals for 17 parameters (i.e. possible different values of effective population size). We can see that the more we divide this up the more resolution we can expect. The data, however, may not not be sufficiently informative to assess population size changes at a very fine scale.
+
+
 
 Let us now run psmc for the first time - we will just use the default values for the options, while still explicitly specifying the parameter pattern. This pattern is quite coarse, but we will try and estimate it again with finer time bins in the next section.
 
