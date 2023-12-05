@@ -120,10 +120,10 @@ now we can execute the script from the `session 2` directory and provide the cor
 ./scripts/formatting.sh ./raw_data/Day_1/instructors_list.txt ./results/corrected_instructors_list.txt
 ```
 
-> exercise
+> Exercise 1
 >
-> use this script to correctly format the 
-
+> Use this script to correctly format the `participants_list.txt`. Make sure you input the right path to this file and use a sensible name for the output file (second argument)
+ 
 
 ### 2. Working with bioinformatic softwares using conda
 In Session 1 we have seen three examples of text file that are commonly used in bioinformatics:
