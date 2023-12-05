@@ -126,12 +126,14 @@ library(tidyverse)
 library(ggrepel)
 library(ggpubr)
 ```
+In R programming, libraries are collections of functions and data sets that provide additional functionality and capabilities for data analysis, visualization, and other tasks. Libraries are essential for extending the abilities of the base R environment and making it a more powerful and versatile tool for various applications.
 
-Now we will load in the metadata file we need for PCA, which contains the sample names and the region of Sulawesi that the sample comes from. 
+Now we will load in the metadata file we need for plotting the PCA, which contains the sample names and the region of Sulawesi that the sample comes from. 
 
 Load the metadata file and name the columns:
 ```sh
 samplelist <- read_tsv("pop_file.txt", col_names = c("sample", "region"))
+
 In R, the read_tsv() function is used to import tab-separated values (TSV) files into R data frames. TSV files are a common format for storing tabular data, with each line representing a record and each column representing a variable. The columns are separated by tab characters, hence the name "tab-separated values".
 
 ```
@@ -193,6 +195,7 @@ First lets make a basic scatter plot:
 ggplot(data = evec_merge) + 
   geom_point(aes(x = V2, y = V3, colour = region), size = 4)
 ```
+
 Lets unpack this
 - the inital ggplot command determines the dataframe (`data = evec_merge`) to be used
 - the `geom_point()` specifies the point or scatter plot we want
@@ -202,6 +205,8 @@ Then we specify the aesthetics (`aes`) within the geom function. These are the n
 - the y-axis is specified as the third column which are the values for PC2
 - the points will be coloured by the region factor - this is important so we can see if there are any distinctive clusters
 - size determines the size of the point
+
+ggplot2 is a powerful data visualization library for the R programming language see here for more detials on ggplot2: https://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html
 
 Lets make this an object called `pca_plot`
 
@@ -224,6 +229,8 @@ Next lets make the plot look a little cleaner. ggplot has lots of built in `them
 pca_plot <- pca_plot + theme_bw()
 ```
 > Hint - start typing `theme_` and then use the tab to see the different options
+
+The theme_bw() function is part of the ggplot2 package in R and is used to create a black and white theme for your plots. 
 
 You are saving the layer ontop of the initial object, so be warned if you want to make changes or clear something you will have to run the code from the beginning.
 
