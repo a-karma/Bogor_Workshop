@@ -90,7 +90,7 @@ psmc
 
 PSMC reconstruct population changes over time in accross time intervals. The number and length of these interval is controlled by the -p option. This option allows us to divide up time into discrete time intervals. 
 
-For example, the default pattern "4+5*3+4" splits time into 23 intervals (4+15+4). The first 4 time intervals will have the same effective population size parameter, then the next 3 intervals will be allowed to have a different parameter. This is repeated 5 times (5*3 time intervals = 15 parameters) then the last 4 intervals will have one effective population size parameter. In total with have 23 time intervals for 17 parameters (i.e. possible different values of effective population size). We can see that the more we divide this up the more resolution we can expect. The data, however, may not not be sufficiently informative to assess population size changes at a very fine scale.
+For example, the default pattern "4+5\*3+4" splits time into 23 intervals (4+15+4). The first 4 time intervals will have the same effective population size parameter, then the next 3 intervals will be allowed to have a different parameter. This is repeated 5 times (5\*3 time intervals = 15 parameters) then the last 4 intervals will have one effective population size parameter. In total with have 23 time intervals for 17 parameters (i.e. possible different values of effective population size). We can see that the more we divide this up the more resolution we can expect. The data, however, may not not be sufficiently informative to assess population size changes at a very fine scale.
 
 
 
