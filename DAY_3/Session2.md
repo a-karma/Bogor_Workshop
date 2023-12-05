@@ -91,6 +91,8 @@ iqtree -s babirusa_panel.min4.phy -st DNA -pre babirusa_panel_tree1 -m GTR+ASC
 
 This should actually throw up an error and generate a new file for us. This is because `+ASC` model is specifying the ascertainment bias correction, which is appropriate for SNP data. ###LF COMMENT: WHY?### However there are invariable sites in the panel. The output file generated only contains variable sites. 
 
+The reasoning behind the use of the `+ASC` model is beyond the scope of this practical - feel free to ask about this to an instructor if you want to know more.
+
 > `Exercise two`
 >
 > How would you modify the original command to rerun iqtree using this new file?
@@ -98,9 +100,11 @@ This should actually throw up an error and generate a new file for us. This is b
 If that is running, we will now let it in the background by deattaching the session (`ctrl`+`a`+`d`) and we will come back to it later.
 
 ### 2. Principal components analysis (PCA) in smartpca
-Next we want to investigate population structure in the dataset using `smartpca` to make a PCA. ###LF COMMENT: define smartPCA###
+PCA is a powerful statistical method widely used in population genomics to analyze and visualize patterns of genetic variation among individuals or populations. It helps researchers understand the underlying structure of genetic data and identify key trends that can be used to infer evolutionary relationships, migration patterns, and adaptation mechanisms.
 
-Make a new directory in your session two directory and navigate to it. 
+In simple terms, PCA can be thought of as a technique that transforms a complex set of genetic data into a more manageable and interpretable form. It does this by identifying a set of new variables, called principal components (PCs), that capture the main axes of variation in the data. These PCs are essentially linear combinations of the original genetic markers, but they have the advantage of being uncorrelated with each other, making them easier to analyze and interpret.
+
+Here we are going to use  `smartpca` to make a PCA from the babirusa data.  Make a new directory in your session two directory and navigate to it. 
 
 ### Convert files to the correct format
 smartPCA does not work with vcf or plink files so we need to run a file conversion (this is somehow very common in bioinformatics). Luckily the author of the program provide a code to do the conversion from plink file to eigenformat. The first thing to do is convert our plink fileset into an eignstrat format which is used by the eigensoft set of programs - including smartpca. To do this we use a program called `convertf`
@@ -146,6 +150,7 @@ Then the original `.ind` file can be removed and rename the updated `.ind_new` f
 rm babirusa_panel.ind
 mv babirusa_panel.ind_new babirusa_panel.ind
 ```
+These files can be used to run multiple types of analysis beyond PCA using the admixtools package (https://github.com/DReichLab/AdmixTools). We will stick to PCA for today though. 
 
 ### Run smartpca
 Our data is now ready to run `smartpca`. Like `convertf` we make a parameter file to supply to the program to generate the output files.
@@ -180,7 +185,7 @@ This should give you two new output files, look at the contents of these files:
 In the next session you will copy these files to your local computer and visualise in RStudio. But now lets move on to the admixture analysis.
 
 ### 3. ADMIXTURE analysis
-The final analysis we will run is ADMIXTURE. This will calculate individual ancestry proportions for each of the babirusa.
+The final analysis we will run is ADMIXTURE. ADMIXTURE is a software program for inferring individual ancestries and population structure from SNP data. It uses a maximum likelihood approach to estimate the proportions of each ancestral population in each individual. ADMIXTURE is a popular tool for population genomics research because it is relatively easy to use and can handle large datasets.
 
 Make a new directory within your project folder for session two and navigate to it
 
