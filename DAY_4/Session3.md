@@ -185,7 +185,7 @@ ggplot(l)+
 
 Question: Which region has the highest homozygous load? Which has the lowest?
 
-### Task 5 (Optional)
+### Task 6 (Optional)
 
 The other file, "*sift_het_scores.txt" contain more information such as the heterozygous ancestral and heterozygous derived, assuming that the ancestral allele we got are all homozygous.
 
