@@ -33,7 +33,7 @@ First we need to to use `vcf2phylip.py` to convert our vcf (https://en.wikipedia
 ```sh 
 PANEL=/home/DATA/Day_3_b/babirusa_panel
 ```
-Then we we can run vcf2phylip  by specifying the vcf file as the input (`-i`) and the output name you want in your current working directory (`--out-prefix`)
+Then we can run vcf2phylip by specifying the vcf file as the input (`-i`) and the output name you want in your current working directory (`--out-prefix`)
 
 ```sh
 /home/DATA/Day_3_b/scripts/vcf2phylip.py -i $PANEL.vcf --output-prefix babirusa_panel
@@ -74,7 +74,7 @@ Now we have our input file and the basic understanding of screen we will run iqt
 Reopen the screen you made for running `iqtree`
 You should see that you have to reactivate the conda environment when you enter a new session. 
 
-IQtree is a very versatile program with many options but is very simple to use. 
+IQtree is a very versatile program with many options yet very straightforward to use. 
 
 To run it we are going to specify some parameters:
 > 1. The phylip alignment (`-s`)
@@ -82,12 +82,14 @@ To run it we are going to specify some parameters:
 > 3. The substitution model (`-m`) - if you omit this option iqtree runs an automatic model test. But it can take a while so we will specify this. 
 > 4. The output file prefix (`-pre`)
 
+The theory behind substitutions model in phylogenetics is beyond the scope of this tutorial. We'd be happy to discuss this with you in the classroom if you are interested - you can also check this wikipedia page for more information: https://en.wikipedia.org/wiki/Substitution_model
+
 So the command is: 
 ```sh 
 iqtree -s babirusa_panel.min4.phy -st DNA -pre babirusa_panel_tree1 -m GTR+ASC
 ```
 
-This should actually throw up an error and generate a new file for us. This is because `+ASC` model is specifiying the ascertainment bias correction, which is appropriate for SNP data. However there are invarible sites in the panel. The output file generated only contains variable sites. 
+This should actually throw up an error and generate a new file for us. This is because `+ASC` model is specifying the ascertainment bias correction, which is appropriate for SNP data. ###LF COMMENT: WHY?### However there are invariable sites in the panel. The output file generated only contains variable sites. 
 
 > `Exercise two`
 >
@@ -96,12 +98,14 @@ This should actually throw up an error and generate a new file for us. This is b
 If that is running, we will now let it in the background by deattaching the session (`ctrl`+`a`+`d`) and we will come back to it later.
 
 ### 2. Principal components analysis (PCA) in smartpca
-Next we are going to look at the possible population structure in the dataset using `smartpca` to make a PCA. 
+Next we want to investigate population structure in the dataset using `smartpca` to make a PCA. ###LF COMMENT: define smartPCA###
 
 Make a new directory in your session two directory and navigate to it. 
 
 ### Convert files to the correct format
-The first thing to do is convert our plink fileset into an eignstrat format which is used by the eigensoft set of programs - including smartpca. To do this we use a program called `convertf`
+smartPCA does not work with vcf or plink files so we need to run a file conversion (this is somehow very common in bioinformatics). Luckily the author of the program provide a code to do the conversion from plink file to eigenformat. The first thing to do is convert our plink fileset into an eignstrat format which is used by the eigensoft set of programs - including smartpca. To do this we use a program called `convertf`
+![image](https://github.com/a-karma/Bogor_Workshop/assets/5824025/dea61bb6-7edc-475a-8837-21b829924e05)
+
 
 To run `convertf` you need to make a parameter file, or par file, which contains the information on where the files we want to convert are located. The program can change between several different formats, for example - the current files are in the .ped format and would like the EIGENSTRAT format as the output. 
 > `Hint` - take a look at the format and additional options here - https://github.com/chrchang/eigensoft/blob/master/CONVERTF/README
