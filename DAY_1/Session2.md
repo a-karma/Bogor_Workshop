@@ -8,13 +8,12 @@ In this section we will revise what we have learn about variables in Bash and we
 Before we start, let's run some preliminary commads to create the directory structure for this session
 
 ```sh
-mkdir session2; cd session2; mkdir raw_data; mkdir script; mkdir clean_input; mkdir results 
+mkdir session2; cd session2; mkdir raw_data; mkdir script; mkdir results 
 ```
 
 > Exercise 1
 >
-> Create a link between your newly created `raw_data` directory and the `/home/DATA/Day_1` folder
-
+> Create a link between the `/home/DATA/Day_1` folder and your newly created `raw_data` directory 
 
 
 ### 2. Working with bioinformatic softwares using conda
@@ -69,17 +68,23 @@ end) plus an unusual 4th field. In that column I have stored the genotype of 4 i
 You can have a look at it using `less` or inspect just three lines with a combination of head and tail, see for example what you get by running:
 
 ```
-head -65 /home/DATA/Day_1/snp_ch30.bed | tail -3
+head -65 ~/session2/raw_data/Day_1/snp_ch30.bed | tail -3
 ```
 
 Suppose you are interested in analysing neutral evolving sites, therefore, you may want to remove from the analysis all sites that are likely to be under selective pressures. 
 As a first approximation, we could take a conservative approach and start to analyse polymorphic sites (SNPs) that do not fall inside CDS. Performing this task manually is obviously tedious and very time consuming but it's super fast using a software like bedtools:
 
 ```sh 
-bedtools intersect -a /home/DATA/Day_1/snps_panel.bed -b genes_chr30.gtf -v > snp_filtered.bed
+bedtools intersect -a /home/DATA/Day_1/snp_ch30.bed -b genes_chr30.gtf -v > snp_filtered.bed
 ```
 The intersect command reports overlapping regions between two BED/GFF/GTF files by comparing the coordinates of the genomic feature listed in them.
 The `-v` flag tells `intersect` to report all lines in file A (specified using the `-a` flag) that DO NOT overlap with the genomic intervals listed in file B (-b flag).
+
+> exerxise
+>
+> can you figured out how many SNPs we have escluded?
+>
+> hint: remember that each SNP information is recorded on a single line in the bed file format
 
 There is a lot more that you can do with genome arithmetic. Let’s picture a more complex scenario: suppose you are interested in studying the promoter regions of various genes
 on this chromosome. You have a fasta file with the entire chromosome sequence (see `ptw_ch30.fa` file) and you would like to examine 10 kb upstream the starting codon of each gene. 
