@@ -4,7 +4,7 @@
 
 ### 1. Shell Scripting
 In Session 1 we have seen how to navigate a Unix-like file system and how to manipulate text files. 
-In this section we will revise what we have learn about variables in Bash and we wil introduce the concept of scripts and arguments.
+In this section we will revise what we have learnt about variables in Bash, we wil introduce the concept of positional arguments, and we will write our first shell script.
 
 Before we start, let's run some preliminary commads to create the directory structure for this session:
 
