@@ -5,7 +5,8 @@
 ### 1. Shell Scripting
 In Session 1 we have seen how to navigate a Unix-like file system and how to manipulate text files. 
 In this section we will revise what we have learn about variables in Bash and we wil introduce the concept of scripts and arguments.
-Before we start, let's run some preliminary commads to create the directory structure for this session
+
+Before we start, let's run some preliminary commads to create the directory structure for this session:
 
 ```sh
 mkdir session2; cd session2; mkdir raw_data; mkdir script; mkdir results 
@@ -15,6 +16,42 @@ mkdir session2; cd session2; mkdir raw_data; mkdir script; mkdir results
 >
 > Create a link between the `/home/DATA/Day_1` folder and your newly created `raw_data` directory 
 
+If you now move into your raw_data directory and run `ls Day_1` you should see two files having the .txt extension. 
+
+Let's have a look at `instructors_list.txt` first, you can print the content on screen using `cat`.
+
+As the name suggests, this files contains the list of the workshop instructors along with their affiliations and their status. 
+Unfortunately, the fields are not well defined because each word is separated by a space. let's try to fix these formatting issues.
+
+First of all we need to separate the last two fields (affiliation and status). 
+We can do this in `awk` and make use of variable `NF` which is set to the total number of fields in the input record:
+```sh
+awk '{print $(NF-1),"\t",$NF}' ./Day_1/instructors_list.txt
+```
+
+Now let's redirect the output to a file:
+```sh
+awk '{print $(NF-1),"\t",$NF}' ./Day_1/instructors_list.txt > aff_status.txt
+```
+Let's now deal with the names. We should start by printing all but the last two fields:
+
+```sh
+awk 'NF-=2 {print $0}' ./Day_1/instructors_list.txt
+```
+
+Then we can pipe this into `sed` and replace all white spaces with the character `_`:
+
+```
+awk 'NF-=2 {print $0}' ./Day_1/instructors_list.txt | sed -e 's/ /_/g'
+```
+Finally we redirect the output to a file:
+
+```
+awk 'NF-=2 {print $0}' ./Day_1/instructors_list.txt | sed -e 's/ /_/g' > names.txt
+```
+
+Now that we have created we can paste the two files back together
+that we want to extract the first word of eac line
 
 ### 2. Working with bioinformatic softwares using conda
 In Session 1 we have seen three examples of text file that are commonly used in bioinformatics:
