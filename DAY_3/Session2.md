@@ -107,11 +107,10 @@ In simple terms, PCA can be thought of as a technique that transforms a complex 
 Here we are going to use  `smartpca` to make a PCA from the babirusa data.  Make a new directory in your session two directory and navigate to it. 
 
 ### Convert files to the correct format
-smartPCA does not work with vcf or plink files so we need to run a file conversion (this is somehow very common in bioinformatics). Luckily the author of the program provide a code to do the conversion from plink file to eigenformat. The first thing to do is convert our plink fileset into an eignstrat format which is used by the eigensoft set of programs - including smartpca. To do this we use a program called `convertf`
-![image](https://github.com/a-karma/Bogor_Workshop/assets/5824025/dea61bb6-7edc-475a-8837-21b829924e05)
-
+smartPCA does not work with vcf or plink files so we need to run a file conversion (this is somehow very common in bioinformatics). Luckily the author of the program provide a code to do the conversion from plink file to eigenformat. The first thing to do is convert our plink fileset into an eignstrat format which is used by the eigensoft set of programs - including smartpca. To do this we are going to use a program called `convertf`.
 
 To run `convertf` you need to make a parameter file, or par file, which contains the information on where the files we want to convert are located. The program can change between several different formats, for example - the current files are in the .ped format and would like the EIGENSTRAT format as the output. 
+
 > `Hint` - take a look at the format and additional options here - https://github.com/chrchang/eigensoft/blob/master/CONVERTF/README
 
 Make an empty text file and enter the text editor (`nano`).
