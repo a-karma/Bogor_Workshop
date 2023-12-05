@@ -254,7 +254,7 @@ ggsave(plot = PLOT_NAME, "PATH/TO/FILE.png")
 - do you think that there is evidence of population structure and how many populations do you this these samples from?
 
 ### 4. Visualising the ADMIXTURE analysis
-Great, now lets move on to plotting the admixture results. You can keep going in the script, but remember to save it every so ofter. 
+Great, now lets move on to plotting the admixture results. You can keep going in the script, but remember to save it every so often. 
 We want to use the same metadata file as for the PCA, so lets not clear our environment. 
 
 First we need to read in the `.Q` files we downloaded from the server. 
@@ -267,7 +267,7 @@ The columns V1 and V2 correspond to the ancestry proportions, and the number of 
 >
 > Can you read in the additional Q files for the each of the clusters you ran?
 
-Again, the first thing we need to do is get the dataframe in the correct format. We can use the `cbind()` function from before, or because we also need to get the data into longform format, we can achieve this using the `tidyverse` (of which ggplot is part of). Long form means that each row in the dataframe only has one value, whereas our data is currently in wide form - there are two values for each individual on each row (V1 & V2). 
+Again, the first thing we need to do is get the dataframe in the correct format. We can use the `cbind()` function from before, or because we also need to get the data into longform format, we can achieve this using the `tidyverse` library (of which ggplot is part of). Long form means that each row in the dataframe only has one value, whereas our data is currently in wide form - there are two values for each individual on each row (V1 & V2). 
 We do this using:
 ```sh
 k2_long <- k2 %>% bind_cols(samplelist, k = "k2") %>% 
@@ -288,7 +288,8 @@ Lets look at this
 
 Now we should have a long form data frame object for every cluster with the metadata (samples and regions) attached. 
 
-Using this we will make the stacked barplots using `geom_col()`, this is for a barchart where the bars will mean that the bars add up to 1.
+Using this we will plot the results as a  stacked barplots using `geom_col()`.
+
 We plot in ggplot using the same process as before. First we can make the basic plot:
 ```sh
 admix_plot_k2 <- ggplot(data = babik2_L) +
@@ -301,6 +302,9 @@ admix_plot_k2 <- ggplot(data = babik2_L) +
 
 Take a look at the plot, can you tell anything about whether the babirusa from the same region show the same patterns of ancestry? Probably not quite yet as the bars are just in the order R has read the sample column in the metadata. 
 We need to split up the columns by the regions, the quick way to do this is with facets. 
+
+In ggplot2, facets are a powerful way to create multiple plots within a single plot. They allow you to group your data by one or more variables and create separate plots for each group. This can be a great way to visualize how your data varies across different groups.
+
 To the base plot add this line: 
 ```sh
 admix_plot_k2 <- admix_plot_k2 + facet_wrap(~region, scales = "free", nrow = 1)
@@ -345,14 +349,8 @@ Do not forget to save your script as you go.
 3. which region is the most genetically distinct and why might this be?
 
 ### 5. Extra exercises
-Extra tree exercises 
 >
 > Can you add the regions and colours to the tree?
->
-> Why do we ignore the branch lengths?
->
-
-Extra PCA exercises
 >
 > Can you add the sample names to the plot using the function `geom_text_repel()`
 > 
