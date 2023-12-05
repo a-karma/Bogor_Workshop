@@ -1,9 +1,7 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
 
-##  
-
-Fastq Format
+##  Fastq Format
 Genomic information from high-throughput sequencing are stored in text-based files called
 FASTQ. These files comprise a series of entries containing not only the sequence but also
 its quality score. Each entry consists of four lines as shown in the box below.
