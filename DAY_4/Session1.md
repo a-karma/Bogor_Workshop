@@ -11,9 +11,9 @@
 
 ### Introduction
 
-The Pairwise Sequentially Markovian Coalescent (PSMC) model uses information in the complete diploid sequence of a single individual to infer the history of population size changes. Originally published in 2011 (Li and Durbin 2011), it has become a very popular tool in the world of genomics. In this tutorial, we walk through the steps to generate the necessary input data for PSMC and run it on our babirusa data set to see how well we can estimate effective population size. 
+The Pairwise Sequentially Markovian Coalescent (PSMC) is a statistical method used to infer demographic history from genomic data. It is a powerful tool that can be used to estimate changes in population size over time, as well as to identify ancient population bottlenecks and expansions. In this tutorial, we walk through the steps to generate the necessary input data for PSMC and run it on our babirusa data set to see how well we can estimate effective population size changes through time.
 
-We will use the `psmc` tool to estimate the effective population size for our data. Instead of directly using bam files, we will use a variant calling format (vcf) file as the starting point. 
+We will use the `psmc` tool to estimate the effective population size for our data. We will use a variant calling format (vcf) file as the starting point. 
 
 ### Task 0: Preparing your working directory
 
@@ -26,9 +26,10 @@ conda activate Day_4
 In this exercise, you will need the following input files which you can find in `/home/DATA/Day_4`:
 ```sh
 babirusa_workshop_set.vcf.gz
-babirusa_workshop_set.vcf.gz.tbi # this is just an index file to make bcftools works easily
+babirusa_workshop_set.vcf.gz.tbi 
 chr_autosomes.txt
 ```
+The `.tbi` file is an index. Indexing VCF files is a crucial step in facilitating efficient data retrieval and analysis for large-scale genomic studies. Indexing creates a data structure that allows tools to quickly access specific genomic regions or variants within large VCF file, significantly improving performance for various tasks using programs like bcftools.
 
 Make your own directory for this project and use a symbolic link for easy access to your working directory:
 ```sh
