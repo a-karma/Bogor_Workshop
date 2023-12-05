@@ -230,10 +230,10 @@ where the `-fi` flag stands for file input, the `-bed` indicates the coordinate 
 
 You can examine the first output line using: 
 ```sh
-cat ./results/ptw_prom_sequences | head -1
+cat ./results/ptw_prom_sequences.fa | head -1
 ```
 
-> Exercise 1:
+> Exercise 2
 >
 > Combine the intersect and flank functions in order to filter the `snp_ch30.bed` file
 > by excluding CDS and all reagions that are 5 kb form the starting and the stop codon of each CDS.
