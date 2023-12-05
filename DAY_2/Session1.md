@@ -17,7 +17,7 @@ IGHFDEC@;;?=>B=?<;A:?@>9<>9756867544312*+*),&)’
 The first line starts with @ and contains a series of characters which uniquely identify
 the read. When dealing with Illumina data, the identifier includes 7 fields encoding
 information about the sequencing process plus 4 fields about the read itself (see tab2.1).
-Fileds are separated by a : and the two groups are separated by a space.
+Fields are separated by a : and the two groups are separated by a space.
 
 Table 2.1: Fastq format – Fields in the Sequence ID line
 | Field | example|
