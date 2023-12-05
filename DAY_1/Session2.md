@@ -16,9 +16,10 @@ mkdir session2; cd session2; mkdir raw_data; mkdir scripts; mkdir results
 >
 > Create a link between the `/home/DATA/Day_1` folder and your newly created `raw_data` directory 
 
-If you now move into your raw_data directory and run `ls Day_1` you should see two files having the .txt extension:
+If you now move into your raw_data directory and run `ls Day_1` you should see two files having the `.txt` extension:
 ```sh
 instructors_list.txt
+
 ```
 
 Let's have a look at `instructors_list.txt` first, you can print the content on screen using `cat`.
