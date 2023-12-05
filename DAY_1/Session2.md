@@ -209,7 +209,7 @@ grep 'start_codon' ./raw_data/Day_1/genes_chr30.gtf > ./raw_data/CDS_start.gtf
 Now you need to modify this file using the function `flank` implemented in bedtools which will create flanking intervals for each region in a BED/GFF/VCF file.
 This function requires also a genome file defining the length of each chromosome, so let’s create this file first.
 ```sh
-echo -e "chr30\t150000000" > ./raw_data/ch30_length.bed
+echo -e "chr30\t40214260" > ./raw_data/ch30_length.bed
 ```
 The above command `echo` would normally output on screen whatever string you type after it. 
 The `-e` option tells the software to enable the interpretation of backslash escapes and `\t` stands for TAB.
