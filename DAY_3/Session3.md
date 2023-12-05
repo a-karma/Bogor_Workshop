@@ -2,18 +2,19 @@
 # Applications of Genomics in Wildlife Conservation
 
 ## Day three - Session three - Visualisation 
-In this session the aim is to visualise the results of the analyses we just completed on the server. We will be working mainly on our local computers in RStudio and the browser.
-We will:
-1. download our output files via `sftp`
-2. visualise the phylogenetic tree in iTOL (https://itol.embl.de/)
-3. generate figures in RStudio for the PCA and ADMIXTURE results
+The aim of this session is to visualise the results of the analyses we just completed in the previous session. We will be working mainly on our local computers in RStudio and a web browser.
+
+Before we can do that we first need to download our output files via `sftp`. We will then:
+1. visualise the phylogenetic tree in iTOL (https://itol.embl.de/)
+2. generate figures in RStudio for the PCA and ADMIXTURE results
 
 ### 1. Downloading the output files 
 On your local computer we will use `sftp` to connect to the remote server and download the files.
 
-In your terminal make a project directory where you would like to store the output files on your local computer. 
+In your terminal create a project directory where you would like to store the output files on your local computer. 
 
-Then run `sftp` - this stands for secure file transfer protocol and will open a connection between your local comput and the remote server. 
+Wee will then use `sftp`, which this stands for Secure File Transfer Protocol and will open a connection between your local comput and the remote server. 
+
 We need to tell it where the ssh key is, and which remote server to connect using your username and the IP address. Therefore enter: 
 ```sh
 sftp -i ~/path/to/ssh/key [your_username]@138.246.238.65
@@ -21,14 +22,14 @@ sftp -i ~/path/to/ssh/key [your_username]@138.246.238.65
 You will now be in your home directory in the server. 
 
 In the screenshot you can see: 
-- If you list the files (`ls`) you should see the files in your home directory
+- the command `ls` should list the files in your home directory
 - If you add an `l` infront, so `lls` you should see the file structure for your local computer
 - `pwd` shows the working directory in the server
 - while `lpwd` shows the working directory on your local computer
  
 ![SFTP_connection](../IM/SFTP_connection.png)
 
-We need to download your output files:
+We need to download the output files from the previous analyses:
 
 - From the PCA = `.evec` and `.eval`
 - From the ADMIXTURE = all the `.Q` files and `cv_errors.txt`
@@ -40,8 +41,9 @@ The structure is like this:
 get [PATH/TO/REMOTE/FILE] [LOCATION/TO/PUT/FILE/IN/LOCAL]
 ```
 > Hints - You can use `get -r ` to get the whole directory
+> The -r flag, also known as --recursive, is a powerful option used in various shell commands to operate on files and directories in a nested manner. It instructs the command to process not only the specified target but also all of its contents, including subdirectories and their contents, recursively.
 > 
-> If you are in the desired location on your local you can just use a `.`
+> If you are in the desired location on your local you can just use a `.` instead of `[LOCATION/TO/PUT/FILE/IN/LOCAL]`
 
 You will also need to download some files from the shared directory `/home/DATA/Day_3_b/`
 - you need the `population_file.txt`
