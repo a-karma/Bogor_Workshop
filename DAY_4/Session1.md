@@ -95,14 +95,14 @@ For example, the default pattern "4+5\*3+4" splits time into 23 intervals (4+15+
 `Quick exercise`
 How many free effective population size parameters do we expect if we run psmc with -p "4+25*2+4+6"
 
-Let us now run psmc for the first time - we will just use the default values for the options, while still explicitly specifying the parameter pattern. This pattern is quite coarse, but we will try and estimate it again with finer time bins in the next section.
+Let us now run psmc for the first time - we will just use the default values for the options, while still explicitly specifying the parameter pattern. This pattern is quite coarse, but we will try and estimate it again with more parameters per time intervals in the next section.
 
 ```sh
 psmc -p "4+5*3+4" -o RD44_coarsePattern.psmc RD44.psmcfa &
 psmc -p "4+5*3+4" -o RD71_coarsePattern.psmc RD71.psmcfa &
 ```
 
-As we have done this for whole autosomal genomes, this will take ~20 minutes. While we wait for it to finish, let's try have a look on only one chromosome to have faster result.
+As we have done this for whole autosomal genomes, this will take ~20 minutes. While we wait for it to finish, let's try have a look at what happens when we run psmc only one chromosome.
 
 ### Task 3: Running PSMC in chromosome 1
 
@@ -125,7 +125,7 @@ psmc -p "4+5*3+4" -o RD44_1_coarsePattern.psmc RD44_chr1.psmcfa &
 psmc -p "4+5*3+4" -o RD71_1_coarsePattern.psmc RD71_chr1.psmcfa &
 ```
 
-This should run in only within a minute. Let's have a look on one of the output files:
+This should run within a minute. Let's have a look on one of the output files:
 ```sh
 tail -34 RD44_1_coarsePattern.psmc
 ```
@@ -143,12 +143,12 @@ cat RD44_1_coarsePattern.psmc \
     RD71_1_coarsePattern.psmc > combined_coarsePattern.psmc 
 ```
 
-To simplify the psmc results, we need to run the .psmc file with `psmc_plot.pl`. First let have a look on this script to see what it does.
+To simplify the psmc results, we need to parse the .psmc file with `psmc_plot.pl`. First let have a look on this script to see what it does.
 ```sh
 psmc_plot.pl
 ```
 
-An important thing here is to make sure we use the correct mutation rate and generation time. Because there is no mutation rate estimates yet for babirusa, we used domestic pig mutation rate here and average generation time we found on babirusa in captivity.
+An important thing here is to make sure we use the correct mutation rate and generation time. Because there is no mutation rate estimates yet for babirusa, we used a mutation rate estimated for domestic pigs. We set the average generation time as expected for babirusa in captivity.
 ```sh
 psmc_plot.pl -u 1.5e-09 -g 3 -s 100 -Y 1 -m 5 -n 30 -p -M "SE, TO" babirusa_chr1_coarse combined_coarsePattern.psmc 
 ```
