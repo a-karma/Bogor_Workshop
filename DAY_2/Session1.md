@@ -194,8 +194,53 @@ But what should we assign to the variable OUTPUT?
 Ideally we would like to keep a consistent naming convention which retains the same information about the sample name that is present in each of the input files.
 One possibility is to employ the `basename` command which separates a file name from its path. Try to run for example: 
 ```sh
-basename ~/day2/scripts/remove_adapters.sh
+basename 
 ```
 
 > Question 4: what's the output of the command above?
+
+We can now modify our script and assign to the last variable the `correct` value.
+
+```sh
+!#/usr/bin/bash
+INPUT1= $1
+INPUT2= $2
+OUTPUT= $(basename $1)
+AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ~day2/fastqs/${OUTPUT} --trimns --trimqualities
+```
+At this stage, the usage of this script should be:
+
+```sh
+./scripts/remove_adapters.sh path/to/read1/file.fastq path/to/read2/file.fastq
+```
+
+> `Exercise 1`
+>
+> Try to run the script to remove adapters for one sample by inputing the right paths for both the read1 and read2 files.
+> Have a look at the output inside the `fastqs` directory.
+> Do you see anything that can be improved in our file naming convention?
+
+As you probably have noticed, the first part of the output name looks exactly as the first input file name. 
+Also the .fastq extension appears in the middle and we might want to get rid of that part.
+We can use a little trick to adjust this. Let's modify our script for the last time!
+
+```sh
+!#/usr/bin/bash
+INPUT1= $1
+INPUT2= $2
+OUTPUT= $(echo `basename ${input1}` | sed 's/_*.fastq//')
+AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ~day2/fastqs/${OUTPUT} --trimns --trimqualities
+```
+
+> `Exercise 3`
+>
+> Run the last version of our script to remove adapters using the same input files you have used before.
+> Have a look at the output inside the `fastqs` directory. Do you see the difference?
+
+We are now finally ready to run the adaper removal step for all our sample. 
+We are going to use the same stratagy we have employed for the quality control step i.e. the while loop.
+First of all let's remove our experiments with the naming by running:
+```sh
+rm -R ~/day2/fastqs; mkdir ~/day2/fastqs
+```
 
