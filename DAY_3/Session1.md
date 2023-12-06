@@ -12,14 +12,14 @@ We will further try to explore if a population is evolving or is neutral using t
 
 ### Measuring Genetic Diversity 
 ##### Heterozygosity 
-- this is how you define bullet point
-- in case you want to make more explicit 
-- the series of steps required to accomplish a task 
+- Heterozygosity is the probability of sampling two different alleles for a locus.
+- We will use vcftools (https://vcftools.sourceforge.net) for this exercise 
+- There are other methods as well, for example, RTG tools (https://github.com/RealTimeGenomics/rtg-tools) and ANGSD (http://www.popgen.dk/angsd/index.php/Heterozygosity)
 
-See example below on how to format commands that the participants will have to run
+
 
 ```sh
-conda activate Day_1
+conda activate Day_3
 plink --bfile file_name --recode
 ```
 
