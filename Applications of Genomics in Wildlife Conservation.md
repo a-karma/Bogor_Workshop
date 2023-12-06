@@ -57,19 +57,18 @@ Analysing genetic variation.
 Demographic analysis, inbreeding & load.
 
 #### Session 1
-- add some content here please
-- two or three bullet point will suffice
-- see my examples above
+- Prepping input files for PSMC
+- Running and discussing PSMC
 
 #### Session 2
-- add some content here please
-- two or three bullet point will suffice
-- see my examples above
+- Running observational ROH detection method using PLINK
+- Using R to visualise ROH observation-based and model-based results
+- Discussion of different areas inbreeding extent
 
 #### Session 3
-- add some content here please
-- two or three bullet point will suffice
-- see my examples above 
+- Running custom pipeline to calculate mutational load per individual
+- Using R to plot mutational load per area
+- Discussion of burden of mutation in different areas
 
 ## Day 5 - Overview
 Advanced population genetics & Metabarcoding for biodiversity.
