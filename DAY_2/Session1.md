@@ -149,7 +149,8 @@ After quality control, the next step in the pre-processing of NGS data consists 
 There are many software available that can perform this task, here we will focus on ![AdapterRemoval](https://adapterremoval.readthedocs.io/en/stable/). 
 The main reason why we present this software in this workshop is because it not only search and remove adapters from high-throughput sequencing data 
 but it can also perform the colllapsing of the two reads if necessary. 
-Collapsing reads should be avoided when dealing with modern DNA given that the DNA molecules present in the library are longer than the read size (normally 150 bp for Illumina) hence the forward and reverse sequencing product do not overlap. Merging the two reads in their overlapping region is instead the standard procedure when analysing shorter DNA fragments degraded DNA such as DNA extracted from archaeological specimens or museum collections. This is because the DNA fragments are much shorter 
+
+Collapsing reads should be avoided when dealing with modern DNA given that the DNA molecules present in the library are longer than the read size (normally 150 bp for Illumina) hence the forward and reverse sequencing product do not overlap. Merging the overlapping region of the two reads is instead the standard procedure when analysing shorter DNA fragments which is always the case when dealing with degraded DNA such as DNA extracted from archaeological specimens or museum collections. 
 
 In orther to remove adapters and low-quality bases at the termini of each read you can run the following command:
 
@@ -157,4 +158,6 @@ In orther to remove adapters and low-quality bases at the termini of each read y
 AdapterRemoval --file1 reads_1.fq --file2 reads_2.fq --basename output_paired --trimns --trimqualities
 ```
 If working with ancient DNA (aDNA), you can add the `--collapse` option to merge the two reads and adjust the quality score accordingly.
+
+
 
