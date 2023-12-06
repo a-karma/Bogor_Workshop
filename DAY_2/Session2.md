@@ -1,43 +1,26 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
-please do not modify these first two lines of the .md file
 
-use the same syntax to add pictures:
+## Day 2 - NGS data procesing - Session 2
+In this session you will learn how to align reads to a reference genome and how to manipulate bam files.
 
-placeholder name within square brackets and ../IM/file_name.png within parentheses
+#### The SAM and BAM format
+SAM stands for Sequence Alignment/Map format. It is a TAB-delimited text format consisting of a header
+section, which is optional, and an alignment section. The BAM is the compressed binary version of a SAM file.
+Header lines start with `@`, while alignment lines do not. Each alignment line has 11 mandatory fields for
+essential alignment information such as mapping position, and variable number of optional fields for flexible
+or aligner specific information. 
 
-## Session Title
-please add a few sentences here to introduce your session of the tutorial.
-
-### Example of section title 
-##### Example of sub-section title 
-- this is how you define bullet point
-- in case you want to make more explicit 
-- the series of steps required to accomplish a task 
-
-See example below on how to format commands that the participants will have to run
+In your raw_data directory you should see a folder called CHR_10. 
+This contains a few bam files that we have generated for you using the same procedure that you are learning today. 
+Let's examine the first few line of the header:
 
 ```sh
-conda activate Day_1
-plink --bfile file_name --recode
+samtools view -H RD10_chr10.bam | head -20
 ```
 
-you can instead use `this syntax` to highlight an in-line command, software name or something you think it's important
 
-see below the syntax for tables:
-
-| column A | column B |
-| ------ | ------ |
-| row 1a | row 1b |
-| row 2a | row 2b |
-| you can also leave cells blank | |
-
-you can also use this env for exercises and tips:
-> Exercise 1 
-> 
-> Modify the command above to ...
-
-Or even:
-> Best practice: never use spaces in file names
-
-note the empty line in the first quoted env (it seems to make it look nicer on github) 
+#### Indexing BAMS 
+Indexing aims to achieve fast retrieval of alignments overlapping a specified region without going through
+the whole alignments. BAM must be sorted by the reference ID and then the leftmost coordinate before
+indexing.
