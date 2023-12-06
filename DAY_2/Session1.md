@@ -76,3 +76,4 @@ Table 2.2: Illumina Phred-score encoding
 > Question: What's the accuracy of the last base call in the example above? 
 
 #### Quality Control
+![fastQC](../IM/fq_report.png)
