@@ -58,8 +58,8 @@ to a Q-score of 40 (see table 2.2) which means that the base call accuracy of th
 position in the sequence is 99.99%.
 
 Table 2.2: Illumina Phred-score encoding
-| Symbol |Q-score|| Symbol |Q-score|| Symbol |Q-score|
-| ------ | ------ |------| ------ | ------ |------| ------ | ------ |------ |
+|Symbol|Q-score||Symbol|Q-score||Symbol|Q-score||Symbol|Q-score|
+|----|----|----|----|----|----|----|----|----|----|----|
 |!|0||,|11||7|22||B|33|
 |”|1||-|12||8|23||C|34|
 |#|2||.|13||9|24||D|35|
