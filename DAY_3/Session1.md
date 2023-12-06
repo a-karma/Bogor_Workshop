@@ -34,8 +34,11 @@ less -S [input].het
 tail -n +2 [input].het | awk '{print $1, 1-($2/$4)}' | less
 
 ```
-What factors influence heterozysity?
-How do you estimate expected heterozygosity?
+> What factors influence heterozysity?
+
+> How do you estimate expected heterozygosity?
+
+
 
 you can instead use `this syntax` to highlight an in-line command, software name or something you think it's important
 
