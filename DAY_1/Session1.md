@@ -335,3 +335,6 @@ Here we used the -V option because we are dealing with a mixture of numerical an
 > 
 > Use the commands you have learn to find out   
 
+We will have more information about `BED` files in the next session.
+
+If you are finished early you can also run through these tutorials for more practice: 1) https://sandbox.bio/tutorials?id=terminal-basics 2) https://sandbox.bio/tutorials?id=awk-intro
