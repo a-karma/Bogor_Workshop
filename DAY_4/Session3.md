@@ -112,7 +112,7 @@ head SusScr11_107_sift_scores_chr1.bed
 ```
 This is again a `BED` file as in day one. You can see how we have customise this bed file - we kept its basic structure: tab separated 0-based coordinates but from field 4 we have added our own informations: the ancestral (non-deleterious) state of the allele, and the SIFT score of all possible homozygous genotpye, A, C, G, T at this position. 
 
-We would like to align this reference to our .gpf files for further processing downstream. We will use `bedtools intersect`.
+We would like to intersect this file with our .gpf files to merge both genotype probabilities and their deleterious (SIFT) score in the same file. To do this we will use `bedtools intersect` (on day 1)
 ```{bash bedtools, eval=FALSE}
 bedtools intersect -b $FILE -a SusScr11_107_sift_scores_chr1.bed -wb | cut -f 1-8,12-21 > ${FILE%.gpf}_sift.bed
 ```
@@ -132,22 +132,23 @@ The resulting *_sift.bed file should look as follows:
 ```
 Note that we have merged the content of the two files side by side here.
 
-Question: What is happening when we did the bedtools intersect? How many sites do we have now?
+Question: Why did we use a cut command after the intersect?
+>Hint: run the same command as above without the `cut` part instead use `| less -S`
 
 ### Task 3: Calculating mutational load using custom script
 
-The `_sift.bed` file is the input for another script that was initiated by Deborah Greer also, to calculate the total load per sample that are homozygous, heterozygous, or both. After the score has been aligned and made in the same file as the genotype probability score, we run the custom python script as follows:
+The `_sift.bed` file is the input for another script that we will use to calculate the total load per sample. The python script as follows:
 ```{bash load, eval=FALSE}
 python mut_load_calculator_SIFT.py ${FILE%.gpf}_sift.bed ${FILE%.gpf}_0 0
 ```
 
-Question (Advanced): Have a look on the mut_load_calculator_SIFT.py script. What do you think the argument '0' stands for?
+Question (Advanced): Have a look on the mut_load_calculator_SIFT.py script. What do you think the argument '0' means?
 
-The resulting files of this commands will be `*_sift_scores.txt` and `*_sift_het_scores.txt`. The first contain the homozygous load while the last contain the heterozygous load. We will discuss the content of these files when we are trying to plot the files.
+The script will output two files 1) `*_sift_scores.txt` and 2) `*_sift_het_scores.txt`. The first contain the homozygous load while the last contain the heterozygous load. We will discuss the content of these files later in the session when are plotting the results.
 
 ### Task 4: Concatenating the results
 
-As we have one file for each sample, we would like to have them in one file for easy plotting with R. 
+As we have one file for each sample, we would like to have them in one file to make it easier to plot the results with R. 
 
 What we will be doing is first concatenate the .txt file with same suffix in one file. For example, all files ending up with *_sift_scores.txt can be concatenated as follows.
 ```{bash cat, eval=FALSE}
