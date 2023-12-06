@@ -159,5 +159,43 @@ AdapterRemoval --file1 reads_1.fq --file2 reads_2.fq --basename output_paired --
 ```
 If working with ancient DNA (aDNA), you can add the `--collapse` option to merge the two reads and adjust the quality score accordingly.
 
+As for the quality control step, we could run the command above 4 times, each time editing manually the file name for read_1 and read2 and changing the output name (`--basename`). 
+In this case is feasible because we are only dealing with 4 samples but imagine a scenario in which you have a dataset that comprises hundreds of individuals, doing this manually would be not only unefficient the chances that you can by accident forget to process a sample or inputing the wrong sample name increase exponentially. Thus, let's transform this command into a script!
 
+First of all let's create a file in our `script` directory
+```sh
+touch ~/day2/scripts/remove_adapters.sh
+```
+Then, we should transform this into an executable:
+```sh
+chmod 770 ~/day2/scripts/remove_adapters.sh
+```
+
+Now let's edit this file using nano: 
+```sh
+!#/usr/bin/bash
+INPUT1=
+INPUT2=
+OUTPUT=
+AdapterRemoval --file1 $INPUT1 --file2 $INPUT2 --basename $OUTPUT --trimns --trimqualities
+```
+Here we have just set three variables (INPUT1, INPUT2, OUTPUT) but we still need to find a way to assign to these variable the right file name. 
+If we would like to pass the file names as positional arguments we could do someting like this:
+
+```sh
+!#/usr/bin/bash
+INPUT1= $1
+INPUT2= $2
+OUTPUT= ?
+AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ${OUTPUT} --trimns --trimqualities
+```
+But what should we assign to the variable OUTPUT? 
+
+Ideally we would like to keep a consistent naming convention which retains the same information about the sample name that is present in each of the input files.
+One possibility is to employ the `basename` command which separates a file name from its path. Try to run for example: 
+```sh
+basename ~/day2/scripts/remove_adapters.sh
+```
+
+> Question 4: what's the output of the command above?
 
