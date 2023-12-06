@@ -10,8 +10,9 @@ placeholder name within square brackets and ../IM/file_name.png within parenthes
 ## Detecting Recent Inbreeding using Runs of Homozygosity
 
 ### Introduction
+Runs of Homozygosity (ROHs) are stretches of DNA where both chromosomes are identical (homozygous). This happens after consanginous mating i.e. when an individual inherits the same allele from related inviduals. Long ROHs suggest recent inbreeding, potentially leading to 1) reduced genetic diversity, making populations less adaptable to change 2) increased risk of deleterious recessive traits to be expressed, impacting health and survival. 
 
-In the last decade, ROH analyses have become the state-of-the-art method for inbreeding assessment. There are many ways to detect segments of ROH in a whole genome sequence. We can do it straight from BAM file (ROHan), but most do it from a VCF file. The principle is to slide a "window" across the VCF file and see whether there are subsequent homozygous genotypes stretches unbroken across the genome of each sample.
+ROHs are a powerful tool for population genomics, helping us understand the past, present, and future of species. This is why in the last decade, ROH analyses have become the state-of-the-art method for inbreeding assessment. There are many ways to detect segments of ROH in a whole genome sequence. We can do it straight from BAM file (e.g. using methods like ROHan: https://github.com/grenaud/ROHan), or from a VCF file (most common). The principle is to compute heterozgosity in "sliding windows" across the VCF file to assess for the preseence of long streches of homozygosity in the genome an individual.
 
 In this tutorial, we will use the most commonly used method: PLINK. PLINK is probably the most used program for analyzing SNP genotypes and ROH in human and animal populations.  In PLINK, the --homozyg function is used to perform ROH analyses and relies on several input settings.
 
