@@ -87,7 +87,7 @@ mv project_bash ./day1/
 cd day2
 mkdir qc; mkdir bams; mkdir vcfs; mkdir fastqs; mkdir scripts
 touch what_i_did.txt
-ln -s /home/DADA/Day_2/ ~/day2/raw_data
+ln -s /home/DATA/Day_2/ ~/day2/raw_data
 ```
 
 
