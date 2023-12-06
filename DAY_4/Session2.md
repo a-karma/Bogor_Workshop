@@ -14,7 +14,11 @@ Runs of Homozygosity (ROHs) are stretches of DNA where both chromosomes are iden
 
 ROHs are a powerful tool for population genomics, helping us understand the past, present, and future of species. This is why in the last decade, ROH analyses have become the state-of-the-art method for inbreeding assessment. There are many ways to detect segments of ROH in a whole genome sequence. We can do it straight from BAM file (e.g. using methods like ROHan: https://github.com/grenaud/ROHan), or from a VCF file (most common). The principle is to compute heterozgosity in "sliding windows" across the VCF file to assess for the preseence of long streches of homozygosity in the genome an individual.
 
-In this tutorial, we will use the most commonly used method: PLINK. PLINK is probably the most used program for analyzing SNP genotypes and ROH in human and animal populations.  In PLINK, the --homozyg function is used to perform ROH analyses and relies on several input settings.
+Please speak to your instructor if you do not understand the concept of "sliding windows" along the genome.
+
+In this tutorial, we will use the most commonly used method: `PLINK`. `PLINK` is probably the most widely use software for conducting SNP analyses, including computing ROHs. Have a look at the `PLINK` manual to get an idea of how comphrensive this tool is: https://www.cog-genomics.org/plink/  
+
+In `PLINK`, the `--homozyg` function is used to perform ROH analyses and relies on several input settings.
 
 ### Task 0: Preparing your working directory
 
