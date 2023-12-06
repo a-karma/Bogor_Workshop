@@ -3,6 +3,7 @@
 
 ## Day 2 - NGS data pre-procesing - Session 1
 
+#### Fastq format
 Genomic information from high-throughput sequencing are stored in text-based files called
 FASTQ. These files comprise a series of entries containing not only the sequence but also
 its quality score. Each entry consists of four lines as shown in the box below.
@@ -83,7 +84,4 @@ Table 2.2: Illumina Phred-score encoding
 
 > Question: What's the accuracy of the last base call in the example above? 
 
-Or even:
-> Best practice: never use spaces in file names
-
-note the empty line in the first quoted env (it seems to make it look nicer on github) 
+#### Quality Control
