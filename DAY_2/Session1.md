@@ -3,6 +3,27 @@
 
 ## Day 2 - NGS data pre-procesing - Session 1
 
+Before we start, let's organize yesterday's material and prepare the directory structure for today.
+Please connect to the server either via `putty` or via the `ssh` command then run:
+```sh
+mkdir day1; mkdir day2;
+mv session2 ./day1/
+mv project_bash ./day1/
+cd day2
+mkdir qc; mkdir bams; mkdir vcfs; mkdir fastqs; mkdir scripts; mkdir lists
+touch what_i_did.txt
+```
+You should now be in your `~/day2/` directory, run `ls -lh` to ensure that all sub-directories have been created.
+
+Let's now create a symbolik link to the directory containing the input data for the tutorial and activate the conda environment to access all software we will need:
+```sh
+ln -s /home/DATA/Day_2/ ~/day2/raw_data
+conda activate Day_2
+```
+In your `raw_data` folder you should now see 8 files with the `.fastq` extension. These are the results of pair-end sequencing of 4 babirusa individuals (one from each region of Sulawesi plus the Togean Islands as shown on the map). We are now going to familiarise with this bioinformatic format and then eveluate the quality of these sequencing results.
+
+![babirusa_map](../IM/babirusa_day2.png)
+
 #### Fastq format
 Genomic information from high-throughput sequencing are stored in text-based files called
 FASTQ. These files comprise a series of entries containing not only the sequence but also
@@ -78,16 +99,4 @@ Table 2.2: Illumina Phred-score encoding
 #### Quality Control
 ![fastQC](../IM/fq_report.png)
 
-Before we start, let's organize yesterday's material and prepare the directory structure for today.
-Please connect to the server either via `putty` or via the `ssh` command then run:
-```sh
-mkdir day1; mkdir day2;
-mv session2 ./day1/
-mv project_bash ./day1/
-cd day2
-mkdir qc; mkdir bams; mkdir vcfs; mkdir fastqs; mkdir scripts
-touch what_i_did.txt
-ln -s /home/DATA/Day_2/ ~/day2/raw_data
-```
-
-
+ 
