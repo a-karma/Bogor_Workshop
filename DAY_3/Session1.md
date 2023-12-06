@@ -71,5 +71,5 @@ less -S [input].sites.pi
 
 ```
 > What factors influence Pi?
-> 
-> What is the relation between Pi and S
+
+> What is the relation between Pi and S?
