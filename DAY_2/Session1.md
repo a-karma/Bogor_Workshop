@@ -85,8 +85,9 @@ mkdir day1; mkdir day2;
 mv session2 ./day1/
 mv project_bash ./day1/
 cd day2
-mkdir qc; mkdir bams; mkdir vcfs; mkdir fastqs
-ln -s 
+mkdir qc; mkdir bams; mkdir vcfs; mkdir fastqs; mkdir scripts
+touch what_i_did.txt
+ln -s /home/DADA/Day_2/ ~/day2/raw_data
 ```
 
 
