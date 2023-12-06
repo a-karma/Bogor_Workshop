@@ -19,7 +19,7 @@ In this tutorial, we will calculate mutational load from a pre-determined list o
 1. Determine the sites which we want to include in our mutational load analysis.
 2. Obtain the deleterious score these sites from a database.
 3. Obtain the genotype likelihood for all possible genotypes at the same sites for all samples.
-4. Intersect files in step 1 and 2; i.e. determine whether the genotype possess by an individual at a specific position in the genome is likely to be deleterious or not.
+4. Intersect files in step 1 and 2; i.e. determine whether the genotype possessed by an individual at a specific position in the genome is likely to be deleterious or not.
 5. Use the result of 4 to calculate the total, genome-wide, mutational load for each sample.
 
 Step 1 to 3 are very slow so we will not go through these steps during this tutorial. In fact, step 3 takes ~1h per sample. The command, in angsd, which we used to generate a genotype likelihood file is given below for your information:
