@@ -263,7 +263,5 @@ done<~/day2/lists/adrm_list.txt
 >
 > HINT: you need to call the script and pass to it the right arguments
 
-
-
-
+Now that we have completed the pre-processing stage, we can move to the next step of our bioinformatic pipeline: align reads to the reference genome.
 
