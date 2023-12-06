@@ -30,7 +30,13 @@ You should have a working directory in your home folder now named `day_4_inbreed
 
 ### Task 1 Detecting ROH with PLINK
 
-To detect homozygous segments in a VCF, we run a plink command as follows:
+PLINK detect subsequent runs of homozygous genotypes in a genomic data sample using VCF data. To remind you, a VCF file contains variants from single or multiple sample.
+
+> Exercise 1.1
+>
+> Have a look on the vcf file we are going to use and see how many samples we have. Use `bcftools view -h <filename> | tail -n 1`.
+
+To detect homozygous segments in a VCF, we run a `plink` command with the `--homozyg` flag as follows:
 ```{bash plink, eval=FALSE}
 plink --vcf babirusa_workshop_set.vcf.gz \
   --homozyg \
@@ -38,7 +44,6 @@ plink --vcf babirusa_workshop_set.vcf.gz \
 ```
 
 The output files of the command will be a set of text files with the prefix declared in the --out argument ending with suffix ".hom.*". The ".log" file will contain all the options and the command 
-
 ```sh
 ls -lh babirusa_workshop_set_PLINK_A.*
  539K Dec  4 13:43 babirusa_workshop_set_PLINK_A.hom
@@ -48,19 +53,35 @@ ls -lh babirusa_workshop_set_PLINK_A.*
   170 Dec  4 13:43 babirusa_workshop_set_PLINK_A.nosex
 ```
 
-The detail of the ROH segments found can be found in the ".hom" file. (Read more about the output details in this [link](https://www.cog-genomics.org/plink/1.9/formats#hom)).
+The detail of the ROH segments found can be found in the ".hom" file.
+ ```sh
+ head babirusa_workshop_set_PLINK_A.hom
+ FID  IID      PHE  CHR SNP1 SNP2         POS1         POS2         KB     NSNP  DENSITY     PHOM     PHET
+ RD1  RD1   -9.000    1    .    .      1198144      2953307   1755.164     1445    1.215    0.997    0.003
+ RD1  RD1   -9.000    1    .    .      3585147      5219183   1634.037     2885    0.566    0.992    0.008
+ RD1  RD1   -9.000    1    .    .      7043994      8521042   1477.049     2199    0.672    0.995    0.005
+ RD1  RD1   -9.000    1    .    .     10434224     11627525   1193.302     2262    0.528    0.994    0.006
+ RD1  RD1   -9.000    1    .    .     12676447     13694281   1017.835     2010    0.506    0.995    0.005
+ RD1  RD1   -9.000    1    .    .     13697923     14982005   1284.083     2349    0.547    0.995    0.005
+ RD1  RD1   -9.000    1    .    .     17237019     18584878   1347.860     2418    0.557    0.995    0.005
+ RD1  RD1   -9.000    1    .    .     24939490     26049512   1110.023     2045    0.543    0.992    0.008
+ RD1  RD1   -9.000    1    .    .     28662930     29897745   1234.816     2197    0.562    0.995    0.005
+ ```
+You can immediately recognise that this output file gives sample names, the start and end position of the ROH segment length detected, which chromosome it is, the number of SNP representing the segment. Read more about the output details in this [link](https://www.cog-genomics.org/plink/1.9/formats#hom).
 
-Let's have a look on the .hom.indiv to see the summary. Does all samples have ROH segment?
+> Exercise 1.2
+>
+> Have a look on the content of the "`.hom.indiv`" output. It will tell you the summary of ROH segment distribution per sample. How many samples in our sample set has ROH?
 
 The power of ROH is that the segment length is inversely correlated with the time of inbreeding event. The longer the segment is, the more recent is the inbreeding event. However, we cannot see this easily from the output file. We need to download the output files and plot the results. Before we do that, we need to prepare a R working directory in our local computer.
 
-### Task 2 Plotting PLINK results in R
+### Task 2 Downloading and preparing PLINK results for plotting in R
 
 We will use R in R Studio to visualise our ROH results. To make our working directory, open R Studio, choose File > New Project and in the `New Project Wizard` choose `Create New R Directory > New Project`. Type in your directory name, such as "Inbreeding_Analysis" and choose your preferred path within your local computer. If you are happy with the directory name and location, click `Create Project`. A new R Studio session will appear.
 
-To start our data visualization project, choose `File > New File > R Script`. Save the R Script from the start to avoid forgetting to save your commands. For example, save it as "01_plot_PLINK.R" in our R project working directory.
+To start our data visualization project, choose `File > New File > R Script`. Save the R Script from the start to avoid forgetting to save your commands. For example, save it as "`01_plot_PLINK.R`" in our R project working directory.
 
-Then, go to your command line interface and go to the directory of your newly made R project. Make a new directory called "input" and download your PLINK results there. Do not forget to also download the accompanying metadata you have sym-link-ed. For example:
+Then, go to your command line interface and go to the directory of your newly made R project. Make a new directory called "`input`" and download your PLINK results there. Do not forget to also download the accompanying metadata you have sym-link-ed. For example:
 ```sh
 mkdir input
 cd input
@@ -68,10 +89,11 @@ sftp -i <path_to_identity_file> <username>@138.246.238.65
 > get /home/<username>/day_4_inbreeding/babirusa_workshop_set_PLINK_A.hom* .
 > get /home/<username>/day_4_inbreeding/babirusa_workshop_metadata.txt
 ```
+Do not download the `.vcf` file as it will be veru heavy.
 
 > Tips: You can check whether you are on the correct directory by looking at the content. If it contains a file with the directory name with .Rproj suffix, you are on the right place.
 
-Afterwards, we go back to our R Studio and open our "01_plot_PLINK.R".
+Afterwards, we go back to our R Studio and open our "`01_plot_PLINK.R`".
 
 To plot the results, we need to first read the PLINK results and the accompanying metadata.
 ```{r readHom}
@@ -81,7 +103,7 @@ m<-read.table("input/babirusa_workshop_metadata.txt",header=T)
 ```
 
 To check whether our dataset were properly read into the assigned object `p` and `m`, we use the R command `head()`.
-```{r}m<-read.table("babirusa_workshop_metadata.txt",header=T)
+```{r}
 head(p)
 head(m)
 ```
@@ -92,7 +114,13 @@ r<-left_join(m,p,by=c("Sample"="IID"))
 ```
 The argument `by=c("Sample"="IID")` allows you to merge similar columns. Look at the result using `head()` is the merging successful? Pay attention in the observation count of the objects.
 
-Now, we will look at how ROH segment distributed along chromosome 1? We can plot it using ggplot as follows:
+Now we have a dataframe object `r` containing ROH segment length details.
+
+### Task 3 Visualising ROH results using `ggplot2` and interpreting it
+
+To plot the PLINK results, we will use an R package `ggplot2`. This package uses a different plotting grammar than base R plotting functionalities. In principle, you need to choose a type of plot, e.g. `geom_bar()` or `geom_point()`, then determine the aesthetics inside the function, i.e. the elements of the graph like x axis, y axis, how is it colored, etc, and run it with `ggplot()` function. read more about what `ggplot2` can do (here)[https://r-graph-gallery.com/ggplot2-package.html].
+
+So, our first plot will be looking at how ROH segment distributed along chromosome 1. We will use `geom_segment()` here that could plot segment of ROH by specifying the start and end of the x and y coordinates.
 ```{r plotSeg}
 library(ggplot2)
 r %>%
@@ -103,31 +131,47 @@ r %>%
   labs(x="Chromosome 1 (Mbp)",y="Sample ID")+
   theme_minimal()
 ```
+Note the `r %>% filter(CHR==1) %>%` before the `ggplot()` function. As ggplot2 is part of the `tidyverse` package set, it can be run with the tidyverse piping grammar (`%>%`) to direct a function/object to another function, much like bash pipe (`|`). Using this functionality, we are asking R to only read chromosome 1 from the `r` object using `filter()` function before plotting the segment.
 
-Which region has the highest ROH? To know that, we need to summarise the ROH length per sample. This can be done with tidyverse functionality as follows.
+> Exercise 3.1.
+>
+> Plot the ROH segment in chromosome 2 by modifying the `filter()` command. Is the sample with the most abundant ROH still the same as in chromosome 1?
+
+The segment plot is a nice way of looking whether ROH has been happening at the same exact location in all samples, which could be an indication of selection within the population. Despite the coloring per region, it is still quite difficult to discern which region has the most ROH.
+
+To know which region has the most ROH, we need to summarise the ROH length per sample. This can be done with tidyverse functionality as follows.
 ```{r group}
 rSROH<-r %>% group_by(Sample) %>% summarise(SROH=sum(KB))
 ```
-Open rSROH and see what is inside. This is the summary of the total ROH segment we obtained.
+Open rSROH and see what is inside. This is the summary of the total ROH segment per sample (SROH) we obtained from PLINK.
 
-> Exercise 2.1
+> Exercise 3.2
 >
 > We have this summary on the .hom.indiv. Can you check whether we have the correct sum per sample?
 > Repeat the above command to get the mean length and also check.
 
-To see which region has the most ROHs, we can merge `rSROH` with `r` and plot them as follows:
+> Exercise 3.3.
+>
+> Merge `rSROH` with `r` using `left_join()` into a new object calles `r2`. Have a look first on the name of the columns that are the same in each object, i.e. defining the SampleID, to use the `by` argument (See Task 2).
+
+<details open>
+<summary>Exercise 3.3. Solution</summary>
+<br>
 ```{r}
 r2<-left_join(r,rSROH,by=c("Sample"="Sample"))
+```
+</details>
 
+To see which population has the most ROH, we will group the SROH values based on the region and made a boxplot.
+```{r}
 ggplot(r2)+
   geom_boxplot(aes(x=Region,y=SROH/1e6,color=Region))+
   labs(x="region",y="Total ROH amount (Mbp)")+
   theme_minimal()
 ```
-
 Which population has the highest amount of inbreeding?
 
-> Exercise 2.2.
+> Exercise 3.4.
 >
 > The inbreeding coefficient (FROH) is the total sum of ROH segment divided by the entire genome length in which we run the inbreeding analysis. As we map to the domestic pig genome and ran this on autosomal genome only, the total here is 2265774640 base pairs. Calculate the FROH and plot the result. Is it still looking the same with the SROH plot?
 
@@ -139,13 +183,15 @@ ggplot(r2)+
   xlim(1000,10000)+
   theme_minimal()
 ```
+Now we know that most segments are short, and there is no distinct difference in segment length distribution between the different regions. This means that the extent of inbreeding is almost natural, where it is mostly broken down by recombination in the following generations and resulting in short segments.
 
-Let's go back to the server and do Exercise 2.4.
+Let's go back to the server and do Exercise 3.5.
 
-> Exercise 2.4.
+> Exercise 3.5.
 >
-> We have run the default PLINK option that was based on human genome. Try to run PLINK with minimum SNP count 20, minimal ROH segment length 10 kb, 1 SNP per 1 Mbp, and scanning window consists of 20 SNP with 0.25 portion of the overlapping windows must be called homozygous to define any given SNP as 'in a homozygous segment'. Name the output files of this new run with `_PLINK_B` suffix.
-> Hint: Read the documentation for PLINK --homozyg here https://zzz.bwh.harvard.edu/plink/ibdibs.shtml#homo
+> We have run the default PLINK option of the `--homozyg` argument. The entire default parameter setting was based on human genome. A babirusa genome, however, was different from human genome. It may have different mutation rate, recombination rate, linked genes, etc.  that was based on human genome. However, we did not know any of this for the babirusa genome. We will approach it using the pig genomes that has been run by previous studies (reviewed by Meyermans et al. 2020), i.e., we will run a second PLINK with output suffix `_PLINK_B` with minimum SNP count 20 (`--homozyg-snp 20`), minimal ROH segment length 10 kb (`--homozyg-kb 10`), SNP density 1 per 1 Mbp (`--homozyg-density 1000`), and scanning window consists of 20 SNP (`--homozyg-window-snp 20`) with 0.25 portion of the overlapping windows must be called homozygous to define any given SNP as 'in a homozygous segment' (`--homozyg-window-thershold 0.25`).
+>
+> Read the documentation for PLINK `--homozyg` (here)[https://zzz.bwh.harvard.edu/plink/ibdibs.shtml#homo] for more information about the parameters.
 >
 > Compare the result of Exercise 2.4 with the result from the default. Which has more ROHs per sample? Which set of parameters do you trust more?
 
@@ -153,7 +199,7 @@ Let's go back to the server and do Exercise 2.4.
 I just added this, might not be a good idea? Just intense plotting session.
 --->
 
-### Task 3: Comparing observational method with model-based method
+### Task 4: Comparing observational method with model-based method
 
 The many input parameters required by observational method such as PLINK makes ROH results volatile. Another way to detect ROH is to use a model-based method, i.e., given a certain model on how to detect a homozygous genotypes, how likely is a segment a ROH. Such model-based method can be really long to run (~6 hours with 18 threads per sample!), so we have run the model for you and we will focus on analysing the results instead. 
 
@@ -219,11 +265,13 @@ The resulting file should look like more or less like this:
 6      6     1 87000001 92000000   5000000        3000020      RD1
 ```
 
-> Exercise 3.2.
+> Exercise 4.1.
 >
-> Plot the segment distribution using `geom_segment()`, the FROH boxplot, and the frequency of segment length classes as you have done with PLINK. How similar it is with the PLINK results?
+> Plot the segment distribution, the FROH boxplot, and the frequency of segment length classes as you have done with PLINK in Task 3. How similar it is with the PLINK results?
 
-### Task 4: Calculating the number generations since the last inbreeding
+Depending on the parameter and tools you used, you can have different ROH distribution inferred per population. This is why understanding the genomic architecture of the species in full is important for accurate inference of inbreeding.
+
+### Challenge (Optional): Calculating the number generations since the last inbreeding
 
 The useful part of directly observing recent inbreeding is that you will be able to know when is the recent inbreeding given the rate of recombination rate within the species' genome. As the recombination rate of the babirusa genome is unknown, we will work with 1 cM ~ 1 Mb.
 
@@ -234,10 +282,6 @@ s_df<-s_df %>% mutate(generations=100/(rohLength*2))
 ```
 Note that the formula in the new column `generations` is 100 divided by rohLength multiplied twice. This comes from the expectation of ROH segment length to follow an exponential distribution with mean equals to 100 / ( 2 * g * c ), with g is generation and c is recombination rate.
 
-> Exercise 4.1.
->
-> How will the distribution of generation time change if the recombination rate in pig genome is known to be 0.76 cM/Mb ? Modify the above command accordingly and plot the results using `geom_histogram()`.
+We can plot the `generation` using `geom_histogram()` and see how the number of generations since inbreeding differs between different population.
 
-### Challenge (Optional): Intersect your results
-
-Try to look the similarity between PLINK_B results and the ROHan. How much of the ROH segments is reproducible between the two software? Use R programming or other tools you think will work with the data set in hand.
+> Challenge: How will the distribution of generation time change if the recombination rate in pig genome is known to be 0.76 cM/Mb ? Modify the above command accordingly and plot the results using `geom_histogram()`.
