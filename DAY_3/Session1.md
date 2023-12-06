@@ -38,7 +38,7 @@ tail -n +2 [input].het | awk '{print $1, 1-($2/$4)}' | less
 
 > How do you estimate expected heterozygosity?
 
-##### Number of seggregating sites 
+##### Number of seggregating sites (S)
 - Number of seggregating sites are the total number of polymorphic loci.
 - We will use vcftools (https://vcftools.sourceforge.net) for this exercise 
 
@@ -55,24 +55,20 @@ tail -n +2 [input].frq.count | awk 'NF==6 {print $0}' | awk -F "[\t:]" '$6>0 && 
 ```
 > What factors influence number of seggregating sites?
 
+##### Average number of pairwise difference between sequences (Pi)
+- Number of difference between every pair of sequence in the dataset is estimated and averaged out.
+- We will use vcftools (https://vcftools.sourceforge.net) for this exercise
+- There are other methods as well, for example, ANGSD (http://www.popgen.dk/angsd/index.php/Thetas,Tajima,Neutrality_tests)
 
 
-you can instead use `this syntax` to highlight an in-line command, software name or something you think it's important
+```sh
 
-see below the syntax for tables:
+# Calculate Pi per loci using vcftools
+vcftools --vcf [input.vcf] --site-pi --out [input]
 
-| column A | column B |
-| ------ | ------ |
-| row 1a | row 1b |
-| row 2a | row 2b |
-| you can also leave cells blank | |
+# View the output and estimate average Pi
+less -S [input].sites.pi
 
-you can also use this env for exercises and tips:
-> Exercise 1 
-> 
-> Modify the command above to ...
-
-Or even:
-> Best practice: never use spaces in file names
-
-note the empty line in the first quoted env (it seems to make it look nicer on github) 
+```
+> What factors influence Pi?
+> What is the relation between Pi and S
