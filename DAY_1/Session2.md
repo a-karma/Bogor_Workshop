@@ -146,9 +146,9 @@ The `GTF` and the `BED` format are both TAB-separated files used to store genomi
 Other fields (4 etc.) are free form (as long as they are tab separated) - these can be used to store any information you may want, e.g. the name of the interval. For more information about this widely use format refer to the UCSC website here: https://genome.ucsc.edu/FAQ/FAQformat.html#format1
 
 Although in principles we could manually edit these files using standard text editors this becomes very unpractical when dealing with very large files.
-A more efficient option would be combinig command line tools (like `sed`, `awk`, or `grep`) but performing complex tasks using only these tools is not straightforward and often require a deep understanding of programming. Luckly for us, bioinformaticians have created various software specifically designed to manipulate these file formats. 
+A more efficient option would be combinig command line tools (like `sed`, `awk`, or `grep`) but performing complex tasks using only these tools is not straightforward and often require a good basis understanding of unix. Luckly for us, bioinformaticians have created various software specifically designed to manipulate these file formats. 
 
-Let's have a look at `bedtools` a powerful toolset for genome arithmetic. 
+Let's have a look at `bedtools` a powerful toolset for genome arithmetic that focuses on `BED` format.
 
 In your terminal, please type: 
 
@@ -158,7 +158,9 @@ bedtools --help
 
 Looks like the program is not installed :( 
 
-To protect the integrity of the file system on a server, normal users do not have permissions to directly install softwares. Moreover, almost any bioinformatic tool will rely on specific libraries or package versions that might create conflicts or even impeed the functionality of other programs. To circumvent these issues, we need to make sure that the software we need are installed in a "confined space" (a.k.a environment) containing all the necessary dependencies which becomes accessible only when we need it. This can be esily implemented using `conda` which is a package, dependency, and environment manager for any programming language. You can read more about conda [here](https://docs.conda.io/en/latest/).
+To protect the integrity of the file system on a server, normal users do not have permissions to directly install softwares. Moreover, almost any bioinformatic tool will rely on specific libraries or package versions that might create conflicts or even impeed the functionality of other programs. To circumvent these issues, we need to make sure that the software we need are installed in a "confined space" (a.k.a environment) containing all the necessary dependencies which becomes accessible only when we need it. This can be easily implemented using `conda` which is a package, dependency, and environment manager for any programming language. 
+
+You can read more about conda [here](https://docs.conda.io/en/latest/).
 
 We have already installed conda on our server and we have created a different environment for each day of the workshop. In order to have access to conda please run:
 
@@ -184,8 +186,7 @@ bedtools --help
 
 Hurray! Now that bedtools is accessible let's see what we can do with it.
 
-The `snp_ch30.bed` file in the folder `/home/DATA/Day_1/` is an example of a "customized" bed format. It contains the three mandatory fields (chromosome, start,
-end) plus an unusual 4th field. In that column I have stored the genotype of 4 individuals at that position. If the 4 th column is empty, that particular site is monomorphic.
+The `snp_ch30.bed` file in the folder `/home/DATA/Day_1/` is an example of a "customized" bed format. It contains the three mandatory fields (chromosome, start, end) plus an unusual 4th field. In that column I have stored the genotype of 4 individuals at that position. If the 4 th column is empty, that particular site is monomorphic.
 You can have a look at it using `less` or inspect just three lines with a combination of head and tail, see for example what you get by running:
 
 ```
@@ -193,7 +194,7 @@ head -65 ~/session2/raw_data/Day_1/snp_ch30.bed | tail -3
 ```
 
 Suppose you are interested in analysing neutral evolving sites, therefore, you may want to remove from the analysis all sites that are likely to be under selective pressures. 
-As a first approximation, we could take a conservative approach and start to analyse polymorphic sites (SNPs) that do not fall inside CDS. Performing this task manually is obviously tedious and very time consuming but it's super fast using a software like bedtools:
+As a first approximation, we could take a conservative approach and start to analyse polymorphic sites (SNPs) that are not in coding region (i.e. do not code for protein and so less likely to be underselective constraints; please speak to your instructor if you do not understand this concept). Performing this task manually is obviously tedious and very time consuming but it's super fast using a software like bedtools:
 
 ```sh
 cd ~/session2/
@@ -204,7 +205,7 @@ The `-v` flag tells `intersect` to report all lines in file A (specified using t
 
 > exerxise
 >
-> can you figured out how many SNPs we have escluded?
+> How many SNPs we have excluded?
 >
 > hint: remember that each SNP information is recorded on a single line in the bed file format
 
@@ -249,6 +250,8 @@ cat ./results/ptw_prom_sequences.fa | head -1
 >
 > Combine the intersect and flank functions in order to filter the `snp_ch30.bed` file
 > by excluding CDS and all reagions that are 5 kb form the starting and the stop codon of each CDS.
+
+If you finished early and you want to keep playing with bedtools have a look at this tutorial here: https://sandbox.bio/tutorials?id=bedtools-intro
 
 
 ### 3. Transferring files
