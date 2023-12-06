@@ -100,7 +100,7 @@ Table 2.2: Illumina Phred-score encoding
 
 Assessing the quality of sequencing results is a crucial step in genomic analysis. 
 If your initial input are problematic, all downstream analysis might suffer from various biases and in general your inference will be less reliable.
-In this tutorial we are going to use a standard tool for quality control called [FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
+In this tutorial we are going to use a standard tool for quality control called ![FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
 ![fastQC](../IM/fq_report.png)
 
