@@ -144,7 +144,7 @@
   
   Let's go back to the server and do Exercise 2.4.
   
-  > Exercise 2.4.
+  > Exercise 2.3.
   >
   > For now we have ran PLINK with default options. These parameters values in the detault option were fine tuned for ROH analyses of human genomes. Now lets try to run PLINK with more sensible parameters for our species of interest (i.e. babirusa). Lets set minimum SNP count to 20, minimal ROH segment length to 10 kb, a maximum of 1 SNP per Mbp. ####LF COMMENT: NOT SURE WHAT THIS SENTENCE MEANS HERE#### We set the size of windows to 20 SNPs with 0.25 portion of the overlapping windows must be called homozygous to define any given SNP as 'in a homozygous segment'.  Name the output files of this new run with `_PLINK_B` suffix.
   > 
@@ -228,8 +228,6 @@
   6      6     1 87000001 92000000   5000000        3000020      RD1
   ```
   
-  > Exercise 3.2.
+  > Exercise 3.1.
   >
   > Plot the segment distribution using `geom_segment()`, a boxplot, and the frequency of segment length classes as you have for the PLINK results. How similar it is with the PLINK results?
-![image](https://github.com/a-karma/Bogor_Workshop/assets/5824025/e7f2f38f-7bbd-4c3d-8597-177a272c551f)
-
