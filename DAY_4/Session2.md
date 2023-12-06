@@ -233,26 +233,3 @@
   > Plot the segment distribution using `geom_segment()`, a boxplot, and the frequency of segment length classes as you have for the PLINK results. How similar it is with the PLINK results?
 ![image](https://github.com/a-karma/Bogor_Workshop/assets/5824025/e7f2f38f-7bbd-4c3d-8597-177a272c551f)
 
-
-### Challenge (Optional): Calculating the number generations since the last inbreeding
-
-It is possible to calculate the number of generation since inbreeding given a distribution of ROH length in the genome. This is because at every generation after inbreeding recombination will break ROH into smaller fragments. We expect 1 recombination per meiosis (i.e. generation) every Morgan. A Morgan represent the size of an interval in the genome in which we expect 1 recombination event every meiosis. 
-  
-So if we can convert the size of ROH fragments accross the genome, in Morgan, we can should be able to calculate how many generation it took for ROHs to break into the size we observed today. For this we need to be able to convert base pairs in Morgans, i.e. we need a recombination rate. How we can estimate recombination rate accross the genome (also known as a recombination map) is beyond the scope of this tutorial - what you need to know, however, is that recombination rate varies dramatically accross the genome. Some regions are recombination "hotspots" i.e. we observe a lot of recombination (so we expect ROHs to break up faster), while some regions are "desert" i.e. we observe a very little recombination (so we expect ROH to break up at a slower rate). 
-
-Nobody has yet calculate estimated a recombination map for babirusa, we could use the map built for pigs but for the sake of simplicity we are going to use a uniform recombiation rate in this exercise. In mammals a general rule of thumb is ~1cM (centiMorgan: 1/100th of a Morgan) is 1Mb (1e6 base pair). 
-
-The length of ROHs accross the genome are expected to be exponentially distributed (https://en.wikipedia.org/wiki/Exponential_distribution). The rate parameter of this distribution is related to the age of the inbreeding event - a higher means short RoH, and an older the inbreeding event. 
-
-![image](https://github.com/a-karma/Bogor_Workshop/assets/5824025/94628d87-2946-40e0-9176-69304af9608c)
-
-Here, we will make an additional column containing the number of generations since inbreeding for each ROH segment.
-```
-library(dplyr)
-s_df<-s_df %>% mutate(generations=100/(rohLength*2))
-```
-Note that the formula in the new column `generations` is 100 divided by rohLength multiplied twice. This comes from the expectation of ROH segment length to follow an exponential distribution with mean equals to 100 / ( 2 * g * c ), with g is generation and c is recombination rate.
-
-We can plot the `generation` using `geom_histogram()` and see how the number of generations since inbreeding differs between different population.
-
-> Challenge: How will the distribution of generation time change if the recombination rate in pig genome is known to be 0.76 cM/Mb ? Modify the above command accordingly and plot the results using `geom_histogram()`.
