@@ -59,7 +59,7 @@ position in the sequence is 99.99%.
 
 Table 2.2: Illumina Phred-score encoding
 | Symbol |Q-score|| Symbol |Q-score|| Symbol |Q-score|
-| ------ | ------ |------| ------ | ------ |------| ------ | ------ |
+| ------ | ------ |------| ------ | ------ |------| ------ | ------ |------ |
 |!|0||,|11||7|22||B|33|
 |”|1||-|12||8|23||C|34|
 |#|2||.|13||9|24||D|35|
@@ -70,7 +70,7 @@ Table 2.2: Illumina Phred-score encoding
 |(|7||3|18||>|29||I|40|
 |)|8||4|19||?|30|
 |*|9||5|20||@|31|
-|+|10|6|21||A|32|
+|+|10||6|21||A|32|
 
 
 > Question: What's the accuracy of the last base call in the example above? 
