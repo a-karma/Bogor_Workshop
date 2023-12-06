@@ -4,17 +4,18 @@
 
 ### 1. Shell Scripting
 In Session 1 we have seen how to navigate a Unix-like file system and how to manipulate text files. 
-In this section we will revise what we have learnt about variables in Bash, we wil introduce the concept of positional arguments, and we will write our first shell script.
+In this section we will revise what we have learnt about variables in Bash, we will then introduce the concept of positional arguments, and we will write our first shell script.
 
 Before we start, let's run some preliminary commads to create the directory structure for this session:
 
 ```sh
 mkdir session2; cd session2; mkdir raw_data; mkdir scripts; mkdir results 
 ```
+Note the use of `;`, which allows to run multiple commands in short succession.  
 
 > Exercise 1
 >
-> Create a link between the `/home/DATA/Day_1` folder and your newly created `raw_data` directory 
+> Create a symbolic link between the `/home/DATA/Day_1` folder and your newly created `raw_data` directory 
 
 If you now move into your raw_data directory and run `ls Day_1` you should see two files having the `.txt` extension, namely:
 ```sh
@@ -24,7 +25,6 @@ participants_list.txt
 
 Let's have a look at `instructors_list.txt` first, you can print the content on screen using `cat`.
 
-As the name suggests, this files contains the list of the workshop instructors along with their affiliations and their status. 
 Unfortunately, the fields are not well defined because each word is separated by a space. let's try to fix these formatting issues.
 
 First of all we need to separate the last two fields (affiliation and status) from the instructors' names.
