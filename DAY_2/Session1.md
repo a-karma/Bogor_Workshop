@@ -228,7 +228,7 @@ We can use a little trick to adjust this. Let's modify our script for the last t
 !#/usr/bin/bash
 INPUT1= $1
 INPUT2= $2
-OUTPUT= $(echo `basename ${input1}` | sed 's/_*.fastq//')
+OUTPUT= $(echo `basename ${INPUT1}` | sed 's/_*.fastq//')
 AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ~day2/fastqs/${OUTPUT} --trimns --trimqualities
 ```
 
