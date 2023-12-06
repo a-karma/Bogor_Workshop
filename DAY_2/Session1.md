@@ -20,7 +20,7 @@ Let's now create a symbolik link to the directory containing the input data for 
 ln -s /home/DATA/Day_2/ ~/day2/raw_data
 conda activate Day_2
 ```
-In your `raw_data` folder you should now see 8 files with the `.fastq` extension. These are the results of pair-end sequencing of 4 babirusa individuals (one from each region of Sulawesi plus the Togean Islands as shown on the map). We are now going to familiarise with this bioinformatic file format and then evaluate the quality of these sequencing results.
+In your `raw_data` folder you should now see 8 files with the `.fastq` extension. These are the results of pair-end sequencing on Illumina HiSeq X platform of 4 babirusa individuals (one from each region of Sulawesi plus the Togean Islands as shown on the map). We are now going to familiarise with this bioinformatic file format and then evaluate the quality of these sequencing results.
 
 ![babirusa_map](../IM/babirusa_day2.png)
 
@@ -97,6 +97,11 @@ Table 2.2: Illumina Phred-score encoding
 > Question: What's the accuracy of the last base call in the example above? 
 
 #### Quality Control
+
+Assessing the quality of sequencing results is a crucial step in genomic analysis. 
+If your initial input are problematic, all downstream analysis might suffer from various biases and in general your inference will be less reliable.
+In this tutorial we are going to use a standard tool for quality control called [FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
+
 ![fastQC](../IM/fq_report.png)
 
  
