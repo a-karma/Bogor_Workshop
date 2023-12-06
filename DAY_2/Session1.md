@@ -132,3 +132,29 @@ do
 fastqc -t 1 $line -o qc
 done<./lists/fastq_list.txt
 ```
+Once completed, use either the PSFTP app or the sftp command to transfer the .html files to your local computer and visualise them in your web-browser.
+After establishing the sftp connection you can run:
+```sh
+cd ./day2/qc/
+lcd path/to/download/folder
+get *.html
+```
+
+> Question 3:
+>
+> How many reads we got for each individual?
+
+#### Removing Adapters
+After quality control, the next step in the pre-processing of NGS data consists in removing adapters. 
+There are many software available that can perform this task, here we will focus on ![AdapterRemoval](https://adapterremoval.readthedocs.io/en/stable/). 
+The main reason why we present this software in this workshop is because it not only search and remove adapters from high-throughput sequencing data 
+but it can also perform the colllapsing of the two reads if necessary. 
+Collapsing reads should be avoided when dealing with modern DNA given that the DNA molecules present in the library are longer than the read size (normally 150 bp for Illumina) hence the forward and reverse sequencing product do not overlap. Merging the two reads in their overlapping region is instead the standard procedure when analysing shorter DNA fragments degraded DNA such as DNA extracted from archaeological specimens or museum collections. This is because the DNA fragments are much shorter 
+
+In orther to remove adapters and low-quality bases at the termini of each read you can run the following command:
+
+```sh
+AdapterRemoval --file1 reads_1.fq --file2 reads_2.fq --basename output_paired --trimns --trimqualities
+```
+If working with ancient DNA (aDNA), you can add the `--collapse` option to merge the two reads and adjust the quality score accordingly.
+
