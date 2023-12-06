@@ -249,7 +249,7 @@ ls ~/day2/raw_data/*_1.fastq > ~/day2/lists/read1_list.txt
 ls ~/day2/raw_data/*_2.fastq > ~/day2/lists/read2_list.txt
 paste ~/day2/lists/read1_list.txt ~/day2/lists/read2_list.txt > ~/day2/lists/adrm_list.txt
 ```
-now that we have our list we have completed our while loop structure:
+Now that we have our list we have completed our while loop structure:
 
 ```sh
 while read -r line
