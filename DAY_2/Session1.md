@@ -206,7 +206,7 @@ We can now modify our script and assign to the last variable the `correct` value
 INPUT1=$1
 INPUT2=$2
 OUTPUT=$(basename $1)
-AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ~day2/fastqs/${OUTPUT} --trimns --trimqualities
+AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ~/day2/fastqs/${OUTPUT} --trimns --trimqualities
 ```
 At this stage, the usage of this script should be:
 
@@ -229,7 +229,7 @@ We can use a little trick to adjust this. Let's modify our script for the last t
 INPUT1=$1
 INPUT2=$2
 OUTPUT=$(echo `basename ${INPUT1}` | sed 's/_*.fastq//')
-AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ~day2/fastqs/${OUTPUT} --trimns --trimqualities
+AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ~/day2/fastqs/${OUTPUT} --trimns --trimqualities
 ```
 
 > `Exercise 3`
