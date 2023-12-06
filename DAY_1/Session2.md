@@ -134,10 +134,17 @@ now we can execute the script from the `session 2` directory and provide the cor
 In Session 1 we have seen three examples of text file that are commonly used in bioinformatics:
 
 - The `fasta` format to store DNA sequence information
-- The `GTF` (General Transfer Format) developed for the Ensembl genome browser
+- The `GTF` (Gene Transfer Format) developed for the Ensembl genome browser
 - The `BED` (Browser Extensible Data) format developed at UCSC for the Genome Browser tool
 
-The `GTF` and the `BED` format are both TAB-separated files used to store genomic regions as coordinates along with their associated annotations. 
+The `GTF` and the `BED` format are both TAB-separated files used to store genomic regions as coordinates along with their associated annotations (see the previous session for more information on `GTF`). While `GTF` is used to store mostly information about genic structure accross the genome (i.e. the G stands for gene), the `BED` (short for Browser Extensible Data) stores information about any genomic features. It is simpler than `GTF` and widely used in bioinformatics and consist of at least 3 fields:
+
+1. chromsome ID
+2. start of feature (0 based coordinate; see link to UCSC below)
+3. end of the feature 
+
+Other fields (4 etc.) are free form (as long as they are tab separated) - these can be used to store any information you may want, e.g. the name of the interval. For more information about this widely use format refer to the UCSC website here: https://genome.ucsc.edu/FAQ/FAQformat.html#format1
+
 Although in principles we could manually edit these files using standard text editors this becomes very unpractical when dealing with very large files.
 A more efficient option would be combinig command line tools (like `sed`, `awk`, or `grep`) but performing complex tasks using only these tools is not straightforward and often require a deep understanding of programming. Luckly for us, bioinformaticians have created various software specifically designed to manipulate these file formats. 
 
