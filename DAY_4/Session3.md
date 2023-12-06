@@ -172,12 +172,13 @@ colnames(s)<-c("SampleID","totalPositions",
                  "totalLoad","hetFactor","scoreType")
 head(s)
 ```
+> Question: what do you think the colname function in R is for? Why do we need it?
 
 > Exercise 5.1.
 >
 > Merge the metadata with left_join() as in with previous session.
 
-Then we plot the load as follows.
+Then we plot a boxplot:
 ```{r plotLoad, eval=FALSE}
 library(ggplot2)
 ggplot(l)+
@@ -186,9 +187,7 @@ ggplot(l)+
   theme_minimal()
 ```
 
-####Rasmus comment: I would avoid the term "region", as it is ambiguous (could mean a genomic region).#######
-
-Question: Which region has the highest homozygous load? Which has the lowest?
+Question: Which population of babirusa has the highest homozygous load? Which has the lowest?
 
 ### Task 6 (Optional)
 
