@@ -100,8 +100,12 @@ Table 2.2: Illumina Phred-score encoding
 
 Assessing the quality of sequencing results is a crucial step in genomic analysis. 
 If your initial input are problematic, all downstream analysis might suffer from various biases and in general your inference will be less reliable.
-In this tutorial we are going to use a standard tool for quality control called ![FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
+In this tutorial we are going to use a ![FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) which is a program designed to spot potential problems in high througput sequencing datasets. 
 
+The program will analyse the input file provided and it will produce a report (.html file) that can be visualised in a web-browser. Each tab in the FASTQC report will show different aspects of the quality of the sequencing but the `Per base sequence quality` is arguably the most important. 
+
+> Question: In the figure below you can see two examples of very different quality control results. Can you guess which one is "the good run"?
+ 
 ![fastQC](../IM/fq_report.png)
 
  
