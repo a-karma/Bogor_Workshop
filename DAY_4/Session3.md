@@ -11,17 +11,18 @@ placeholder name within square brackets and ../IM/file_name.png within parenthes
 
 ### Introduction
 
-Another effect of being in a very small population size is accumulating deleterious mutations, or mutational load. With the increasing availability of whole genome sequences of various non-model species, we are now able to make a multi-species alignment of hundreds of animal species and look for regions that are conserved, or in another words, preferred by natural selection. When these regions experienced mutations, it means that the area that has been highly adapted and selected was disrupted, and this might not be good for the species' survival.
+In small populations, the accumulation of harmful mutations accelerates due to the combined effects of genetic drift and inbreeding. This accumulation, known as mutational load, compromises overall health, adaptability, and reproductive success, ultimately increasing the extinction risk for these vulnerable populations. This effect is further exacerbated by inbreeding-induced reductions in heterozygosity, which can lead to the expression of deleterious recessive traits.
 
-In this tutorial, we will calculate mutational load from a pre-determined site. What is needed in this tutorial is:
-1. Determine the sites where we want to calculate mutational load.
-2. Obtain the score reference file for those sites.
-3. Getting the genotype likelihood of all genotypes from the pre-determined sites from all samples.
-4. Getting the genotype probability of all genotypes (AA,AC,AT,AG,CC,CG,CT,GG,GT, TT) from all sites from the genotype likelihood.
-5. Align the score reference to the genotype probability file.
-6. Calculate the total mutational load within each sample.
+Genome data provides a powerful tool for assessing mutational load at the individual level. By analyzing multi-species alignments encompassing hundreds of animal species, we can identify conserved regions, representing areas of the genome that have been maintained in the same way (i.e. did not accumulate mutations) for millions of years due to natural selection. Mutations within these conserved regions potentially disrupt highly adapted and selected sequences and are therefore likely to be deleterious.
 
-Step 1 to 3 needs takes quite a while so it has been done for this tutorial. Step 3 especially takes ~1h per sample. The command to generate a genotype likelihood file is given below for your information.
+In this tutorial, we will calculate mutational load from a pre-determined list of site. These are the steps we will follow:
+1. Determine the sites which we want to include in our mutational load analysis.
+2. Obtain the deleterious score these sites from a database.
+3. Obtain the genotype likelihood for all possible genotypes at the same sites for all samples.
+4. Intersect files in step 1 and 2; i.e. determine whether the genotype possess by an individual at a specific position in the genome is likely to be deleterious or not.
+5. Use the result of 4 to calculate the total, genome-wide, mutational load for each sample.
+
+Step 1 to 3 are very slow so we will not go through these steps during this tutorial. In fact, step 3 takes ~1h per sample. The command, in angsd, which we used to generate a genotype likelihood file is given below for your information:
 ```{bash glf, eval=FALSE}
 FILE=input.bam
 SITES=predeterminedSites.file # indexed in ANGSD
@@ -32,7 +33,9 @@ angsd -i $FILE -sites $SITES -out ${FILE%.bam} -minQ 20 -minMapQ 20 -remove_bads
 
 Question: How do you decide which sites we use to calculate mutational load?
 
-The conservation scores we will be using is the SIFT score. The SIFT score is a measure of deleteriousness of a mutation by how harmful is the change to the protein structure. Consequently, it is only available on coding sequence.
+The conservation scores we will be using is the SIFT score. The SIFT score is a measure of amino acid similarity, which indicates the potential impact of a mutation on protein function. Ranging from 0.0 to 1.0, the score signifies the likelihood of a mutation affecting protein function. Scores closer to 0.0 suggest a higher probability of deleterious effects, while scores closer to 1.0 indicate a lower probability of functional disruption. Variants with SIFT scores between 0.0 and 0.05 are generally considered deleterious. SIFT scores can only be computed for mutation in coding region of the genome. 
+
+Other type of conservation score can also be used for this type of analysis, we encourage you to read this review if you want to know more: 
 
 ### Task 0: Prepping your working directory
 
@@ -50,9 +53,9 @@ RD17_chr1.glf  RD2_chr1.glf   RD53_chr1.glf  RD60_chr1.glf  RD71_chr1.glf  SusSc
 
 ### Task 1: Obtaining genotype probability from genotype likelihood
 
-Sometimes, we cannot be certain about the genotypes in a site because our sequencing coverage is low. In this situation, the preferred approach is to use the likelihood of a genotype which can be obtained with software tailored to analyse low coverage genome such as `angsd`. T
+When calculating mutational load we want to make sure we got the genotype right. Getting the genotype wrong at the wrong position could mean we are expected an individual to posses a highly harmful mutation while it does not, which can badly affect our calculations. Sabhrina, Alberto and Deborah have designed a method to do this, which is what we are going to teach you today. There are other methods out there too, for more information please have a look at this review when you are done: 
 
-The genotype likelihood, however, only describes the likelihood of the genotypes relative to the best one. Have a look on one of the .glf file using `head` command. The resulting file should look like this:
+To takei nto account genotyping uncertainity the method uses angsd to calculate genotype likelhood which outputs a file that looks like this: 
 ```{bash glf_view, eval=FALSE}
 1   14852   -57.707866    -57.707866    -57.707866    -4.158484   -57.707866	-57.707866    -4.158484   -57.707866    -4.158484   0.000000
 1   15068   -67.325843    -4.851565   -67.325843    -67.325843    0.000000    -4.851565   -4.851565   -67.325843    -67.325843    -67.325843
@@ -65,16 +68,15 @@ The genotype likelihood, however, only describes the likelihood of the genotypes
 1   132504    -28.853933    -2.079242   -28.853933    -28.853933    0.000000    -2.079242   -2.079242   -28.853933    -28.853933    -28.853933
 1   132540    -48.089888    -3.465403   -48.089888    -48.089888    0.000000    -3.465403   -3.465403   -48.089888    -48.089888    -48.089888
 ```
-This does not tell us how probable each genotypes are because the values are relative to the best one (0.0000000). We need a kind of "independent" value that tells us the genotype probability.
+This is a tab separated file which give us the log likelihood of each 10 possible genotype at the site for one individual genome. We can use this value to calculate the probability that this individual possess any specific genotype using this data using Bayesian statistics. We have provided you a small python script that can do this. 
 
-To do that, a Master student of ours, Deborah Greer, made a small custom script that can change genotype likelihood into genotype probability based on Bayesian Theorem together with Alberto Carmagnini.
+To run this script type:
 
-You need to use the script to change the genotype likelihood file into genotype probability file using the provided script as below.
 ```{bash gpf, eval=FALSE}
 python3 all_genotype_likelihoods_v3.py $FILE.glf $FILE.gpf
 ```
 
-> Challenge: Make a one liner to do this simultaneously for all 18 .glf files!
+> Challenge: write a one line script to automate this for all 18 .glf files!
 
 Have a look at the resulting .gpf file using the `head` command. The resulting file should look like this:
 ```{bash gpf_view, eval=FALSE}
@@ -90,11 +92,11 @@ Have a look at the resulting .gpf file using the `head` command. The resulting f
 1   132539    132540    0.0   0.0   0.0   0.0   1.0   0.0   0.0   0.0   0.0   0.0
 ```
 
-> Food for thought: Do we have the same sites between .glf and .gpf? Are each of the samples having the same number of sites?
+> Food for thought: can you spot the formatting difference between the .glf and .gpf files?
 
 ### Task 2: Aligning genotype probability file with conservation score reference
 
-After obtaining the gpf file, we align the reference score that was premade (`SusScr11_107_sift_scores_chr1.bed`). Let's have a look on this file using `head()` command.
+We now need to intersect SIFT scores and the gpf file. The SIFT score based on the pig genome are found in this file `SusScr11_107_sift_scores_chr1.bed`. Let's have a look on this file using `head()` command.
 ```sh
 head SusScr11_107_sift_scores_chr1.bed 
 1	204560	204561	A	1	0	0	0
@@ -108,7 +110,7 @@ head SusScr11_107_sift_scores_chr1.bed
 1	204569	204570	C	1	1	0	1
 1	204571	204572	T	0	0	0	1
 ```
-A bed file is a text file format used to store genomic regions as coordinates and associated annotations. The data are presented in the form of columns separated by spaces or tabs. Starting from the fourth column and subsequen columns, the content is usually variable, ranging from gene names, score, strand information, and many more (Read more (here)[https://en.wikipedia.org/wiki/BED_(file_format)]). In this tutorial, it is the ancestral allele of the site, and the deleteriousness score when the derived allele is A, C, G, and T (alphabetical order).
+This is again a `BED` file as in day one. You can see how we have customise this bed file - we kept its basic structure: tab separated 0-based coordinates but from field 4 we have added our own informations: the ancestral (non-deleterious) state of the allele, and the SIFT score of all possible homozygous genotpye, A, C, G, T at this position. 
 
 We would like to align this reference to our .gpf files for further processing downstream. We will use `bedtools intersect`.
 ```{bash bedtools, eval=FALSE}
