@@ -9,7 +9,7 @@ SAM stands for Sequence Alignment/Map format. It is a TAB-delimited text format 
 section, which is optional, and an alignment section. The BAM is the compressed binary version of a SAM file.
 Header lines start with `@`, while alignment lines do not. Each alignment line has 11 mandatory fields for
 essential alignment information such as mapping position, and variable number of optional fields for flexible
-or aligner specific information. 
+or aligner specific information. The most commnly used software to manipulate these file formats is ![samtools](http://www.htslib.org/).
 
 In your raw_data directory you should see a folder called CHR_10. 
 This contains a few bam files that we have generated for you using the same procedure that you are learning today. 
@@ -18,7 +18,8 @@ Let's examine the first few line of the header:
 ```sh
 samtools view -H RD10_chr10.bam | head -20
 ```
-
+The `view` command of samtools allows you to read, print, and convert SaM/BAM/CRAM files. The `-H` flags outputs only the header.
+As you can see, from the second line onwards 
 
 #### Indexing BAMS 
 Indexing aims to achieve fast retrieval of alignments overlapping a specified region without going through
