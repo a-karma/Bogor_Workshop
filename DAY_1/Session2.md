@@ -209,8 +209,7 @@ The `-v` flag tells `intersect` to report all lines in file A (specified using t
 >
 > hint: remember that each SNP information is recorded on a single line in the bed file format
 
-There is a lot more that you can do with genome arithmetic. Let’s picture a more complex scenario: suppose you are interested in studying the promoter regions of various genes
-on this chromosome. You have a fasta file with the entire chromosome sequence (see `ptw_ch30.fa` file) and you would like to examine 10 kb upstream the starting codon of each gene. 
+There is a lot more that you can do with genome arithmetic. Let’s picture a more complex scenario: suppose you are interested in studying the promoter regions of various genes on this chromosome. You have a fasta file with the entire chromosome sequence (see `ptw_ch30.fa` file) and you would like to examine 10 kb upstream the starting codon of each gene. 
 
 How can you get that information?
 
@@ -224,7 +223,7 @@ This function requires also a genome file defining the length of each chromosome
 ```sh
 echo -e "chr30\t40214260" > ./raw_data/ch30_length.bed
 ```
-The above command `echo` would normally output on screen whatever string you type after it. 
+The above command `echo` would normally output on screen whatever string you type after it. The value `40214260` is the size of chromosome 30 in the dog genome (which we used for this example).
 The `-e` option tells the software to enable the interpretation of backslash escapes and `\t` stands for TAB.
 Now we can run:
 
