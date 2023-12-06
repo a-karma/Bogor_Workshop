@@ -110,4 +110,25 @@ The program will analyse the input file provided and it will produce a report (.
  
 ![fastQC](../IM/fq_report.png)
 
- 
+Let's analyse our data and see what we get, shall we?
+
+The command to run fastqc is quite straightforward:
+```sh
+fastqc -t 1 ./raw_data/sub_RD56_1.fastq -o qc
+```
+where `-t 1` corresponds to the number of threads used for the analysis, and `-o qc` corresponds to the output directory where the program will store the report.
+
+In principle we could run this command for the other 7 files in our initial dataset by manually changing the file name every time. Given that this is quite tedious, we are going to make use of what we learnt yesterday and use a loop instead. First of all let's make a list of input files:
+
+```sh
+ls ~/day2/raw_data/*.fastq > ~/day2/lists/fastq_list.txt
+```
+You can inspect this list as usual using either the command `cat` (to print it on screen) or `less` (press q to exit)
+Now that we have our list of files, we are going to run all the quality control analysis sequentially (one after the other) using our `while` loop:
+
+```sh
+while read -r line
+do
+fastqc -t 1 $line -o qc
+done<./lists/fastq_list.txt
+```
