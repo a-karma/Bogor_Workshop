@@ -184,8 +184,8 @@ If we would like to pass the file names as positional arguments we could do some
 
 ```sh
 !#/usr/bin/bash
-INPUT1= $1
-INPUT2= $2
+INPUT1=$1
+INPUT2=$2
 OUTPUT= ?
 AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ${OUTPUT} --trimns --trimqualities
 ```
@@ -203,9 +203,9 @@ We can now modify our script and assign to the last variable the `correct` value
 
 ```sh
 !#/usr/bin/bash
-INPUT1= $1
-INPUT2= $2
-OUTPUT= $(basename $1)
+INPUT1=$1
+INPUT2=$2
+OUTPUT=$(basename $1)
 AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ~day2/fastqs/${OUTPUT} --trimns --trimqualities
 ```
 At this stage, the usage of this script should be:
@@ -226,9 +226,9 @@ We can use a little trick to adjust this. Let's modify our script for the last t
 
 ```sh
 !#/usr/bin/bash
-INPUT1= $1
-INPUT2= $2
-OUTPUT= $(echo `basename ${INPUT1}` | sed 's/_*.fastq//')
+INPUT1=$1
+INPUT2=$2
+OUTPUT=$(echo `basename ${INPUT1}` | sed 's/_*.fastq//')
 AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ~day2/fastqs/${OUTPUT} --trimns --trimqualities
 ```
 
