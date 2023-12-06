@@ -77,3 +77,16 @@ Table 2.2: Illumina Phred-score encoding
 
 #### Quality Control
 ![fastQC](../IM/fq_report.png)
+
+Before we start, let's organize yesterday's material and prepare the directory structure for today.
+Please connect to the server either via `putty` or via the `ssh` command then run:
+```sh
+mkdir day1; mkdir day2;
+mv session2 ./day1/
+mv project_bash ./day1/
+cd day2
+mkdir qc; mkdir bams; mkdir vcfs; mkdir fastqs
+ln -s 
+```
+
+
