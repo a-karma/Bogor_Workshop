@@ -28,7 +28,7 @@ Let's have a look at `instructors_list.txt` first, you can print the content on 
 Unfortunately, the fields are not well defined because each word is separated by a space. let's try to fix these formatting issues.
 
 First of all we need to separate the last two fields (affiliation and status) from the instructors' names.
-We can do this in `awk` and make use of variable `NF` which is set to the total number of fields in the input record:
+We can do this in `awk` and make use of variable `NF` (number of fields variable) which is set to the total number of fields in the input record:
 ```sh
 awk '{print $(NF-1),"\t",$NF}' ./Day_1/instructors_list.txt
 ```
@@ -36,6 +36,8 @@ Now let's redirect the output to a file:
 ```sh
 awk '{print $(NF-1),"\t",$NF}' ./Day_1/instructors_list.txt > aff_status.txt
 ```
+Tabs allow for consistent indentation across different file viewers and analysis tools. Each tab represents a single logical level of indentation, making the alignment structure more apparent and easier to interpret. Tabs are also more compatible with automation tools and scripts used for sequence analysis and manipulation. Many software programs and scripts expect tab-delimited alignment files, and using tabs avoids potential compatibility issues or the need for manual formatting adjustments.
+
 Let's now deal with the names. Given that we don't know how many words each names consit of, we should start by printing all but the last two fields of the original input file:
 
 ```sh
@@ -47,7 +49,9 @@ Then we can pipe this into `sed` and replace all white spaces with the character
 ```
 awk 'NF-=2 {print $0}' ./Day_1/instructors_list.txt | sed -e 's/ /_/g'
 ```
-Note the use of the `g` at the end of the substitution command. Finally we redirect the output to a file:
+Note the use of the `g` at the end of the substitution command. The use of `g` means that sed will now change all matching space into a _.
+
+Finally we redirect the output to a file:
 
 ```
 awk 'NF-=2 {print $0}' ./Day_1/instructors_list.txt | sed -e 's/ /_/g' > names.txt
@@ -57,6 +61,7 @@ Now that we have created these two intermediate files we can stitch them togethe
 ```sh
 paste names.txt aff_status.txt > corrected_instructors_list.tsv
 ```
+The `paste` command is a versatile tool that combines text from multiple files. It's particularly useful for merging data, and comparing files.
 
 The series of commands presented above acts as a single unit to accomplish the required task. Therefore we can transform them into a script that we can re-use.
 ```sh
@@ -99,7 +104,7 @@ rm aff_status.txt
 Note that we have added two lines to delete the intermediate files (names.txt and aff_status.txt) that we don't need anymore.
 
 This version looks slightly better but the input and output are still hard-coded inside the script. 
-Ideally, we would like to supply the input and output at the call (meaning when we execute the script). To do so we can make use of positional arguments.
+Ideally, we would like to supply the input and output at the runtime (meaning when we execute the script). To do so we can make use of positional arguments.
 The indexing of the arguments starts at one, and the first argument can be accessed inside the script using $1. Similarly, the second argument can be accessed using $2, and so on.
 Thus our final version of `formatting.sh` should be:
 ```sh
