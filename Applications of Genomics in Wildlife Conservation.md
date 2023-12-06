@@ -35,7 +35,7 @@ NGS data preparation for genomic analyses.
 - Variant calling
 
 ## Day 3 - Overview
-Analysing genetic variations.
+Analysing genetic variation.
 
 #### Session 1
 - Understanding the .vcf file
@@ -44,14 +44,14 @@ Analysing genetic variations.
 - Discuss how to test these hypothesis
 
 #### Session 2
-- add some content here please
-- two or three bullet point will suffice
-- see my examples above
+- Generating phylogenetic trees
+- Population structure with PCA
+- Investigating population admixture
 
 #### Session 3
-- add some content here please
-- two or three bullet point will suffice
-- see my examples above
+- Visualising trees with iTOL
+- Using R to visual PCA and ADMIXTURE results
+- Discussion of Babirusa population structure
 
 ## Day 4 - Overview
 Demographic analysis, inbreeding & load.
@@ -85,9 +85,11 @@ Advanced population genetics & Metabarcoding for biodiversity.
 - see my examples above
 
 #### Session 3
-- add some content here please
-- two or three bullet point will suffice
-- see my examples above
+- Overview of analysis of biodiversity with metabarcoding data
+- Run through of DADA2 pipeline in R
+
+#### Session 4
+- Calculating biodiversity metrics from OTU/ASVs in R
 
 
 
