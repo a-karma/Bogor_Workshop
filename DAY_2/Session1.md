@@ -94,7 +94,7 @@ Table 2.2: Illumina Phred-score encoding
 |+|10||6|21||A|32|
 
 
-> Question: What's the accuracy of the last base call in the example above? 
+> Question 1: What's the accuracy of the last base call in the example above? 
 
 #### Quality Control
 
@@ -104,7 +104,9 @@ In this tutorial we are going to use a ![FASTQC](https://www.bioinformatics.babr
 
 The program will analyse the input file provided and it will produce a report (.html file) that can be visualised in a web-browser. Each tab in the FASTQC report will show different aspects of the quality of the sequencing but the `Per base sequence quality` is arguably the most important. 
 
-> Question: In the figure below you can see two examples of very different quality control results. Can you guess which one is "the good run"?
+> Question 2:
+>
+> In the figure below you can see two examples of very different quality control results. Can you guess which one is "the good run"?
  
 ![fastQC](../IM/fq_report.png)
 
