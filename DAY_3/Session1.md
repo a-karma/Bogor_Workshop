@@ -17,11 +17,25 @@ We will further try to explore if a population is evolving or is neutral using t
 - There are other methods as well, for example, RTG tools (https://github.com/RealTimeGenomics/rtg-tools) and ANGSD (http://www.popgen.dk/angsd/index.php/Heterozygosity)
 
 
-
 ```sh
 conda activate Day_3
-plink --bfile file_name --recode
+# Calculate the number of heterozygous genotypes at a loci using vcftools
+vcftools --vcf [input.vcf] --hardy --out [input]
+
+# View the output and estimate heterozygosity per loci
+less -S [input].hwe
+tail -n +2 [input].hwe | awk -F "[\t/]" '{print $4, $3+$4+$5, $4/($3+$4+$5)}' | less
+
+# Calculate the number of heterozygous genotypes for an individual using vcftools
+vcftools --vcf [input.vcf] --het --out [input]
+
+# View the output and calculate heterozygosity per individual
+less -S [input].het
+tail -n +2 [input].het | awk '{print $1, 1-($2/$4)}' | less
+
 ```
+What factors influence heterozysity?
+How do you estimate expected heterozygosity?
 
 you can instead use `this syntax` to highlight an in-line command, software name or something you think it's important
 
