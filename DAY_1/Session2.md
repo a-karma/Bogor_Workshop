@@ -251,9 +251,6 @@ cat ./results/ptw_prom_sequences.fa | head -1
 > Combine the intersect and flank functions in order to filter the `snp_ch30.bed` file
 > by excluding CDS and all reagions that are 5 kb form the starting and the stop codon of each CDS.
 
-If you finished early and you want to keep playing with bedtools have a look at this tutorial here: https://sandbox.bio/tutorials?id=bedtools-intro
-
-
 ### 3. Transferring files
 We conclude today's tutorials with some basic commands to transfer files between you local machime and our server.
 You can download or upload files using the Secure File Transfer Protocol (SFTP) which essentially creates a secure connection between your laptop and the cloud server.
@@ -290,4 +287,5 @@ get file_name
 ```
 To close the sftp connection, simply type `bye`
 
+If you finished early and you want to keep playing with bedtools have a look at this tutorial here: https://sandbox.bio/tutorials?id=bedtools-intro
 
