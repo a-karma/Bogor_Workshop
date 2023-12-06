@@ -243,4 +243,27 @@ First of all let's remove our experiments with the naming by running:
 ```sh
 rm -R ~/day2/fastqs; mkdir ~/day2/fastqs
 ```
+Then we need to prepare our list. This time we want two files (along with their path) per line. We can easily do this using a combination of `ls` and `paste`
+```sh
+ls ~/day2/raw_data/*_1.fastq > ~/day2/lists/read1_list.txt
+ls ~/day2/raw_data/*_2.fastq > ~/day2/lists/read2_list.txt
+paste ~/day2/lists/read1_list.txt ~/day2/lists/read2_list.txt > ~/day2/lists/adrm_list.txt
+```
+now that we have our list we have completed our while loop structure:
+
+```sh
+while read -r line
+do
+???
+done<~/day2/lists/adrm_list.txt
+```
+> `Exercise 4`
+>
+> Modify the loop above by substituting the question marks with the appropriate command.
+>
+> HINT: you need to call the script and pass to it the right arguments
+
+
+
+
 
