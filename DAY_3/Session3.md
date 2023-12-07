@@ -9,17 +9,27 @@ Before we can do that we first need to download our output files via `sftp`. We 
 2. generate figures in RStudio for the PCA and ADMIXTURE results
 
 ### 1. Downloading the output files 
-On your local computer we will use `sftp` to connect to the remote server and download the files.
+On your local computer please use either the `sftp` command or the `PSFTP` app to connect to the remote server and download files.
 
-In your terminal create a project directory where you would like to store the output files on your local computer. 
+Please create a project directory where you would like to store the output files on your local computer. 
 
-Wee will then use `sftp`, which this stands for Secure File Transfer Protocol and will open a connection between your local comput and the remote server. 
-
-We need to tell it where the ssh key is, and which remote server to connect using your username and the IP address. Therefore enter: 
+##### macOS, Linux, and WSL users
+Open a terminal and please enter: 
 ```sh
 sftp -i ~/path/to/ssh/key [your_username]@138.246.238.65
 ```
 You will now be in your home directory in the server. 
+
+##### Windows users
+Open the PSFTP app then type:
+```sh
+open name_of_the_putty_saved_session
+```
+Then enter your user_ID then the key passphrase.
+
+You will now be in your home directory in the server.
+
+Either case, you should now see a terminal like the one below. 
 
 In the screenshot you can see: 
 - the command `ls` should list the files in your home directory
