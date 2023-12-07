@@ -136,7 +136,7 @@ OUTPUT=$(echo `basename ${INPUT1}` | sed 's/.pair1.truncated//')
 bwa mem raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa ${INPUT1} ${INPUT2} -t 1 -R ${INPUT3} | samtools view -Shu - > bams/${OUTPUT}
 ```
 
-Let's now run our while loop (this will take a few minutes):
+Let's now run our while loop (this will take quite a few minutes):
 
 ```sh
 while read -r line
@@ -148,7 +148,8 @@ done<./lists/bwa_full_arg_list.txt
 Once completed, have a look at the `bams` folder to make sure all our samples have been aligned.
 
 
-#### Indexing BAMS 
+#### BAM files processing
+Now that we have 
 Indexing aims to achieve fast retrieval of alignments overlapping a specified region without going through
 the whole alignments. BAM must be sorted by the reference ID and then the leftmost coordinate before
 indexing.
