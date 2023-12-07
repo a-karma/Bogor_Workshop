@@ -202,7 +202,7 @@ tail -8 random.fasta
 ```
 The `tail` command is a versatile tool in Bash scripting used to display the last portion of a file's contents. It's commonly used to quickly review the end of a file, check for recent changes, or monitor log files in real time.
 
-We could a combination of these two commands to extract set of sequence in the middle of the file:
+We could use a combination of these two commands to extract a set of sequences in the middle of the file:
 ```sh
 head -20 random.fasta | tail -4
 ```
