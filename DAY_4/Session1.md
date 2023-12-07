@@ -60,7 +60,7 @@ After getting our consensus fasta, we construct our psmcfa file using `fq2psmcfa
 fq2psmcfa RD44.fa > RD44.psmcfa
 ```
 
-<details open>
+<details close>
 <summary>Have a look on the result using `head` command. What do you see?</summary>
 <br>
 It appears to be a regular fasta file, with only "T" and "K". Here a "T" represents a 100 bp window without any heterozygous sites in it, whereas a "K" represents a 100 bp window with at least 1 heterozygous site in it.
@@ -98,7 +98,7 @@ As we have done this for whole autosomal genomes, this will take ~20 minutes. Wh
 
 To run PSMC on one chromosome only, we need to prepare a psmcfa for only one chromosome.
 
-<details open>
+<details close>
 <summary>Can you guess how it is done?</summary>
 <br>
   See the steps on Task 1. We need to first single out chromosome one as we make the consensus fasta and made a .psmcfa.
@@ -140,7 +140,7 @@ psmc_plot.pl
 
 An important thing here is to make sure we use the correct mutation rate and generation time. Because there is no mutation rate estimates yet for babirusa, we used a mutation rate estimated for domestic pigs. We set the average generation time as expected for babirusa in captivity.
 ```sh
-psmc_plot.pl -u 1.5e-09 -g 3 -s 100 -Y 1 -m 5 -n 30 -p -M "SE, TO" babirusa_chr1_coarse combined_coarsePattern.psmc 
+psmc_plot.pl -u 1.5e-09 -g 6 -s 100 -Y 1 -m 5 -n 30 -p -M "SE, TO" babirusa_chr1_coarse combined_coarsePattern.psmc 
 ```
 Note that "SE" and "TO" stands for the different population assignment of RD44 and RD71 respectively.
 
@@ -164,6 +164,8 @@ The plot should look somewhat like this:
 Babirusa PSMC with coarse parameter           |  Babirusa PSMC with fine parameter (4 + 10*2 + 4 + 6)                | Babirusa PSMC with fine parameter (4 + 25*2 + 4 + 6)
 :--------------------------------------------:|:---------------------------------------------------:|:---------------------------------:|
 ![RD44 and RD71 run with coarse parameter](../IM/babirusa_chr1_coarse.png)  |  ![RD44 and RD71 run with the first fine parameter](../IM/babirusa_chr1_fine_a.png) | ![RD44 and RD71 run with the second fine parameter](../IM/babirusa_chr1_fine_b.png)
+
+This plot is may look different from the exercise because it was made with option `-g 3`. Does specifiying different generation time matters?
 
 > Exercise 4.2:
 >
