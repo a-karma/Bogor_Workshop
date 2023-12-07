@@ -323,7 +323,7 @@ cat d_g_tab_cfp.tsv | cut -f 1
 ```
 Have you noticed that the chromosomes are not in the right order? Let’s fix it!
 ```sh
-sort -V -o ../../Results/d_g_sorted_table.bed d_g_tab_cfp.tsv
+sort -V -o ../../results/d_g_sorted_table.bed d_g_tab_cfp.tsv
 ```
 The `sort` command is a fundamental tool in Bash scripting used to organize and rearrange data based on specified criteria. It is commonly used to `sort` text files numerically or alphabetically, making it a versatile tool for data manipulation and analysis.
 
