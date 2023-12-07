@@ -84,10 +84,10 @@ The output of bwa mem is a SAM file, in order to reduce disk usage we would like
 bwa mem raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa fastqs/read1_file fastqs/read2_file -t 1 -R read_group_info | samtools view -Shu - > bams/bam_file_name.bam
 
 ```
-In the command above, the `read_group_info` correspond to a string starting with `@RG`. The string (enclosed in quotes) should contain the following fields:
+In the command above, the `read_group_info` correspond to a string starting with `@RG`. The string (enclosed in quotes) should contain the following tab-separated fields:
 
 - ID = read group unique IDentifier. 
-- PU = Platform Unit i.e. the flow cell and lane barcode 
+- PU = Platform Unit i.e. the flow cell and lane barcode (optional)
 - SM = sample name
 - PL = PLatform technology
 - LB = LiBrary identifier.
@@ -102,6 +102,33 @@ The output on your screen should be:
 ```sh
 @A00155:379:HMTKMDSXY:3:2406:8594:22608 1:N:0:GTTCCAAT+GCAGAATT
 ```
+The relevant info for the ID/PU field are the flow cell id (HMTKMDSXY in our case) and the lane number (3). For the LB field it is common practice to use the the last portion of the fastq header containing the external indexes of the library (GTTCCAAT+GCAGAATT). Therefore for this sample our read_group_info should look like this:
+
+```sh
+"@RG\t\tID:HMTKMDSXY.3\tPL:illumina\tSM:RD56\tLB:GTTCCAAT+GCAGAATT"
+```
+
+> `Exercise 1`
+>
+> prepare a file with the read group information for all our samples (one sample per line). store this file in the `lists` directory as `rg_info.txt`
+
+In order to perform the alignment step for all our samples we are going to use the same loop structure you have seen in session 1. Thus, we need to prepare the full argument list using `paste`.
+
+```sh
+ls ~/day2/fastqs/*
+```
+After this we need to prepare our script for bwa by running:
+
+```sh
+touch ./scripts/bwa_aligner.sh
+```
+and edit it with nano. Here's the content of the script:
+
+```sh
+bwa mem raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa fastqs/read1_file fastqs/read2_file -t 1 -R read_group_info | samtools view -Shu - > bams/bam_file_name.bam
+```
+
+
 
 
 #### Indexing BAMS 
