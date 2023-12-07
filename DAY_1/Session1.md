@@ -151,7 +151,7 @@ Now that we have a good structure we can start populating our directories. Let's
 ```sh
 for i in $(seq 3)
 do
-touch output_file_$1
+touch output_file_$i
 done
 ```
 Now we should move each of these file to the corresponding `stage_{i}/output` directory.
