@@ -53,6 +53,8 @@ of Ns because we haven’t provide any reference genome in a fasta format to thi
 The third line is the consensus sequence while each of the following line represent a specific read that was mapped to that region of the reference genome. 
 As you can see, reads are displayed in different colours which represent quality scores. Just type `?` to look at the visualization options. Press for example `n` or `c` and see what happens.
 
+If you are eager to know more about BAM files and samtools please try to tutorial after the course: https://sandbox.bio/tutorials?id=samtools-intro
+
 Now that we have familiarised ourselves with this file format, let's try to generate some new bams!
 
 #### Aligning reads
