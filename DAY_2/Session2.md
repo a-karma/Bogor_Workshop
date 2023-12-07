@@ -115,7 +115,9 @@ The relevant info for the ID/PU field are the flow cell id (HMTKMDSXY in our cas
 In order to perform the alignment step for all our samples we are going to use the same loop structure you have seen in session 1. Thus, we need to prepare the full argument list using `paste`.
 
 ```sh
-ls ~/day2/fastqs/*
+ls ~/day2/fastqs/*pair1.truncated > ./lists/r1.txt
+ls ~/day2/fastqs/*pair2.truncated > ./lists/r2.txt
+paste ./lists/r1.txt ./lists/r2.txt ./lists/rg_info.txt > bwa_full_arg_list.txt
 ```
 After this we need to create our script for bwa and trannsform into an executable:
 
@@ -134,7 +136,16 @@ OUTPUT=$(echo `basename ${INPUT1}` | sed 's/.pair1.truncated//')
 bwa mem raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa ${INPUT1} ${INPUT2} -t 1 -R ${INPUT3} | samtools view -Shu - > bams/${OUTPUT}
 ```
 
+Let's now run our while loop (this will take a few minutes):
 
+```sh
+while read -r line
+do
+./scripts/bwa_aligner.sh $line
+done<bwa_full_arg_list.txt
+```
+
+Once completed, have a look at the `bams` folder to make sure all our samples have been aligned.
 
 
 #### Indexing BAMS 
