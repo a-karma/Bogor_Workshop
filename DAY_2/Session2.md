@@ -166,14 +166,14 @@ We are going to process only one bam through this pipeline but if you finish ear
 Let's start with the sorting. The usage of `samtools sort` is as follows:
 
 ```sh
-samtools sort -n -o sorted_output.bam -O BAM input.bam
+samtools sort -n -o name_sorted_output.bam -O BAM input.bam
 ```
 note the `-n` flags which is used to sort the file by read grooup name. Later on we will also sort the bam by coordinates.
 
 Now we can move to the removing duplicate procedure. this requires to run a sequence of a few commands:
 
 ```sh
-samtools fixmate -m sorted_output.bam sample.fixmate.bam
+samtools fixmate -m name_sorted_output.bam sample.fixmate.bam
 ```
 Explanation: this will fill in mate coordinates (read1 and read2 pair) and insert size fields
 ```sh
