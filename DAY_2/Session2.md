@@ -166,7 +166,7 @@ We are going to process only one bam through this pipeline but if you finish ear
 Let's start with the sorting. The usage of `samtools sort` is as follows:
 
 ```sh
-samtools sort -n -o sorted_output.bam -O BAM input.bam
+samtools sort -o sorted_output.bam -O BAM input.bam
 ```
 
 > Exercise 2
