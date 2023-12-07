@@ -105,12 +105,12 @@ The output on your screen should be:
 The relevant info for the ID/PU field are the flow cell id (HMTKMDSXY in our case) and the lane number (3). For the LB field it is common practice to use the the last portion of the fastq header containing the external indexes of the library (GTTCCAAT+GCAGAATT). Therefore for this sample our read_group_info should look like this:
 
 ```sh
-@RG\t\tID:HMTKMDSXY.3\tPL:illumina\tSM:RD56\tLB:GTTCCAAT+GCAGAATT
+@RG\tID:HMTKMDSXY.3\tPL:illumina\tSM:RD56\tLB:GTTCCAAT+GCAGAATT
 ```
 
 > `Exercise 1`
 >
-> prepare a file with the read group information for all our samples (one sample per line). store this file in the `lists` directory as `rg_info.txt`
+> Prepare a file with the read group information for all our samples (one sample per line). store this file in the `lists` directory as `rg_info.txt`
 
 In order to perform the alignment step for all our samples we are going to use the same loop structure you have seen in session 1. Thus, we need to prepare the full argument list using `paste`.
 
@@ -149,7 +149,71 @@ Once completed, have a look at the `bams` folder to make sure all our samples ha
 
 
 #### BAM files processing
-Now that we have 
-Indexing aims to achieve fast retrieval of alignments overlapping a specified region without going through
-the whole alignments. BAM must be sorted by the reference ID and then the leftmost coordinate before
-indexing.
+Now that we have generated our raw bam files, we need to take a few steps in order to use them in our analysis, namely:
+
+- Sorting the reads in the alignment file
+- Indexing the sorted bam
+- Mark duplicate reads
+
+Aligners generates unsorted bam files, a bam is sed to be coordinate sorted if the reads are sorted by coordinates which means that reads from the beginning of the first chromosome are first in the file. That's what `samtools sort` is for. 
+
+Indexing aims to achieve fast retrieval of alignments overlapping a specified region without going through the whole alignments. BAM must be sorted by the reference ID and then the leftmost coordinate before indexing. That's what `samtools index` is for. 
+
+Duplicates can arise during sample preparation e.g. library construction using PCR (typical of aDNA library prep). Duplicate reads can also result from a single amplification cluster, incorrectly detected as multiple clusters by the optical sensor of the sequencing instrument. These duplication artifacts are referred to as optical duplicates. It is important to remove these arctifacts in order not to bias downstream analysis. This is what `samtools markdup` is for.
+
+We are going to process only one bam through this pipeline but if you finish early you can repeate these steps for all samples.
+
+Let's start with the sorting. The usage of `samtools sort` is as follows:
+
+```sh
+samtools sort -n -o sorted_output.bam -O BAM input.bam
+```
+
+> Exercise 2
+>
+>  Pick one of the sample and run the samtools sort command.
+
+We can now index our bam by running:
+
+```sh
+samtools index sorted_output.bam
+```
+
+> `Exercise 3`
+>
+>  Use samtools tview to inspect this sorted bam file you have generated
+
+Now we can move to the removing duplicate procedure. this requires to run a sequence of a few commands:
+
+```sh
+samtools fixmate -m sorted_output.bam sample.fixmate.bam
+```
+Explanation: this will fill in mate coordinates (read1 and read2 pair) and insert size fields
+```sh
+samtools sort -o sample.sorted.bam sample.fixmate.bam
+```
+Explanation: This will sort based on chromosome number and coordinates
+```sh
+samtools markdup -r -s sample.sorted.bam sample.sorted.dedup.bam
+```
+Explanation: This will remove all the duplicates and also print some basic stats about the result file.
+
+Finally we can create an index for our final output bam:
+
+```sh
+samtools index sample.sorted.dedup.bam
+```
+
+> `Exercise 4`
+>
+> Run the pipeline above for the sample you've picked.
+
+Now that you have learnt how to generate a clean bam file we can move to our next session: Variant Calling!
+
+
+
+
+
+
+
+
