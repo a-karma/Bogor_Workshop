@@ -194,7 +194,7 @@ head -65 ~/session2/raw_data/Day_1/snp_ch30.bed | tail -3
 ```
 
 Suppose you are interested in analysing neutral evolving sites, therefore, you may want to remove from the analysis all sites that are likely to be under selective pressures. 
-As a first approximation, we could take a conservative approach and start to analyse polymorphic sites (SNPs) that are not in coding region (i.e. do not code for protein and so less likely to be underselective constraints; please speak to your instructor if you do not understand this concept). Performing this task manually is obviously tedious and very time consuming but it's super fast using a software like bedtools:
+As a first approximation, we could take a conservative approach and start to analyse polymorphic sites (SNPs) that are not in coding region (i.e. do not code for protein and so less likely to be under selective constraints; please speak to your instructor if you do not understand this concept). Performing this task manually is obviously tedious and very time consuming but it's super fast using a software like bedtools:
 
 ```sh
 cd ~/session2/
