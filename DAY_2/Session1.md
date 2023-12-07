@@ -2,6 +2,7 @@
 # Applications of Genomics in Wildlife Conservation
 
 ## Day 2 - NGS data pre-procesing - Session 1
+In this session you will learn how to process genomic data generated with high-throughput sequencing technologies.
 
 Before we start, let's organize yesterday's material and prepare the directory structure for today.
 Please connect to the server either via `putty` or via the `ssh` command then run:
