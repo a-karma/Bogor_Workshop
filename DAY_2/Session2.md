@@ -133,7 +133,7 @@ INPUT1=$1
 INPUT2=$2
 INPUT3=$3
 OUTPUT=$(echo `basename ${INPUT1}` | sed 's/.pair1.truncated//')
-bwa mem raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa ${INPUT1} ${INPUT2} -t 1 -R ${INPUT3} | samtools view -Shu - > bams/${OUTPUT}
+bwa mem raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa $INPUT1 $INPUT2 -t 1 -R $INPUT3 | samtools view -Shu - > bams/${OUTPUT}.bam
 ```
 
 Let's now run our while loop (this will take quite a few minutes):
