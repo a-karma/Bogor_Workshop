@@ -273,7 +273,7 @@ grep '^#' /home/DATA/Day_1/dog_genes.gtf
 ```
 > `Exercise 6`
 >
-> Remove the header of this file using the ”select non matching lines” option of grep (-v flag) and redirect the output to a file called `dog_genes_no_H.tsv` inside the Stage_1/output directory.
+> Remove the header of this file using the ”select non matching lines” option of grep (-v flag) and redirect the output to a file called `dog_genes_no_H.tsv` inside the stage_1/output directory.
 
 The first line of your file without a header should look like:
 `X ensembl gene 1575 5716 . + . gene_id "ENSCAFG00000010935"; gene_version "3"; gene_source "ensembl"; gene_biotype "protein_coding"`
@@ -287,11 +287,11 @@ The fields that we are interested in are:
 
 > `Exercise 7`
 > 
-> Use `cut` to extract the required fields from dog_genes_no_H.tsv. Then redirect the output to a file called `dog_genes_table.tsv` inside your `Stage_2/Output/` directory. See cut --help to identify the option for fields
+> Use `cut` to extract the required fields from dog_genes_no_H.tsv. Then redirect the output to a file called `dog_genes_table.tsv` inside your `stage_2/output/` directory. See cut --help to identify the option for fields
 
 Now that we have extracted the relevant information, we would like to make a few adjustments to our table. Let’s start with adding a string at the beginning of each line:
 ```sh
-cd Stage_2/Output/
+cd stage_2/output/
 sed -i 's/^/chr_/' dog_genes_table.tsv
 ```
 Here we have used the substitution command of sed (`s`) and modified the file in-place (`i`).
@@ -309,7 +309,7 @@ The next thing we would like to do is switching the order of the columns in our 
 
 This requires a simple awk command:
 ```sh
-awk 'BEGIN {OFS="\t"};{print $1,$3,$4,$2}' Stage_2/Output/dog_genes_table.tsv > Stage_3/Output/d_g_tab_cfp.tsv
+awk 'BEGIN {OFS="\t"};{print $1,$3,$4,$2}' stage_2/output/dog_genes_table.tsv > stage_3/output/d_g_tab_cfp.tsv
 ```
 `awk` is a powerful scripting language designed for processing text files. It is commonly used in Bash scripting to manipulate, analyze, and transform text data. `awk` is particularly well-suited for tasks like parsing log files, extracting information from text files, and performing text-based calculations.
 
@@ -318,7 +318,7 @@ The OFS option before the print command stands for ”Output Filed Separator” 
 We are almost done with pre-processing our data but there’s still something that’s not quite right with it. Have a look at the first column:
 
 ```sh
-cd stage_3/Output
+cd stage_3/output
 cat d_g_tab_cfp.tsv | cut -f 1
 ```
 Have you noticed that the chromosomes are not in the right order? Let’s fix it!
