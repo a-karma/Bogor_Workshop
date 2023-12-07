@@ -50,5 +50,32 @@ Here we have called variants only in a region of 1Mb at the beginning of chromos
 
 > `Exercise 1`
 >
-> run freeBayes on the same region but using a more stringent quality filtering (-q 30) and a minimum depth filtering (-m 10). 
+> run freeBayes on the same region but using a more stringent base quality filtering (-q 30) and mapping quality filtering (-m 20). 
 > Then calculate how many variants have been included in the output and compare this value with the previous one. Did you expect this result?
+
+Let's keep experimenting with the filtering options:
+
+> `Exercise 2`
+>
+> run freeBayes on the same region but using a even more stringent filtering; -q 30 -m 20 -C 5.
+>
+> Have a look at the help message to understand the meaning of the `-C`
+>
+> Then calculate how many variants have been included in the output and compare this value with the previous ones. Did you expect this result?
+
+Let's examine another region:
+
+```sh
+freebayes -f ~/day2/raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa -r 10:1000000-2000000 -L  ~/day2/lists/bams_for_vcf.txt >  ~/day2/vcfs/babirusa.chr10.1to2mb.vcf
+```
+by changing the values after the `-r` flag we are moving along chromosome 10 and analysing the next region of 1Mb.
+
+> `Question`: how many variants freeBayes have identified this time?
+
+In principle we culd write a script that splits the entire chromosome 10 into regions and pass this list of values to freebayes using a loop.
+This goes beyond the scope of today but feel free to experiment with this if you have time.
+
+We will now introduce a software that will become very useful for tomorrow's sessions that will allow us to concatenate vcf files: `vcftools`
+
+
+
