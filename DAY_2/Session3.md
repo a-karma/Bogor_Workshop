@@ -32,18 +32,23 @@ freeBayes is a fast genetic variant detector designed to find SNPs (single-nucle
 
 The general usage of this variant calling software is as follow:
 ```sh
-freebayes -f reference_genome -L list_of_bam_files > output.vcf
+freebayes -f reference_genome -L list_of_bam_files -v output.vcf
 ```
 Have a look at the varius options and at the examples by running:
 ```sh
 freebayes --help
 ```
-
+Let's experiment with this software. First of all, we need to create a list of bam files the we want to include in our analysis.
 ```sh
-freebayes -f ~/day2/raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa -q 20 -m 10 -r 1 -L bam_list.txt > babirusa.chr10.r1.vcf
+ls ~/day2/raw_data/CHR_10/*.bam > ~/day2/lists/bams_for_vcf.txt
 ```
+Even with a small sample size like the one we have provided you with, the variant calling procedure is very computationally demanding. In order to complete the task in the time allowed for this session and to avoid server overload, we are going to examine only a small region of chromosome 10. The region can be specified with the `-r` flag as in the example below:
+```sh
+freebayes -f ~/day2/raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa -r 10:0-1000000 -L  ~/day2/lists/bams_for_vcf.txt >  ~/day2/vcfs/babirusa.chr10.0to1mb.vcf
+```
+Here we have called variants only in a region of 1Mb at the beginning of chromosome 10. 
 
 > `Exercise 1`
 >
-> run freeBayes on the same region but using a more stringent quality filtering (-q 30) and a
-> then calculate how many variants have been included in the output 
+> run freeBayes on the same region but using a more stringent quality filtering (-q 30) and a minimum depth filtering (-m 10). 
+> Then calculate how many variants have been included in the output and compare this value with the previous one. Did you expect this result?
