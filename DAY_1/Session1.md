@@ -263,13 +263,13 @@ Finally, we have redirected the output to store this information into a file cal
 > 
 > Now navigate to your `Raw_Data` directory and visualise the content of the file on screen using the command `cat name-of-the-file`.
 
-Let’s have a look at a different file format and keep  experimenting with regex. In the`/home/Data/Day_1` folder you should see a file called `dog_genes.gtf`.
+Let’s have a look at a different file format and keep  experimenting with regex. In the`/home/DATA/Day_1` folder you should see a file called `dog_genes.gtf`.
 
 A GTF (Gene Transfer Format) file is a text-based file format used to store information about the genomic structure of genes and their features. It is commonly used in genomics research to annotate and analyze genome sequences. It is a tab separated file containing annotations for coding sequences in the dog genome.
 
 We can extract the header if of this file (lines starting with #) by running:
 ```sh
-grep '^#' /home/Data/Day_1/dog_genes.gtf
+grep '^#' /home/DATA/Day_1/dog_genes.gtf
 ```
 > `Exercise 6`
 >
