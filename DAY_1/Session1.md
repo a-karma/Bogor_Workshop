@@ -83,11 +83,12 @@ To facilitate efficient command logging, it's recommended to adopt a consistent 
 ```sh
 touch what_i_did.txt
 ```
-You can then edit this file manually using any text editor, such as for example `nano`.
+You can then edit this file manually using any text editor, such as `nano`.
 
 ```sh
 nano what_i_did.txt
 ```
+After editing the file you can then press `Ctrl X` to close the editor and press `enter` to save the changes.
 
 Today we will create a very simple directory structure for our research project just to illustrate the principle. Each of our `stage` directories should contain three items:
 - a what_i_did.txt file.
