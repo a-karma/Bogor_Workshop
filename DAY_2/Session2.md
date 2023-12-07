@@ -58,11 +58,11 @@ If you are eager to know more about BAM files and samtools please try this ![tut
 Now that we have familiarised ourselves with this file format, let's try to generate some new bams!
 
 #### Aligning reads
-Aligning short-read sequences is the foundational step to most genomic and transcriptomic analyses. 
+Aligning short-read sequences is a necessary step in most genomic and transcriptomic analyses. 
 There are several tools to perform this task such as Bowtie2, BWA, HISAT2, MUMmer4, STAR, and TopHat2 just to name a few.
 Here we are going to focus on the Burrows Wheeler Aligner (BWA) but the procedure can be generalised to any aligner with minor modifications.
 
-The first step for using BWA consist in makeing an index of the reference genome in fasta format. This can be done via the `bwa index` command:
+TTo efficiently align reads to the genome, BWA requires an index file, which is a collection of pre-computed data structures that represent the reference genome. These data structures allow BWA to quickly locate potential alignment positions for reads without having to scan the entire genome each time. The first step for using BWA therefore consists in makeing an index of the reference genome in fasta format. This can be done via the `bwa index` command:
 
 ```sh
 bwa index [-a bwtsw|is] input_reference.fasta index_prefix
@@ -92,7 +92,7 @@ In the command above, the `read_group_info` correspond to a string starting with
 - PL = PLatform technology
 - LB = LiBrary identifier.
 
-Recording this information in our bams is crucial because it will allow us to identify and mitigate batch effects. Imagine a scenario in which each sample has been sequenced twice on two different flow cells. During the library preparation for the second run, two labels have been swapped but we have discovered the errror only after the sequencing data has been processed. do we need to throw away all our work and start again from scratch? Absolutely not! We can easily extract the wrongly assigned reads using the read group info and save a lot of computing time. 
+Recording this information in our bams is crucial because it will allow us to identify and mitigate batch effects. Imagine a scenario in which each sample has been sequenced twice on two different sequencing runs. During the library preparation for the second run, two indices have been swapped but we have discovered the error only after the sequencing data has been processed. do we need to throw away all our work and start again from scratch? Absolutely not! We can easily extract the wrongly assigned reads using the read group info and save a lot of computing time. 
 
 Let's now see how to extract the required read group info from a fastq header:
 ```sh
@@ -155,11 +155,17 @@ Now that we have generated our raw bam files, we need to take a few steps in ord
 - Mark duplicate reads
 - Indexing the bam
 
-Aligners generates unsorted bam files, a bam is sed to be coordinate sorted if the reads are sorted by coordinates which means that reads from the beginning of the first chromosome are first in the file. The alternative option si 'sorting by name' in which reads are sorted by their read ID. That's what `samtools sort` is for. 
+When aligner software maps sequencing reads to a reference genome, it typically generates unsorted BAM files. These files contain read alignments with no regard to their genomic positions, making them difficult to analyze effectively. To facilitate efficient downstream analysis, it's essential to sort BAM files by either coordinates or read names.
 
-Duplicates can arise during sample preparation e.g. library construction using PCR (typical of aDNA library prep). Duplicate reads can also result from a single amplification cluster, incorrectly detected as multiple clusters by the optical sensor of the sequencing instrument. These duplication artifacts are referred to as optical duplicates. It is important to remove these arctifacts in order not to bias downstream analysis. This is what `samtools markdup` is for.
+Coordinate sorting arranges reads in the BAM file based on their genomic locations, ensuring that reads from the same chromosome and corresponding positions are grouped together. This organization enables efficient processing and analysis of mapped reads, as computational tools can navigate the BAM file more quickly and accurately.
 
-Indexing aims to achieve fast retrieval of alignments overlapping a specified region without going through the whole alignments. BAM must be sorted by the reference ID and then the leftmost coordinate before indexing. That's what `samtools index` is for. 
+The samtools sort command is a widely used tool for sorting BAM files. It takes an unsorted BAM file as input and generates a sorted BAM file based on the specified criteria. 
+
+Duplicate reads can arise from various sources during sequencing, including library preparation steps like PCR (especially in ancient DNA library preparation) and optical artifacts caused by the sequencing instrument. These duplicates can skew downstream analyses, making it crucial to remove them. samtools markdup is a tool specifically designed to identify and remove duplicate reads from BAM files.
+
+By identifying and removing duplicates, samtools markdup helps to ensure that downstream analyses are focused on unique reads, enhancing the accuracy and reliability of downstream analyses, such as variant calling and gene expression analysis. This tool is essential for maintaining data integrity and ensuring reliable results in genomics research.
+
+BAM file indexing serves to expedite the extraction of alignments within a particular genomic region, eliminating the need to scan the entire BAM file for each query. The `samtools index` command serves as the standard tool for creating indexes for BAM files. It accepts a sorted BAM file as input and generates an associated index file.
 
 We are going to process only one bam through this pipeline but if you finish early you can repeate these steps for all samples.
 
@@ -168,7 +174,7 @@ Let's start with the sorting. The usage of `samtools sort` is as follows:
 ```sh
 samtools sort -n -o name_sorted_output.bam -O BAM input.bam
 ```
-note the `-n` flags which is used to sort the file by read grooup name. Later on we will also sort the bam by coordinates.
+note the `-n` flags which is used to sort the file by read group name. Later on we will also sort the bam by coordinates.
 
 Now we can move to the removing duplicate procedure. this requires to run a sequence of a few commands:
 
@@ -185,6 +191,8 @@ Explanation: This will sort based on chromosome number and coordinates
 samtools markdup -r -s sample.sorted.bam sample.sorted.dedup.bam
 ```
 Explanation: This will remove all the duplicates and also print some basic stats about the result file.
+
+> Challenge question: why do we need a sorted BAM files for indentifying duplicate reads?
 
 Finally we can create an index for our final output bam:
 
