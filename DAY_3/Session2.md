@@ -1,7 +1,7 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
 
-## Day two - Session two - Population genetic analysis
+## Day 3 - Population genetic analysis - Session 2
 In this session we are going to learn the basics of population genomics analyses using the babirusa dataset. As explained, we will use these analyses to explore whether all the babirusa come from a panmictic population, or whether we can see evidence of population structure and whether this structure correlates with geography.
 
 In this tutorial you will run the three analyses using the remote server:
