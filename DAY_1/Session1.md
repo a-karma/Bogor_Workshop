@@ -289,15 +289,17 @@ The fields that we are interested in are:
 > 
 > Use `cut` to extract the required fields from dog_genes_no_H.tsv. Then redirect the output to a file called `dog_genes_table.tsv` inside your `stage_2/output/` directory. See cut --help to identify the option for fields
 
-Now that we have extracted the relevant information, we would like to make a few adjustments to our table. Let’s start with adding a string at the beginning of each line:
+Now that we have extracted the relevant information, we would like to make a few adjustments to our table. Let’s start with adding the string `chr` at the beginning of each line.
+We can do this easily by using the substitution command of sed which has the following general syntax:
+
+```sh
+sed 's/target/replacement/'
+```
+in our case we are going to modify the file in-place using the `-i` flag.
+
 ```sh
 cd stage_2/output/
 sed -i 's/^/chr_/' dog_genes_table.tsv
-```
-Here we have used the substitution command of sed (`s`) and modified the file in-place (`i`).
-The substitution command has the following syntax:
-```sh
-sed 's/target/replacement/'
 ```
 In our example, the caret symbol (^) is a regex which denotes the beginning of a line and we replaced this with `chr_`. You can check whether the substitution worked or not by examining the first 10 lines of the table with head.
 
