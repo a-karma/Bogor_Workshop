@@ -13,7 +13,7 @@
 
 The Pairwise Sequentially Markovian Coalescent (PSMC) is a statistical method used to infer demographic history from genomic data. It is a powerful tool that can be used to estimate changes in population size over time, as well as to identify ancient population bottlenecks and expansions. In this tutorial, we walk through the steps to generate the necessary input data for PSMC and run it on our babirusa data set to see how well we can estimate effective population size changes through time.
 
-We will use the `psmc` tool to estimate the effective population size for our data, which are two babirusa individuals, RD44 from the Southeast Sulawesi, and RD71 from Togean. Later on, we will also try to run `psmc` on human data from the 1000 human genomes consoritum as a species comparison. The samples are 2 human individuals, NA12718 - a CEU female sample (Northern European ancestry), and NA19471 - a female Luhya sample from Kenya. We will use a variant calling format (vcf) file as the starting point. 
+We will use the `psmc` tool to estimate the effective population size for our data, which are four babirusa individuals, RD70 from Northwest Sulawesi, RD64 from West Central Sulawesi, RD44 from the Southeast Sulawesi, and RD71 from Togean. Later on, we will also try to run `psmc` on human data from the 1000 human genomes consoritum as a species comparison. The samples are 2 human individuals, NA12718 - a CEU female sample (Northern European ancestry), and NA19471 - a female Luhya sample from Kenya. We will use a variant calling format (vcf) file as the starting point. 
 
 ### Task 0: Preparing your working directory
 
@@ -25,11 +25,10 @@ conda activate Day_4
 
 In this exercise, you will need the following input files which you can find in `/home/DATA/Day_4`:
 ```sh
-NA12718_chr1.psmc  NA12718_chr1.psmcfa  NA19471_chr1.psmc  NA19471_chr1.psmcfa  RD44.vcf.gz  RD44.vcf.gz.tbi  RD71.vcf.gz  RD71.vcf.gz.tbi  babirusa_workshop_metadata.txt  chr_autosome.txt
+NA12718_chr1.psmc    NA19471_chr1.psmc    RD44.vcf.gz      RD64.vcf.gz      RD70.vcf.gz      RD71.vcf.gz      babirusa_workshop_metadata.txt
+NA12718_chr1.psmcfa  NA19471_chr1.psmcfa  RD44.vcf.gz.tbi  RD64.vcf.gz.tbi  RD70.vcf.gz.tbi  RD71.vcf.gz.tbi  chr_autosome.txt
 ```
 The `.tbi` file is an index. Indexing VCF files is a crucial step in facilitating efficient data retrieval and analysis for large-scale genomic studies. Indexing creates a data structure that allows tools to quickly access specific genomic regions or variants within large VCF file, significantly improving performance for various tasks using programs like bcftools. 
-
-Note that there are also a couple of psmc input files and results for a later part of the exercise.
 
 Make your own directory for this project and use a symbolic link for easy access to your working directory:
 ```sh
@@ -170,6 +169,10 @@ This plot is may look different from the exercise because it was made with optio
 > Exercise 4.2:
 >
 > Re-run commands from Task 3 and 4 to the resulting whole genome psmc you did in Task 2. Compare the result of this coarse pattern. How are they different?
+
+> Exercise 4.3:
+>
+> Re-run Task 3 to 4 on RD64 and RD70 to get the coarse psmc of chromosome 1 of these samples and plot them together with the other two samples. How are they different?
 
 ### Task 5: Looking at human population
 
