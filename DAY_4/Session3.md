@@ -13,16 +13,16 @@ placeholder name within square brackets and ../IM/file_name.png within parenthes
 
 In small populations, the accumulation of harmful mutations accelerates due to the combined effects of genetic drift and inbreeding. This accumulation, known as mutational load, compromises overall health, adaptability, and reproductive success, ultimately increasing the extinction risk for these vulnerable populations. This effect is further exacerbated by inbreeding-induced reductions in heterozygosity, which can lead to the expression of deleterious recessive traits.
 
-Genome data provides a powerful tool for assessing mutational load at the individual level. By analyzing multi-species alignments encompassing hundreds of animal species, we can identify conserved regions, representing areas of the genome that have been maintained in the same way (i.e. did not accumulate mutations) for millions of years due to natural selection. Mutations within these conserved regions potentially disrupt highly adapted and selected sequences and are therefore likely to be deleterious.
+Genomic data provides a powerful tool for assessing mutational load at the individual level. By analyzing multi-species alignments encompassing hundreds of animal species, we can identify conserved regions, representing areas of the genome that have been maintained in the same way (i.e. did not accumulate mutations) for millions of years due to natural selection. Mutations within these conserved regions potentially disrupt highly adapted and selected sequences and are therefore likely to be deleterious.
 
-In this tutorial, we will calculate mutational load from a pre-determined list of site. These are the steps we will follow:
+In this tutorial, we will calculate mutational load from a list of pre-determined sites. The general pipeline runs from BAM file as follows:
 1. Determine the sites which we want to include in our mutational load analysis.
 2. Obtain the deleterious score these sites from a database.
-3. Obtain the genotype likelihood for all possible genotypes at the same sites for all samples.
+3. Obtain the genotype likelihood for all 10 possible genotypes at the same sites for all samples.
 4. Intersect files in step 1 and 2; i.e. determine whether the genotype possessed by an individual at a specific position in the genome is likely to be deleterious or not.
 5. Use the result of 4 to calculate the total, genome-wide, mutational load for each sample.
 
-Step 1 to 3 are very slow so we will not go through these steps during this tutorial. In fact, step 3 takes ~1h per sample. The command, in angsd, which we used to generate a genotype likelihood file is given below for your information:
+Step 1 to 3 are very slow so we will not go through these steps during this tutorial. In fact, step 3 takes ~1h per sample. The command, in `angsd`, which we used to generate a genotype likelihood file is given below for your information:
 ```{bash glf, eval=FALSE}
 FILE=input.bam
 SITES=predeterminedSites.file # indexed in ANGSD
@@ -31,11 +31,11 @@ SITES=predeterminedSites.file # indexed in ANGSD
 angsd -i $FILE -sites $SITES -out ${FILE%.bam} -minQ 20 -minMapQ 20 -remove_bads 1 -trim 5 -GL 2 -doGlf 4
 ```
 
-Question: How do you decide which sites we use to calculate mutational load?
-
 The conservation scores we will be using is the SIFT score. The SIFT score is a measure of amino acid similarity, which indicates the potential impact of a mutation on protein function. Ranging from 0.0 to 1.0, the score signifies the likelihood of a mutation affecting protein function. Scores closer to 0.0 suggest a higher probability of deleterious effects, while scores closer to 1.0 indicate a lower probability of functional disruption. Variants with SIFT scores between 0.0 and 0.05 are generally considered deleterious. SIFT scores can only be computed for mutation in coding region of the genome. 
 
-Other type of conservation score can also be used for this type of analysis, we encourage you to read this review if you want to know more: 
+> Food for thought: How do you decide which sites we use to calculate mutational load?
+
+Conservation scores such as SIFT is only one among the many ways of characterizing deleterious variations empirically. Other ways are looking directly at amino acids or RNA transcripts. Read more about detecting deleterious variations in natural populations [here](https://doi.org/10.1146/annurev-animal-080522-093311). 
 
 ### Task 0: Prepping your working directory
 
@@ -53,7 +53,7 @@ RD17_chr1.glf  RD2_chr1.glf   RD53_chr1.glf  RD60_chr1.glf  RD71_chr1.glf  SusSc
 
 ### Task 1: Obtaining genotype probability from genotype likelihood
 
-When calculating mutational load we want to make sure we got the genotype right. Getting the genotype wrong at a specific position could mean we are expecting an individual to posses a highly harmful mutation while it does not, which can badly affect our calculations. Sabhrina, Alberto and Deborah have designed a method to do this, which is what we are going to teach you today. There are other methods out there too, for more information please have a look at this review when you are done: 
+When calculating mutational load we want to make sure we got the genotype right. Getting the genotype wrong at a specific position could mean we are expecting an individual to posses a highly harmful mutation while it does not, which can badly affect our calculations. Sabhrina, Alberto, and Deborah have designed a method to do this, which is what we are going to teach you today. There are other methods out there too, for more information please have a look at this review when you are done: 
 
 To take into account genotyping uncertainity the method uses angsd to calculate genotype likelhood which outputs a file that looks like this: 
 ```{bash glf_view, eval=FALSE}
@@ -142,7 +142,7 @@ The `_sift.bed` file is the input for another script that we will use to calcula
 python mut_load_calculator_SIFT.py ${FILE%.gpf}_sift.bed ${FILE%.gpf}_0 0
 ```
 
-Question (Advanced): Have a look on the mut_load_calculator_SIFT.py script. What do you think the argument '0' means?
+Question (Advanced): Have a look on the command we use to run `mut_load_calculator_SIFT.py` script above. What do you think the argument '0' means? Hint: have a look inside the python script.
 
 The script will output two files 1) `*_sift_scores.txt` and 2) `*_sift_het_scores.txt`. The first contain the homozygous load while the last contain the heterozygous load. We will discuss the content of these files later in the session when are plotting the results.
 
@@ -154,6 +154,8 @@ What we will be doing is first concatenate the .txt file with same suffix in one
 ```{bash cat, eval=FALSE}
 cat $(ls result/RD*sift_scores.txt | sort -V) | sed 's/result\///' | sed 's/_chr1_sift.bed//' > babirusa_sift_scores.txt
 ```
+
+> Question: What do you think the `sed` command does? Have a look on the resulting file when you remove one of the sed command and compare it with a file which has the entire commands intact.
 
 > Exercise 4.1.
 >
@@ -172,7 +174,7 @@ colnames(s)<-c("SampleID","totalPositions",
                  "totalLoad","hetFactor","scoreType")
 head(s)
 ```
-> Question: what do you think the colname function in R is for? Why do we need it?
+> Question: what do you think the colnames() function in R is for? Why do we need it?
 
 > Exercise 5.1.
 >
@@ -189,11 +191,13 @@ ggplot(l)+
 
 Question: Which population of babirusa has the highest homozygous load? Which has the lowest?
 
-### Task 6 (Optional)
+### Challenge (Optional)
 
-The other file, "*sift_het_scores.txt" contain more information such as the heterozygous ancestral and heterozygous derived, assuming that the ancestral allele we got are all homozygous.
+The other file, "*sift_het_scores.txt" contain more information on the heterozygous load. This file is automatically generated as part of the script `mut_load_calculator_SIFT.py` when we ran it on Task 3.
 
-When you have the time, repeat the commands from Task 3, adjusting the file names accordingly, and try to plot the result. The column headers are given below:
+When you have the time, repeat the commands from Task 4 with the "`_het_scores.txt`" files until the plotting. You will only need the `hetLoad` part to plot the heterozygous load.
+
+The column headers are given below:
 ```{r hetFile, eval=FALSE}
 c("SampleID","totalHet","totalHetAnc","totalHetDer",
                  "totalScoreHet","totalScoreHetAnc","totalScoreHetDer",
@@ -201,4 +205,4 @@ c("SampleID","totalHet","totalHetAnc","totalHetDer",
                  "totalLoad","totalLoad_hetAnc", "totalLoad_hetDer","hetFactor","scoreType")
 ```
 
-Question: Is there any difference between heterozygous ancestral and derived? Would you trust the result?
+> Question: Is there any difference between heterozygous ancestral and derived? Would you trust the result?
