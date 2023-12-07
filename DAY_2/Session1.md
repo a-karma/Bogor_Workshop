@@ -261,7 +261,7 @@ AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ~/day2/fastqs/${OU
 > Run the last version of our script to remove adapters using the same input files you have used before.
 > Have a look at the output inside the `fastqs` directory. Do you see the difference?
 
-We are now finally ready to run the adaper removal step for all our sample. 
+We are now finally ready to run the `adaperemoval` step for all our sample. 
 We are going to use the same stratagy we have employed for the quality control step i.e. the while loop.
 First of all let's remove our experiments with the naming by running:
 ```sh
