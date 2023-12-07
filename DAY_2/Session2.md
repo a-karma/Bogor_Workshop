@@ -117,15 +117,21 @@ In order to perform the alignment step for all our samples we are going to use t
 ```sh
 ls ~/day2/fastqs/*
 ```
-After this we need to prepare our script for bwa by running:
+After this we need to create our script for bwa and trannsform into an executable:
 
 ```sh
 touch ./scripts/bwa_aligner.sh
+chmod 770 ./scripts/bwa_aligner.sh
 ```
 and edit it with nano. Here's the content of the script:
 
 ```sh
-bwa mem raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa fastqs/read1_file fastqs/read2_file -t 1 -R read_group_info | samtools view -Shu - > bams/bam_file_name.bam
+!#/usr/bin/bash
+INPUT1=$1
+INPUT2=$2
+INPUT3=$3
+OUTPUT=$(echo `basename ${INPUT1}` | sed 's/.pair1.truncated//')
+bwa mem raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa ${INPUT1} ${INPUT2} -t 1 -R ${INPUT3} | samtools view -Shu - > bams/${OUTPUT}
 ```
 
 
