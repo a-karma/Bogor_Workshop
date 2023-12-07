@@ -75,7 +75,7 @@ The next step consists in choosing the aligner algorithm and map the reads to th
 ```sh
 bwa mem reference_index_prefix reads_pair_1.fastq reads_pair_2.fastq <bwa options>
 ```
-The full list of bwa mem option can be found in the ![manual](https://bio-bwa.sourceforge.net/bwa.shtml)
+The full list of `bwa mem` option can be found in the manual ![here](https://bio-bwa.sourceforge.net/bwa.shtml).
 
 In our case we will use the -t option to specify the number of threads used for the computation and the -R flag to specify the read group information.
 The output of bwa mem is a SAM file, in order to reduce disk usage we would like to produce directly its compressed binary version (i.e. BAM). We can easily achieve this by piping the output of bwa into samtools view. Here is an example of the full command that we are going to run for all four babirusa individuals that we have sequenced:
