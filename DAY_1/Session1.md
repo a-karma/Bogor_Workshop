@@ -295,7 +295,7 @@ We can do this easily by using the substitution command of sed which has the fol
 ```sh
 sed 's/target/replacement/'
 ```
-in our case we are going to modify the file in-place using the `-i` flag.
+In our case we are going to modify the file in-place using the `-i` flag.
 
 ```sh
 cd stage_2/output/
