@@ -160,10 +160,11 @@ In most cases when your DNA is of very good quality (e.g. DNA was extracted from
 
 If the dna insert (in gray; the DNA we are interested in) is shorter than the read length (e.g. 150bp) then the machine will sequence what comes after i.e. the adapter. 
 
-This is particularly an issue if your DNA is degraded, for example, if it is comming from an non-invasive sample like hair or feaces, or even bone. In this case we would want to remove the adapter sequence so that we only work with the DNA we are interested in i.e the part in gray in diagram above. If you do not understand this please speak to a instructor so they can help you. 
+This is particularly an issue if your DNA is degraded, for example, if it is comming from an non-invasive sample like hair or feaces, or even bone. In this case we would want to remove the adapter sequence so that we only work with the DNA we are interested in: the part in gray in diagram above. If you do not understand this please speak to a instructor so they can help you. 
 
+In the case when you have degraded DNA it is better to use a software that can identify adapter sequences in the reads and remove them. this 
 
-In these cases it is better to remove the adapter part of the sequence   After quality control, the next step in the pre-processing of NGS data consists in removing adapters. 
+After quality control, the next step in the pre-processing of NGS data consists in removing adapters. 
 There are many software available that can perform this task, here we will focus on ![AdapterRemoval](https://adapterremoval.readthedocs.io/en/stable/). 
 The main reason why we present this software in this workshop is because it not only search and remove adapters from high-throughput sequencing data 
 but it can also perform the colllapsing of the two reads if necessary. 
