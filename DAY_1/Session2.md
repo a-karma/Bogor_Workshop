@@ -79,7 +79,7 @@ In unix-like systms, `chmod` is the command and used to change the access permis
 Now let's use nano to edit our script and add this code-block to its content:
 
 ```sh
-#!/usr/bib/bash
+#!/usr/bin/bash
 awk '{print $(NF-1),"\t",$NF}' ~/session2/raw_data/Day_1/instructors_list.txt > aff_status.txt
 awk 'NF-=2 {print $0}' ~/session2/raw_data/raw_data/Day_1/instructors_list.txt | sed -e 's/ /_/g' > names.txt
 paste names.txt aff_status.txt >  ~/session2/results/corrected_instructors_list.tsv
@@ -90,7 +90,7 @@ If we want to re-use it to format a different input file we would have to open i
 Let's modify it to allow for more flexibility in the usage by transforming input and output into variables:
 
 ```sh
-#!/usr/bib/bash
+#!/usr/bin/bash
 
 INPUT_FILE=~/session2/raw_data/Day_1/instructors_list.txt
 OUTPUT_FILE=~/session2/results/corrected_instructors_list.txt
@@ -108,7 +108,7 @@ Ideally, we would like to supply the input and output at the runtime (meaning wh
 The indexing of the arguments starts at one, and the first argument can be accessed inside the script using $1. Similarly, the second argument can be accessed using $2, and so on.
 Thus our final version of `formatting.sh` should be:
 ```sh
-#!/usr/bib/bash
+#!/usr/bin/bash
 
 INPUT_FILE=$1
 OUTPUT_FILE=$2
