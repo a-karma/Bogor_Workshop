@@ -28,11 +28,9 @@ The standard file format for storing information about genetic variation is term
 Now that we have familiarised ourselves with the file format let's have a look at the algorithmic procedure to generate these files.
 
 ### Commands for calling variants with freeBayes
+freeBayes is a fast genetic variant detector designed to find SNPs (single-nucleotide polymorphisms) and small indels (insertions and deletions). You can read more about freeBayes on the project [github page](https://github.com/freebayes/freebayes)
 
-
-You can read more about freeBayes on the project [github page](https://github.com/freebayes/freebayes)
-
-the general usage of this variant calling software is as follow:
+The general usage of this variant calling software is as follow:
 ```sh
 freebayes -f reference_genome -L list_of_bam_files > output.vcf
 ```
