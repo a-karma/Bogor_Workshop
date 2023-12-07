@@ -248,7 +248,7 @@ cat ./results/ptw_prom_sequences.fa | head -1
 > Exercise 3
 >
 > Combine the intersect and flank functions in order to filter the `snp_ch30.bed` file
-> by excluding CDS and all reagions that are 5 kb form the starting and the stop codon of each CDS.
+> by excluding CDS and all regions that are 5 kb from the start and the stop codon of each CDS.
 
 ### 3. Transferring files
 We conclude today's tutorials with some basic commands to transfer files between you local machime and our server.
