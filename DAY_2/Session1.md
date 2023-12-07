@@ -158,20 +158,25 @@ In most cases when your DNA is of very good quality (e.g. DNA was extracted from
 
 <img width="181" alt="Screenshot 2023-12-07 at 05 07 58" src="https://github.com/a-karma/Bogor_Workshop/assets/5824025/6af3160c-b252-4637-ad4a-e63fb06840d7">
 
-If the dna insert (in gray; the DNA we are interested in) is shorter than the read length (e.g. 150bp) then the machine will sequence what comes after i.e. the adapter. 
+If the dna insert (in gray; the DNA we are interested in) is shorter than the read length (e.g. 150bp) then the sequencer will sequence what comes after i.e. the adapter. 
 
-This is particularly an issue if your DNA is degraded, for example, if it is comming from an non-invasive sample like hair or feaces, or even bone. In this case we would want to remove the adapter sequence so that we only work with the DNA we are interested in: the part in gray in diagram above. If you do not understand this please speak to a instructor so they can help you. 
+This is particularly an issue if your DNA is degraded, for example, if it is comming from an non-invasive sample like hair or feaces, or even bone. In this case we would want to remove the adapter sequence so that you only work with the DNA we are interested in: the part in gray in diagram above. Having adapter sequences in reads can lead to issues with mapping and genotyping later on. If you do not understand this please speak to a instructor so they can help you. 
 
-In the case when you have degraded DNA it is better to use a software that can identify adapter sequences in the reads and remove them. this 
-
-After quality control, the next step in the pre-processing of NGS data consists in removing adapters. 
 There are many software available that can perform this task, here we will focus on ![AdapterRemoval](https://adapterremoval.readthedocs.io/en/stable/). 
-The main reason why we present this software in this workshop is because it not only search and remove adapters from high-throughput sequencing data 
-but it can also perform the colllapsing of the two reads if necessary. 
+The main reason why we present this software in this workshop is because it not only search and remove adapters from high-throughput sequencing data but it can also perform the colllapsing of the two reads if necessary. 
 
 Collapsing reads should be avoided when dealing with modern DNA given that the DNA molecules present in the library are longer than the read size (normally 150 bp for Illumina) hence the forward and reverse sequencing product do not overlap. Merging the overlapping region of the two reads is instead the standard procedure when analysing shorter DNA fragments which is always the case when dealing with degraded DNA such as DNA extracted from archaeological specimens or museum collections. 
 
-In orther to remove adapters and low-quality bases at the termini of each read you can run the following command:
+Lets look at the same diagram below this time for paired end reads. Lets say the gray DNA insert is 300bp and you sequencing 150bp paired end (the most common type of Illumina sequencing). You first sequence using read1 primer (in orange) then you sequence using read2 primer in the last diagram. If you sequence 150bp each time and the insert is 300 bp then you don't have any overlap between the sequencing reads. Now lets say you insert is only 50bp. In both read1 and read2 you'll end up sequencing the whole 50bp (so sequence it twice) and you will sequence adpaters on both sides of the DNA molecule:
+
+<img width="777" alt="Screenshot 2023-12-07 at 06 34 40" src="https://github.com/a-karma/Bogor_Workshop/assets/5824025/464b862d-cdbe-488d-806d-531ea40933c0">
+
+`Adapterremoval` can do both, remove the adapters and collapse the 50bp fragment you sequenced twice so you get only 1 reads at the end.  
+
+> Question: What do you think the index primers are for? 
+
+`Adapterremoval` can also do quality trimming. This involves removing low-quality bases from the ends of reads (e.g. see how bad the quality is at end of the reads in the first fastqc example).
+
 
 ```sh
 AdapterRemoval --file1 reads_1.fq --file2 reads_2.fq --basename output_paired --trimns --trimqualities
