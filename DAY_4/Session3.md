@@ -53,7 +53,7 @@ RD17_chr1.glf  RD2_chr1.glf   RD53_chr1.glf  RD60_chr1.glf  RD71_chr1.glf  SusSc
 
 ### Task 1: Obtaining genotype probability from genotype likelihood
 
-When calculating mutational load we want to make sure we got the genotype right. Getting the genotype wrong at a specific position could mean we are expecting an individual to posses a highly harmful mutation while it does not, which can badly affect our calculations. Sabhrina, Alberto, and Deborah have designed a method to do this, which is what we are going to teach you today. There are other methods out there too, for more information please have a look at this review when you are done: 
+When calculating mutational load we want to make sure we got the genotype right. Getting the genotype wrong at a specific position could mean we are expecting an individual to posses a highly harmful mutation while it does not, which can badly affect our calculations. Have a read on the impact of low depth to genotype calling [here](https://www.researchgate.net/publication/353052622_A_beginner's_guide_to_low-coverage_whole_genome_sequencing_for_population_genomics) or [here](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7115901/). Sabhrina, Alberto, and Deborah have designed a method to do this, which is what we are going to teach you today. There are other methods out there too, for more information please have a look at this review when you are done: 
 
 To take into account genotyping uncertainity the method uses angsd to calculate genotype likelhood which outputs a file that looks like this: 
 ```{bash glf_view, eval=FALSE}
