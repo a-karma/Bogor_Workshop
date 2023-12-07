@@ -84,7 +84,7 @@ The output of bwa mem is a SAM file, in order to reduce disk usage we would like
 bwa mem raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa fastqs/read1_file fastqs/read2_file -t 1 -R read_group_info | samtools view -Shu - > bams/bam_file_name.bam
 
 ```
-In the command above, the `read_group_info` correspond to a string starting with `@RG`. The string (enclosed in quotes) should contain the following tab-separated fields:
+In the command above, the `read_group_info` correspond to a string starting with `@RG` which should contain the following tab-separated fields:
 
 - ID = read group unique IDentifier. 
 - PU = Platform Unit i.e. the flow cell and lane barcode (optional)
@@ -105,7 +105,7 @@ The output on your screen should be:
 The relevant info for the ID/PU field are the flow cell id (HMTKMDSXY in our case) and the lane number (3). For the LB field it is common practice to use the the last portion of the fastq header containing the external indexes of the library (GTTCCAAT+GCAGAATT). Therefore for this sample our read_group_info should look like this:
 
 ```sh
-"@RG\t\tID:HMTKMDSXY.3\tPL:illumina\tSM:RD56\tLB:GTTCCAAT+GCAGAATT"
+@RG\t\tID:HMTKMDSXY.3\tPL:illumina\tSM:RD56\tLB:GTTCCAAT+GCAGAATT
 ```
 
 > `Exercise 1`
