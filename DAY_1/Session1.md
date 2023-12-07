@@ -290,7 +290,7 @@ The fields that we are interested in are:
 > Use `cut` to extract the required fields from dog_genes_no_H.tsv. Then redirect the output to a file called `dog_genes_table.tsv` inside your `stage_2/output/` directory. See cut --help to identify the option for fields
 
 Now that we have extracted the relevant information, we would like to make a few adjustments to our table. Let’s start with adding the string `chr` at the beginning of each line.
-We can do this easily by using the substitution command of sed which has the following general syntax:
+We can do this easily by using the substitution command in `sed` which has the following general syntax:
 
 ```sh
 sed 's/target/replacement/'
