@@ -315,7 +315,7 @@ awk 'BEGIN {OFS="\t"};{print $1,$3,$4,$2}' stage_2/output/dog_genes_table.tsv > 
 ```
 `awk` is a powerful scripting language designed for processing text files. It is commonly used in Bash scripting to manipulate, analyze, and transform text data. `awk` is particularly well-suited for tasks like parsing log files, extracting information from text files, and performing text-based calculations.
 
-The OFS option before the print command stands for ”Output Filed Separator” and we set it to Tab (`\t`) to ensure our table has the correct delimiter for a ”tab separated file” (TSV). `awk` stores each field in a different variable which is accessible via the `$` symbol.  We made use of this feature to put the columns in the rigth order.
+The OFS option before the print command stands for ”Output Filed Separator” and we set it to Tab (`\t`) to ensure our table has the correct delimiter for a ”tab separated file” (TSV). `awk` stores each field in a different variable which is accessible via the `$` symbol.  We made use of this feature to put the columns in the right order.
 
 We are almost done with pre-processing our data but there’s still something that’s not quite right with it. Have a look at the first column:
 
