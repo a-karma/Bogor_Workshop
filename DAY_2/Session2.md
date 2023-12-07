@@ -5,22 +5,23 @@
 In this session you will learn how to align reads to a reference genome and how to manipulate bam files.
 
 #### The SAM and BAM format
-SAM stands for Sequence Alignment/Map format. It is a TAB-delimited text format consisting of a header
-section, which is optional, and an alignment section. The BAM is the compressed binary version of a SAM file.
-Header lines start with `@`, while alignment lines do not. Each alignment line has 11 mandatory fields for
-essential alignment information such as mapping position, and variable number of optional fields for flexible
-or aligner specific information. 
+SAM, or Sequence Alignment Map, is a standard file format for storing and exchanging alignment data generated from high-throughput sequencing technologies. It is a tab-delimited text format that consists of a header section and an alignment section. The header section provides metadata about the alignment file, while the alignment section contains detailed information about each individual read's alignment to a reference genome.
+
+The BAM format, or Binary Alignment Map, is a compressed binary version of a SAM file. It is more compact and efficient for storing large datasets, making it the preferred format for most downstream analysis.
+
+Each SAM alignment line contains eleven mandatory fields, each representing a specific aspect of the read's alignment. These fields include information such as the read name, chromosome, strand, mapping position, alignment score, and mismatches. Additional optional fields can also be included to store more detailed information or aligner-specific annotations.
+
+The SAM format is a widely used standard in genomics research, allowing for efficient communication and analysis of alignment data across different software tools and platforms.
 
 In your raw_data directory you should see a folder called CHR_10. 
 This contains a five bam files that we have generated for you using the same procedure that you are learning today. 
-Let’s have a look at a BAM file and play around with a versatile tool to manipulate this file
-format: ![samtools](http://www.htslib.org/).
+Let’s have a look at a bam file and look at it with the widely used tool called `samtools`.
 
 First try to type:
 ```sh
 less ~/day2/raw_data/CHR_10/RD10_chr10.bam
-and as usual type Q to close it
 ```
+and as usual type Q to close it
 
 This is how a binary file looks like, not very user friendly or human readable right?
 
@@ -29,7 +30,7 @@ Let’s find a better way to visualize it. We should start by examining the head
 ```sh
 samtools view -H ~/day2/raw_data/CHR_10/RD10_chr10.bam | head -20
 ```
-The `view` command of samtools allows you to read, print, and convert SaM/BAM/CRAM files. The `-H` flags outputs only the header.
+The `view` command of samtools allows you to read, print, and convert SAM/BAM/CRAM files. The `-H` flags outputs only the header.
 As you can see, there are 19 lines starting with `@SQ`. Each of these lines corresponds to a chromosome of the reference genome and the value you read after `LN:` corresponds to the chromosome length in base pairs (bp).  
 
 Now let’s have a look at an alignment line. We can use again the view command:
