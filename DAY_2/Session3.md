@@ -44,7 +44,7 @@ ls ~/day2/raw_data/CHR_10/*.bam > ~/day2/lists/bams_for_vcf.txt
 ```
 Even with a small sample size like the one we have provided you with, the variant calling procedure is very computationally demanding. In order to complete the task in the time allowed for this session and to avoid server overload, we are going to examine only a small region of chromosome 10. The region can be specified with the `-r` flag as in the example below:
 ```sh
-freebayes -f ~/day2/raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa -r 10:0-1000000 -L  ~/day2/lists/bams_for_vcf.txt >  ~/day2/vcfs/babirusa.chr10.0to1mb.vcf
+freebayes -f ~/day2/raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa -r 10:0-1000000 -L ~/day2/lists/bams_for_vcf.txt > ~/day2/vcfs/babirusa.chr10.0to1mb.vcf
 ```
 Here we have called variants only in a region of 1Mb at the beginning of chromosome 10. 
 
@@ -66,16 +66,32 @@ Let's keep experimenting with the filtering options:
 Let's examine another region:
 
 ```sh
-freebayes -f ~/day2/raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa -r 10:1000000-2000000 -L  ~/day2/lists/bams_for_vcf.txt >  ~/day2/vcfs/babirusa.chr10.1to2mb.vcf
+freebayes -f ~/day2/raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa -r 10:1000000-2000000 -L ~/day2/lists/bams_for_vcf.txt > ~/day2/vcfs/babirusa.chr10.1to2mb.vcf
 ```
 by changing the values after the `-r` flag we are moving along chromosome 10 and analysing the next region of 1Mb.
 
 > `Question`: how many variants freeBayes have identified this time?
 
-In principle we culd write a script that splits the entire chromosome 10 into regions and pass this list of values to freebayes using a loop.
+In principle we could write a script that splits the entire chromosome 10 into regions and pass this list of values to freebayes using a loop.
 This goes beyond the scope of today but feel free to experiment with this if you have time.
 
 We will now introduce a software that will become very useful for tomorrow's sessions that will allow us to concatenate vcf files: `vcftools`
+
+First of all we need to compress and index the vcfs that we want to concatenate:
+```sh
+bgzip -c ~/day2/vcfs/babirusa.chr10.0to1mb.vcf > ~/day2/vcfs/babirusa.chr10.0to1mb.vcf.gz
+bgzip -c ~/day2/vcfs/babirusa.chr10.1to2mb.vcf > ~/day2/vcfs/babirusa.chr10.1to2mb.vcf.gz
+tabix -p vcf ~/day2/vcfs/babirusa.chr10.0to1mb.vcf.gz
+tabix -p vcf ~/day2/vcfs/babirusa.chr10.1to2mb.vcf.gz
+```
+Then we can concatenate the two by running:
+```sh
+ vcf-concat ~/day2/vcfs/babirusa.chr10.0to1mb.vcf.gz ~/day2/vcfs/babirusa.chr10.1to2mb.vcf.gz | bgzip -c > ~/day2/vcfs/babirusa.chr10.0to2mb.vcf.gz
+```
+
+We will lear a lot more about vcfs and genetic diversity tomorrow.
+
+
 
 
 
