@@ -20,7 +20,7 @@ Let's now create a symbolik link to the directory containing the input data for 
 ln -s /home/DATA/Day_2/ ~/day2/raw_data
 conda activate Day_2
 ```
-In your `raw_data` folder you should now see 8 files with the `.fastq` extension. These are the results of pair-end sequencing on Illumina HiSeq X platform of 4 babirusa individuals (one from each region of Sulawesi plus the Togean Islands as shown on the map). We are now going to familiarise with this bioinformatic file format and then evaluate the quality of these sequencing results.
+In your `raw_data` folder you should now see 8 files with the `.fastq` extension. These are the results of pair-end sequencing on Illumina HiSeq X platform of 4 babirusa individuals (one from each region of Sulawesi plus the Togean Islands as shown on the map). We are now going to familiarise with this file format and then evaluate the quality of these sequencing results.
 
 ![babirusa_map](../IM/babirusa_day2.png)
 
@@ -36,7 +36,7 @@ ATTTAGTACCATGACATGACACATACTACAATTGACGACATCAATCA
 IGHFDEC@;;?=>B=?<;A:?@>9<>9756867544312*,*)'&)+
 ```
 
-The first line (a.k.a header_line) starts with `@` and contains a series of characters which uniquely identify the read. 
+The first line (or header line) starts with `@` and contains a series of characters which uniquely identify the read. 
 When dealing with Illumina data, the identifier includes 7 fields encoding information about the sequencing process plus 4 fields about the read itself (see tab2.1).
 Fields are separated by a `:` and the two groups are separated by a space.
 
@@ -55,7 +55,7 @@ Table 2.1: Fastq format – Fields in the Sequence ID line
 |control number| always zero on HiSeq X |
 |sample number| 7 (the 7 th sample in the pool) |
 
-The second line contains the actual sequence (in the example above, a short fragment of 47 nucleotides).
+The second line contains the actual sequence (in the example above, a short fragment of 47 nucleotides). Most Illumina sequencers however are ran on 150 cycle these days which means they produce 150bp reads. 
 
 The third line always start with a `+` to improve the readability of the file by separating the
 sequence line from its quality. The + symbol might be followed by the read identifier in
@@ -100,19 +100,19 @@ Table 2.2: Illumina Phred-score encoding
 
 Assessing the quality of sequencing results is a crucial step in genomic analysis. 
 If your initial input are problematic, all downstream analysis might suffer from various biases and in general your inference will be less reliable.
-In this tutorial we are going to use a ![FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) which is a program designed to spot potential problems in high througput sequencing datasets. 
+In this tutorial we are going to use a ![FASTQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) which is a program designed to spot potential problems in high througput sequencing data. 
 
-The program will analyse the input file provided and it will produce a report (.html file) that can be visualised in a web-browser. Each tab in the FASTQC report will show different aspects of the quality of the sequencing but the `Per base sequence quality` is arguably the most important. 
+The program will analyse a fastq file and produce a html report that can be visualised in a web-browser. Each tab in the FASTQC report will show different aspects of the quality of the sequencing but the `Per base sequence quality` is one of the most important. 
 
 > Question 2:
 >
-> In the figure below you can see two examples of very different quality control results. Can you guess which one is "the good run"?
+> In the figure below you can see two examples of very different quality control results. Can you guess which dataset is better?
  
 ![fastQC](../IM/fq_report.png)
 
-Let's analyse our data and see what we get, shall we?
+Lets run `fastqc` on our own data.
 
-The command to run fastqc is quite straightforward:
+The command to run fastqc is straightforward:
 ```sh
 fastqc -t 1 ./raw_data/sub_RD56_1.fastq -o qc
 ```
@@ -132,6 +132,15 @@ do
 fastqc -t 1 $line -o qc
 done<./lists/fastq_list.txt
 ```
+We could also run this without a list of files as: 
+
+```sh
+for i in ~/day2/raw_data/*.fastq
+do
+fastqc -t 1 $i -o qc
+done
+```
+
 Once completed, use either the PSFTP app or the sftp command to transfer the .html files to your local computer and visualise them in your web-browser.
 After establishing the sftp connection you can run:
 ```sh
@@ -145,7 +154,16 @@ get *.html
 > How many reads we got for each individual?
 
 #### Removing Adapters
-After quality control, the next step in the pre-processing of NGS data consists in removing adapters. 
+In most cases when your DNA is of very good quality (e.g. DNA was extracted from fresh blood) the DNA fragements are usually larger than Illumina reads of 150bp. This is not always the case, and in some case the DNA insert will be shorter than the read length. This means that you will end up sequencing adapter sequences. Look at this diagram below:
+
+<img width="181" alt="Screenshot 2023-12-07 at 05 07 58" src="https://github.com/a-karma/Bogor_Workshop/assets/5824025/6af3160c-b252-4637-ad4a-e63fb06840d7">
+
+If the dna insert (in gray; the DNA we are interested in) is shorter than the read length (e.g. 150bp) then the machine will sequence what comes after i.e. the adapter. 
+
+This is particularly an issue if your DNA is degraded, for example, if it is comming from an non-invasive sample like hair or feaces, or even bone. In this case we would want to remove the adapter sequence so that we only work with the DNA we are interested in i.e the part in gray in diagram above. If you do not understand this please speak to a instructor so they can help you. 
+
+
+In these cases it is better to remove the adapter part of the sequence   After quality control, the next step in the pre-processing of NGS data consists in removing adapters. 
 There are many software available that can perform this task, here we will focus on ![AdapterRemoval](https://adapterremoval.readthedocs.io/en/stable/). 
 The main reason why we present this software in this workshop is because it not only search and remove adapters from high-throughput sequencing data 
 but it can also perform the colllapsing of the two reads if necessary. 
