@@ -1,20 +1,16 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
-please do not modify these first two lines of the .md file
 
-use the same syntax to add pictures:
 
-placeholder name within square brackets and ../IM/file_name.png within parentheses
-
-## Measuring genetic diversity
+## Day 3 - Measuring genetic diversity - Session 1
 In this session we are going to explore the observables of genetic data a.k.a genetic diversity. We are going to measure three metrics of genetic diversity: Observed heterozygosiy (Ho), number of seggregating sites (S) and the average number of pairwise difference between sequences (Pi).
 We will further try to explore if a population is evolving or is neutral using these metrics.
 
 ### Measuring Genetic Diversity 
 ##### Heterozygosity 
 - Heterozygosity is the probability of sampling two different alleles for a locus.
-- We will use vcftools (https://vcftools.sourceforge.net) for this exercise 
-- There are other methods as well, for example, RTG tools (https://github.com/RealTimeGenomics/rtg-tools) and ANGSD (http://www.popgen.dk/angsd/index.php/Heterozygosity)
+- We will use ![vcftools](https://vcftools.sourceforge.net) for this exercise 
+- There are other methods as well, for example, ![RTG tools](https://github.com/RealTimeGenomics/rtg-tools) and ![ANGSD](http://www.popgen.dk/angsd/index.php/Heterozygosity)
 
 
 ```sh
