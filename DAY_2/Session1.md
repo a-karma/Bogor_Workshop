@@ -197,7 +197,7 @@ chmod 770 ~/day2/scripts/remove_adapters.sh
 
 Now let's edit this file using nano: 
 ```sh
-!#/usr/bin/bash
+#!/usr/bin/bash
 INPUT1=
 INPUT2=
 OUTPUT=
@@ -207,7 +207,7 @@ Here we have just set three variables (INPUT1, INPUT2, OUTPUT) but we still need
 If we would like to pass the file names as positional arguments we could do someting like this:
 
 ```sh
-!#/usr/bin/bash
+#!/usr/bin/bash
 INPUT1=$1
 INPUT2=$2
 OUTPUT= ?
@@ -226,7 +226,7 @@ basename
 We can now modify our script and assign to the last variable the `correct` value.
 
 ```sh
-!#/usr/bin/bash
+#!/usr/bin/bash
 INPUT1=$1
 INPUT2=$2
 OUTPUT=$(basename $1)
@@ -249,7 +249,7 @@ Also the .fastq extension appears in the middle and we might want to get rid of 
 We can use a little trick to adjust this. Let's modify our script for the last time!
 
 ```sh
-!#/usr/bin/bash
+#!/usr/bin/bash
 INPUT1=$1
 INPUT2=$2
 OUTPUT=$(echo `basename ${INPUT1}` | sed 's/_*.fastq//')
