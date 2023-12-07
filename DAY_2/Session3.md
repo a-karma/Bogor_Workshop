@@ -1,9 +1,9 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
 
-## Session Title
-please add a few sentences here to introduce your session of the tutorial.
-
+## Day 2 - NGS data procesing - Session 3
+In this section we will highlights the necessary steps to identify genetic variations from whole-genome-sequencing data.
+ 
 ### Example of section title 
 ##### Example of sub-section title 
 - this is how you define bullet point
