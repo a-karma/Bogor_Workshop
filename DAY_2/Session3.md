@@ -3,9 +3,14 @@
 
 ## Day 2 - NGS data procesing - Session 3
 In this section we will highlight the necessary steps to identify genetic variations from whole-genome-sequencing data.
+
+### Variant Calling procedure
+Variant calling is the process of identifying differences between a reference genome and the genome of an individual or a population of individuals. These differences, known as variants, include single nucleotide polymorphisms (SNPs), insertions, deletions, and structural variations. Variant calling is an important step in NGS data analysis, as it provides insights into the genetic variation that underlies phenotypic differences between individuals and populations.
+
+There are several methods used for variant calling in NGS data analysis, each with its advantages and disadvantages. Here we will focus on alignment-based methods which involve mapping the sequencing reads to a reference genome and identifying variants based on the differences between the reads and the reference genome. These methods include Samtools, BWA/GATK, and FreeBayes (which is the softare that we are going to use in this session)
  
 ### Variant Calling Format (vcf)
-VCFs are tab-separated text files representing the standard file format for storing genetic variation data. Each .vcf file should contain some header lines (starting with `#`) which provide metadata information describing the body of the file. The file body consists of 8 mandatory columns and an unlimited number of optional columns that may be used to record other information about the sample(s). When additional columns are used, the first optional column is used to describe the format of the data in the columns that follow (see table below)
+The standard file format for storing information about genetic variation is termed VCF. These are tab-separated text files contain some header lines (starting with `#`) which provide metadata information followed by the body of the file. The file body consists of 8 mandatory columns and an unlimited number of optional columns that may be used to record other information about the sample(s). When additional columns are used, the first optional column is used to describe the format of the data in the columns that follow (see table below)
 
 |Column Index| Name| Description |
 |---|---|---|
@@ -20,36 +25,27 @@ VCFs are tab-separated text files representing the standard file format for stor
 |9|FORMAT|An (optional) extensible list of fields for describing the samples.|
 |+|SAMPLEs|For each (optional) sample described in the file, values are given for the fields listed in FORMAT| 
 
+Now that we have familiarised ourselves with the file format let's have a look at the algorithmic procedure to generate these files.
+
+### Commands for calling variants with freeBayes
 
 
-##### Example of sub-section title 
-- this is how you define bullet point
-- in case you want to make more explicit 
-- the series of steps required to accomplish a task 
+You can read more about freeBayes on the project [github page](https://github.com/freebayes/freebayes)
 
-See example below on how to format commands that the participants will have to run
-
+the general usage of this variant calling software is as follow:
 ```sh
-conda activate Day_1
-plink --bfile file_name --recode
+freebayes -f reference_genome -L list_of_bam_files > output.vcf
+```
+Have a look at the varius options and at the examples by running:
+```sh
+freebayes --help
 ```
 
-you can instead use `this syntax` to highlight an in-line command, software name or something you think it's important
+```sh
+freebayes -f ~/day2/raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa -q 20 -m 10 -r 1 -L bam_list.txt > babirusa.chr10.r1.vcf
+```
 
-see below the syntax for tables:
-
-| column A | column B |
-| ------ | ------ |
-| row 1a | row 1b |
-| row 2a | row 2b |
-| you can also leave cells blank | |
-
-you can also use this env for exercises and tips:
-> Exercise 1 
-> 
-> Modify the command above to ...
-
-Or even:
-> Best practice: never use spaces in file names
-
-note the empty line in the first quoted env (it seems to make it look nicer on github) 
+> `Exercise 1`
+>
+> run freeBayes on the same region but using a more stringent quality filtering (-q 30) and a
+> then calculate how many variants have been included in the output 
