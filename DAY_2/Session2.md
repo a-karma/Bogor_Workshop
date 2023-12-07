@@ -65,7 +65,7 @@ Here we are going to focus on the Burrows Wheeler Aligner (BWA) but the procedur
 The first step for using BWA consist in makeing an index of the reference genome in fasta format. This can be done via the `bwa index` command:
 
 ```sh
-# bwa index [-a bwtsw|is] input_reference.fasta index_prefix
+bwa index [-a bwtsw|is] input_reference.fasta index_prefix
 ```
 
 If you look into your raw_data//SUS_REF/ folder you will see that contains the sus scrofa reference genome (.fa) plus a few other files with various extensions. Those are exactly the index files produce by the above command.
