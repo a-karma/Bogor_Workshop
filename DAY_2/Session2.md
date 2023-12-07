@@ -62,6 +62,46 @@ Aligning short-read sequences is the foundational step to most genomic and trans
 There are several tools to perform this task such as Bowtie2, BWA, HISAT2, MUMmer4, STAR, and TopHat2 just to name a few.
 Here we are going to focus on the Burrows Wheeler Aligner (BWA) but the procedure can be generalised to any aligner with minor modifications.
 
+The first step for using BWA consist in makeing an index of the reference genome in fasta format. This can be done via the `bwa index` command:
+
+```sh
+# bwa index [-a bwtsw|is] input_reference.fasta index_prefix
+```
+
+If you look into your raw_data//SUS_REF/ folder you will see that contains the sus scrofa reference genome (.fa) plus a few other files with various extensions. Those are exactly the index files produce by the above command.
+
+The next step consists in choosing the aligner algorithm and map the reads to the reference genome. Here we will use `bwa mem` which performs local alignment and produces alignments for different part of the query sequence. The basic usage of bwa mem is:
+
+```sh
+bwa mem reference_index_prefix reads_pair_1.fastq reads_pair_2.fastq <bwa options>
+```
+The full list of bwa mem option can be found in the ![manual](https://bio-bwa.sourceforge.net/bwa.shtml)
+
+In our case we will use the -t option to specify the number of threads used for the computation and the -R flag to specify the read group information.
+The output of bwa mem is a SAM file, in order to reduce disk usage we would like to produce directly its compressed binary version (i.e. BAM). We can easily achieve this by piping the output of bwa into samtools view. Here is an example of the full command that we are going to run for all four babirusa individuals that we have sequenced:
+
+```sh
+bwa mem raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa fastqs/read1_file fastqs/read2_file -t 1 -R read_group_info | samtools view -Shu - > bams/bam_file_name.bam
+
+```
+In the command above, the `read_group_info` correspond to a string starting with `@RG`. The string (enclosed in quotes) should contain the following fields:
+
+- ID = read group unique IDentifier. 
+- PU = Platform Unit i.e. the flow cell and lane barcode 
+- SM = sample name
+- PL = PLatform technology
+- LB = LiBrary identifier.
+
+Recording this information in our bams is crucial because it will allow us to identify and mitigate batch effects. Imagine a scenario in which each sample has been sequenced twice on two different flow cells. During the library preparation for the second run, two labels have been swapped but we have discovered the errror only after the sequencing data has been processed. do we need to throw away all our work and start again from scratch? Absolutely not! We can easily extract the wrongly assigned reads using the read group info and save a lot of computing time. 
+
+Let's now see how to extract the required read group info from a fastq header:
+```sh
+head -1 ~/day2/raw_data/sub_RD56_1.fastq
+```
+The output on your screen should be:
+```sh
+@A00155:379:HMTKMDSXY:3:2406:8594:22608 1:N:0:GTTCCAAT+GCAGAATT
+```
 
 
 #### Indexing BAMS 
