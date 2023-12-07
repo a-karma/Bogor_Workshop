@@ -1,7 +1,7 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
 
-## Day three - Session three - Visualisation 
+## Day 3 - Session 3 - Visualisation 
 The aim of this session is to visualise the results of the analyses we just completed in the previous session. We will be working mainly on our local computers in RStudio and a web browser.
 
 Before we can do that we first need to download our output files via `sftp`. We will then:
