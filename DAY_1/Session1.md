@@ -158,7 +158,7 @@ Now we should move each of these file to the corresponding `stage_{i}/output` di
 
 > `Exercise 3`
 >
-> Use a for foop to move each of the output_file_{i} ∀i ∈ {1, 2, 3} to its own directory.
+> Use a for loop to move each of the output_file_{i} ∀i ∈ {1, 2, 3} to its own directory.
 > 
 > To do so, you should use the `mv` command which has the following syntax: `mv target_file_name path/to/destination`.
 
