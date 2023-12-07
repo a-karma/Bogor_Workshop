@@ -128,7 +128,7 @@ chmod 770 ./scripts/bwa_aligner.sh
 and edit it with nano. Here's the content of the script:
 
 ```sh
-!#/usr/bin/bash
+#!/usr/bin/bash
 INPUT1=$1
 INPUT2=$2
 INPUT3=$3
