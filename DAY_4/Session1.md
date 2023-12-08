@@ -50,7 +50,7 @@ Conventionally, a single individual psmcfa is generated from a consensus fasta g
 REF=/home/DATA/Day_2/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa
 samtools faidx $REF -r chr_autosome.txt | bcftools consensus RD44.vcf.gz > RD44.fa
 ```
-Note that we need the pig reference genome to do this, and a file with the autosomes list on `chr_autosomes.txt` to keep our analysis within the autosomal chromosomes.
+Note that we need the pig reference genome to do this, and a file with the autosomes list on `chr_autosome.txt` to keep our analysis within the autosomal chromosomes.
 
 > Food for thought: Why don't we use mitochondrial and sex chromosome?
 
