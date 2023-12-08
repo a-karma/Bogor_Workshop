@@ -13,16 +13,23 @@ We will further try to explore if a population is evolving or is neutral using t
 - We will use vcftools(https://vcftools.sourceforge.net) for this exercise 
 - There are other methods as well, for example, RTG tools (https://github.com/RealTimeGenomics/rtg-tools) and ANGSD (http://www.popgen.dk/angsd/index.php/Heterozygosity)
 
-
+First we will estimate the number of heterozygous genotypes at a locus. That is, the number of individuals that are heterozygous at a locus.
 ```sh
 conda activate Day_3
 # Calculate the number of heterozygous genotypes at a loci using vcftools
 vcftools --vcf [input.vcf] --hardy --out [input]
+...
 
+Then we will estimate the proportion of individuals that are heterozygous at a locus. For this we need to calculate the ratio of number of individuals heterozygous at a locus and the total number of individuals genotyped at the locus.
+Let's first visualize the output generated in the previous step.
+
+```sh
 # View the output and estimate heterozygosity per loci
 less -S [input].hwe
 tail -n +2 [input].hwe | awk -F "[\t/]" '{print $4, $3+$4+$5, $4/($3+$4+$5)}' | less
+...
 
+```sh
 # Calculate the number of heterozygous genotypes for an individual using vcftools
 vcftools --vcf [input.vcf] --het --out [input]
 
