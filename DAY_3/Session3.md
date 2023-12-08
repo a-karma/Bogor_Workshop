@@ -309,7 +309,7 @@ Using this we will plot the results as a  stacked barplots using `geom_col()`.
 
 We plot in ggplot using the same process as before. First we can make the basic plot:
 ```sh
-admix_plot_k2 <- ggplot(data = babik2_L) +
+admix_plot_k2 <- ggplot(data = k2_long) +
     geom_col(aes(x=sample, y=value, fill=name)) +
     scale_y_continuous(expand = c(0,0))
 ```
