@@ -379,11 +379,7 @@ Do not forget to save your script as you go.
 
 <img src="../IM/ADMIX_ALL.png" width="60%" height="60%">
 
-Now we will check to see which value of K the cross validation suggests is best. The easiest way to do this is to return to your terminal and we will use `grep` to get the CV errors values. The lower the value the more fitting the k-value is to the data. However, be warned this is only suggestive and should not be overinterpretted.
-
-```sh
-grep 'CV' /day3/output_admixture/cv_errors.txt 
-```
+Now we will check to see which value of K the cross validation suggests is best. The easiest way to do this is to return to your terminal and look at the contents of the `cv_errors.txt` file (or you can open this in a text editor). The lower the value the more fitting the k-value is to the data. However, be warned this is only suggestive and should not be overinterpretted.
 
 #### Questions: 
 - what is the most fitting value of k? 
