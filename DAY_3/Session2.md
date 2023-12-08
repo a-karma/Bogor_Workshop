@@ -24,11 +24,11 @@ We will keep the output files for each analysis in their own directory, so make 
 The program you will use to make the tree is called `iqtree`. `iqtree` requires an alignment file as an input but this can take several formats. 
 We will be using the `.phylip` alignment format. To generate this from the vcf file, you need to use a script called `vcf2phylip.py`. 
 
-`iq-tree` is program to reconstruct phylogenetic tree based on genetic data - it uses maximum likelihood (see here if you want more details about tree reconstruction methods: https://en.wikipedia.org/wiki/Computational_phylogenetics). 
+`iqtree` is program to reconstruct phylogenetic tree based on genetic data - it uses maximum likelihood (see here if you want more details about tree reconstruction methods: https://en.wikipedia.org/wiki/Computational_phylogenetics). 
 
-The data for this exercise can be found here `/home/DATA/Day_3_b/scripts/`. 
+The data for this exercise can be found here `/home/DATA/Day_3_b/`. 
 
-First we need to to use `vcf2phylip.py` to convert our vcf (https://en.wikipedia.org/wiki/Variant_Call_Format) into a phylip (https://en.wikipedia.org/wiki/PHYLIP) format. To do this, first create a shell variable we call `PANEL` which contains the path the panel.
+First we need to to use `vcf2phylip.py` to convert our vcf (https://en.wikipedia.org/wiki/Variant_Call_Format) into a phylip (https://en.wikipedia.org/wiki/PHYLIP) format. This script can be foundin the scripts directory in the shared data folder. To do this, first create a shell variable we call `PANEL` which contains the path the panel.
 
 ```sh 
 PANEL=/home/DATA/Day_3_b/babirusa_panel
