@@ -393,12 +393,13 @@ Now we will check to see which value of K the cross validation suggests is best.
 
 ### 5. Extra exercises
 >
-> can you add the sample names to the plot using the function `geom_text_repel()`
+> can you change the plots to be a better representation of the clusters? `Hint` - look at column `region2` in the metadata
 > 
-> in your pca, can you re-colour the points based on the three clusters inside of four? `Hint` - look at column `region2` in the metadata
-> 
-> can you use `scale_colour_manual()` to choose your own colour palette?
+> can you use `scale_colour_manual()` to choose your own colour palette for both the PCA and ADMIXTURE?
 >
 > plot on the different PC axes and calculate the contribution of variation for these axes
 >
-> could you change the plots to be a better representation of the  clusters
+> in the admixture - the colours of the clusters are not consistent across the values of k
+> take a look at the R package http://www.royfrancis.com/pophelper/articles/index.html for some ideas on how to fix this
+> or in your browser https://tau.evolseq.net/clumpak/index.html 
+
