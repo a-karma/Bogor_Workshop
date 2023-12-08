@@ -197,6 +197,11 @@ evec_merge <- as.data.frame(cbind(evec[,-12],
 - plus the metadata columns we want - the formate is `[name_of_column] = [location_of_column]`
 - `as.data.frame()` function ensures that it stays in a data frame format
 
+> `Question`
+>
+> Why do we do `evec[,-12]` first? What is it doing? `Hint` - check the contents of the original `evec` file
+> 
+
 Now we are ready for plotting using the function ggplot. ggplot is a very comprehensive package with many options. We will just try and keep it simple but if you have experience with it, go ahead and add options ontop. 
 The plots are built in layers, with each layer being added to the basic plot using (`+`). 
 The style of plot is determined by the `geom` functions - for a scatter plot we want to use `geom_point()`
