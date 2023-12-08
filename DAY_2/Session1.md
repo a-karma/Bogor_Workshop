@@ -51,7 +51,7 @@ Table 2.1: Fastq format – Fields in the Sequence ID line
 | tile number | 15 |
 | X coordinate of cluster| 66 |
 | Y coordinate of cluster| 165 |
-| read number | 2 (2 nd read of the pair) |
+| read number | 2 (2nd read of the pair) |
 | is filtered | N (Y did not pass, N otherwise) |
 |control number| always zero on HiSeq X |
 |sample number| 7 (the 7 th sample in the pool) |
