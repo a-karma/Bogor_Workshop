@@ -267,9 +267,7 @@ pca_plot_names <- pca_plot + geom_text_repel(aes(x = V2, y = V3, colour = region
 
 pca_plot_names
 ```
-![Final_PCA](../IM/Final_PCA.png)
-
-<img src="../IM/Final_PCA.png" width="50%" height="50%">
+<img src="../IM/Final_PCA.png" width="60%" height="60%">
 
 > `Hint` - use `?ggplot` or `?geom_point` to read the help files and there is alot of help online
 
@@ -351,6 +349,8 @@ admix_plot_k2 <- admix_plot_k2 + theme(axis.text.x = element_text(angle = 60, hj
 ```
 ![ADMIX_K2](../IM/ADMIX_K2.png)
 
+<img src="../IM/ADMIX_K2.png" width="60%" height="60%">
+
 > `Exercise seven`
 >
 > Save this plot and generate the remaining plots for your clusters?
@@ -378,6 +378,8 @@ grid.arrange(admix_plot_k2, admix_plot_k3, admix_plot_k4, admix_plot_k5, ncol = 
 Do not forget to save your script as you go.
 
 ![ADMIX_ALL](../IM/ADMIX_ALL.png)
+
+<img src="../IM/ADMIX_ALL.png" width="60%" height="60%">
 
 Now we will check to see which value of K the cross validation suggests is best. The easiest way to do this is to return to your terminal and we will use `grep` to get the CV errors values. The lower the value the more fitting the k-value is to the data. However, be warned this is only suggestive and should not be overinterpretted.
 
