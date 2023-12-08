@@ -269,7 +269,7 @@ pca_plot_names
 ```
 ![Final_PCA](../IM/Final_PCA.png)
 
-<Final_PCA src="../IM/Final_PCA.png" width="100" height="100">
+<img src="../IM/Final_PCA.png" width="100" height="100">
 
 replace ![image](https://your-image-url.type) with <img src="https://your-image-url.type" width="100" height="100">
 
