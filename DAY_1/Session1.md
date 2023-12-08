@@ -254,7 +254,7 @@ The regular expression `>seq.*` matches any line containing the string >seq foll
 
 We can also use a regex inside a sed command. For example, let's extract the 3rd sequence of each haplogroup:
 ```sh
-sed -n '/seq_3_/,+1p' random.fasta > /home/your-user-id/Project_BASH/Raw_Data/third_seq_all_Hg.fasta
+sed -n '/seq_3_/,+1p' random.fasta > /home/your-user-id/project_BASH/raw_Data/third_seq_all_Hg.fasta
 ```
 As you can see, it looks very similar to the sed command we used before with the exception that instead of providing sed with specific line number, 
 here we have specified a pattern (`/seq_3_/`) and asked the program to print each matching line plus and the following one: (+1p). 
@@ -262,7 +262,7 @@ Finally, we have redirected the output to store this information into a file cal
 
 > `Exercise 5`
 > 
-> Now navigate to your `Raw_Data` directory and visualise the content of the file on screen using the command `cat name-of-the-file`.
+> Now navigate to your `raw_Data` directory and visualise the content of the file on screen using the command `cat name-of-the-file`.
 
 Let’s have a look at a different file format and keep  experimenting with regex. In the`/home/DATA/Day_1` folder you should see a file called `dog_genes.gtf`.
 
