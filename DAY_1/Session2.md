@@ -81,7 +81,7 @@ Now let's use nano to edit our script and add this code-block to its content:
 ```sh
 #!/usr/bin/bash
 awk '{print $(NF-1),"\t",$NF}' ~/session2/raw_data/Day_1/instructors_list.txt > aff_status.txt
-awk 'NF-=2 {print $0}' ~/session2/raw_data/raw_data/Day_1/instructors_list.txt | sed -e 's/ /_/g' > names.txt
+awk 'NF-=2 {print $0}' ~/session2/raw_data/Day_1/instructors_list.txt | sed -e 's/ /_/g' > names.txt
 paste names.txt aff_status.txt >  ~/session2/results/corrected_instructors_list.tsv
 ```
 
