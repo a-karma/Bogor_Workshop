@@ -58,7 +58,7 @@ Table 2.1: Fastq format – Fields in the Sequence ID line
 
 The second line contains the actual sequence (in the example above, a short fragment of 47 nucleotides). Most Illumina sequencers however are ran on 150 cycle these days which means they produce 150bp reads. 
 
-The third line always start with a `+` to improve the readability of the file by separating the
+The third line always starts with a `+` to improve the readability of the file by separating the
 sequence line from its quality. The + symbol might be followed by the read identifier in
 the first line (optional).
 
