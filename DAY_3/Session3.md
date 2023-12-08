@@ -267,6 +267,9 @@ pca_plot_names <- pca_plot + geom_text_repel(aes(x = V2, y = V3, colour = region
 
 pca_plot_names
 ```
+
+![Final_PCA](../IM/Final_PCA.png)
+
 <img src="../IM/Final_PCA.png" width="60%" height="60%">
 
 > `Hint` - use `?ggplot` or `?geom_point` to read the help files and there is alot of help online
