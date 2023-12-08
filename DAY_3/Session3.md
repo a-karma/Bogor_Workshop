@@ -267,7 +267,7 @@ pca_plot_names <- pca_plot + geom_text_repel(aes(x = V2, y = V3, colour = region
 
 pca_plot_names
 ```
-<img src="../IM/Final_PCA.png" width="60%" height="60%">
+<img src="../IM/Final_PCA.png" width="70%" height="70%">
 
 > `Hint` - use `?ggplot` or `?geom_point` to read the help files and there is alot of help online
 
@@ -347,9 +347,8 @@ Finally to make the names readable and label the y axis correctly we can add:
 admix_plot_k2 <- admix_plot_k2 + theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
  ylab("Admixture proportion")
 ```
-![ADMIX_K2](../IM/ADMIX_K2.png)
 
-<img src="../IM/ADMIX_K2.png" width="60%" height="60%">
+<img src="../IM/ADMIX_K2.png" width="70%" height="70%">
 
 > `Exercise seven`
 >
