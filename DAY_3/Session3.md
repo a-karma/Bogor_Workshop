@@ -11,7 +11,12 @@ Before we can do that we first need to download our output files via `sftp`. We 
 ### 1. Downloading the output files 
 On your local computer please use either the `sftp` command or the `PSFTP` app to connect to the remote server and download files.
 
-Please create a project directory where you would like to store the output files on your local computer. 
+Please create a project directory where you would like to store the output files on your local computer. Like you have done on the previous days but now on your local machine. Make a directory for the output of each analysis and one directory for storing the figures
+
+For example:
+```sh
+mkdir day3; cd day3; mkdir tree_output; mkdir pca_output; mkdir admixture_output; mkdir figures
+```
 
 ##### macOS, Linux, and WSL users
 Open a terminal and please enter: 
