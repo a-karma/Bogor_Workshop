@@ -269,6 +269,10 @@ pca_plot_names
 ```
 ![Final_PCA](../IM/Final_PCA.png)
 
+<Final_PCA src="../IM/Final_PCA.png" width="100" height="100">
+
+replace ![image](https://your-image-url.type) with <img src="https://your-image-url.type" width="100" height="100">
+
 > Hint - use `?ggplot` or `?geom_point` to read the help files and there is alot of help online
 
 You save the plot using `ggsave`. Save the PCA as a `.png` in your figures directory.
