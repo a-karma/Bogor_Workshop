@@ -156,7 +156,7 @@ head(samplelist)
 ```
 
 Next you want to make a new column which groups the samples from the north together.
-First you make an empty column that is the length of the dataframe
+First you make an empty column that is the length of the dataframe. In R `$` indicates the column name you want to specify. RStudio is helpful and when you type `$` it will show you a list of the potential columns in that dataframe.
 ```sh
 samplelist$region2 <- rep(NA, length(samplelist$region))
 ```
@@ -194,7 +194,7 @@ evec_merge <- as.data.frame(cbind(evec[,-12],
 ```
 - `cbind()` function binds the columns together
 - we take all but the last column of the eigenvector df (this was an additional sample name column)
-- plus the metadata columns we want - the formate is `[name_of_column] = [location_of_column]`
+- plus the metadata columns we want - the format is `[name_of_column] = [location_of_column]`
 - `as.data.frame()` function ensures that it stays in a data frame format
 
 > `Question`
