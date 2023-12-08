@@ -152,7 +152,7 @@ get *.html
 
 > Question 3:
 >
-> How many reads we got for each individual?
+> How many reads do we get for each individual?
 
 #### Removing Adapters
 In most cases when your DNA is of very good quality (e.g. DNA was extracted from fresh blood) the DNA fragements are usually larger than Illumina reads of 150bp. This is not always the case, and in some case the DNA insert will be shorter than the read length. This means that you will end up sequencing adapter sequences. Look at this diagram below:
