@@ -262,7 +262,7 @@ Finally, we have redirected the output to store this information into a file cal
 
 > `Exercise 5`
 > 
-> Now navigate to your `raw_Data` directory and visualise the content of the file on screen using the command `cat name-of-the-file`.
+> Now navigate to your `raw_data` directory and visualise the content of the file on screen using the command `cat name-of-the-file`.
 
 Let’s have a look at a different file format and keep  experimenting with regex. In the`/home/DATA/Day_1` folder you should see a file called `dog_genes.gtf`.
 
