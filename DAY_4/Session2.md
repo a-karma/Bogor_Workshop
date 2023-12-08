@@ -28,7 +28,7 @@
   
   You should have a working directory in your home folder now named `day_4_inbreeding` containing a symbolic link of `babirusa_workshop_set.vcf.gz`, `babirusa_workshop_metadata.txt`, and 18 files of a ROH run results ending with `.hmmrohl.gz`. We will work with these results a bit later in the session.
   
-  ### Task 1 Detecting ROH with PLINK
+  ### Task 1: Detecting ROH with PLINK
   
   To detect homozygous segments in a VCF, we run a plink command as follows:
   ```{bash plink, eval=FALSE}
@@ -54,7 +54,7 @@
   
   The power of ROH is that the segment length is inversely correlated with the time of inbreeding event. The longer the segment is, the more recent is the inbreeding event. However, we cannot see this easily from the output file. We need to download the output files and plot the results. Before we do that, we need to prepare a R working directory in our local computer.
   
-  ### Task 2 Plotting PLINK results in R
+  ### Task 2: Plotting PLINK results in R
   
   We will use R in R Studio to visualise our ROH results. To make our working directory, open R Studio, choose File > New Project and in the `New Project Wizard` choose `Create New R Directory > New Project`. Type in your directory name, such as "Inbreeding_Analysis" and choose your preferred path within your local computer. If you are happy with the directory name and location, click `Create Project`. A new R Studio session will appear.
   
@@ -233,3 +233,5 @@ Let's go back to the server and do Exercise 2.4.
   > Exercise 4
   >
   > Plot the segment distribution using `geom_segment()`, a boxplot, and the frequency of segment length classes as you have for the PLINK results. How similar it is with the PLINK results?
+ 
+If you have done up to this point and there is still some time before the wrap up session, feel free to have another PLINK run with different parameters. Read the documentation for PLINK `--homozyg` [here](https://zzz.bwh.harvard.edu/plink/ibdibs.shtml#homo) to have an idea of how the parameters can be tuned in. For a start, have a look on [this review paper](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-020-6463-x) on how usually it is done with various domestic species.
