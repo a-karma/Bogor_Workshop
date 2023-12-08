@@ -44,7 +44,7 @@ When it is finished you should see a your output file in your directory, and tha
 > 
 >  Can you use the help file to find out what the addition of "min4" in the file name means? Now how would you run the command and change this option?
 
-### Basics of using `screen` in linux
+#### Basics of using `screen` in linux
 Now we have our input file in the correct format for `iqtree`. Because the command we are going to run can take a while to complete, we are going to use a program called `screen` to allow us to run commands in a different session in the background as we continue with the other analyses. Below are some of commands we will need for interacting with `screen`.
 
 To activate new session with a specific name: 
@@ -68,7 +68,7 @@ To kill a session use:
 screen -XS [name_of_session] quit
 ```
 
-### Running iqtree
+#### Running iqtree
 Now we have our input file and the basic understanding of screen we will run iqtree. 
 
 Reopen the screen you made for running `iqtree`
@@ -84,18 +84,12 @@ To run it we are going to specify some parameters:
 
 The theory behind substitutions model in phylogenetics is beyond the scope of this tutorial. We'd be happy to discuss this with you in the classroom if you are interested - you can also check this wikipedia page for more information: https://en.wikipedia.org/wiki/Substitution_model
 
-So the command is: 
+If you do not specify a model, `iqtree` runs a model test for all substitution models. This will take too long and use up to many resources so for now we will use the Generalised Time Reversible `GTR` model
+
+The command is: 
 ```sh 
-iqtree -s babirusa_panel.min4.phy -st DNA -pre babirusa_panel_tree1 -m GTR+ASC
+iqtree -s babirusa_panel.min4.phy -st DNA -pre babirusa_panel_tree1 -m GTR
 ```
-
-This should actually throw up an error and generate a new file for us. This is because `+ASC` model is specifying the ascertainment bias correction, which is appropriate for SNP data. ###LF COMMENT: WHY?### However there are invariable sites in the panel. The output file generated only contains variable sites. 
-
-The reasoning behind the use of the `+ASC` model is beyond the scope of this practical - feel free to ask about this to an instructor if you want to know more.
-
-> `Exercise two`
->
-> How would you modify the original command to rerun iqtree using this new file?
 
 If that is running, we will now let it in the background by deattaching the session (`ctrl`+`a`+`d`) and we will come back to it later.
 
@@ -106,7 +100,7 @@ In simple terms, PCA can be thought of as a technique that transforms a complex 
 
 Here we are going to use  `smartpca` to make a PCA from the babirusa data.  Make a new directory in your session two directory and navigate to it. 
 
-### Convert files to the correct format
+#### Convert files to the correct format
 smartPCA does not work with vcf or plink files so we need to run a file conversion (this is somehow very common in bioinformatics). Luckily the author of the program provide a code to do the conversion from plink file to eigenformat. The first thing to do is convert our plink fileset into an eignstrat format which is used by the eigensoft set of programs - including smartpca. To do this we are going to use a program called `convertf`.
 
 To run `convertf` you need to make a parameter file, or par file, which contains the information on where the files we want to convert are located. The program can change between several different formats, for example - the current files are in the .ped format and would like the EIGENSTRAT format as the output. 
@@ -134,7 +128,7 @@ convertf -p [name_of_par_file]
 ```
 Once completed, you should see the new files in your working directory
 
-### Redefining the populations
+#### Redefining the populations
 Check the first few lines of the `.ind` file. What do you see? 
 Column one should be the sample name, column two is sex (U = unknown) and column three is population. Currently the third colummn will be filled with `???`. We dont want to make prior assumptions about the population membership of the individuals, therefore we want to rename this column so each individual is in a unique population before we run the pca. The easiest way is to copy the first column to the third. This can be done using `awk`
 
@@ -151,7 +145,7 @@ mv babirusa_panel.ind_new babirusa_panel.ind
 ```
 These files can be used to run multiple types of analysis beyond PCA using the admixtools package (https://github.com/DReichLab/AdmixTools). We will stick to PCA for today though. 
 
-### Run smartpca
+#### Run smartpca
 Our data is now ready to run `smartpca`. Like `convertf` we make a parameter file to supply to the program to generate the output files.
 
 Again, make an empty text file and enter the text editor.
@@ -177,7 +171,7 @@ This should give you two new output files, look at the contents of these files:
 - babirusa_panel_PCA.evec - this is the position of where each individual falls along the eigenvectors (columns 2:11) 
 - babirusa_panel_PCA.eval - this contains the eigenvalues for each of the principal components (the importance of each axis)
 
-> `Exercise three`
+> `Exercise two`
 >
 > Can you modify the par file and generate new outputs for 15 eigenvectors?
 
@@ -194,16 +188,28 @@ admixture [path_to_bed] [number_of_ks]
 ```
 This program can also calculate the cross validation errors using the option (`-cv`).
 
-> `Exercise four`
+> `Exercise three`
 >
-> Run ADMIXTURE for k = 2 with thr cross validation error calculation
+> Run ADMIXTURE for k = 2 with the cross validation error calculation, can you see the CV value in the output ?
 
-Next you can use a loop to run through several values of k, calculate the cv errors and output the results to a log file.
+Next you can use a loop to run through several values of k, calculate the cv errors and output the results to a log file. This may take a little while, so again we will open a new screen, this means you can continue to use your terminal while it  is running. 
+Lets look at the screens we have running: 
+```sh 
+screen -ls 
+```
+Hopefully you see the screen with your tree running
+
+Then open a new screen with a sensible name: 
+```sh 
+screen -S [name_of_session]
+```
+Remember - You will have to reactivate the conda environment before you start
+
 First lets assign a variable for the path to the `.bed` file.
-
 ```sh
 ADMIX=/home/DATA/Day_3_b/babirusa_panel.bed
 ```
+
 Then make the for loop for k = 1-5
 ```sh 
 for k in {1..5} 
@@ -211,14 +217,11 @@ do
     admixture $ADMIX --cv $k | tee babirusa_k_$k.log
 done
 ```
+`tee` is a command which is writing to standard output and the log file at the same time
 
-When this has finished running, use `grep` on the log files to extract the cv values, which we can later visualise
+Close the session with `ctrl` + `a` + `d`
 
-```sh 
-grep CV *.log > cv_errors.txt
-```
-
-### Lets quickly check on the IQtree before having coffee...
+#### Lets check on the IQtree
 
 Reactivate your screen session. To see which screens you have running, list them first:
 ```sh 
@@ -237,5 +240,21 @@ If it has finished - great. You can check the files in the directory for this an
 - .mldist - maximum likelihood distance matrix
 - .bionj - contains the BIONJ tree, related to the neighbour joining tree
 
-If you see these files, you can close the screen session.
+If you see these files, you can close that screen session.
+
+#### Lets check on the ADMIXTURE before coffee... 
+Reactivate the screen. Is it still running? 
+
+If you think its finished, close the screen and check whether the output files for all five values of k are in your output directory.
+
+When it has finished running, use `grep` on the log files to extract the cv values, which we will look at after
+```sh 
+grep CV *.log > cv_errors.txt
+```
+
+#### If you get here before the end of the session you can start downloading and organising your files
+Follow the first steps in the next session - session 3 - and use `sftp` to download your files to your local computer
+
+
+
 
