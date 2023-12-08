@@ -162,16 +162,4 @@ If you are short on time, or are tired of waiting, I have the psmc files for the
 >
 > Remember that we now plot a different species, the human species. Consequently, the plotting parameters is different. Run `psmc_plot.pl -u 2.5e-08 -s 100 -m 5 -n 30 -p -M` with the `psmc` files to get the result.
 
-> Question: Based on what you see in the human population PSMC, what would you conclude regarding the population size history of the two populations of babirusa - did they have large or small populations, and were their population sizes similar over time?
-
-### Challenge (Optional): Running on whole autosome
-
-Running on one chromosome may not be enough to get the entire history of the babirusa population. As running PSMC on the whole genome takes a huge amount of RAM, we have run all samples whole genome psmc for you to plot. The steps are similar to the previous one, except that we use a list of chromosome names to make the consensus fasta. The psmcfa and psmc files for this are on the `/home/DATA/Day_4/Session1_Challenge`
-
-```sh
-REF=/home/DATA/Day_2/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa
-samtools faidx $REF -r chr_autosome.txt | bcftools consensus RD44.vcf.gz > RD44.fa
-```
-Note a file with the autosomes list on `chr_autosomes.txt` to keep our analysis within the autosomal chromosomes.
-
-After concatenating all sample files, Run the psmc_plot.pl using the same options with the other babirusa genomes.
+Based on what you see in the human population PSMC, what would you conclude regarding the population size history of the two populations of babirusa - did they have large or small populations, and were their population sizes similar over time?
