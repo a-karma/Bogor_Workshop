@@ -82,7 +82,7 @@ First we will look at the unrooted tree you generated. So under the tree file bo
 >
 > Use the control panel on the right to make your unrooted tree look like this example below
 
-![iTOL_unrooted](../IM/iTOL_unrooted.png)
+![iTOL_unrooted_renamed](../IM/iTOL_unrooted_renamed.png)
 
 ### Rooted tree
 Now lets do the same for the rooted tree, in a different browser window so you can compare. The first thing to do is specify the root.
