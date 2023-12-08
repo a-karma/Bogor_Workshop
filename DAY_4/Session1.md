@@ -7,7 +7,7 @@
 [comment]: # placeholder name within square brackets and ../IM/file_name.png within parentheses
 --->
 
-## Inferring Ancient Demography with PSMC
+## Day 4 - Inferring Ancient Demography with PSMC - Session 1
 
 ### Introduction
 
@@ -23,8 +23,9 @@ Before starting this first session, activate the conda environment containing al
 conda activate Day_4
 ```
 
-In this exercise, you will need the following input files which you can find in `/home/DATA/Day_4`:
+In this exercise, you will need the following input files which you can find in `/home/DATA/Day_4/Session_1`:
 ```sh
+ls /home/DATA/Day_4/Session_1
 NA12718_chr1.psmc    NA19471_chr1.psmc    RD44.vcf.gz      RD64.vcf.gz      RD70.vcf.gz      RD71.vcf.gz      babirusa_workshop_metadata.txt
 NA12718_chr1.psmcfa  NA19471_chr1.psmcfa  RD44.vcf.gz.tbi  RD64.vcf.gz.tbi  RD70.vcf.gz.tbi  RD71.vcf.gz.tbi  chr_autosome.txt
 ```
@@ -32,9 +33,9 @@ The `.tbi` file is an index. Indexing VCF files is a crucial step in facilitatin
 
 Make your own directory for this project and use a symbolic link for easy access to your working directory:
 ```sh
-mkdir day4_psmc_tutorial
-cd day4_psmc_tutorial
-ln -s /home/DATA/Day_4/Session_1/* .
+mkdir day_4_psmc_tutorial
+cd day_4_psmc_tutorial
+ln -s /home/DATA/Day_4/* .
 ```
 
 Now we are good to go.
@@ -43,29 +44,33 @@ Now we are good to go.
 
 PSMC works on a psmcfa file of a single diploid sample. A `psmcfa` file is a fasta-like representation of the genome which keeps track of where heterozygous variant are located in the genome.
 
-> Food for thought: Can you guess why RD44 is chosen? Hint: Have a look on the metadata.
-
-Conventionally, a single individual psmcfa is generated from a consensus fasta generated from a BAM file. However, this will take some time so we will instead generate the consensus sequence from a VCF file using `samtools faidx` and `bcftools consensus` below:
+To get a .psmcfa file, we need to first generate the consensus sequence from a VCF file using `samtools faidx` and `bcftools consensus`. Here is an example using sample RD44 to make a consensus fasta file of chromosome 10 only of RD44.
 ```sh
 REF=/home/DATA/Day_2/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa
-samtools faidx $REF -r chr_autosome.txt | bcftools consensus RD44.vcf.gz > RD44.fa
+samtools faidx $REF 10 | bcftools consensus RD44.vcf.gz > RD44_chr10.fa &
 ```
-Note that we need the pig reference genome to do this, and a file with the autosomes list on `chr_autosome.txt` to keep our analysis within the autosomal chromosomes.
+Note that we need the pig reference genome to do this, and a file with the autosomes list on `chr_autosomes.txt` to keep our analysis within the autosomal chromosomes. The '&' at the end allows us to run this command in the background while running another command. Whilr this command runs, do Exercise 1.
 
-> Food for thought: Why don't we use mitochondrial and sex chromosome?
+> Exercise 1
+>
+> Modify the above command to do the same for the three other babirusa samples.
+
+> Question: Why don't we use mitochondrial and sex chromosome?
 
 After getting our consensus fasta, we construct our psmcfa file using `fq2psmcfa`.
 ```sh
-fq2psmcfa RD44.fa > RD44.psmcfa
+fq2psmcfa RD44_chr10.fa > RD44_chr10.psmcfa &
 ```
+
+> Exercise 2
+>
+> Do a one liner to run that command on four babirusa samples. Hint: use for loop in bash.
 
 <details close>
 <summary>Have a look on the result using `head` command. What do you see?</summary>
 <br>
 It appears to be a regular fasta file, with only "T" and "K". Here a "T" represents a 100 bp window without any heterozygous sites in it, whereas a "K" represents a 100 bp window with at least 1 heterozygous site in it.
 </details>
-
-Lets repeat the same procedure for `RD71.vcf.gz`.
 
 > IMPORTANT: Remember that this is **NOT** the prefered method to generate input files for `psmc`. The prefered method is to generate the input files directly from bam files, and that information can be found [here](https://github.com/lh3/psmc).
 
@@ -81,55 +86,33 @@ PSMC reconstruct population changes over time in accross time intervals. The num
 
 For example, the default pattern "4+5\*3+4" splits time into 23 intervals (4+15+4). The first 4 time intervals will have the same effective population size parameter, then the next 3 intervals will be allowed to have a different parameter. This is repeated 5 times (5\*3 time intervals = 15 parameters) then the last 4 intervals will have one effective population size parameter. In total with have 23 time intervals for 17 parameters (i.e. possible different values of effective population size). We can see that the more we divide this up the more resolution we can expect. The data, however, may not not be sufficiently informative to assess population size changes at a very fine scale.
 
-`Quick Exercise`
-How many time intervals and free effective population size parameters are you expecting when specifying -p "4+25*2+4+6"?
+> Exercise 3
+> 
+> How many time intervals and free effective population size parameters are you expecting when specifying -p "4+25*2+4+6"?
 
 Let us now run psmc for the first time - we will just use the default values for the options, while still explicitly specifying the parameter pattern. This pattern is quite coarse, but we will try and estimate it again with more parameters per time intervals in the next section.
 
 ```sh
-psmc -p "4+5*3+4" -o RD44_coarsePattern.psmc RD44.psmcfa &
-psmc -p "4+5*3+4" -o RD71_coarsePattern.psmc RD71.psmcfa &
+psmc -p "4+5*3+4" -o RD44_chr10_coarsePattern.psmc RD44_chr10.psmcfa &
 ```
 
-As we have done this for whole autosomal genomes, this will take ~20 minutes. While we wait for it to finish, let's try have a look at what happens when we run psmc only one chromosome.
+> Exercise 4
+>
+> Modify the above command to run it on all four babirusa samples.
 
-### Task 3: Running PSMC in chromosome 1
-
-To run PSMC on one chromosome only, we need to prepare a psmcfa for only one chromosome.
-
-<details close>
-<summary>Can you guess how it is done?</summary>
-<br>
-  See the steps on Task 1. We need to first single out chromosome one as we make the consensus fasta and made a .psmcfa.
-  ```sh
-  REF=/home/DATA/Day_3_b/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa
-  samtools faidx $REF 1 | bcftools consensus RD44.vcf.gz > RD44_chr1.fa
-  fq2psmcfa RD44_chr1.fa > RD44_chr1.psmcfa
-  ```
-</details>
-
-After having the psmcfa of chr1 from both samples, run the same command as Task 1:
-```sh
-psmc -p "4+5*3+4" -o RD44_1_coarsePattern.psmc RD44_chr1.psmcfa &
-psmc -p "4+5*3+4" -o RD71_1_coarsePattern.psmc RD71_chr1.psmcfa &
-```
-
-This should run within a minute. Let's have a look on one of the output files:
+The psmc command should run within a minute. Let's have a look on one of the output files:
 ```sh
 tail -34 RD44_1_coarsePattern.psmc
 ```
 
-> Exercise 3.1:
->
-> Modify the -p option to have finer resolution. Use "4 + 10*2 + 4 + 6" and “4 + 25*2 + 4 + 6”.
-> Name the resulting files differently. For example, adding suffix "fine_a.psmc" and "fine_b.psmc".
+### Task 3: Plotting PSMC
 
-### Task 4: Plotting PSMC
-
-Let us now cat the psmc outputs for all 2 samples, and plot them into a pdf.
+Let us now cat the psmc outputs for all four babirusa samples, and plot them into a pdf.
 ```sh
-cat RD44_1_coarsePattern.psmc \
-    RD71_1_coarsePattern.psmc > combined_coarsePattern.psmc 
+cat RD64_chr10_coarsePattern.psmc \
+    RD70_chr10_coarsePattern.psmc \
+    RD44_chr10_coarsePattern.psmc \
+    RD71_chr10_coarsePattern.psmc > babirusa_chr10_coarsePattern.psmc 
 ```
 
 To simplify the psmc results, we need to parse the .psmc file with `psmc_plot.pl`. First let have a look on this script to see what it does.
@@ -139,55 +122,56 @@ psmc_plot.pl
 
 An important thing here is to make sure we use the correct mutation rate and generation time. Because there is no mutation rate estimates yet for babirusa, we used a mutation rate estimated for domestic pigs. We set the average generation time as expected for babirusa in captivity.
 ```sh
-psmc_plot.pl -u 1.5e-09 -g 6 -s 100 -Y 1 -m 5 -n 30 -p -M "SE, TO" babirusa_chr1_coarse combined_coarsePattern.psmc 
+psmc_plot.pl -u 1.5e-09 -g 6 -s 100 -Y 1 -m 5 -n 30 -p -M "WC, NW, SE, TO" babirusa_chr10_coarse babirusa_chr10_coarsePattern.psmc 
 ```
-Note that "SE" and "TO" stands for the different population assignment of RD44 and RD71 respectively.
+Note that "WC", "NW", "SE", and "TO" stands for the different population assignment of the babirusa samples used here. Read more on the metadata txt file.
 
-> Exercise 4.1:
+> Exercise 5
 >
-> Re-run the entire command for Task 4 with the results of Exercise 3.1.
-> Do not forget to choose different prefix name for files from different parameters!
-> For example, babirusa_chr1_fine_a and babirusa_chr1_fine_b
+> Modify the -p option to have finer resolution of psmc on all four babirusa samples. Use “4+25*2+4+6” and name the resulting file with "_finePattern.psmc" suffix and run the same plotting script on the concatenated result as the previous tutorial. Note that this will take about 5-10 minutes to run.
 
-By this stage, you should have three pdf files, each coming from different -p option. To see how they look like, we need to download the output into our local machine using sftp:
+By this stage, you should have two pdf files, each coming from different -p option. To see how they look like, we need to download the output into our local machine using sftp:
 ```sh
-sftp -i <path_to_identity_file> username@138.246.238.65
-> get babirusa_* .
+sftp -i <path_to_identity_file> <username>@138.246.238.65
+> get babirusa_chr10_* .
 ```
 
+<!---
 ###Rasmus comment: I would show the whole time axis in these plots. 1st because at present you are only showing a small subset of the free parameters that are being estimated, which may not be pedagogic given that you ask them to play around with the number of free parameters. 2nd because it allows you to make an important point: that although PSMC gives you a population size estimate over a long time scale, one should be careful about interpreting it in the recent and old parts of the history.######
-
+--->
 
 The plot should look somewhat like this:
 
-Babirusa PSMC with coarse parameter           |  Babirusa PSMC with fine parameter (4 + 10*2 + 4 + 6)                | Babirusa PSMC with fine parameter (4 + 25*2 + 4 + 6)
-:--------------------------------------------:|:---------------------------------------------------:|:---------------------------------:|
-![RD44 and RD71 run with coarse parameter](../IM/babirusa_chr1_coarse.png)  |  ![RD44 and RD71 run with the first fine parameter](../IM/babirusa_chr1_fine_a.png) | ![RD44 and RD71 run with the second fine parameter](../IM/babirusa_chr1_fine_b.png)
+Babirusa PSMC with coarse parameter           |  Babirusa PSMC with fine parameter                |
+:--------------------------------------------:|:---------------------------------------------------:|
+![babirusa_coarse](../IM/babirusa_chr10_coarse.png)  |  ![babirusa_fine](../IM/babirusa_chr10_fine.png) 
 
-This plot is may look different from the exercise because it was made with option `-g 3`. Does specifiying different generation time matters?
-
-> Exercise 4.2:
->
-> Re-run commands from Task 3 and 4 to the resulting whole genome psmc you did in Task 2. Compare the result of this coarse pattern. How are they different?
-
-> Exercise 4.3:
->
-> Re-run Task 3 to 4 on RD64 and RD70 to get the coarse psmc of chromosome 1 of these samples and plot them together with the other two samples. How are they different?
-
-### Task 5: Looking at human population
+### Task 4: Looking at human population
 
 We are now going to shift gears to estimate the effective population sizes from 2 samples in the 1000 human genomes consoritum. We will compare and contrast how the effective population sizes vary between these two populations.
 
 We will only be using data from chromosome 1 due to time constraints. Further, we have already run the commands that generate the psmcfa files using our custom script, so you do not need to do that.
 
-> Exercise 5.1
+> Exercise 6
 >
 > The psmcfa files are called NA12718_chr1.psmcfa and NA19471_chr1.psmcfa. Using the same sets of commands we used in the previous section, run psmc on these 2 samples using the pattern "4+25*2+4+6". Note that this will take about 10 minutes to run.
 
 If you are short on time, or are tired of waiting, I have the psmc files for these samples already generated. They are called NA12718_chr1.psmc and NA19471_chr1.psmc. Use the plotting command - you might have to remove the -Y option from the command from the last section - to plot these.
 
-> Exercise 5.2
+> Exercise 7
 >
-> Task 2: Remember that we now plot a different species, the human species. Consequently, the plotting parameters is different. Run `psmc_plot.pl -u 2.5e-08 -s 100 -m 5 -n 30 -p -M` with the `psmc` files to get the result.
+> Remember that we now plot a different species, the human species. Consequently, the plotting parameters is different. Run `psmc_plot.pl -u 2.5e-08 -s 100 -m 5 -n 30 -p -M` with the `psmc` files to get the result.
 
 > Question: Based on what you see in the human population PSMC, what would you conclude regarding the population size history of the two populations of babirusa - did they have large or small populations, and were their population sizes similar over time?
+
+### Challenge (Optional): Running on whole autosome
+
+Running on one chromosome may not be enough to get the entire history of the babirusa population. As running PSMC on the whole genome takes a huge amount of RAM, we have run all samples whole genome psmc for you to plot. The steps are similar to the previous one, except that we use a list of chromosome names to make the consensus fasta. The psmcfa and psmc files for this are on the `/home/DATA/Day_4/Session1_Challenge`
+
+```sh
+REF=/home/DATA/Day_2/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa
+samtools faidx $REF -r chr_autosome.txt | bcftools consensus RD44.vcf.gz > RD44.fa
+```
+Note a file with the autosomes list on `chr_autosomes.txt` to keep our analysis within the autosomal chromosomes.
+
+After concatenating all sample files, Run the psmc_plot.pl using the same options with the other babirusa genomes.
