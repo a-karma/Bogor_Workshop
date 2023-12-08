@@ -362,7 +362,10 @@ admix_all_plots <- ggarrange(admix_plot_k2, admix_plot_k3, admix_plot_k4, admix_
 
 admix_all_plots
 ```
-
+If there were any issues install the `ggpubr` package, you can use the `grid.arrange()` another function from the package `gridExtra` which has the same structure
+```sh
+grid.arrange(admix_plot_k2, admix_plot_k3, admix_plot_k4, admix_plot_k5, ncol = 1)
+```
 Do not forget to save your script as you go.
 
 ![ADMIX_ALL](../IM/ADMIX_ALL.png)
