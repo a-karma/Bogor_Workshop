@@ -34,9 +34,7 @@ Then enter your user_ID then the key passphrase.
 
 You will now be in your home directory in the server.
 
-Either case, you should now see a terminal like the one below. 
-
-In the screenshot you can see: 
+Either case, you should now see a terminal like the one in the screenshot below. Here you can see: 
 - the command `ls` should list the files in your home directory
 - If you add an `l` infront, so `lls` you should see the file structure for your local computer
 - `pwd` shows the working directory in the server
@@ -55,6 +53,7 @@ The structure is like this:
  ```sh
 get [PATH/TO/REMOTE/FILE] [LOCATION/TO/PUT/FILE/IN/LOCAL]
 ```
+
 > Hints - You can use `get -r ` to get the whole directory.
 > The -r flag, also known as --recursive, is a powerful option used in various shell commands to operate on files and directories in a nested manner. It instructs the command to process not only the specified target but also all of its contents, including subdirectories and their contents, recursively.
 > 
@@ -63,8 +62,8 @@ get [PATH/TO/REMOTE/FILE] [LOCATION/TO/PUT/FILE/IN/LOCAL]
 You will also need to download some files from the shared directory `/home/DATA/Day_3_b/`
 - you need the `pop_file.txt`
 - and the rooted tree file `babirusa_rooted.treefile`
-When you have done this, type this to close the connection.
-
+  
+When you have downloaded all the files, type this to close the connection.
 ```sh
 bye
 ```
@@ -98,7 +97,13 @@ Now lets do the same for the rooted tree, in a different browser window so you c
 >
 > By hovering over the samples, root the tree by the correct sample and colour by region using the `pop_file.txt`
 
-It is possible to add colours for regions, change and format lines etc, but for speed we will just compare the clustes we see on our tree to the metadata file. If you finish the session, this is something you can play around with. But for now, open your population metadata file, ('pop_file.txt') which contains the sample IDs and regions
+It is possible to add colours for regions, change and format lines etc, but for speed we will just colour the groups based on the population metadata file ('pop_file.txt') so we can compare the clades we see on our tree and see if there is any geographic signal. 
+
+> `Exercise three`
+>
+> Using the population metadata, and the `coloured ranges` options in iTOL can you colour the samples by region. The image below shows the Togean island population. Can you do the same for the individuals from the SE, WC and NW. But you might need to consider how to colour the samples from the NW and WC? 
+
+![iTOL_rooted_TO](../IM/iTOL_rooted_colours_TO.png)
 
 #### Questions:
 - when you consider the region of origin for each individual, do you think there is evidence of geographic clustering?
