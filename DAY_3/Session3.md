@@ -271,7 +271,7 @@ pca_plot_names
 ![Final_PCA](../IM/Final_PCA.png)
 
 <img src="../IM/Final_PCA.png" width="50%" height="50%">
-
+<img src="../IM/Final_PCA.png" width="80%" height="80%">
 > `Hint` - use `?ggplot` or `?geom_point` to read the help files and there is alot of help online
 
 You save the plot using `ggsave`. Save the PCA as a `.png` in your figures directory.
