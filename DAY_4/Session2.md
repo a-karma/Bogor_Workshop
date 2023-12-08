@@ -22,7 +22,7 @@
   
   ### Task 0: Preparing your working directory
   
-  > Exercise 0.1
+  > Exercise 1
   >
   > Prepare your working directory for this session by following all the steps in Task 0 of Day 4 Session 1, but with data from /home/DATA/Day_4/Session_2
   
@@ -112,7 +112,7 @@
   ```
   Open rSROH and see what is inside. This is the summary of the total ROH segment we obtained.
   
-  > Exercise 2.1
+  > Exercise 2
   >
   > We have this summary on the .hom.indiv. Can you check whether we have the correct sum per sample?
   > Repeat the above command to get the mean length and also check.
@@ -129,7 +129,7 @@
   
   Which population has the highest amount of inbreeding?
   
-  > Exercise 2.2.
+  > Exercise 3
   >
   > The inbreeding coefficient (FROH) is the total sum of ROH segment divided by the entire genome length. As we map to the domestic pig genome and ran this on autosomal genome only, the total here is 2,265,774,640 base pairs. Calculate the FROH and plot the result. Is it still looking the same with the SROH plot?
   
@@ -230,6 +230,6 @@ Let's go back to the server and do Exercise 2.4.
   6      6     1 87000001 92000000   5000000        3000020      RD1
   ```
   
-  > Exercise 3.1.
+  > Exercise 4
   >
   > Plot the segment distribution using `geom_segment()`, a boxplot, and the frequency of segment length classes as you have for the PLINK results. How similar it is with the PLINK results?
