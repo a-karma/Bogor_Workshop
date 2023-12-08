@@ -141,8 +141,9 @@
     xlim(1000,10000)+
     theme_minimal()
   ```
-  
-  Let's go back to the server and do Exercise 2.4.
+
+  <!---
+Let's go back to the server and do Exercise 2.4.
   
   > Exercise 2.3.
   >
@@ -151,6 +152,7 @@
   > Hint: Read the documentation for PLINK --homozyg here https://zzz.bwh.harvard.edu/plink/ibdibs.shtml#homo
   >
   > Compare the result of Exercise 2.4 with the result from the default. Which analysis detect the most ROHs per sample? Which set of parameters do you trust more?
+  --->
   
   <!---
   I just added this, might not be a good idea? Just intense plotting session.
