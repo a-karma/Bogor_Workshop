@@ -131,7 +131,7 @@ Now that we have our list of files, we are going to run all the quality control 
 while read -r line
 do
 fastqc -t 1 $line -o qc
-done<./lists/fastq_list.txt
+done < ./lists/fastq_list.txt
 ```
 We could also run this without a list of files as: 
 
