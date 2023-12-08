@@ -350,10 +350,10 @@ admix_plot_k2 <- admix_plot_k2 + theme(axis.text.x = element_text(angle = 60, hj
 >
 > `Hint` - you can add multiple layer to the object at once
 > 
-> e.g. admix_plot_k3 <- ggplot(data = k3_long) +
+> e.g. `admix_plot_k3 <- ggplot(data = k3_long) +
 >                        geom_col(aes(x=sample, y=value, fill=name)) +
 >                        scale_y_continuous(expand = c(0,0)) +
->                        facet_wrap(~region, scales = "free", nrow = 1)
+>                        facet_wrap(~region, scales = "free", nrow = 1)`
 > 
 
 When you have made the plots of all the values of k, we can visualise them ontop of each other using a function called `ggarrange()` in the `ggpubr` package.
@@ -364,7 +364,7 @@ admix_all_plots <- ggarrange(admix_plot_k2, admix_plot_k3, admix_plot_k4, admix_
 
 admix_all_plots
 ```
-If there were any issues install the `ggpubr` package, you can use the `grid.arrange()` another function from the package `gridExtra` which has the same structure
+If there were any issues install the `ggpubr` package, you can use the `grid.arrange()` a function from the package `gridExtra` which has the same structure
 ```sh
 grid.arrange(admix_plot_k2, admix_plot_k3, admix_plot_k4, admix_plot_k5, ncol = 1)
 ```
@@ -372,9 +372,15 @@ Do not forget to save your script as you go.
 
 ![ADMIX_ALL](../IM/ADMIX_ALL.png)
 
-### Questions: 
+Now we will check to see which value of K the cross validation suggests is best. The easiest way to do this is to return to your terminal and we will use `grep` to get the CV errors values. The lower the value the more fitting the k-value is to the data. However, be warned this is only suggestive and should not be overinterpretted.
+
+```sh
+grep 'CV' /day3/output_admixture/cv_errors.txt 
+```
+
+#### Questions: 
+- what is the most fitting value of k? 
 - what do you think this analysis tells us about the ancestry of the babirusa?
-- open up the cv.errors.txt file - what does this suggest is the most fitting number of clusters? Why might this be?
 - are there any individuals that look like they are admixed, i.e. show evidence of multiple ancestries?
 
 ### Now that you have the results of all three exercises: 
@@ -384,7 +390,7 @@ Do not forget to save your script as you go.
 
 ### 5. Extra exercises
 >
-> Can you add the sample names to the plot using the function `geom_text_repel()`
+> can you add the sample names to the plot using the function `geom_text_repel()`
 > 
 > in your pca, can you re-colour the points based on the three clusters inside of four? `Hint` - look at column `region2` in the metadata
 > 
