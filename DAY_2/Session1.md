@@ -263,7 +263,7 @@ OUTPUT=$(echo `basename ${INPUT1}` | sed 's/_*.fastq//')
 AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ~/day2/fastqs/${OUTPUT} --trimns --trimqualities
 ```
 
-> `Exercise 3`
+> `Exercise 2`
 >
 > Run the last version of our script to remove adapters using the same input files you have used before.
 > Have a look at the output inside the `fastqs` directory. Do you see the difference?
