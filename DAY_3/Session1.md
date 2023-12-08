@@ -57,17 +57,28 @@ tail -n +2 [input].het | awk '{print $1, 1-($2/$4)}' | less
 > How do you estimate expected heterozygosity?
 
 ##### Number of seggregating sites (S)
-- Number of seggregating sites are the total number of polymorphic loci.
+- Number of seggregating sites are the total number of polymorphic loci. This is a metric that informs conservation geneticists the number of loci with fixed alleles and the number of loci that still hosts some variation.
 - We will use vcftools (https://vcftools.sourceforge.net) for this exercise 
 
+First we need to count the number of loci that hosts some variation i.e. the number of loci with more than one allele in the population.
 
 ```sh
 
 # Calculate the number of polymorphic loci using vcftools
 vcftools --vcf [input.vcf] --counts --out [input]
 
-# View the output and estimate the number of seggreating sites
+```
+We will visualize the results of the previous step with `less -S` command.
+
+```sh
+# View the output
 less -S [input].frq.count
+
+```
+We need to count the number the loci with both the reference allele and the alternate allele are found atleast once in the population. Or to reiterate none of the alleles are fixed. The `wc -l` counts the number of lines in a file. We will use the `wc -l` command to count the number of loci that atleast one reference and one alternate allele in the population.
+
+```sh
+# estimate the number of seggreating sites
 tail -n +2 [input].frq.count | awk 'NF==6 {print $0}' | awk -F "[\t:]" '$6>0 && $8>0 {print $0}' | wc -l
 
 ```
