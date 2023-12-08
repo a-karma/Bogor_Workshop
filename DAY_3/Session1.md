@@ -5,13 +5,13 @@
 ## Day 3 - Population genetic analysis - Session 2
 In this session you will learn how to measure genetic diversity and what can we learn from these metrics.
 ### Measuring Genetic Diversity 
-Today we are going to explore the observables of genetic data a.k.a genetic diversity. We are going to measure three metrics of genetic diversity: Observed heterozygosiy (Ho), number of seggregating sites (S) and the average number of pairwise difference between sequences (Pi).
+We are going to explore the observables of genetic data a.k.a genetic diversity. We are going to measure three metrics of genetic diversity: Observed heterozygosiy (Ho), number of seggregating sites (S) and the average number of pairwise difference between sequences (Pi).
 We will further try to explore if a population is evolving or is neutral using these metrics.
 
 ##### Heterozygosity 
 - Heterozygosity is the probability of sampling two different alleles for a locus.
-- We will use ![vcftools](https://vcftools.sourceforge.net) for this exercise 
-- There are other methods as well, for example, ![RTG tools](https://github.com/RealTimeGenomics/rtg-tools) and ![ANGSD](http://www.popgen.dk/angsd/index.php/Heterozygosity)
+- We will use vcftools(https://vcftools.sourceforge.net) for this exercise 
+- There are other methods as well, for example, RTG tools (https://github.com/RealTimeGenomics/rtg-tools) and ANGSD (http://www.popgen.dk/angsd/index.php/Heterozygosity)
 
 
 ```sh
