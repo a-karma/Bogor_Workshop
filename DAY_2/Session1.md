@@ -95,7 +95,9 @@ Table 2.2: Illumina Phred-score encoding
 |+|10||6|21||A|32|
 
 
-> Question 1: What's the accuracy of the last base call in the example above? 
+> Question 1:
+>
+> What's the accuracy of the last base call in the example above? 
 
 #### Quality Control
 
@@ -174,7 +176,9 @@ Lets look at the same diagram below this time for paired end reads. Lets say the
 
 `Adapterremoval` can do both, remove the adapters and collapse the 50bp fragment you sequenced twice so you get only 1 reads at the end.  
 
-> Question: What do you think the index primers are for? 
+> Question 4:
+>
+> What do you think the index primers are for? 
 
 `Adapterremoval` can also do quality trimming. This involves removing low-quality bases from the ends of reads (e.g. see how bad the quality is at end of the reads in the first fastqc example).
 
@@ -222,7 +226,9 @@ One possibility is to employ the `basename` command which separates a file name 
 basename 
 ```
 
-> Question 4: what's the output of the command above?
+> Question 5:
+>
+> What's the output of the command above?
 
 We can now modify our script and assign to the last variable the `correct` value.
 
