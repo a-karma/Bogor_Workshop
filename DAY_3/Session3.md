@@ -69,6 +69,8 @@ When you have done this, type this to close the connection.
 bye
 ```
 
+Now move the output files to the correct directory for each analysis.
+
 ### 2. Visualising and comparing the trees
 You should have two trees now - the one the you built (unrooted) and the one from the shared directory (rooted).
 
@@ -80,7 +82,7 @@ Open your browser and navigate to: https://itol.embl.de/
 
 Scroll down a little and click on the upload tree button
 
-### Unrooted tree
+#### Unrooted tree
 First we will look at the unrooted tree you generated. So under the tree file box, navigate to your unrooted `.treefile` and click upload. Alternatively you can copy the newick format tree at the bottom of the `.iqtree` file into the text box.
 
 > `Exercise one`
@@ -89,7 +91,7 @@ First we will look at the unrooted tree you generated. So under the tree file bo
 
 ![iTOL_unrooted_renamed](../IM/iTOL_unrooted_renamed.png)
 
-### Rooted tree
+#### Rooted tree
 Now lets do the same for the rooted tree, in a different browser window so you can compare. The first thing to do is specify the root. Then we will colour the samples by region to identify if the populations form monophyletic clades. 
 
 > `Exercise two`
@@ -98,7 +100,7 @@ Now lets do the same for the rooted tree, in a different browser window so you c
 
 It is possible to add colours for regions, change and format lines etc, but for speed we will just compare the clustes we see on our tree to the metadata file. If you finish the session, this is something you can play around with. But for now, open your population metadata file, ('pop_file.txt') which contains the sample IDs and regions
 
-### Questions:
+#### Questions:
 - when you consider the region of origin for each individual, do you think there is evidence of geographic clustering?
 - what is the difference between the tree with and without the outgroup?
 - which population of babirusa are most distinct?
@@ -190,7 +192,6 @@ evec.pc2 <- round(eval[2,1]/sum(eval)*100,digits=2)
 ```
 
 We will plot the PCA using ggplot and first we will add the metadata information to the eigenvectors dataframe.  
-
 ```sh
 evec_merge <- as.data.frame(cbind(evec[,-12],
                                   sample = samplelist$sample,
@@ -205,7 +206,6 @@ evec_merge <- as.data.frame(cbind(evec[,-12],
 > `Question`
 >
 > Why do we do `evec[,-12]` first? What is it doing? `Hint` - check the contents of the original `evec` file
-> 
 
 Now we are ready for plotting using the function ggplot. ggplot is a very comprehensive package with many options. We will just try and keep it simple but if you have experience with it, go ahead and add options ontop. 
 The plots are built in layers, with each layer being added to the basic plot using (`+`). 
@@ -229,18 +229,17 @@ Then we specify the aesthetics (`aes`) within the geom function. These are the n
 
 ggplot2 is a powerful data visualization library for the R programming language see here for more detials on ggplot2: https://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html
 
-Lets make this an object called `pca_plot`
-
-Do the same thing again but specify an object name. 
+We will do the same thing again but this time specifying an object name. Lets make this an object called `pca_plot`.
 ```sh
 pca_plot <- ggplot(data = evec_merge) + 
   geom_point(aes(x = V2, y = V3, colour = region), size = 4)
 
 pca_plot
 ```
-Then you can see the plot by calling the object `pca_plot`
+Then you can see the plot by calling the object `pca_plot` on its own
 
 Now this your basic PCA plot. You could stop here - but there are many other options that we could add, and just adding a couple can make the figure much clearer for the reader.
+
 First lets add the percentage contribution to each axis, this gives an indication of how important each axis is to the genetic structure.
 ```sh
 pca_plot <- pca_plot + xlab(paste0("PC1 (", evec.pc1, "%)")) + ylab(paste0("PC2 (", evec.pc2, "%)")) 
@@ -269,13 +268,14 @@ pca_plot_names
 
 You save the plot using `ggsave`. Save the PCA as a `.png` in your figures directory.
 ```sh
-ggsave(plot = PLOT_NAME, "PATH/TO/FILE.png")
+ggsave(plot = PLOT_NAME, "figures/name_of_plot.png") # you can make a .pdf or other formats by changing the extension here
 ```
-### Questions:
+
+#### Questions:
 - when you look at the PCA, what do you see and what do you think this means for the babirusa population?
 - do you think that there is evidence of population structure and how many populations do you this these samples from?
 
-### 4. Visualising the ADMIXTURE analysis
+### 4. Visualising ADMIXTURE analysis
 Great, now lets move on to plotting the admixture results. You can keep going in the script, but remember to save it every so often. 
 We want to use the same metadata file as for the PCA, so lets not clear our environment. 
 
@@ -351,11 +351,8 @@ admix_plot_k2 <- admix_plot_k2 + theme(axis.text.x = element_text(angle = 60, hj
 > `Hint` - you can add multiple layer to the object at once
 > 
 > e.g. admix_plot_k3 <- ggplot(data = k3_long) +
-> 
 >                        geom_col(aes(x=sample, y=value, fill=name)) +
-> 
 >                        scale_y_continuous(expand = c(0,0)) +
-> 
 >                        facet_wrap(~region, scales = "free", nrow = 1)
 > 
 
