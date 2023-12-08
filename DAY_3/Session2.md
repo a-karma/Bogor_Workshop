@@ -13,14 +13,14 @@ In session three - you will export the data from the virtual machine and work in
 
 ### 1. Building phylogenetic trees with IQtree
 
-First create a new directory for this session in your home directory (`~/`). Recall the guidelines with went through on day 1.
+First create a new directory for this session in your home directory (`~/`) with a subdirectory specifically for this analysis. Recall the guidelines with went through on day 1.
 
 Next activate the correct conda environment for the day
 > `Hint` - this will be the same as the one you were using this morning
 
 We will keep the output files for each analysis in their own directory, so make a directory for this analysis and navigate to it. This is your working directory.
 
-### Convert to phylip format
+#### Convert to phylip format
 The program you will use to make the tree is called `iqtree`. `iqtree` requires an alignment file as an input but this can take several formats. 
 We will be using the `.phylip` alignment format. To generate this from the vcf file, you need to use a script called `vcf2phylip.py`. 
 
