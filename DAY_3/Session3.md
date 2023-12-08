@@ -56,7 +56,7 @@ get [PATH/TO/REMOTE/FILE] [LOCATION/TO/PUT/FILE/IN/LOCAL]
 > If you are in the desired location on your local you can just use a `.` instead of `[LOCATION/TO/PUT/FILE/IN/LOCAL]`
 
 You will also need to download some files from the shared directory `/home/DATA/Day_3_b/`
-- you need the `population_file.txt`
+- you need the `pop_file.txt`
 - and the rooted tree file `babirusa_rooted.treefile`
 When you have done this, type this to close the connection.
 
@@ -91,7 +91,7 @@ Now lets do the same for the rooted tree, in a different browser window so you c
 >
 > By hovering over the samples, root the tree by the correct sample
 
-It is possible to add colours for regions, change and format lines etc, but for speed we will just compare the clustes we see on our tree to the metadata file. If you finish the session, this is something you can play around with. But for now, open your population metadata file, which contains the sample IDs and regions
+It is possible to add colours for regions, change and format lines etc, but for speed we will just compare the clustes we see on our tree to the metadata file. If you finish the session, this is something you can play around with. But for now, open your population metadata file, ('pop_file.txt') which contains the sample IDs and regions
 
 ### Questions:
 - when you consider the region of origin for each individual, do you think there is evidence of geographic clustering?
@@ -142,7 +142,7 @@ Now we will load in the metadata file we need for plotting the PCA, which contai
 
 Load the metadata file and name the columns:
 ```sh
-samplelist <- read_tsv("population_file.txt", col_names = c("sample", "region"))
+samplelist <- read_tsv("pop_file.txt", col_names = c("sample", "region"))
 
 In R, the read_tsv() function is used to import tab-separated values (TSV) files into R data frames. TSV files are a common format for storing tabular data, with each line representing a record and each column representing a variable. The columns are separated by tab characters, hence the name "tab-separated values".
 
@@ -373,4 +373,4 @@ Do not forget to save your script as you go.
 
 Extra ADMIXTURE exercise
 >
-> could you change the plots to be a better representation of the population clusters
+> could you change the plots to be a better representation of the  clusters
