@@ -343,11 +343,15 @@ admix_plot_k2 <- admix_plot_k2 + theme(axis.text.x = element_text(angle = 60, hj
 >
 > Save this plot and generate the remaining plots for your clusters?
 >
-> 'Hint' - you can add multiple layer to the object at once
+> `Hint` - you can add multiple layer to the object at once
 > e.g. admix_plot_k3 <- ggplot(data = k3_long) +
+> 
 >                        geom_col(aes(x=sample, y=value, fill=name)) +
+> 
 >                        scale_y_continuous(expand = c(0,0)) +
+> 
 >                        facet_wrap(~region, scales = "free", nrow = 1)
+> 
 
 When you have made the plots of all the values of k, we can visualise them ontop of each other using a function called `ggarrange()` in the `ggpubr` package.
 
