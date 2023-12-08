@@ -329,7 +329,8 @@ admix_plot_k2 <- admix_plot_k2 + facet_wrap(~region, scales = "free", nrow = 1)
 - this is the function `facet_wrap()` where we specify we want it to be split by region
 - `scales = "free"` stops R trying to plot every sample in every region
 - and `nrow = 1` makes sure they are in a line, and not in a square
-> Hint - try running it without these options, what do you see?
+  
+> `Question` - try running it without these options in `facet_wrap()`, what do you see?
 
 Finally to make the names readable and label the y axis correctly we can add: 
 ```sh
