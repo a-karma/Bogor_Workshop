@@ -142,7 +142,7 @@ Now we will load in the metadata file we need for plotting the PCA, which contai
 
 Load the metadata file and name the columns:
 ```sh
-samplelist <- read_tsv("pop_file.txt", col_names = c("sample", "region"))
+samplelist <- read_tsv("population_file.txt", col_names = c("sample", "region"))
 
 In R, the read_tsv() function is used to import tab-separated values (TSV) files into R data frames. TSV files are a common format for storing tabular data, with each line representing a record and each column representing a variable. The columns are separated by tab characters, hence the name "tab-separated values".
 
