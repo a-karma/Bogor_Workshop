@@ -41,6 +41,8 @@ tail -n +2 [input].hwe | awk -F "[\t/]" '{print $4, $3+$4+$5, $4/($3+$4+$5)}' | 
 
 ```
 
+Now, let's try and estimate the total number of heterozygous loci in an individual and then calculate heterozygosity on a per individual basis.
+
 ```sh
 # Calculate the number of heterozygous genotypes for an individual using vcftools
 vcftools --vcf [input.vcf] --het --out [input]
