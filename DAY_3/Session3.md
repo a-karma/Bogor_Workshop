@@ -233,8 +233,9 @@ pca_plot <- ggplot(data = evec_merge) +
 
 pca_plot
 ```
+Then you can see the plot by calling the object `pca_plot`
 
-This is your basic PCA plot. You could stop here - but there are many other options that we could add, and just adding a couple can make the figure much clearer for the reader.
+Now this your basic PCA plot. You could stop here - but there are many other options that we could add, and just adding a couple can make the figure much clearer for the reader.
 First lets add the percentage contribution to each axis, this gives an indication of how important each axis is to the genetic structure.
 ```sh
 pca_plot <- pca_plot + xlab(paste0("PC1 (", evec.pc1, "%)")) + ylab(paste0("PC2 (", evec.pc2, "%)")) 
@@ -244,7 +245,7 @@ Next lets make the plot look a little cleaner. ggplot has lots of built in `them
 ```sh
 pca_plot <- pca_plot + theme_bw()
 ```
-> Hint - start typing `theme_` and then use the tab to see the different options
+> `Hint` - start typing `theme_` and then use the tab to see the different options
 
 The theme_bw() function is part of the ggplot2 package in R and is used to create a black and white theme for your plots. 
 
