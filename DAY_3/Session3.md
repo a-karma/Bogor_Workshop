@@ -289,10 +289,10 @@ We do this using:
 ```sh
 k2_long <- k2 %>% bind_cols(samplelist, k = "k2") %>% 
   pivot_longer(cols = 1:2)
-head(K2_long)
+head(k2_long)
 ```
 Lets look at this
-- first we call the data (`k2)
+- first we call the data (`k2`)
 - `%>%` is a way of piping from one command to the next in the package `tidyverse` - similar to the `|` in UNIX
 - the function `bind_cols()` is similar to the base R function we used earlier `cbind()` and adds columns together. At the same time we can add a column to specify the value of K
 - the function `pivot_longer()` converts it to long form - the number of columns relates to the number of columns in the .Q matrix
