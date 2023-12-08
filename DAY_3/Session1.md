@@ -9,7 +9,7 @@ We are going to explore the observables of genetic data a.k.a genetic diversity.
 We will further try to explore if a population is evolving or is neutral using these metrics.
 
 ##### Heterozygosity 
-- Heterozygosity is the probability of sampling two different alleles for a locus.
+- Heterozygosity is the probability of sampling two different alleles for a locus. Heterozygosity is an important predictor of survivability of populations. It helps rescue from consequences of recessive deleterious alleles for example.  
 - We will use vcftools(https://vcftools.sourceforge.net) for this exercise 
 - There are other methods as well, for example, RTG tools (https://github.com/RealTimeGenomics/rtg-tools) and ANGSD (http://www.popgen.dk/angsd/index.php/Heterozygosity)
 
