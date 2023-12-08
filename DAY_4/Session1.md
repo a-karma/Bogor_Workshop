@@ -34,7 +34,7 @@ Make your own directory for this project and use a symbolic link for easy access
 ```sh
 mkdir day4_psmc_tutorial
 cd day4_psmc_tutorial
-ln -s /home/DATA/Day_4/* .
+ln -s /home/DATA/Day_4/Session_1/* .
 ```
 
 Now we are good to go.
@@ -47,7 +47,7 @@ PSMC works on a psmcfa file of a single diploid sample. A `psmcfa` file is a fas
 
 Conventionally, a single individual psmcfa is generated from a consensus fasta generated from a BAM file. However, this will take some time so we will instead generate the consensus sequence from a VCF file using `samtools faidx` and `bcftools consensus` below:
 ```sh
-REF=/home/DATA/Day_3_b/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa
+REF=/home/DATA/Day_2/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa
 samtools faidx $REF -r chr_autosomes.txt | bcftools consensus RD44.vcf.gz > RD44.fa
 ```
 Note that we need the pig reference genome to do this, and a file with the autosomes list on `chr_autosomes.txt` to keep our analysis within the autosomal chromosomes.
