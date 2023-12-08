@@ -136,7 +136,7 @@ This will clean up any variables from a previous session which might conflict.
 We then need to set the working directory - this should be the path to the project folder you made, where you downloaded the output files to. 
 
 ```sh
-setwd("~/PATH/TO/PROJECT/DIRECTORY/")
+setwd("~/PATH/TO/PROJECT/DIRECTORY/") # this would be the `day3` project directory
 getwd() # this should show your working directory location in the terminal
 ```
 You can see above that anything your write with a `#` will not be run - it is a comment. In programming, a commented line is a line of code that is intentionally excluded from execution. Comments are typically used to explain the purpose of code, document functionality, or provide additional information for programmers who may need to understand or modify the code in the future.
@@ -183,7 +183,7 @@ samplelist$region2[samplelist$region == "SE"] <- "South"
 
 Next you will read in the datafiles, for the pca there are two files we need, `.evec` and `.eval`.
 ```sh
-eval <- read.table("PATH/TO/FILE.eval")
+eval <- read.table("pca_output/[name_of_file].eval")
 head(eval)
 ```
 > `Exercise four`
