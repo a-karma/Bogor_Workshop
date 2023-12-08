@@ -23,11 +23,20 @@ vcftools --vcf [input.vcf] --hardy --out [input]
 
 Then we will estimate the proportion of individuals that are heterozygous at a locus. For this we need to calculate the ratio of number of individuals heterozygous at a locus and the total number of individuals genotyped at the locus.
 
-Let's first visualize the output generated in the previous step. For this we will use the "less" command
+Let's first visualize the output generated in the previous step. For this we will use the `less` command. This command allows us to read a file without printing it or opening the whole file. The `less -S` option will let us read the file without word wrapping. Use `ctrl+q` to exit the window.
 
 ```sh
-# View the output and estimate heterozygosity per loci
+# View the output  
 less -S [input].hwe
+
+```
+
+Now, let's estimate the heterozygosity per locus. We will use the `tail -n +2` command. This will open the file without reading the first line which contains the headers.
+
+Then, we print specific columns and perform the required mathematical operations for each column using the `awk` command. `awk` is a powerful command for performing column operations.
+
+```sh
+# Estimate heterozygosity per loci
 tail -n +2 [input].hwe | awk -F "[\t/]" '{print $4, $3+$4+$5, $4/($3+$4+$5)}' | less
 
 ```
