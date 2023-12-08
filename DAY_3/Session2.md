@@ -212,7 +212,7 @@ ADMIX=/home/DATA/Day_3_b/babirusa_panel.bed
 
 Then make the for loop for k = 1-5
 ```sh 
-for k in {1..5} 
+for k in $(seq 5) 
 do
     admixture $ADMIX --cv $k | tee babirusa_k_$k.log
 done
