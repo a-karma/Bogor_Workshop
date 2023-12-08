@@ -39,7 +39,7 @@ Conservation scores such as SIFT is only one among the many ways of characterizi
 
 ### Task 0: Prepping your working directory
 
-> Exercise 0.1
+> Exercise 1
 >
 > Prepare your working directory for this session by following all the steps in Task 0 of Day 4 Session 1, but with data from /home/DATA/Day_4/Session_3.
 
@@ -157,7 +157,7 @@ cat $(ls result/RD*sift_scores.txt | sort -V) | sed 's/result\///' | sed 's/_chr
 
 > Question: What do you think the `sed` command does? Have a look on the resulting file when you remove one of the sed command and compare it with a file which has the entire commands intact.
 
-> Exercise 4.1.
+> Exercise 2
 >
 > Create a new R project for plotting the result of the mutational load run and download the results into a 'input' directory using sftp.
 
@@ -176,7 +176,7 @@ head(s)
 ```
 > Question: what do you think the colnames() function in R is for? Why do we need it?
 
-> Exercise 5.1.
+> Exercise 3
 >
 > Merge the metadata with left_join() as in with previous session.
 
