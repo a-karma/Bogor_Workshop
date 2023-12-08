@@ -76,9 +76,9 @@ Open your browser and navigate to: https://itol.embl.de/
 Scroll down a little and click on the upload tree button
 
 ### Unrooted tree
-First we will look at the unrooted tree you generated. So under the tree file box, navigate to your unrooted `.treefile` and click upload.
+First we will look at the unrooted tree you generated. So under the tree file box, navigate to your unrooted `.treefile` and click upload. Alternatively you can copy the newick format tree at the bottom of the `.iqtree` file into the text box.
 
-> Exercise
+> Exercise one
 >
 > Use the control panel on the right to make your unrooted tree look like this example below
 
@@ -96,6 +96,7 @@ It is possible to add colours for regions, change and format lines etc, but for 
 ### Questions:
 - when you consider the region of origin for each individual, do you think there is evidence of geographic clustering?
 - what is the difference between the tree with and without the outgroup?
+- which population of babirusa are most distinct?
 
 ### 3. Visualising the PCA analysis
 Next we will look at the results of the PCA using RStudio.
