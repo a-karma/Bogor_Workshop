@@ -62,7 +62,7 @@ The third line always starts with a `+` to improve the readability of the file b
 sequence line from its quality. The + symbol might be followed by the read identifier in
 the first line (optional).
 
-The forth line consists of a series of characters that encode the Phred-score for each
+The forth line consists of a series of characters that encode the Phred-score (Q) for each
 base in the sequence on the second line of the entry. Broadly speaking, Phred scores
 are a measure of how confident we are in calling a given base.
 
