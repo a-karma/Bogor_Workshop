@@ -161,7 +161,7 @@ In most cases when your DNA is of very good quality (e.g. DNA was extracted from
 
 If the dna insert (in gray; the DNA we are interested in) is shorter than the read length (e.g. 150bp) then the sequencer will sequence what comes after i.e. the adapter. 
 
-This is particularly an issue if your DNA is degraded, for example, if it is comming from an non-invasive sample like hair or feaces, or even bone. In this case we would want to remove the adapter sequence so that you only work with the DNA we are interested in: the part in gray in diagram above. Having adapter sequences in reads can lead to issues with mapping and genotyping later on. If you do not understand this please speak to a instructor so they can help you. 
+This is particularly an issue if your DNA is degraded, for example, if it is coming from an non-invasive sample like hair or feaces, or even bone. In this case we would want to remove the adapter sequence so that you only work with the DNA we are interested in: the part in gray in diagram above. Having adapter sequences in reads can lead to issues with mapping and genotyping later on. If you do not understand this please speak to a instructor so they can help you. 
 
 There are many software available that can perform this task, here we will focus on ![AdapterRemoval](https://adapterremoval.readthedocs.io/en/stable/). 
 The main reason why we present this software in this workshop is because it not only search and remove adapters from high-throughput sequencing data but it can also perform the colllapsing of the two reads if necessary. 
