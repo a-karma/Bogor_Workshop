@@ -254,7 +254,7 @@ The regular expression `>seq.*` matches any line containing the string >seq foll
 
 We can also use a regex inside a sed command. For example, let's extract the 3rd sequence of each haplogroup:
 ```sh
-sed -n '/seq_3_/,+1p' random.fasta > /home/your-user-id/project_BASH/raw_data/third_seq_all_Hg.fasta
+sed -n '/seq_3_/,+1p' random.fasta > /home/your-user-id/project_bash/raw_data/third_seq_all_Hg.fasta
 ```
 As you can see, it looks very similar to the sed command we used before with the exception that instead of providing sed with specific line number, 
 here we have specified a pattern (`/seq_3_/`) and asked the program to print each matching line plus and the following one: (+1p). 
