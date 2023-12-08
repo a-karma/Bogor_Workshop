@@ -130,7 +130,7 @@ getwd() # this should show your working directory location in the terminal
 You can see above that anything your write with a `#` will not be run - it is a comment. In programming, a commented line is a line of code that is intentionally excluded from execution. Comments are typically used to explain the purpose of code, document functionality, or provide additional information for programmers who may need to understand or modify the code in the future.
 
 Now you load the libraries you need for this section.
-> Hint - These will have needed to be installed first with install.packages(), and this only needs to be done once
+> Hint - These will have needed to be installed first with `install.packages()`, and this only needs to be done once
 
 ```sh
 library(tidyverse)
