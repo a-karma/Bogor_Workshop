@@ -78,18 +78,18 @@ Scroll down a little and click on the upload tree button
 ### Unrooted tree
 First we will look at the unrooted tree you generated. So under the tree file box, navigate to your unrooted `.treefile` and click upload. Alternatively you can copy the newick format tree at the bottom of the `.iqtree` file into the text box.
 
-> Exercise one
+> `Exercise one`
 >
 > Use the control panel on the right to make your unrooted tree look like this example below
 
 ![iTOL_unrooted_renamed](../IM/iTOL_unrooted_renamed.png)
 
 ### Rooted tree
-Now lets do the same for the rooted tree, in a different browser window so you can compare. The first thing to do is specify the root.
+Now lets do the same for the rooted tree, in a different browser window so you can compare. The first thing to do is specify the root. Then we will colour the samples by region to identify if the populations form monophyletic clades. 
 
-> Exercise
+> `Exercise two`
 >
-> By hovering over the samples, root the tree by the correct sample
+> By hovering over the samples, root the tree by the correct sample and colour by region using the `pop_file.txt`
 
 It is possible to add colours for regions, change and format lines etc, but for speed we will just compare the clustes we see on our tree to the metadata file. If you finish the session, this is something you can play around with. But for now, open your population metadata file, ('pop_file.txt') which contains the sample IDs and regions
 
@@ -165,7 +165,7 @@ Then you want to assign a new group based on the original grouping. So for the S
 ```sh
 samplelist$region2[samplelist$region == "SE"] <- "South"
 ```
-> Exercise
+> `Exercise three`
 >
 > Rename the Togean babirusa to a group called "Island" and then assign both the Northwest and Westcentral babirusa to a "North" group.
 
@@ -174,7 +174,7 @@ Next you will read in the datafiles, for the pca there are two files we need, `.
 eval <- read.table("PATH/TO/FILE.eval")
 head(eval)
 ```
-> Exercise
+> `Exercise four`
 >
 > Can you read in the `.evec` file and check that it has been correctly loaded - there should be 12 columns
 
@@ -274,7 +274,7 @@ k2 <- read.table("PATH/TO/FILE.Q")
 head(k2) # you should see two columns "V1" and "V2" 
 ```
 The columns V1 and V2 correspond to the ancestry proportions, and the number of columns will change with the values of K
-> Exercise
+> `Exercise five`
 >
 > Can you read in the additional Q files for the each of the clusters you ran?
 
@@ -293,7 +293,7 @@ Lets look at this
 
 ![Long_df](../IM/Long_df.png)
 
-> Exercise
+> `Exercise six`
 >
 > Can you modify this code now for your other values of k?
 
@@ -332,7 +332,7 @@ admix_plot_k2 <- admix_plot_k2 + theme(axis.text.x = element_text(angle = 60, hj
 ```
 ![ADMIX_K2](../IM/ADMIX_K2.png)
 
-> Exercise
+> `Exercise seven`
 >
 > Save this plot and generate the remaining plots for your clusters? 
 
@@ -361,17 +361,12 @@ Do not forget to save your script as you go.
 
 ### 5. Extra exercises
 >
-> Can you add the regions and colours to the tree?
->
 > Can you add the sample names to the plot using the function `geom_text_repel()`
 > 
-> Can you re-colour the points based the three clusters inside of four?
+> in your pca, can you re-colour the points based on the three clusters inside of four? `Hint` - look at column `region2` in the metadata
 > 
-> Can you use scale_colour_manual() to choose your own colour palette?
+> can you use `scale_colour_manual()` to choose your own colour palette?
 >
-> Plot on the different PC axis and calculate the variation for these
->
-
-Extra ADMIXTURE exercise
+> plot on the different PC axes and calculate the contribution of variation for these axes
 >
 > could you change the plots to be a better representation of the  clusters
