@@ -262,7 +262,7 @@ pca_plot_names
 
 > Hint - use `?ggplot` or `?geom_point` to read the help files and there is alot of help online
 
-You save the plot using:
+You save the plot using `ggsave`. Save the PCA as a `.png` in your figures directory.
 ```sh
 ggsave(plot = PLOT_NAME, "PATH/TO/FILE.png")
 ```
