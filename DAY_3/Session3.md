@@ -344,6 +344,7 @@ admix_plot_k2 <- admix_plot_k2 + theme(axis.text.x = element_text(angle = 60, hj
 > Save this plot and generate the remaining plots for your clusters?
 >
 > `Hint` - you can add multiple layer to the object at once
+> 
 > e.g. admix_plot_k3 <- ggplot(data = k3_long) +
 > 
 >                        geom_col(aes(x=sample, y=value, fill=name)) +
