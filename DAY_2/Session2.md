@@ -62,7 +62,7 @@ Aligning short-read sequences is a necessary step in most genomic and transcript
 There are several tools to perform this task such as Bowtie2, BWA, HISAT2, MUMmer4, STAR, and TopHat2 just to name a few.
 Here we are going to focus on the Burrows Wheeler Aligner (BWA) but the procedure can be generalised to any aligner with minor modifications.
 
-TTo efficiently align reads to the genome, BWA requires an index file, which is a collection of pre-computed data structures that represent the reference genome. These data structures allow BWA to quickly locate potential alignment positions for reads without having to scan the entire genome each time. The first step for using BWA therefore consists in makeing an index of the reference genome in fasta format. This can be done via the `bwa index` command:
+To efficiently align reads to the genome, BWA requires an index file, which is a collection of pre-computed data structures that represent the reference genome. These data structures allow BWA to quickly locate potential alignment positions for reads without having to scan the entire genome each time. The first step for using BWA therefore consists in makeing an index of the reference genome in fasta format. This can be done via the `bwa index` command:
 
 ```sh
 bwa index [-a bwtsw|is] input_reference.fasta index_prefix
