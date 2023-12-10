@@ -45,7 +45,8 @@ Finally, we need to activate the conda environment to access all software we wil
 
 ```sh
 conda activate Day_2
-cd day2/raw_data/
+ls ./day2/raw_data/
+
 ```
 
 In your `raw_data` folder you should now see 8 files with the `.fastq` extension. These are the results of pair-end sequencing on Illumina HiSeq X platform of 4 babirusa individuals (one from each region of Sulawesi plus the Togean Islands as shown on the map). We are now going to familiarise with this file format and then evaluate the quality of these sequencing results.
@@ -141,6 +142,9 @@ The program will analyse a fastq file and produce a html report that can be visu
 ![fastQC](../IM/fq_report.png)
 
 Lets run `fastqc` on our own data.
+```sh
+cd $SCRATCH/day2
+```
 
 The command to run fastqc is straightforward:
 ```sh
@@ -264,7 +268,7 @@ We can now modify our script and assign to the last variable the `correct` value
 INPUT1=$1
 INPUT2=$2
 OUTPUT=$(basename $1)
-AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ~/day2/fastqs/${OUTPUT} --trimns --trimqualities
+AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename $SCRATCH/day2/fastqs/${OUTPUT} --trimns --trimqualities
 ```
 At this stage, the usage of this script should be:
 
@@ -287,7 +291,7 @@ We can use a little trick to adjust this. Let's modify our script for the last t
 INPUT1=$1
 INPUT2=$2
 OUTPUT=$(echo `basename ${INPUT1}` | sed 's/_*.fastq//')
-AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ~/day2/fastqs/${OUTPUT} --trimns --trimqualities
+AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename $SCRATCH/day2/fastqs/${OUTPUT} --trimns --trimqualities
 ```
 
 > `Exercise 2`
