@@ -37,7 +37,7 @@ cd $SCRATCH
 mkdir day4;
 cd day4; mkdir psmc_tutorial
 cd psmc_tutorial
-ln -s /dev/workshop_DATA/Day_4/* .
+ln -s /dev/workshop_DATA/Day_4/* ./raw_data
 ```
 
 Now we are good to go.
@@ -49,7 +49,7 @@ PSMC works on a psmcfa file of a single diploid sample. A `psmcfa` file is a fas
 To get a .psmcfa file, we need to first generate the consensus sequence from a VCF file using `samtools faidx` and `bcftools consensus`. Here is an example using sample RD44 to make a consensus fasta file of chromosome 10 only of RD44.
 ```sh
 REF=/dev/workshop_DATA/Day_2/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa
-samtools faidx $REF 10 | bcftools consensus RD44.vcf.gz > RD44_chr10.fa &
+samtools faidx $REF 10 | bcftools consensus ./raw_data/RD44.vcf.gz > RD44_chr10.fa &
 ```
 Note that we need the pig reference genome to do this, and a file with the autosomes list on `chr_autosomes.txt` to keep our analysis within the autosomal chromosomes. The '&' at the end allows us to run this command in the background while running another command. Whilr this command runs, do Exercise 1.
 
@@ -156,12 +156,12 @@ We will only be using data from chromosome 1 due to time constraints. Further, w
 
 > Exercise 6
 >
-> The psmcfa files are called NA12718_chr1.psmcfa and NA19471_chr1.psmcfa. Using the same sets of commands we used in the previous section, run psmc on these 2 samples using the pattern "4+25*2+4+6". Note that this will take about 10 minutes to run.
+> The psmcfa files are called `NA12718_chr1.psmcfa` and `NA19471_chr1.psmcfa` and you should find them in your `raw_data` directory. Using the same sets of commands we used in the previous section, run psmc on these 2 samples using the pattern "4+25*2+4+6". Note that this will take about 10 minutes to run.
 
 If you are short on time, or are tired of waiting, I have the psmc files for these samples already generated. They are called NA12718_chr1.psmc and NA19471_chr1.psmc. Use the plotting command - you might have to remove the -Y option from the command from the last section - to plot these.
 
 > Exercise 7
 >
-> Remember that we now plot a different species, the human species. Consequently, the plotting parameters is different. Run `psmc_plot.pl -u 2.5e-08 -s 100 -m 5 -n 30 -p -M` with the `psmc` files to get the result.
+> Remember that we now plot a different species, the human species. Consequently, the plotting parameters is different. Run `psmc_plot.pl -u 2.5e-08 -s 100 -m 5 -n 30 -p -M` followed by the `psmc` files to get the result.
 
 Based on what you see in the human population PSMC, what would you conclude regarding the population size history of the two populations of babirusa - did they have large or small populations, and were their population sizes similar over time?
