@@ -7,23 +7,47 @@ In this session you will learn how to process genomic data generated with high-t
 Before we start, let's organize yesterday's material and prepare the directory structure for today.
 Please connect to the server either via `putty` or via the `ssh` command then run:
 
-
 ```sh
-cd 
+cd /dev/workshop_participants/your_user_ID
 mkdir day1; mkdir day2;
-mv session2 ./day1/
-mv project_bash ./day1/
+mv ~/session2 ./day1/
+mv ~/project_bash ./day1/
 cd day2
 mkdir qc; mkdir bams; mkdir vcfs; mkdir fastqs; mkdir scripts; mkdir lists
 touch what_i_did.txt
 ```
-You should now be in your `~/day2/` directory, run `ls -lh` to ensure that all sub-directories have been created.
+You should now be in the `/dev/workshop_participants/your_user_ID/day2/` directory, run `ls -lh` to ensure that all sub-directories have been created.
 
-Let's now create a symbolik link to the directory containing the input data for the tutorial and activate the conda environment to access all software we will need:
+Let's now create a symbolik link to the directory containing the input data for the tutorial:
+
 ```sh
-ln -s /dev/DATA/Day_2/ ~/day2/raw_data
+ln -s /dev/workshop_DATA/Day_2/ ./raw_data
+```
+
+In order to access more easily the `/dev/workshop_participants/your_user_ID/` directory, without having to type this path everytime, we can modify the configuration file for the Bash shell:
+```sh
+cd
+ls -la
+```
+You should now see some hidden files starting with the '.'  Open the `.bashrc file using `nano` and add the following line to the end of the file:
+```sh
+SCRATCH="/dev/workshop_participants/your_user_ID"
+```
+We have just created an alias called "SCRATCH" for the directory `/dev/workshop_participants/your_user_ID`. 
+if you now run:
+```sh
+source .bashrc
+cd $SCRATCH
+```
+As you can see, once the alias as been created and the modifications to the configuration file have been activated via the `source` command you are able to access the path `/dev/workshop_participants/your_user_ID` using the shortcut `$SCRATCH` 
+
+Finally, we need to activate the conda environment to access all software we will need:
+
+```sh
+cd day2
 conda activate Day_2
 ```
+
 In your `raw_data` folder you should now see 8 files with the `.fastq` extension. These are the results of pair-end sequencing on Illumina HiSeq X platform of 4 babirusa individuals (one from each region of Sulawesi plus the Togean Islands as shown on the map). We are now going to familiarise with this file format and then evaluate the quality of these sequencing results.
 
 ![babirusa_map](../IM/babirusa_day2.png)
@@ -127,7 +151,7 @@ where `-t 1` corresponds to the number of threads used for the analysis, and `-o
 In principle we could run this command for the other 7 files in our initial dataset by manually changing the file name every time. Given that this is quite tedious, we are going to make use of what we learnt yesterday and use a loop instead. First of all let's make a list of input files:
 
 ```sh
-ls ~/day2/raw_data/*.fastq > ~/day2/lists/fastq_list.txt
+ls ./raw_data/*.fastq > ./lists/fastq_list.txt
 ```
 You can inspect this list as usual using either the command `cat` (to print it on screen) or `less` (press q to exit)
 Now that we have our list of files, we are going to run all the quality control analysis sequentially (one after the other) using our `while` loop:
@@ -141,7 +165,7 @@ done < ./lists/fastq_list.txt
 We could also run this without a list of files as: 
 
 ```sh
-for i in ~/day2/raw_data/*.fastq
+for i in ./raw_data/*.fastq
 do
 fastqc -t 1 $i -o qc
 done
@@ -150,7 +174,7 @@ done
 Once completed, use either the PSFTP app or the sftp command to transfer the .html files to your local computer and visualise them in your web-browser.
 After establishing the sftp connection you can run:
 ```sh
-cd ./day2/qc/
+cd /dev/workshop_participants/your_user_ID/day2/qc/
 lcd path/to/download/folder
 get *.html
 ```
@@ -196,11 +220,11 @@ In this case is feasible because we are only dealing with 4 samples but imagine 
 
 First of all let's create a file in our `script` directory
 ```sh
-touch ~/day2/scripts/remove_adapters.sh
+touch $SCRATCH/day2/scripts/remove_adapters.sh
 ```
 Then, we should transform this into an executable:
 ```sh
-chmod 770 ~/day2/scripts/remove_adapters.sh
+chmod 770 $SCRATCH/day2/scripts/remove_adapters.sh
 ```
 
 Now let's edit this file using nano: 
@@ -275,13 +299,13 @@ We are now finally ready to run the `adapteremoval` step for all our sample.
 We are going to use the same stratagy we have employed for the quality control step i.e. the while loop.
 First of all let's remove our experiments with the naming by running:
 ```sh
-rm -R ~/day2/fastqs; mkdir ~/day2/fastqs
+rm -R $SCRATCH/day2/fastqs; mkdir $SCRATCH/day2/fastqs
 ```
 Then we need to prepare our list. This time we want two files (along with their path) per line. We can easily do this using a combination of `ls` and `paste`
 ```sh
-ls ~/day2/raw_data/*_1.fastq > ~/day2/lists/read1_list.txt
-ls ~/day2/raw_data/*_2.fastq > ~/day2/lists/read2_list.txt
-paste ~/day2/lists/read1_list.txt ~/day2/lists/read2_list.txt > ~/day2/lists/adrm_list.txt
+ls $SCRATCHday2/raw_data/*_1.fastq > $SCRATCH/day2/lists/read1_list.txt
+ls $SCRATCH/day2/raw_data/*_2.fastq > $SCRATCH/day2/lists/read2_list.txt
+paste $SCRATCH/day2/lists/read1_list.txt $SCRATCH/day2/lists/read2_list.txt > $SCRATCH/day2/lists/adrm_list.txt
 ```
 Now that we have our list we have completed our while loop structure:
 
@@ -289,7 +313,7 @@ Now that we have our list we have completed our while loop structure:
 while read -r line
 do
 ???
-done < ~/day2/lists/adrm_list.txt
+done < $SCRATCH/day2/lists/adrm_list.txt
 ```
 > `Exercise 3`
 >
