@@ -41,7 +41,7 @@ Conservation scores such as SIFT is only one among the many ways of characterizi
 
 > Exercise 1
 >
-> Prepare your working directory for this session by following all the steps in Task 0 of Day 4 Session 1, but with data from /home/DATA/Day_4/Session_3.
+> Prepare your working directory for this session by following all the steps in Task 0 of Day 4 Session 1, but with data from /dev/workshop_DATA/Day_4/Session_3.
 
 By the end of this exercise, you should have separate working directory for this session containing 18 files with .glf suffix, two python scripts, one bed file containing SIFT reference scores and one metadata file.
 ```
