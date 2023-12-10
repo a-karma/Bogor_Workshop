@@ -18,7 +18,7 @@ You should now be in your `~/day2/` directory, run `ls -lh` to ensure that all s
 
 Let's now create a symbolik link to the directory containing the input data for the tutorial and activate the conda environment to access all software we will need:
 ```sh
-ln -s /home/DATA/Day_2/ ~/day2/raw_data
+ln -s /dev/DATA/Day_2/ ~/day2/raw_data
 conda activate Day_2
 ```
 In your `raw_data` folder you should now see 8 files with the `.fastq` extension. These are the results of pair-end sequencing on Illumina HiSeq X platform of 4 babirusa individuals (one from each region of Sulawesi plus the Togean Islands as shown on the map). We are now going to familiarise with this file format and then evaluate the quality of these sequencing results.
