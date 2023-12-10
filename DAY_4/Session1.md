@@ -25,7 +25,7 @@ conda activate Day_4
 
 In this exercise, you will need the following input files which you can find in `/home/DATA/Day_4/Session_1`:
 ```sh
-ls /home/DATA/Day_4/Session_1
+ls /dev/workshop_DATA/Day_4/Session_1
 NA12718_chr1.psmc    NA19471_chr1.psmc    RD44.vcf.gz      RD64.vcf.gz      RD70.vcf.gz      RD71.vcf.gz      babirusa_workshop_metadata.txt
 NA12718_chr1.psmcfa  NA19471_chr1.psmcfa  RD44.vcf.gz.tbi  RD64.vcf.gz.tbi  RD70.vcf.gz.tbi  RD71.vcf.gz.tbi  chr_autosome.txt
 ```
@@ -35,7 +35,7 @@ Make your own directory for this project and use a symbolic link for easy access
 ```sh
 mkdir day_4_psmc_tutorial
 cd day_4_psmc_tutorial
-ln -s /home/DATA/Day_4/* .
+ln -s /dev/workshop_DATA/Day_4/* .
 ```
 
 Now we are good to go.
@@ -46,7 +46,7 @@ PSMC works on a psmcfa file of a single diploid sample. A `psmcfa` file is a fas
 
 To get a .psmcfa file, we need to first generate the consensus sequence from a VCF file using `samtools faidx` and `bcftools consensus`. Here is an example using sample RD44 to make a consensus fasta file of chromosome 10 only of RD44.
 ```sh
-REF=/home/DATA/Day_2/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa
+REF=/dev/workshop_DATA/Day_2/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa
 samtools faidx $REF 10 | bcftools consensus RD44.vcf.gz > RD44_chr10.fa &
 ```
 Note that we need the pig reference genome to do this, and a file with the autosomes list on `chr_autosomes.txt` to keep our analysis within the autosomal chromosomes. The '&' at the end allows us to run this command in the background while running another command. Whilr this command runs, do Exercise 1.
