@@ -33,8 +33,10 @@ The `.tbi` file is an index. Indexing VCF files is a crucial step in facilitatin
 
 Make your own directory for this project and use a symbolic link for easy access to your working directory:
 ```sh
-mkdir day_4_psmc_tutorial
-cd day_4_psmc_tutorial
+cd $SCRATCH
+mkdir day4;
+cd day4; mkdir psmc_tutorial
+cd psmc_tutorial
 ln -s /dev/workshop_DATA/Day_4/* .
 ```
 
@@ -132,7 +134,7 @@ Note that "WC", "NW", "SE", and "TO" stands for the different population assignm
 
 By this stage, you should have two pdf files, each coming from different -p option. To see how they look like, we need to download the output into our local machine using sftp:
 ```sh
-sftp -i <path_to_identity_file> <username>@138.246.238.65
+sftp -i <path_to_key_file> <username>@138.246.238.65
 > get babirusa_chr10_* .
 ```
 
