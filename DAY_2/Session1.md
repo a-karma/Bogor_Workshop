@@ -6,7 +6,10 @@ In this session you will learn how to process genomic data generated with high-t
 
 Before we start, let's organize yesterday's material and prepare the directory structure for today.
 Please connect to the server either via `putty` or via the `ssh` command then run:
+
+
 ```sh
+cd 
 mkdir day1; mkdir day2;
 mv session2 ./day1/
 mv project_bash ./day1/
