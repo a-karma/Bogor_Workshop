@@ -176,7 +176,7 @@ Regular expressions, also known as regex or regexp, are a powerful tool for mani
 
 Let’s start with opening a new terminal, connecting to the server and look at the file called `random.fasta`:
 ```sh
-cd /dev/workshop_DATA/Day_1/
+cd /home/DATA/Day_1/
 less random.fasta
 Press Q to exit.
 ```
@@ -254,7 +254,7 @@ The regular expression `>seq.*` matches any line containing the string >seq foll
 
 We can also use a regex inside a sed command. For example, let's extract the 3rd sequence of each haplogroup:
 ```sh
-sed -n '/seq_3_/,+1p' random.fasta > /home/your-user-id/project_bash/raw_data/third_seq_all_Hg.fasta
+sed -n '/seq_3_/,+1p' random.fasta > ~/project_bash/raw_data/third_seq_all_Hg.fasta
 ```
 As you can see, it looks very similar to the sed command we used before with the exception that instead of providing sed with specific line number, 
 here we have specified a pattern (`/seq_3_/`) and asked the program to print each matching line plus and the following one: (+1p). 
@@ -264,13 +264,13 @@ Finally, we have redirected the output to store this information into a file cal
 > 
 > Now navigate to your `raw_data` directory and visualise the content of the file on screen using the command `cat name-of-the-file`.
 
-Let’s have a look at a different file format and keep  experimenting with regex. In the`/dev/workshop_DATA/Day_1` folder you should see a file called `dog_genes.gtf`.
+Let’s have a look at a different file format and keep  experimenting with regex. In the`/home/DATA/Day_1` folder you should see a file called `dog_genes.gtf`.
 
 A GTF (Gene Transfer Format) file is a text-based file format used to store information about the genomic structure of genes and their features. It is commonly used in genomics research to annotate and analyze genome sequences. It is a tab separated file containing annotations for coding sequences in the dog genome.
 
 We can extract the header if of this file (lines starting with #) by running:
 ```sh
-grep '^#' /dev/workshop_DATA/Day_1/dog_genes.gtf
+grep '^#' /home/DATA/Day_1/dog_genes.gtf
 ```
 > `Exercise 6`
 >
