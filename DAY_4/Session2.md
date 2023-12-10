@@ -22,11 +22,11 @@
   
   ### Task 0: Preparing your working directory
   
-  > Exercise 1
+  > `Exercise 1`
   >
   > Prepare your working directory for this session by following all the steps in Task 0 of Day 4 Session 1.
   >
-  > This time but with data from /dev/workshop_DATA/Day_4/Session_2
+  > This time your project directory should be called `inbreeding` and the path to the input data for the link command should be /dev/workshop_DATA/Day_4/Session_2
   
   You should have a working directory in your `/de/workshop_participants/your_user_ID/` folder now named `day_4` with a subdirectory called `inbreeding` containing a symbolic link of `babirusa_workshop_set.vcf.gz`, `babirusa_workshop_metadata.txt`, and 18 files of a ROH run results ending with `.hmmrohl.gz`. We will work with these results a bit later in the session.
   
