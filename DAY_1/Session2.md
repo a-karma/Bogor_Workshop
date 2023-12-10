@@ -15,7 +15,7 @@ Note the use of `;`, which allows to run multiple commands in short succession.
 
 > Exercise 1
 >
-> Create a symbolic link between the `/home/DATA/Day_1` folder and your newly created `raw_data` directory 
+> Create a symbolic link between the `/dev/workshop_DATA/Day_1` folder and your newly created `raw_data` directory 
 
 If you now move into your raw_data directory and run `ls Day_1` you should see two files having the `.txt` extension, namely:
 ```sh
@@ -186,7 +186,7 @@ bedtools --help
 
 Hurray! Now that bedtools is accessible let's see what we can do with it.
 
-The `snp_ch30.bed` file in the folder `/home/DATA/Day_1/` is an example of a "customized" bed format. It contains the three mandatory fields (chromosome, start, end) plus an unusual 4th field. In that column I have stored the genotype of 4 individuals at that position. If the 4 th column has a lowercase `m`, that particular site is monomorphic.
+The `snp_ch30.bed` file in the folder `/dev/workshop_DATA/Day_1/` is an example of a "customized" bed format. It contains the three mandatory fields (chromosome, start, end) plus an unusual 4th field. In that column I have stored the genotype of 4 individuals at that position. If the 4 th column has a lowercase `m`, that particular site is monomorphic.
 You can have a look at it using `less` or inspect just three lines with a combination of head and tail, see for example what you get by running:
 
 ```
