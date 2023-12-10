@@ -176,7 +176,7 @@ Regular expressions, also known as regex or regexp, are a powerful tool for mani
 
 Let’s start with opening a new terminal, connecting to the server and look at the file called `random.fasta`:
 ```sh
-cd /home/DATA/Day_1/
+cd /dev/workshop_DATA/Day_1/
 less random.fasta
 Press Q to exit.
 ```
@@ -264,13 +264,13 @@ Finally, we have redirected the output to store this information into a file cal
 > 
 > Now navigate to your `raw_data` directory and visualise the content of the file on screen using the command `cat name-of-the-file`.
 
-Let’s have a look at a different file format and keep  experimenting with regex. In the`/home/DATA/Day_1` folder you should see a file called `dog_genes.gtf`.
+Let’s have a look at a different file format and keep  experimenting with regex. In the`/dev/workshop_DATA/Day_1` folder you should see a file called `dog_genes.gtf`.
 
 A GTF (Gene Transfer Format) file is a text-based file format used to store information about the genomic structure of genes and their features. It is commonly used in genomics research to annotate and analyze genome sequences. It is a tab separated file containing annotations for coding sequences in the dog genome.
 
 We can extract the header if of this file (lines starting with #) by running:
 ```sh
-grep '^#' /home/DATA/Day_1/dog_genes.gtf
+grep '^#' /dev/workshop_DATA/Day_1/dog_genes.gtf
 ```
 > `Exercise 6`
 >
