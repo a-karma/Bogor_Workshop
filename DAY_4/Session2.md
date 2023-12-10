@@ -24,9 +24,11 @@
   
   > Exercise 1
   >
-  > Prepare your working directory for this session by following all the steps in Task 0 of Day 4 Session 1, but with data from /dev/workshop_DATA/Day_4/Session_2
+  > Prepare your working directory for this session by following all the steps in Task 0 of Day 4 Session 1.
+  >
+  > This time but with data from /dev/workshop_DATA/Day_4/Session_2
   
-  You should have a working directory in your home folder now named `day_4_inbreeding` containing a symbolic link of `babirusa_workshop_set.vcf.gz`, `babirusa_workshop_metadata.txt`, and 18 files of a ROH run results ending with `.hmmrohl.gz`. We will work with these results a bit later in the session.
+  You should have a working directory in your `/de/workshop_participants/your_user_ID/` folder now named `day_4` with a subdirectory called `inbreeding` containing a symbolic link of `babirusa_workshop_set.vcf.gz`, `babirusa_workshop_metadata.txt`, and 18 files of a ROH run results ending with `.hmmrohl.gz`. We will work with these results a bit later in the session.
   
   ### Task 1: Detecting ROH with PLINK
   
