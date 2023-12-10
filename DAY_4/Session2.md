@@ -24,7 +24,7 @@
   
   > Exercise 1
   >
-  > Prepare your working directory for this session by following all the steps in Task 0 of Day 4 Session 1, but with data from /home/DATA/Day_4/Session_2
+  > Prepare your working directory for this session by following all the steps in Task 0 of Day 4 Session 1, but with data from /dev/workshop_DATA/Day_4/Session_2
   
   You should have a working directory in your home folder now named `day_4_inbreeding` containing a symbolic link of `babirusa_workshop_set.vcf.gz`, `babirusa_workshop_metadata.txt`, and 18 files of a ROH run results ending with `.hmmrohl.gz`. We will work with these results a bit later in the session.
   
@@ -65,8 +65,8 @@
   mkdir input
   cd input
   sftp -i <path_to_identity_file> <username>@138.246.238.65
-  > get /home/<username>/day_4_inbreeding/babirusa_workshop_set_PLINK_A.hom* .
-  > get /home/<username>/day_4_inbreeding/babirusa_workshop_metadata.txt
+  > get babirusa_workshop_set_PLINK_A.hom* .
+  > get babirusa_workshop_metadata.txt
   ```
   
   > Quick question: how do you download the entire directory in one command?
