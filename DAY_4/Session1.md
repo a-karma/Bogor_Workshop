@@ -23,7 +23,7 @@ Before starting this first session, activate the conda environment containing al
 conda activate Day_4
 ```
 
-In this exercise, you will need the following input files which you can find in `/home/DATA/Day_4/Session_1`:
+In this exercise, you will need the following input files which you can find in `/dev/workshop_DATA/Day_4/Session_1`:
 ```sh
 ls /dev/workshop_DATA/Day_4/Session_1
 NA12718_chr1.psmc    NA19471_chr1.psmc    RD44.vcf.gz      RD64.vcf.gz      RD70.vcf.gz      RD71.vcf.gz      babirusa_workshop_metadata.txt
