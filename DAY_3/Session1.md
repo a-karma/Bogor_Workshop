@@ -52,6 +52,10 @@ less -S [input].het
 tail -n +2 [input].het | awk '{print $1, 1-($2/$4)}' | less
 
 ```
+> Which individuals have the highest and lowest heterozygosity?
+
+> Are there individuals with 0 heterozygosity?
+
 > What factors influence heterozysity?
 
 > How do you estimate expected heterozygosity?
