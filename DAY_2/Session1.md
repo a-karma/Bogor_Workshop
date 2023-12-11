@@ -132,14 +132,11 @@ The program will analyse a fastq file and produce a html report that can be visu
  
 ![fastQC](../IM/fq_report.png)
 
-Lets run `fastqc` on our own data.
-```sh
-cd ~/day2
-```
+Lets run `fastqc` on our own data, shall we?
 
 The command to run fastqc is straightforward:
 ```sh
-fastqc -t 1 ./raw_data/sub_RD56_1.fastq -o qc
+fastqc -t 1 ~/day2/raw_data/sub_RD56_1.fastq -o qc
 ```
 where `-t 1` corresponds to the number of threads used for the analysis, and `-o qc` corresponds to the output directory where the program will store the report.
 
