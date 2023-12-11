@@ -48,7 +48,7 @@ Even with a small sample size like the one we have provided you with, the varian
 ```sh
 freebayes -f ~/day2/raw_data/REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa -r 10:0-1000000 -L ~/day2/lists/bams_for_vcf.txt > ~/day2/vcfs/babirusa.chr10.0to1mb.vcf
 ```
-Here we have called variants only in a region of 1Mb at the beginning of chromosome 10. 
+Here we have called variants only in a region of 1Mb at the beginning of chromosome 10 and it should take approximately 2 minutes to run to completion. 
 
 > `Exercise 1`
 >
