@@ -162,11 +162,11 @@ When aligner software maps sequencing reads to a reference genome, it typically 
 
 Coordinate sorting arranges reads in the BAM file based on their genomic locations, ensuring that reads from the same chromosome and corresponding positions are grouped together. This organization enables efficient processing and analysis of mapped reads, as computational tools can navigate the BAM file more quickly and accurately.
 
-The samtools sort command is a widely used tool for sorting BAM files. It takes an unsorted BAM file as input and generates a sorted BAM file based on the specified criteria. 
+The `samtools sort` command is a widely used tool for sorting BAM files. It takes an unsorted BAM file as input and generates a sorted BAM file based on the specified criteria. 
 
 Duplicate reads can arise from various sources during sequencing, including library preparation steps like PCR (especially in ancient DNA library preparation) and optical artifacts caused by the sequencing instrument. These duplicates can skew downstream analyses, making it crucial to remove them. samtools markdup is a tool specifically designed to identify and remove duplicate reads from BAM files.
 
-By identifying and removing duplicates, samtools markdup helps to ensure that downstream analyses are focused on unique reads, enhancing the accuracy and reliability of downstream analyses, such as variant calling and gene expression analysis. This tool is essential for maintaining data integrity and ensuring reliable results in genomics research.
+By identifying and removing duplicates, `samtools markdup` helps to ensure that downstream analyses are focused on unique reads, enhancing the accuracy and reliability of downstream analyses, such as variant calling and gene expression analysis. This tool is essential for maintaining data integrity and ensuring reliable results in genomics research.
 
 BAM file indexing serves to expedite the extraction of alignments within a particular genomic region, eliminating the need to scan the entire BAM file for each query. The `samtools index` command serves as the standard tool for creating indexes for BAM files. It accepts a sorted BAM file as input and generates an associated index file.
 
