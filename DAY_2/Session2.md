@@ -113,7 +113,7 @@ The relevant info for the ID/PU field are the flow cell id (HMTKMDSXY in our cas
 
 > `Exercise 1`
 >
-> Prepare a file with the read group information for all our samples (one sample per line). store this file in the `lists` directory as `rg_info.txt`
+> Manually prepare a file with the read group information for all our samples (one sample per line). Store this file in the `lists` directory as `rg_info.txt`
 
 In order to perform the alignment step for all our samples we are going to use the same loop structure you have seen in session 1. Thus, we need to prepare the full argument list using `paste`.
 
