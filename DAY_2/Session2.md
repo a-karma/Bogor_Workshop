@@ -13,13 +13,13 @@ Each SAM alignment line contains eleven mandatory fields, each representing a sp
 
 The SAM format is a widely used standard in genomics research, allowing for efficient communication and analysis of alignment data across different software tools and platforms.
 
-In your raw_data directory you should see a folder called CHR_10. 
+In your raw_data directory you should see a folder called chr_10. 
 This contains a four bam files that we have generated for you using the same procedure that you are learning today. 
 Let’s have a look at a bam file and look at it with the widely used tool called `samtools`.
 
 First try to type:
 ```sh
-less ~/day2/raw_data/CHR_10/RD70_chr10.bam
+less ~/day2/raw_data/chr_10/RD70_chr10.bam
 ```
 and as usual type Q to close it
 
@@ -28,23 +28,23 @@ This is how a binary file looks like, not very user friendly or human readable r
 Let’s find a better way to visualize it. We should start by examining the header section:
 
 ```sh
-samtools view -H ~/day2/raw_data/CHR_10/RD70_chr10.bam | head -20
+samtools view -H ~/day2/raw_data/chr_10/RD70_chr10.bam | head -20
 ```
 The `view` command of samtools allows you to read, print, and convert SAM/BAM/CRAM files. The `-H` flags outputs only the header.
 As you can see, there are 19 lines starting with `@SQ`. Each of these lines corresponds to a chromosome of the reference genome and the value you read after `LN:` corresponds to the chromosome length in base pairs (bp).  
 
 Now let’s have a look at an alignment line. We can use again the view command:
 ```sh
-samtools view ~/day2/raw_data/CHR_10/RD10_chr10.bam | head -1
+samtools view ~/day2/raw_data/chr_10/RD10_chr10.bam | head -1
 ```
 As you can see there are two fields occupying the largest portion of the line: one is the sequence (10 th field) and the other one is the Phred-scaled base quality (11 th field).
 Those correspond respectively to the second and 4th line of the fastq file used to generate this bam. This is definitely better than using less but what if we wanted to visualize a specific region of this chromosome?
 
-You may have noticed that in the CHR_10 folder there are also 4 files with the .bai extension. 
+You may have noticed that in the chr_10 folder there are also 4 files with the .bai extension. 
 Those are the indexes of the bams and they allow fast access to specific regions without going through the whole alignment.
 thanks to the indexing procedure we can use another samtools command and look at any given portion of chromosome 10:
 ```sh
-samtools tview ~/day2/raw_data/CHR_10/RD10_chr10.bam -p 10:21100
+samtools tview ~/day2/raw_data/chr_10/RD10_chr10.bam -p 10:21100
 ```
 
 We are looking at the alignment on chromosome 10 starting at the position 21100 from
