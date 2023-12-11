@@ -216,7 +216,6 @@ samtools index sample.sorted.dedup.bam
 > `Exercise 3`
 >
 > Run the pipeline above for the sample you've picked.
-> Use samtools tview to inspect this new bam file you have generated
 
 Now that you have learnt how to generate a clean bam file we can move to our next session: Variant Calling!
 
