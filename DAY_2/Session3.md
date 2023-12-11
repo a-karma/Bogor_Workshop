@@ -42,7 +42,7 @@ freebayes --help
 ```
 Let's experiment with this software. First of all, we need to create a list of bam files the we want to include in our analysis.
 ```sh
-ls ~/day2/raw_data/CHR_10/*.bam > ~/day2/lists/bams_for_vcf.txt
+ls ~/day2/raw_data/chr_10/*.bam > ~/day2/lists/bams_for_vcf.txt
 ```
 Even with a small sample size like the one we have provided you with, the variant calling procedure is very computationally demanding. In order to complete the task in the time allowed for this session and to avoid server overload, we are going to examine only a small region of chromosome 10. The region can be specified with the `-r` flag as in the example below:
 ```sh
