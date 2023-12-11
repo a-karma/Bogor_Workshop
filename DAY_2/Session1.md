@@ -145,7 +145,7 @@ In principle we could run this command for the other 7 files in our initial data
 ```sh
 ls ./raw_data/*.fastq > ./lists/fastq_list.txt
 ```
-You can inspect this list as usual using either the command `cat` (to print it on screen) or `less` (press q to exit)
+You can inspect this list as usual using either the command `cat` (to print it on screen) or `less` (press q to exit).
 Now that we have our list of files, we are going to run all the quality control analysis sequentially (one after the other) using our `while` loop:
 
 ```sh
