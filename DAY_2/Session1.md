@@ -157,7 +157,7 @@ done < ./lists/fastq_list.txt
 We could also run this without a list of files as: 
 
 ```sh
-for i in ./raw_data/*.fastq
+for i in ~/day2/raw_data/*.fastq
 do
 fastqc -t 1 $i -o qc
 done
