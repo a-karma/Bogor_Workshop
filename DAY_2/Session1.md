@@ -234,13 +234,13 @@ If we would like to pass the file names as positional arguments we could do some
 #!/usr/bin/bash
 INPUT1=$1
 INPUT2=$2
-OUTPUT=$3
+OUTPUT=???
 AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ${OUTPUT} --trimns --trimqualities
 ```
 But what should we assign to the variable OUTPUT? 
 
 Ideally we would like to keep a consistent naming convention which retains the same information about the sample name that is present in each of the input files.
-One possibility is to employ the `basename` command which separates a file name from its path. Try to run for example: 
+One possibility is to employ the `basename` command which separates a file name from its path. Note that the --basename flag in `AdapterRemoval` and this shell command are two different thing! Try to run for example: 
 ```sh
 basename /home/DATA/Day_2/sub_RD59_1.fastq
 ```
