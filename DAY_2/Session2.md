@@ -19,7 +19,7 @@ Let’s have a look at a bam file and look at it with the widely used tool calle
 
 First try to type:
 ```sh
-less ~/day2/raw_data/CHR_10/RD10_chr10.bam
+less ~/day2/raw_data/CHR_10/RD70_chr10.bam
 ```
 and as usual type Q to close it
 
@@ -28,7 +28,7 @@ This is how a binary file looks like, not very user friendly or human readable r
 Let’s find a better way to visualize it. We should start by examining the header section:
 
 ```sh
-samtools view -H ~/day2/raw_data/CHR_10/RD10_chr10.bam | head -20
+samtools view -H ~/day2/raw_data/CHR_10/RD70_chr10.bam | head -20
 ```
 The `view` command of samtools allows you to read, print, and convert SAM/BAM/CRAM files. The `-H` flags outputs only the header.
 As you can see, there are 19 lines starting with `@SQ`. Each of these lines corresponds to a chromosome of the reference genome and the value you read after `LN:` corresponds to the chromosome length in base pairs (bp).  
