@@ -86,6 +86,10 @@ Table 2.1: Fastq format – Fields in the Sequence ID line
 
 The second line contains the actual sequence (in the example above, a short fragment of 47 nucleotides). Most Illumina sequencers however are ran on 150 cycle these days which means they produce 150bp reads. 
 
+We call a cycle when the sequencer takes a picture of a new nucleotide that is added during the seqencing by synthesis reaction - this for example is 3 cycles (sequencing 3 nucleotides):
+
+<img width="700" alt="image" src="https://github.com/a-karma/Bogor_Workshop/assets/5824025/d9a6de65-1db2-4017-8254-07602b8bdcb5">
+
 The third line always starts with a `+` to improve the readability of the file by separating the
 sequence line from its quality. The + symbol might be followed by the read identifier in
 the first line (optional).
@@ -101,6 +105,12 @@ Q = −10 log<sub>10</sub> P
 
 Thus, if a base has an assigned Q-score of 20, it means that the chance that we have
 called the wrong base are 1 in 100 i.e. the base call accuracy is 99%.
+
+The quality scores represent how sure the sequencer is about the base - for example here in this picture, how bright is the fluorescence: 
+
+<img width="700" alt="image" src="https://github.com/a-karma/Bogor_Workshop/assets/5824025/0ce27cad-c499-4df7-a913-1d573b8bdeeb">
+
+In some cases the signal is very poor and so the sequencer won't be very sure this is A, a T, a G or a C - so the sequencer will give this base a bad quality socre. 
 
 In the example above, the first base of the sequence is an A. The corresponding quality
 of the base calling is encoded as `I` (first character on line 4). The symbol `I` corresponds
