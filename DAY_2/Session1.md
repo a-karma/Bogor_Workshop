@@ -203,7 +203,8 @@ Collapsing reads should be avoided when dealing with modern DNA given that the D
 
 Lets look at the same diagram below this time for paired end reads. Lets say the gray DNA insert is 300bp and you sequencing 150bp paired end (the most common type of Illumina sequencing). You first sequence using read1 primer (in orange) then you sequence using read2 primer in the last diagram. If you sequence 150bp each time and the insert is 300 bp then you don't have any overlap between the sequencing reads. Now lets say you insert is only 50bp. In both read1 and read2 you'll end up sequencing the whole 50bp (so sequence it twice) and you will sequence adpaters on both sides of the DNA molecule:
 
-<img width="777" alt="Screenshot 2023-12-07 at 06 34 40" src="https://github.com/a-karma/Bogor_Workshop/assets/5824025/464b862d-cdbe-488d-806d-531ea40933c0">
+<img width="1122" alt="Screenshot 2023-12-11 at 11 34 30" src="https://github.com/a-karma/Bogor_Workshop/assets/5824025/e0302ada-332c-481f-a03f-11b4b1231ca2">
+
 
 `Adapterremoval` can do both, remove the adapters and collapse the 50bp fragment you sequenced twice so you get only 1 reads at the end.  
 
