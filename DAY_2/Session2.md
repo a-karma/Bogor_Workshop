@@ -58,7 +58,10 @@ If you are eager to know more about BAM files and samtools please try this ![tut
 Now that we have familiarised ourselves with this file format, let's try to generate some new bams!
 
 #### Aligning reads
-Aligning short-read sequences is a necessary step in most genomic and transcriptomic analyses. 
+Aligning short-read sequences is a necessary step in most genomic and transcriptomic analyses. As you have seen in the lecture earlier this looks roughly like this: 
+
+![image](https://github.com/a-karma/Bogor_Workshop/assets/5824025/fa50b598-175c-4920-8ca2-1f538f357c7e)
+
 There are several tools to perform this task such as Bowtie2, BWA, HISAT2, MUMmer4, STAR, and TopHat2 just to name a few.
 Here we are going to focus on the Burrows Wheeler Aligner (BWA) but the procedure can be generalised to any aligner with minor modifications.
 
