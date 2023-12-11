@@ -14,7 +14,7 @@ Each SAM alignment line contains eleven mandatory fields, each representing a sp
 The SAM format is a widely used standard in genomics research, allowing for efficient communication and analysis of alignment data across different software tools and platforms.
 
 In your raw_data directory you should see a folder called CHR_10. 
-This contains a five bam files that we have generated for you using the same procedure that you are learning today. 
+This contains a four bam files that we have generated for you using the same procedure that you are learning today. 
 Let’s have a look at a bam file and look at it with the widely used tool called `samtools`.
 
 First try to type:
@@ -40,7 +40,7 @@ samtools view ~/day2/raw_data/CHR_10/RD10_chr10.bam | head -1
 As you can see there are two fields occupying the largest portion of the line: one is the sequence (10 th field) and the other one is the Phred-scaled base quality (11 th field).
 Those correspond respectively to the second and 4th line of the fastq file used to generate this bam. This is definitely better than using less but what if we wanted to visualize a specific region of this chromosome?
 
-You may have noticed that in the CHR_10 folder there are also 5 files with the .bai extension. 
+You may have noticed that in the CHR_10 folder there are also 4 files with the .bai extension. 
 Those are the indexes of the bams and they allow fast access to specific regions without going through the whole alignment.
 thanks to the indexing procedure we can use another samtools command and look at any given portion of chromosome 10:
 ```sh
