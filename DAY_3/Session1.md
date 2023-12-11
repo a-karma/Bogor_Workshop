@@ -17,7 +17,7 @@ First we will estimate the number of heterozygous genotypes at a locus. That is,
 ```sh
 conda activate Day_3
 # Calculate the number of heterozygous genotypes at a loci using vcftools
-vcftools --vcf [input.vcf] --hardy --out [input]
+vcftools --gzvcf [input.vcf.gz] --hardy --out [input]
 
 ```
 
@@ -65,7 +65,7 @@ First we need to count the number of loci that hosts some variation i.e. the num
 ```sh
 
 # Calculate the number of polymorphic loci using vcftools
-vcftools --vcf [input.vcf] --counts --out [input]
+vcftools --gzvcf [input.vcf.gz] --counts --out [input]
 
 ```
 We will visualize the results of the previous step with `less -S` command.
@@ -93,7 +93,7 @@ tail -n +2 [input].frq.count | awk 'NF==6 {print $0}' | awk -F "[\t:]" '$6>0 && 
 ```sh
 
 # Calculate Pi per loci using vcftools
-vcftools --vcf [input.vcf] --site-pi --out [input]
+vcftools --gzvcf [input.vcf.gz] --site-pi --out [input]
 
 # View the output and estimate average Pi
 less -S [input].sites.pi
