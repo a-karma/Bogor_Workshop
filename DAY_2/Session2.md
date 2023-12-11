@@ -19,7 +19,7 @@ Let’s have a look at a bam file and look at it with the widely used tool calle
 
 First try to type:
 ```sh
-less $SCRATCH/day2/raw_data/CHR_10/RD10_chr10.bam
+less ~/day2/raw_data/CHR_10/RD10_chr10.bam
 ```
 and as usual type Q to close it
 
@@ -28,14 +28,14 @@ This is how a binary file looks like, not very user friendly or human readable r
 Let’s find a better way to visualize it. We should start by examining the header section:
 
 ```sh
-samtools view -H $SCRATCH/day2/raw_data/CHR_10/RD10_chr10.bam | head -20
+samtools view -H ~/day2/raw_data/CHR_10/RD10_chr10.bam | head -20
 ```
 The `view` command of samtools allows you to read, print, and convert SAM/BAM/CRAM files. The `-H` flags outputs only the header.
 As you can see, there are 19 lines starting with `@SQ`. Each of these lines corresponds to a chromosome of the reference genome and the value you read after `LN:` corresponds to the chromosome length in base pairs (bp).  
 
 Now let’s have a look at an alignment line. We can use again the view command:
 ```sh
-samtools view $SCRATCH/day2/raw_data/CHR_10/RD10_chr10.bam | head -1
+samtools view ~/day2/raw_data/CHR_10/RD10_chr10.bam | head -1
 ```
 As you can see there are two fields occupying the largest portion of the line: one is the sequence (10 th field) and the other one is the Phred-scaled base quality (11 th field).
 Those correspond respectively to the second and 4th line of the fastq file used to generate this bam. This is definitely better than using less but what if we wanted to visualize a specific region of this chromosome?
@@ -44,7 +44,7 @@ You may have noticed that in the CHR_10 folder there are also 5 files with the .
 Those are the indexes of the bams and they allow fast access to specific regions without going through the whole alignment.
 thanks to the indexing procedure we can use another samtools command and look at any given portion of chromosome 10:
 ```sh
-samtools tview $SCRATCH/day2/raw_data/CHR_10/RD10_chr10.bam -p 10:21100
+samtools tview ~/day2/raw_data/CHR_10/RD10_chr10.bam -p 10:21100
 ```
 
 We are looking at the alignment on chromosome 10 starting at the position 21100 from
@@ -99,7 +99,7 @@ Recording this information in our bams is crucial because it will allow us to id
 
 Let's now see how to extract the required read group info from a fastq header:
 ```sh
-head -1 $SCRATCH/day2/raw_data/sub_RD56_1.fastq
+head -1 ~/day2/raw_data/sub_RD56_1.fastq
 ```
 The output on your screen should be:
 ```sh
@@ -118,8 +118,8 @@ The relevant info for the ID/PU field are the flow cell id (HMTKMDSXY in our cas
 In order to perform the alignment step for all our samples we are going to use the same loop structure you have seen in session 1. Thus, we need to prepare the full argument list using `paste`.
 
 ```sh
-ls $SCRATCH/day2/fastqs/*pair1.truncated > ./lists/r1.txt
-ls $SCRATCH/day2/fastqs/*pair2.truncated > ./lists/r2.txt
+ls ~/day2/fastqs/*pair1.truncated > ./lists/r1.txt
+ls ~/day2/fastqs/*pair2.truncated > ./lists/r2.txt
 paste ./lists/r1.txt ./lists/r2.txt ./lists/rg_info.txt > ./lists/bwa_full_arg_list.txt
 ```
 After this we need to create our script for bwa and trannsform into an executable:
