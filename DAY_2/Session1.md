@@ -234,7 +234,7 @@ If we would like to pass the file names as positional arguments we could do some
 #!/usr/bin/bash
 INPUT1=$1
 INPUT2=$2
-OUTPUT= ?
+OUTPUT=$3
 AdapterRemoval --file1 ${INPUT1} --file2 ${INPUT2} --basename ${OUTPUT} --trimns --trimqualities
 ```
 But what should we assign to the variable OUTPUT? 
