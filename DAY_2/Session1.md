@@ -305,7 +305,7 @@ Now that we have our list we have completed our while loop structure:
 while read -r line
 do
 ???
-done < ~/day2/lists/adrm_list.txt
+done<~/day2/lists/adrm_list.txt
 ```
 > `Exercise 3`
 >
