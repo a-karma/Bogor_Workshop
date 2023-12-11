@@ -245,7 +245,7 @@ But what should we assign to the variable OUTPUT?
 Ideally we would like to keep a consistent naming convention which retains the same information about the sample name that is present in each of the input files.
 One possibility is to employ the `basename` command which separates a file name from its path. Try to run for example: 
 ```sh
-basename 
+basename /home/DATA/Day_2/sub_RD59_1.fastq
 ```
 
 > Question 5:
