@@ -84,6 +84,8 @@ We need to count the number the loci with both the reference allele and the alte
 tail -n +2 [input].frq.count | awk 'NF==6 {print $0}' | awk -F "[\t:]" '$6>0 && $8>0 {print $0}' | wc -l
 
 ```
+> How many loci have a fixed allele?
+
 > What factors influence number of seggregating sites?
 
 ##### Average number of pairwise difference between sequences (Pi)
