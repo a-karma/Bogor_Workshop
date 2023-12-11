@@ -139,7 +139,7 @@ OUTPUT=$(echo `basename ${INPUT1}` | sed 's/.pair1.truncated//')
 bwa mem raw_data/REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa $INPUT1 $INPUT2 -t 1 -R $INPUT3 | samtools view -Sh - > bams/${OUTPUT}.bam
 ```
 
-Let's now run our while loop (this will take quite a few minutes):
+Let's now run our while loop (this will take quite a few minutes so enjoy your break):
 
 ```sh
 while read -r line
