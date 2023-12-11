@@ -99,6 +99,8 @@ vcftools --vcf [input.vcf] --site-pi --out [input]
 less -S [input].sites.pi
 
 ```
+> estimate avergae Pi for chromosome 1
+
 > What factors influence Pi?
 
 > What is the relation between Pi and S?
