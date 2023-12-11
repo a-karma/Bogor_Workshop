@@ -27,7 +27,7 @@ Finally, we need to activate the conda environment to access all software we wil
 
 ```sh
 conda activate Day_2
-ls ./day2/raw_data/
+ls ~/day2/raw_data/
 ```
 
 In your `raw_data` folder you should now see 8 files with the `.fastq` extension. These are the results of pair-end sequencing on Illumina HiSeq X platform of 4 babirusa individuals (one from each region of Sulawesi plus the Togean Islands as shown on the map). We are now going to familiarise with this file format and then evaluate the quality of these sequencing results.
