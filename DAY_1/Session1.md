@@ -207,7 +207,7 @@ We could use a combination of these two commands to extract a set of sequences i
 ```sh
 head -20 random.fasta | tail -4
 ```
-With the last command we have selected the 9th and 10th entries corresponding to the lines from 17 to 20 in our fasta file.
+With the last command we have selected the 9th and 10th entries corresponding to the lines from 18 to 20 in our fasta file.
 The vertical bar (`|`) is called `pipe` and it is used to connect the two commands (`head` and `tail` in this case). 
 Specifically, it redirects the standard output of the first command which then serves as input for the second command.
 
