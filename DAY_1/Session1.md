@@ -281,7 +281,6 @@ The first line of your file without a header should look like:
 It contains a lot of information that is not relevant for us at the moment. 
 The fields that we are interested in are:
 - The chromosome (X: 1st field)
-- ensembl (a genomebrowser site which conducted the annotation: see www.ensembl.com). 
 - The type of the feature (gene: 3rd field)
 - The starting position of the feature (1575: 4th field)
 - The ending position of the feature (5716: 5th field)
