@@ -71,7 +71,7 @@ To efficiently align reads to the genome, BWA requires an index file, which is a
 bwa index [-a bwtsw|is] input_reference.fasta index_prefix
 ```
 
-If you look into your raw_data//SUS_REF/ folder you will see that contains the sus scrofa reference genome (.fa) plus a few other files with various extensions. Those are exactly the index files produce by the above command.
+If you look into your `raw_data/SUS_REF/` folder you will see that contains the sus scrofa reference genome (.fa) plus a few other files with various extensions. Those are exactly the index files produce by the above command.
 
 The next step consists in choosing the aligner algorithm and map the reads to the reference genome. Here we will use `bwa mem` which performs local alignment and produces alignments for different part of the query sequence. The basic usage of bwa mem is:
 
