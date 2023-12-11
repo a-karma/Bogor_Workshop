@@ -42,11 +42,11 @@ freebayes --help
 ```
 Let's experiment with this software. First of all, we need to create a list of bam files the we want to include in our analysis.
 ```sh
-ls $SCRATCH/day2/raw_data/CHR_10/*.bam > $SCRATCH/day2/lists/bams_for_vcf.txt
+ls ~/day2/raw_data/CHR_10/*.bam > ~/day2/lists/bams_for_vcf.txt
 ```
 Even with a small sample size like the one we have provided you with, the variant calling procedure is very computationally demanding. In order to complete the task in the time allowed for this session and to avoid server overload, we are going to examine only a small region of chromosome 10. The region can be specified with the `-r` flag as in the example below:
 ```sh
-freebayes -f $SCRATCH/day2/raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa -r 10:0-1000000 -L $SCRATCH/day2/lists/bams_for_vcf.txt > $SCRATCH/day2/vcfs/babirusa.chr10.0to1mb.vcf
+freebayes -f ~/day2/raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa -r 10:0-1000000 -L ~/day2/lists/bams_for_vcf.txt > ~/day2/vcfs/babirusa.chr10.0to1mb.vcf
 ```
 Here we have called variants only in a region of 1Mb at the beginning of chromosome 10. 
 
@@ -68,7 +68,7 @@ Let's keep experimenting with the filtering options:
 Let's examine another region:
 
 ```sh
-freebayes -f $SCRATCH/day2/raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa -r 10:1000000-2000000 -L $SCRATCH/day2/lists/bams_for_vcf.txt > $SCRATCH/day2/vcfs/babirusa.chr10.1to2mb.vcf
+freebayes -f ~/day2/raw_data/SUS_REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa -r 10:1000000-2000000 -L ~/day2/lists/bams_for_vcf.txt > ~/day2/vcfs/babirusa.chr10.1to2mb.vcf
 ```
 by changing the values after the `-r` flag we are moving along chromosome 10 and analysing the next region of 1Mb.
 
@@ -81,14 +81,14 @@ We will now introduce a software that will become very useful for tomorrow's ses
 
 First of all we need to compress and index the vcfs that we want to concatenate:
 ```sh
-bgzip -c $SCRATCH/day2/vcfs/babirusa.chr10.0to1mb.vcf > $SCRATCH/day2/vcfs/babirusa.chr10.0to1mb.vcf.gz
-bgzip -c $SCRATCH/day2/vcfs/babirusa.chr10.1to2mb.vcf > $SCRATCH/day2/vcfs/babirusa.chr10.1to2mb.vcf.gz
-tabix -p vcf $SCRATCH/day2/vcfs/babirusa.chr10.0to1mb.vcf.gz
-tabix -p vcf $SCRATCH/day2/vcfs/babirusa.chr10.1to2mb.vcf.gz
+bgzip -c ~/day2/vcfs/babirusa.chr10.0to1mb.vcf > ~/day2/vcfs/babirusa.chr10.0to1mb.vcf.gz
+bgzip -c ~/day2/vcfs/babirusa.chr10.1to2mb.vcf > ~/day2/vcfs/babirusa.chr10.1to2mb.vcf.gz
+tabix -p vcf ~/day2/vcfs/babirusa.chr10.0to1mb.vcf.gz
+tabix -p vcf ~/day2/vcfs/babirusa.chr10.1to2mb.vcf.gz
 ```
 Then we can concatenate the two by running:
 ```sh
- vcf-concat $SCRATCH/day2/vcfs/babirusa.chr10.0to1mb.vcf.gz $SCRATCH/day2/vcfs/babirusa.chr10.1to2mb.vcf.gz | bgzip -c > $SCRATCH/day2/vcfs/babirusa.chr10.0to2mb.vcf.gz
+ vcf-concat ~/day2/vcfs/babirusa.chr10.0to1mb.vcf.gz ~/day2/vcfs/babirusa.chr10.1to2mb.vcf.gz | bgzip -c > ~/day2/vcfs/babirusa.chr10.0to2mb.vcf.gz
 ```
 
 We will lear a lot more about vcfs and genetic diversity tomorrow.
