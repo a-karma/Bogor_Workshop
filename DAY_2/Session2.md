@@ -139,20 +139,30 @@ OUTPUT=$(echo `basename ${INPUT1}` | sed 's/.pair1.truncated//')
 bwa mem raw_data/REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa $INPUT1 $INPUT2 -t 1 -R $INPUT3 | samtools view -Sh - > bams/${OUTPUT}.bam
 ```
 
-Let's now run our while loop (this will take quite a few minutes so enjoy your break):
+Now, we could use the while loop structure to align all our four sample sequentially which should look like this:
 
 ```sh
-while read -r line
-do
-./scripts/bwa_aligner.sh $line
-done<./lists/bwa_full_arg_list.txt
+# while read -r line
+# do
+# ./scripts/bwa_aligner.sh $line
+# done<./lists/bwa_full_arg_list.txt
 ```
+Unfortunately, this would take approximately 25 minutes per sample, thus, in the interest of time we are going to run our script only on one sample of your chosing:
+```sh
+sed -n '/sample_name/,p' ./lists/bwa_full_arg_list.txt > ./lists/my_choice_bwa_args.txt
+```
+> `Exercise 2`
+>
+> Modify the command above to extract from the `bwa_full_arg_list.txt` the line containg all the info for your chosen sample.
 
-Once completed, have a look at the `bams` folder to make sure all our samples have been aligned.
-
+Once ready, then run:
+```sh
+./scripts/bwa_aligner.sh `cat ./lists/my_choice_bwa_args.txt`
+```
+After launching this command, please have a short break: if you have made it this far you deserve it :).
 
 #### BAM files processing
-Now that we have generated our raw bam files, we need to take a few steps in order to use them in our analysis, namely:
+Now that we have generated our raw bam file, we need to take a few steps in order to use it in our analysis, namely:
 
 - Sorting the reads in the alignment file
 - Mark duplicate reads
@@ -170,7 +180,7 @@ By identifying and removing duplicates, `samtools markdup` helps to ensure that 
 
 BAM file indexing serves to expedite the extraction of alignments within a particular genomic region, eliminating the need to scan the entire BAM file for each query. The `samtools index` command serves as the standard tool for creating indexes for BAM files. It accepts a sorted BAM file as input and generates an associated index file.
 
-We are going to process only one bam through this pipeline but if you finish early you can repeate these steps for all samples.
+We are going to process only one bam through this pipeline but if you finish early you can repeate `Exercise 2` and then follow these steps for each sample.
 
 Let's start with the sorting. The usage of `samtools sort` is as follows:
 
@@ -203,7 +213,7 @@ Finally we can create an index for our final output bam:
 samtools index sample.sorted.dedup.bam
 ```
 
-> `Exercise 2`
+> `Exercise 3`
 >
 > Run the pipeline above for the sample you've picked.
 > Use samtools tview to inspect this new bam file you have generated
