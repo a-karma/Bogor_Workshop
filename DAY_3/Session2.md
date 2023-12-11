@@ -26,17 +26,17 @@ We will be using the `.phylip` alignment format. To generate this from the vcf f
 
 `iqtree` is program to reconstruct phylogenetic tree based on genetic data - it uses maximum likelihood (see here if you want more details about tree reconstruction methods: https://en.wikipedia.org/wiki/Computational_phylogenetics). 
 
-The data for this exercise can be found here `/dev/workshop_DATA/Day_3_b/`. 
+The data for this exercise can be found here `/home/DATA/Day_3_b/`. 
 
 First we need to to use `vcf2phylip.py` to convert our vcf (https://en.wikipedia.org/wiki/Variant_Call_Format) into a phylip (https://en.wikipedia.org/wiki/PHYLIP) format. This script can be foundin the scripts directory in the shared data folder. To do this, first create a shell variable we call `PANEL` which contains the path the panel.
 
 ```sh 
-PANEL=/dev/workshop_DATA/Day_3_b/babirusa_panel
+PANEL=/home/DATA/Day_3_b/babirusa_panel
 ```
 Then we can run vcf2phylip by specifying the vcf file as the input (`-i`) and the output name you want in your current working directory (`--out-prefix`)
 
 ```sh
-/dev/workshop_DATA/Day_3_b/scripts/vcf2phylip.py -i $PANEL.vcf --output-prefix babirusa_panel
+/home/DATA/Day_3_b/scripts/vcf2phylip.py -i $PANEL.vcf --output-prefix babirusa_panel
 ```
 When it is finished you should see a your output file in your directory, and that with default settings the file has been named `[name_of_panel].min4.phy`
 
