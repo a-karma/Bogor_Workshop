@@ -21,7 +21,7 @@ First try to type:
 ```sh
 less ~/day2/raw_data/chr_10/RD70_chr10.bam
 ```
-and as usual type Q to close it
+then answer `yes` when prompted with a question, finally type Q to close it.
 
 This is how a binary file looks like, not very user friendly or human readable right?
 
