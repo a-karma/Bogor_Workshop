@@ -35,7 +35,7 @@ As you can see, there are 19 lines starting with `@SQ`. Each of these lines corr
 
 Now let’s have a look at an alignment line. We can use again the view command:
 ```sh
-samtools view ~/day2/raw_data/chr_10/RD10_chr10.bam | head -1
+samtools view ~/day2/raw_data/chr_10/RD70_chr10.bam | head -1
 ```
 As you can see there are two fields occupying the largest portion of the line: one is the sequence (10 th field) and the other one is the Phred-scaled base quality (11 th field).
 Those correspond respectively to the second and 4th line of the fastq file used to generate this bam. This is definitely better than using less but what if we wanted to visualize a specific region of this chromosome?
@@ -44,7 +44,7 @@ You may have noticed that in the chr_10 folder there are also 4 files with the .
 Those are the indexes of the bams and they allow fast access to specific regions without going through the whole alignment.
 thanks to the indexing procedure we can use another samtools command and look at any given portion of chromosome 10:
 ```sh
-samtools tview ~/day2/raw_data/chr_10/RD10_chr10.bam -p 10:21100
+samtools tview ~/day2/raw_data/chr_10/RD70_chr10.bam -p 10:21100
 ```
 
 We are looking at the alignment on chromosome 10 starting at the position 21100 from
