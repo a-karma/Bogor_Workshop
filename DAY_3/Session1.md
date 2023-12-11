@@ -45,7 +45,7 @@ Now, let's try and estimate the total number of heterozygous loci in an individu
 
 ```sh
 # Calculate the number of heterozygous genotypes for an individual using vcftools
-vcftools --vcf [input.vcf] --het --out [input]
+vcftools --gzvcf [input.vcf.gz] --het --out [input]
 
 # View the output and calculate heterozygosity per individual
 less -S [input].het
