@@ -129,9 +129,11 @@ cd ~/day3/smartpca
 ```
 
 #### Convert files to the correct format
-smartPCA does not work with vcf or plink files so we need to perform a file conversion (this is somehow very common in bioinformatics). Luckily the author of the program provides a code to do the conversion from plink file to eigenformat. The first thing to do is convert our plink fileset into an eigenstrat format which is used by the eigensoft set of programs - including smartpca. To do this we are going to use an utility called `convertf`.
+smartPCA does not recognise vcfs as input files. Thus, in order to analyse our dataset with this program, we need to perform a two-step file conversion (this is somehow very common in bioinformatics). First of all we need to convert our vcf file into a plink filest. Then we need use the `convertf` utility to transform these two tab separated files into a a format called eigenstrat that can be recognise by smartPCA. 
 
-To run `convertf` you need to make a parameter file, or par file, which contains the information on where the files we want to convert are located. The program can change between several different formats, for example - the current files are in the .ped format and would like the EIGENSTRAT format as the output. 
+If you list the content of the directory `/home/DATA/Day_3_b/` you will see a series of files termed `babirusa_panel` with various extensions: `.bed, .bim, .fam` and `.ped, .map`. These two groups of files are respectively the binary and the text version of a plink fileset which represent the native input/output format of this software. These have been obtained by importing the vcf into `plink` and recoding the genotype information for each individuals in a slightly different way. This means that the first step has been already done for you ;). 
+ 
+Let's focus on the second step. `convertf` requires a parameter file (a.k.a. par), which contains the information on where the files we want to convert are located. The program can change between several different formats, for example - the current files are in the .ped format and would like the EIGENSTRAT format as the output. 
 
 > `Hint` - take a look at the format and additional options here - https://github.com/chrchang/eigensoft/blob/master/CONVERTF/README
 
@@ -162,9 +164,10 @@ Once completed, you should see the three new files in your working directory (*.
 
 #### Redefining the populations
 Check the first few lines of the `.ind` file. What do you see? 
-Column one is the sample name, column two is sex (U = unknown) and column three is population.
 
-If you use the `head` command, you can see the third colummn will be filled with `???`. This means the population is unknown but as we dont want to make prior assumptions about the population membership of the individuals, we want each individual to be treated as an individual not as part of a population. Therefore we want to change this third column so each individual is in a unique population before we run the pca. The easiest way is to copy the first column to the third. This can be done using `awk`
+Column one is the sample name, column two is sex (U = unknown) and column three is population name.
+
+If you use the `head` command, you can see that the third colummn is filled with `???` This means that the individuals in our panel haven't been assigned to a specific populationis unknown but as we dont want to make prior assumptions about the population membership of the individuals, we want each individual to be treated as an individual not as part of a population. Therefore we want to change this third column so each individual is considered as a unique population before we run the pca. The easiest way is to copy the first column to the third. This can be done using `awk`
 
 ```sh
 cat babirusa_panel.ind | awk 'BEGIN {OFS="\t"};{print $1,"U",$1}' > babirusa_panel.ind_new
