@@ -18,9 +18,22 @@ First create a new directory for this session in your home directory (`~/`) with
 Next activate the correct conda environment for the day
 > `Hint` - this will be the same as the one you were using this morning
 
-We will keep the output files for each analysis in their own directory, so make a directory for this analysis and navigate to it. This is your working directory.
+We will keep the output files for each analysis in their own directory, so make a directory for this analysis and navigate to it. This is your working directory. 
+
+```sh
+mkdir day3;
+cd day3
+mkdir iqtree; mkdir smartpca; mkdir admixture
+touch what_i_did.txt
+```
 
 #### Convert to phylip format
+
+Ok lets start with the tree, navigate into the correct folder for this analysis
+```sh
+cd iqtree
+```
+
 The program you will use to make the tree is called `iqtree`. `iqtree` requires an alignment file as an input but this can take several formats. 
 We will be using the `.phylip` alignment format. To generate this from the vcf file, you need to use a script called `vcf2phylip.py`. 
 
@@ -33,6 +46,13 @@ First we need to to use `vcf2phylip.py` to convert our vcf (https://en.wikipedia
 ```sh 
 PANEL=/home/DATA/Day_3_b/babirusa_panel
 ```
+
+To check what the variable is we can use the command `echo`
+```sh
+echo $PANEL
+```
+This should now show you the path to the babirusa panel.
+
 Then we can run vcf2phylip by specifying the vcf file as the input (`-i`) and the output name you want in your current working directory (`--out-prefix`)
 
 ```sh
@@ -43,6 +63,7 @@ When it is finished you should see a your output file in your directory, and tha
 >  `Exercise one`
 > 
 >  Can you use the help file to find out what the addition of "min4" in the file name means? Now how would you run the command and change this option?
+> `Hint` - use the help file (`--help`)
 
 #### Basics of using `screen` in linux
 Now we have our input file in the correct format for `iqtree`. Because the command we are going to run can take a while to complete, we are going to use a program called `screen` to allow us to run commands in a different session in the background as we continue with the other analyses. Below are some of commands we will need for interacting with `screen`.
@@ -51,6 +72,12 @@ To activate new session with a specific name:
 ```sh 
 screen -S [name_of_session]
 ```
+
+Lets call the session tree
+```sh
+screen -S tree
+```
+
 To detach a session you press `ctrl`+`a`+`d` at the same time 
 
 To see what sessions are open use: 
@@ -63,7 +90,7 @@ To reopen a session use:
 screen -r [name_of_session]
 ```
 
-To kill a session use: 
+To kill a session, so close it forever, use:
 ```sh 
 screen -XS [name_of_session] quit
 ```
@@ -72,6 +99,9 @@ screen -XS [name_of_session] quit
 Now we have our input file and the basic understanding of screen we will run iqtree. 
 
 Reopen the screen you made for running `iqtree`
+```sh
+screen -r tree
+```
 You should see that you have to reactivate the conda environment when you enter a new session. 
 
 IQtree is a very versatile program with many options yet very straightforward to use. 
