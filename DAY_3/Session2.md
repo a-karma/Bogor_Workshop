@@ -26,7 +26,7 @@ Next activate the correct conda environment for the day
 ### 1. Building phylogenetic trees with IQtree
 As mentioned in the introduction to this practical session, a phylogetic is a diagram that represents the evolutionary relationships among a set of organisms. The pattern of branching in a phylogenetic tree reflects how lineages evolved from a series of common ancestors (see figure below). Phylogenetic inference relies on either morphological or molecular data and aims at identifying the best supported topology i.e. the shape and the structure of the tree that is able to explain the observed pattern of variations (see here if you want more details about tree reconstruction methods: https://en.wikipedia.org/wiki/Computational_phylogenetics). In this session we will focus on genetic variation (specifically on SNPs) and we will use for our inference `iqtree` .
 
-
+![tree-schematics](../IM/LOGO_new.png)
 
 
 #### Convert to phylip format
