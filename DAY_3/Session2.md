@@ -24,25 +24,19 @@ Next activate the correct conda environment for the day
 > `Hint` - this will be the same as the one you were using this morning
 
 ### 1. Building phylogenetic trees with IQtree
-As mentioned in the introduction to this practical session, a phylogetic is a diagram that represents the evolutionary relationships among a set of organisms. The pattern of branching in a phylogenetic tree reflects how lineages evolved from a series of common ancestors (see figure below). Phylogenetic inference relies on either morphological or molecular data and aims at identifying the best supported topology i.e. the shape and the structure of the tree that is able to explain the observed pattern of variations (see here if you want more details about tree reconstruction methods: https://en.wikipedia.org/wiki/Computational_phylogenetics). In this session we will focus on genetic variation (specifically on SNPs) and we will use for our inference `iqtree` .
+As mentioned in the introduction to this practical session, a phylogetic tree is a diagram that represents the evolutionary relationships among a set of organisms. The pattern of branching in a phylogenetic tree reflects how lineages evolved from a series of common ancestors (see figure below). Phylogenetic inference relies on either morphological or molecular data and aims at identifying the best supported topology i.e. the shape and the structure of the tree that is able to explain the observed pattern of variations (see here if you want more details about tree reconstruction methods: https://en.wikipedia.org/wiki/Computational_phylogenetics). In this session we will focus on genetic variation (specifically on SNPs) and we will use for our inference `iqtree` .
 
 ![tree-schematics](../IM/tree_scheme.png)
 
 
 #### Convert to phylip format
+The program `iqtree` is a fast algorithm for inferring phylogentics tree using a maximum likelihood approach. It requires an alignment file as an input but this can take several formats. Here will be using the `.phylip` alignment format which can be easily generated from a vcf file using a python based utility called `vcf2phylip.py`. 
 
-Ok lets start with the tree, navigate into the correct folder for this analysis
+First of all, navigate to the correct folder for this analysis;
 ```sh
 cd iqtree
 ```
-
-The program you will use to make the tree is called `iqtree`. `iqtree` requires an alignment file as an input but this can take several formats. 
-We will be using the `.phylip` alignment format. To generate this from the vcf file, you need to use a script called `vcf2phylip.py`. 
-
-`iqtree` is program to reconstruct phylogenetic tree based on genetic data -
-The data for this exercise can be found here `/home/DATA/Day_3_b/`. 
-
-First we need to use `vcf2phylip.py` to convert our vcf (https://en.wikipedia.org/wiki/Variant_Call_Format) into a phylip (https://en.wikipedia.org/wiki/PHYLIP) format. To do this, first create a shell variable we call `PANEL` which contains the path to the panel.
+Then, let's create a shell variable called `PANEL` which contains the path to the our input data.
 
 ```sh 
 PANEL=/home/DATA/Day_3_b/babirusa_panel
@@ -59,15 +53,15 @@ Then we can run the `vcf2phylip` utility by specifying the vcf file as the input
 ```sh
 vcf2phylip.py -i $PANEL.vcf --output-prefix babirusa_panel
 ```
-When it is finished you should see a your output file in your directory, and that with default settings the file has been named `[name_of_panel].min4.phy`
+When it is finished you should see an output file in your `iqtree` directory, which, with default settings, has been named `[name_of_panel].min4.phy`
 
 >  `Exercise one`
 > 
 >  Can you use the help file to find out what the addition of "min4" in the file name means? Now how would you run the command and change this option?
 > `Hint` - use the help file (`--help`)
 
-#### Basics of using `screen` in linux
-Now we have our input file in the correct format for `iqtree`. Because the command we are going to run can take a while to complete, we are going to use a program called `screen` to allow us to run commands in a different session in the background as we continue with the other analyses. Below are some of commands we will need for interacting with `screen`.
+#### Basic usage of `screen` in linux
+We now have our input file in the correct format for `iqtree` and we are almost ready to run our analysis. Unfortunately, the tree inference can take a while to complete, therefore we are going to use a program called `screen` that will allow us to launch multiple shell sessions. This way, the iqtree commands will keep running in the background as we continue with the other analyses. Below are some commands we will need for interacting with `screen`.
 
 To activate new session with a specific name: 
 ```sh 
