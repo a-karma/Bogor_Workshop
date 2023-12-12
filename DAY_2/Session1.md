@@ -183,7 +183,7 @@ If the dna insert (in gray; the DNA we are interested in) is shorter than the re
 
 This is particularly an issue if your DNA is degraded, for example, if it is coming from an non-invasive sample like hair or feaces, or even bone. In this case we would want to remove the adapter sequence so that you only work with the DNA we are interested in: the part in gray in diagram above. Having adapter sequences in reads can lead to issues with mapping and genotyping later on. If you do not understand this please speak to a instructor so they can help you. 
 
-There are many software available that can perform this task, here we will focus on ![AdapterRemoval](https://adapterremoval.readthedocs.io/en/stable/). 
+There are many software available that can perform this task, here we will focus on `AdapterRemoval` (https://adapterremoval.readthedocs.io/en/stable/). 
 The main reason why we present this software in this workshop is because it not only search and remove adapters from high-throughput sequencing data but it can also perform the colllapsing of the two reads if necessary. 
 
 Collapsing reads should be avoided when dealing with modern DNA given that the DNA molecules present in the library are longer than the read size (normally 150 bp for Illumina) hence the forward and reverse sequencing product do not overlap. Merging the overlapping region of the two reads is instead the standard procedure when analysing shorter DNA fragments which is always the case when dealing with degraded DNA such as DNA extracted from archaeological specimens or museum collections. 
