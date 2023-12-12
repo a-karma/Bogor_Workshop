@@ -149,7 +149,7 @@ Now, we could use the while loop structure to align all our four sample sequenti
 ```
 Unfortunately, this would take approximately 25 minutes per sample, thus, in the interest of time we are going to run our script only on one sample of your chosing:
 ```sh
-sed -n '/sample_name/,p' ./lists/bwa_full_arg_list.txt > ./lists/my_choice_bwa_args.txt
+sed -n '/sample_name/p' ./lists/bwa_full_arg_list.txt > ./lists/my_choice_bwa_args.txt
 ```
 > `Exercise 2`
 >
