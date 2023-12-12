@@ -11,17 +11,7 @@ In this tutorial you will run the three analyses using the remote server:
 
 In session three - you will download the final output produced by these software and work in RStudio to visualise the results from the PCA and ADMIXTURE, while instead you will use the browser tool iTOL for tree visualisation.
 
-### 1. Building phylogenetic trees with IQtree
-As mentioned in the introduction to this practical session, a phylogetic is a diagram that represents the evolutionary relationships among a set of organisms. The pattern of branching in a phylogenetic tree reflects how lineages evolved from a series of common ancestors (see figure below). 
-
-
-
-First create a new directory for this session in your home directory (`~/`) with a subdirectory specifically for this analysis. Recall the guidelines with went through on day 1.
-
-Next activate the correct conda environment for the day
-> `Hint` - this will be the same as the one you were using this morning
-
-We will keep the output files for each analysis in their own directory, so make a directory for this analysis and navigate to it. This is your working directory. 
+As usual, we first need to create the directory structure for the whole session. Recalling the guidelines with went through on day 1, let's make a new folder in your home directory (`~/`) and a specific subdirectory for each of the analyses.
 
 ```sh
 mkdir day3;
@@ -29,6 +19,15 @@ cd day3
 mkdir iqtree; mkdir smartpca; mkdir admixture
 touch what_i_did.txt
 ```
+
+Next activate the correct conda environment for the day
+> `Hint` - this will be the same as the one you were using this morning
+
+### 1. Building phylogenetic trees with IQtree
+As mentioned in the introduction to this practical session, a phylogetic is a diagram that represents the evolutionary relationships among a set of organisms. The pattern of branching in a phylogenetic tree reflects how lineages evolved from a series of common ancestors (see figure below). Phylogenetic inference relies on either morphological or molecular data and aims at identifying the best supported topology i.e. the shape and the structure of the tree that is able to explain the observed pattern of variations (see here if you want more details about tree reconstruction methods: https://en.wikipedia.org/wiki/Computational_phylogenetics). In this session we will focus on genetic variation (specifically on SNPs) and we will use for our inference a program called `iqtree`.
+
+
+
 
 #### Convert to phylip format
 
@@ -40,8 +39,7 @@ cd iqtree
 The program you will use to make the tree is called `iqtree`. `iqtree` requires an alignment file as an input but this can take several formats. 
 We will be using the `.phylip` alignment format. To generate this from the vcf file, you need to use a script called `vcf2phylip.py`. 
 
-`iqtree` is program to reconstruct phylogenetic tree based on genetic data - it uses maximum likelihood (see here if you want more details about tree reconstruction methods: https://en.wikipedia.org/wiki/Computational_phylogenetics). 
-
+`iqtree` is program to reconstruct phylogenetic tree based on genetic data -
 The data for this exercise can be found here `/home/DATA/Day_3_b/`. 
 
 First we need to use `vcf2phylip.py` to convert our vcf (https://en.wikipedia.org/wiki/Variant_Call_Format) into a phylip (https://en.wikipedia.org/wiki/PHYLIP) format. To do this, first create a shell variable we call `PANEL` which contains the path to the panel.
