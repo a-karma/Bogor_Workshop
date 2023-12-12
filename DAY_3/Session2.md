@@ -2,14 +2,14 @@
 # Applications of Genomics in Wildlife Conservation
 
 ## Day 3 - Population genetic analysis - Session 2
-In this session we are going to learn the basics of population genomics analyses using the babirusa dataset. We conduct exploratory analyses to infer whether all the babirusa come from a panmictic population, or whether we can find evidence of population structure and, if this is the case, whether this structure correlates with geography.
+In this session we are going to learn the basics of population genomics analyses using the babirusa dataset. We will conduct exploratory analyses to infer whether all the babirusa come from a panmictic population, or whether we can find evidence of population structure and, if this is the case, whether this structure correlates with geography.
 
-In this tutorial you will run the three analyses using the remote server:
+In this tutorial you will run the three analyses on our remote server:
 - building maximum likelihood tress in IQtree
 - principal components analysis in smartpca
 - ADMIXTURE with different values of K
 
-In session three - you will download the final output produced by these software and work in RStudio to visualise the results from the PCA and ADMIXTURE, while instead you will use the browser tool iTOL for tree visualisation.
+In session three, you will then download the final output produced by these software and work in RStudio to plot the PCA and ADMIXTURE results while you will use `iTOL` to visualise the inferred tree directly in your web-browser.
 
 As usual, we first need to create the directory structure for the whole session. Recalling the guidelines with went through on day 1, let's make a new folder in your home directory (`~/`) and a specific subdirectory for each of the analyses.
 
@@ -24,7 +24,7 @@ Next activate the correct conda environment for the day
 > `Hint` - this will be the same as the one you were using this morning
 
 ### 1. Building phylogenetic trees with IQtree
-As mentioned in the introduction to this practical session, a phylogetic is a diagram that represents the evolutionary relationships among a set of organisms. The pattern of branching in a phylogenetic tree reflects how lineages evolved from a series of common ancestors (see figure below). Phylogenetic inference relies on either morphological or molecular data and aims at identifying the best supported topology i.e. the shape and the structure of the tree that is able to explain the observed pattern of variations (see here if you want more details about tree reconstruction methods: https://en.wikipedia.org/wiki/Computational_phylogenetics). In this session we will focus on genetic variation (specifically on SNPs) and we will use for our inference a program called `iqtree`.
+As mentioned in the introduction to this practical session, a phylogetic is a diagram that represents the evolutionary relationships among a set of organisms. The pattern of branching in a phylogenetic tree reflects how lineages evolved from a series of common ancestors (see figure below). Phylogenetic inference relies on either morphological or molecular data and aims at identifying the best supported topology i.e. the shape and the structure of the tree that is able to explain the observed pattern of variations (see here if you want more details about tree reconstruction methods: https://en.wikipedia.org/wiki/Computational_phylogenetics). In this session we will focus on genetic variation (specifically on SNPs) and we will use for our inference `iqtree` .
 
 
 
