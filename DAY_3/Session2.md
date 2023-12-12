@@ -129,7 +129,7 @@ cd ~/day3/smartpca
 ```
 
 #### Convert files to the correct format
-smartPCA does not work with vcf or plink files so we need to run a file conversion (this is somehow very common in bioinformatics). Luckily the author of the program provides a code to do the conversion from plink file to eigenformat. The first thing to do is convert our plink fileset into an eignstrat format which is used by the eigensoft set of programs - including smartpca. To do this we are going to use a program called `convertf`.
+smartPCA does not work with vcf or plink files so we need to perform a file conversion (this is somehow very common in bioinformatics). Luckily the author of the program provides a code to do the conversion from plink file to eigenformat. The first thing to do is convert our plink fileset into an eigenstrat format which is used by the eigensoft set of programs - including smartpca. To do this we are going to use an utility called `convertf`.
 
 To run `convertf` you need to make a parameter file, or par file, which contains the information on where the files we want to convert are located. The program can change between several different formats, for example - the current files are in the .ped format and would like the EIGENSTRAT format as the output. 
 
