@@ -2,16 +2,19 @@
 # Applications of Genomics in Wildlife Conservation
 
 ## Day 3 - Population genetic analysis - Session 2
-In this session we are going to learn the basics of population genomics analyses using the babirusa dataset. As explained, we will use these analyses to explore whether all the babirusa come from a panmictic population, or whether we can see evidence of population structure and whether this structure correlates with geography.
+In this session we are going to learn the basics of population genomics analyses using the babirusa dataset. We conduct exploratory analyses to infer whether all the babirusa come from a panmictic population, or whether we can find evidence of population structure and, if this is the case, whether this structure correlates with geography.
 
 In this tutorial you will run the three analyses using the remote server:
 - building maximum likelihood tress in IQtree
 - principal components analysis in smartpca
 - ADMIXTURE with different values of K
 
-In session three - you will export the data from the virtual machine and work in RStudio to visualise the results from the PCA and ADMIXTURE, and you will use the browser tool iTOL for tree visualisation.
+In session three - you will download the final output produced by these software and work in RStudio to visualise the results from the PCA and ADMIXTURE, while instead you will use the browser tool iTOL for tree visualisation.
 
 ### 1. Building phylogenetic trees with IQtree
+As mentioned in the introduction to this practical session, a phylogetic is a diagram that represents the evolutionary relationships among a set of organisms. The pattern of branching in a phylogenetic tree reflects how lineages evolved from a series of common ancestors (see figure below). 
+
+
 
 First create a new directory for this session in your home directory (`~/`) with a subdirectory specifically for this analysis. Recall the guidelines with went through on day 1.
 
