@@ -91,7 +91,7 @@ The quality scores represent how sure the sequencer is about the base - for exam
 
 <img width="700" alt="image" src="https://github.com/a-karma/Bogor_Workshop/assets/5824025/0ce27cad-c499-4df7-a913-1d573b8bdeeb">
 
-In some cases the signal is very poor and so the sequencer won't be very sure this is A, a T, a G or a C - so the sequencer will give this base a bad quality socre. 
+In some cases the signal is very poor and so the sequencer won't be very sure this is A, a T, a G or a C - so the sequencer will give this base a bad quality score. 
 
 In the example above, the first base of the sequence is an A. The corresponding quality
 of the base calling is encoded as `I` (first character on line 4). The symbol `I` corresponds
