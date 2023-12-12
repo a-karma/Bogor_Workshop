@@ -41,22 +41,22 @@ We will be using the `.phylip` alignment format. To generate this from the vcf f
 
 The data for this exercise can be found here `/home/DATA/Day_3_b/`. 
 
-First we need to to use `vcf2phylip.py` to convert our vcf (https://en.wikipedia.org/wiki/Variant_Call_Format) into a phylip (https://en.wikipedia.org/wiki/PHYLIP) format. This script can be foundin the scripts directory in the shared data folder. To do this, first create a shell variable we call `PANEL` which contains the path the panel.
+First we need to use `vcf2phylip.py` to convert our vcf (https://en.wikipedia.org/wiki/Variant_Call_Format) into a phylip (https://en.wikipedia.org/wiki/PHYLIP) format. To do this, first create a shell variable we call `PANEL` which contains the path to the panel.
 
 ```sh 
 PANEL=/home/DATA/Day_3_b/babirusa_panel
 ```
 
-To check what the variable is we can use the command `echo`
+To check whether the desired string has been correctly assigned to our variable, we can simply use the command `echo`
 ```sh
 echo $PANEL
 ```
-This should now show you the path to the babirusa panel.
+which should print on screen the path to the babirusa panel.
 
-Then we can run vcf2phylip by specifying the vcf file as the input (`-i`) and the output name you want in your current working directory (`--out-prefix`)
+Then we can run the `vcf2phylip` utility by specifying the vcf file as the input (`-i`) and the output name you want in your current working directory (`--out-prefix`)
 
 ```sh
-/home/DATA/Day_3_b/scripts/vcf2phylip.py -i $PANEL.vcf --output-prefix babirusa_panel
+vcf2phylip.py -i $PANEL.vcf --output-prefix babirusa_panel
 ```
 When it is finished you should see a your output file in your directory, and that with default settings the file has been named `[name_of_panel].min4.phy`
 
