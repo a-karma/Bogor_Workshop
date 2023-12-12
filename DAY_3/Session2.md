@@ -128,23 +128,30 @@ PCA is a powerful statistical method widely used in population genomics to analy
 
 In simple terms, PCA can be thought of as a technique that transforms a complex set of genetic data into a more manageable and interpretable form. It does this by identifying a set of new variables, called principal components (PCs), that capture the main axes of variation in the data. These PCs are essentially linear combinations of the original genetic markers, but they have the advantage of being uncorrelated with each other, making them easier to analyze and interpret.
 
-Here we are going to use  `smartpca` to make a PCA from the babirusa data.  Make a new directory in your session two directory and navigate to it. 
+Here we are going to use  `smartpca` to make a PCA from the babirusa data.  In your day three directory navigate to the pca sub-directory. 
+```sh
+cd ~/day3/smartpca
+```
 
 #### Convert files to the correct format
-smartPCA does not work with vcf or plink files so we need to run a file conversion (this is somehow very common in bioinformatics). Luckily the author of the program provide a code to do the conversion from plink file to eigenformat. The first thing to do is convert our plink fileset into an eignstrat format which is used by the eigensoft set of programs - including smartpca. To do this we are going to use a program called `convertf`.
+smartPCA does not work with vcf or plink files so we need to run a file conversion (this is somehow very common in bioinformatics). Luckily the author of the program provides a code to do the conversion from plink file to eigenformat. The first thing to do is convert our plink fileset into an eignstrat format which is used by the eigensoft set of programs - including smartpca. To do this we are going to use a program called `convertf`.
 
 To run `convertf` you need to make a parameter file, or par file, which contains the information on where the files we want to convert are located. The program can change between several different formats, for example - the current files are in the .ped format and would like the EIGENSTRAT format as the output. 
 
 > `Hint` - take a look at the format and additional options here - https://github.com/chrchang/eigensoft/blob/master/CONVERTF/README
 
 Make an empty text file and enter the text editor (`nano`).
+```sh
+touch par.convertf_PEDtoEIGENSTRAT
+nano par.convertf_PEDtoEIGENSTRAT
+```
 
-You need to specify the location of your original plink .ped and .map file, define the output format that you require and then specify where you want to generate the new eigenstrat files. For us this will be in your working directory.
+Inside the `par` file we need to specify the location of your original plink .ped and .map file, our babirusa panel, define the output format that you require and then specify where you want to generate the new eigenstrat files. For us this will be in your working directory.
 
 ```sh
-genotypename:  /dev/workshop_DATA/Day_3_b/babirusa_panel.ped
-snpname:       /dev/workshop_DATA/Day_3_b/babirusa_panel.map 
-indivname:     /dev/workshop_DATA/Day_3_b/babirusa_panel.ped
+genotypename:  /home/DATA/Day_3_b/babirusa_panel.ped
+snpname:       /home/DATA/Day_3_b/babirusa_panel.map 
+indivname:     /home/DATA/Day_3_b/babirusa_panel.ped
 outputformat:    EIGENSTRAT
 genotypeoutname: babirusa_panel.eigenstratgeno
 snpoutname:      babirusa_panel.snp
@@ -154,13 +161,15 @@ indivoutname:    babirusa_panel.ind
 
 Now run convertf using 
 ```sh 
-convertf -p [name_of_par_file]
+convertf -p par.convertf_PEDtoEIGENSTRAT
 ```
-Once completed, you should see the new files in your working directory
+Once completed, you should see the three new files in your working directory (*.eigenstrat, *.snp, *.ind)
 
 #### Redefining the populations
 Check the first few lines of the `.ind` file. What do you see? 
-Column one should be the sample name, column two is sex (U = unknown) and column three is population. Currently the third colummn will be filled with `???`. We dont want to make prior assumptions about the population membership of the individuals, therefore we want to rename this column so each individual is in a unique population before we run the pca. The easiest way is to copy the first column to the third. This can be done using `awk`
+Column one is the sample name, column two is sex (U = unknown) and column three is population.
+
+If you use the `head` command, you can see the third colummn will be filled with `???`. This means the population is unknown but as we dont want to make prior assumptions about the population membership of the individuals, we want each individual to be treated as an individual not as part of a population. Therefore we want to change this third column so each individual is in a unique population before we run the pca. The easiest way is to copy the first column to the third. This can be done using `awk`
 
 ```sh
 cat babirusa_panel.ind | awk 'BEGIN {OFS="\t"};{print $1,"U",$1}' > babirusa_panel.ind_new
@@ -179,6 +188,11 @@ These files can be used to run multiple types of analysis beyond PCA using the a
 Our data is now ready to run `smartpca`. Like `convertf` we make a parameter file to supply to the program to generate the output files.
 
 Again, make an empty text file and enter the text editor.
+```sh
+touch par.smartpca_babirusa
+nano par.smartpca_babirusa
+```
+
 The same as the previous par file - specify the path to the input files (in eigenstrat format generated by the convertf command), followed by the path we want for the two output files.
 
 ```sh 
@@ -195,15 +209,15 @@ There are many other options to add to the par file, which will depend on your d
 
 Now run `smartpca` and save the output to a log file
 ```sh 
-smartpca -p [name_of_your_par_file] > [name_of_your_logfile].log
+smartpca -p par.smartpca_babirusa > babirusa_smartpca.log
 ```
 This should give you two new output files, look at the contents of these files: 
 - babirusa_panel_PCA.evec - this is the position of where each individual falls along the eigenvectors (columns 2:11) 
 - babirusa_panel_PCA.eval - this contains the eigenvalues for each of the principal components (the importance of each axis)
 
-> `Exercise two`
+> `Bonus exercise two`
 >
-> Can you modify the par file and generate new outputs for 15 eigenvectors?
+> The default number of eigenvectors smartpca runs, the number of PC axis it will test, is 10. Using the help file and website can you modify the par file and generate new outputs for 15 eigenvectors? 
 
 In the next session you will copy these files to your local computer and visualise in RStudio. But now lets move on to the admixture analysis.
 
