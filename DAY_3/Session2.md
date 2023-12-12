@@ -90,7 +90,7 @@ To reopen a session use:
 screen -r [name_of_session]
 ```
 
-To kill a session, so close it forever, use:
+To kill a session, i.e. close it forever, use:
 ```sh 
 screen -XS [name_of_session] quit
 ```
@@ -226,15 +226,20 @@ The final analysis we will run is ADMIXTURE. ADMIXTURE is a software program for
 
 Make a new directory within your project folder for session two and navigate to it
 
-The program `ADMIXTURE` runs directly from a `.bed` file. Great, we already have this in the right format. So the command is very simple.
-```sh 
-admixture [path_to_bed] [number_of_ks]
+The program `ADMIXTURE` runs directly from a `.bed` file. Great, we already have this in the right format. 
+```sh
+ls /home/DATA/Day_3_b/babirusa_panel*
 ```
-This program can also calculate the cross validation errors using the option (`-cv`).
+
+So the command is very simple.
+```sh 
+admixture [path_to_bed] --cv [number_of_ks]
+```
+Here the option (`--cv`) calculates the cross validation error. When selecting values of k to cluster the data by, the lower the cv value the closer the fit to the data. 
 
 > `Exercise three`
 >
-> Run ADMIXTURE for k = 2 with the cross validation error calculation, can you see the CV value in the output ?
+> Run ADMIXTURE for k = 2 with the cross validation error calculation, can you see the CV value in the output on your screen?
 
 Next you can use a loop to run through several values of k, calculate the cv errors and output the results to a log file. This may take a little while, so again we will open a new screen, this means you can continue to use your terminal while it  is running. 
 Lets look at the screens we have running: 
@@ -245,23 +250,23 @@ Hopefully you see the screen with your tree running
 
 Then open a new screen with a sensible name: 
 ```sh 
-screen -S [name_of_session]
+screen -S admix
 ```
 Remember - You will have to reactivate the conda environment before you start
 
 First lets assign a variable for the path to the `.bed` file.
 ```sh
-ADMIX=/dev/workshop_DATA/Day_3_b/babirusa_panel.bed
+ADMIX=/home/DATA/Day_3_b/babirusa_panel.bed
 ```
 
-Then make the for loop for k = 1-5
+Then make the for loop for clusters one to five 
 ```sh 
 for k in $(seq 5) 
 do
     admixture $ADMIX --cv $k | tee babirusa_k_$k.log
 done
 ```
-`tee` is a command which is writing to standard output and the log file at the same time
+`tee` is just a command which writes the output to your screen while also writing to a log text file at the same time.
 
 Close the session with `ctrl` + `a` + `d`
 
@@ -273,7 +278,7 @@ screen -ls
 ```
 and then activate the one running IQtree
 ```sh 
-screen -r [name_of_screen]
+screen -r tree
 ```
 If it has not finished running leave it for longer while we have a break. Deattach the screen using `ctrl`+`a`+`d`
 If it has finished - great. You can check the files in the directory for this analysis. You should have these output files: 
@@ -285,16 +290,32 @@ If it has finished - great. You can check the files in the directory for this an
 - .bionj - contains the BIONJ tree, related to the neighbour joining tree
 
 If you see these files, you can close that screen session.
+```sh 
+screen -XS tree quit
+```
 
 #### Lets check on the ADMIXTURE before coffee... 
-Reactivate the screen. Is it still running? 
+Reactivate the admixture screen. Is it still running? 
+```sh 
+screen -ls
+```
+and then activate the one running IQtree
+```sh 
+screen -r admix
+```
 
 If you think its finished, close the screen and check whether the output files for all five values of k are in your output directory.
 
 When it has finished running, use `grep` on the log files to extract the cv values, which we will look at after
 ```sh 
-grep CV *.log > cv_errors.txt
+grep 'CV' *.log > cv_errors.txt
 ```
+
+Make sure you have the correct output files in your directory and the close screen
+```sh 
+screen -XS admix quit
+```
+
 
 #### If you get here before the end of the session you can start downloading and organising your files
 Follow the first steps in the next session - session 3 - and use `sftp` to download your files to your local computer
