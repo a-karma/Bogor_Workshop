@@ -400,8 +400,8 @@ Now we will check to see which value of K the cross validation suggests is best.
 > - Can you choose your own colour palette for both the PCA and ADMIXTURE? `Hint` - use the `colour=` option in `geom_point()` or the addition layers `scale_colour_manual()`
 >  http://www.sthda.com/english/wiki/ggplot2-colors-how-to-change-colors-automatically-and-manually
 >
-> - in the admixture - the colours of the clusters are not consistent across the values of k
-> - there are programs that can be used to fix it - in your browser https://tau.evolseq.net/clumpak/index.html - you will also need to edit the population file to remove the `RD` sample names. > - Ask an instructor if you get to this point
+> - In the admixture plot can you see that the colours of the clusters are not consistent across the values of k - i.e. V1 in the k2 plot is not the same as V1 in the k3 plot for example
+> - There are programs that can be used to fix it - in your browser https://tau.evolseq.net/clumpak/index.html - you will also need to edit the population file to remove the `RD` sample names. > - Ask an instructor if you get to this point
 > - Or take a look at the R package http://www.royfrancis.com/pophelper/articles/index.html for some ideas on how to fix this
 
 
