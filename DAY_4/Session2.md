@@ -7,7 +7,7 @@
   placeholder name within square brackets and ../IM/file_name.png within parentheses
   --->
   
-## Detecting Recent Inbreeding using Runs of Homozygosity
+## Day 4 - Detecting Recent Inbreeding using Runs of Homozygosity - Session 2
   
 ### Introduction
 Runs of Homozygosity (ROHs) are stretches of DNA where both chromosomes are identical (homozygous). This happens after consanginous mating i.e. when an individual inherits the same allele from related inviduals. Long ROHs suggest recent inbreeding, potentially leading to 1) reduced genetic diversity, making populations less adaptable to change 2) increased risk of deleterious recessive traits to be expressed, impacting health and survival. 
@@ -26,56 +26,55 @@ In `PLINK`, the `--homozyg` function is used to perform ROH analyses and relies 
 >
 > Prepare your working directory for this session by following all the steps in Task 0 of Day 4 Session 1.
 >
-> This time your project directory should be called `inbreeding` and the path to the input data for the link command should be /home/DATA/Day_4/Session_2
+> This time your project directory should be called `day_4_inbreeding` and the path to the input data for the link command should be `/home/DATA/Day_4/Session_2` (`ln -s /home/DATA/Day_4/Session_2/* .`).
   
-You should have a working directory in your `/de/workshop_participants/your_user_ID/` folder now named `day_4` with a subdirectory called `inbreeding` containing a symbolic link of `babirusa_workshop_set.vcf.gz`, `babirusa_workshop_metadata.txt`, and 18 files of a ROH run results ending with `.hmmrohl.gz`. We will work with these results a bit later in the session.
+You should have a working directory in your `/de/workshop_participants/your_user_ID/` folder now named `day_4_inbreeding` containing a symbolic link of `babirusa_workshop_set.vcf.gz`, `babirusa_workshop_metadata.txt`, and 18 files of a ROH run results ending with `.hmmrohl.gz`. We will work with these ROH run results a bit later in the session.
   
 ### Task 1: Detecting ROH with PLINK
   
-To detect homozygous segments in a VCF, we run a plink command as follows:
+First, we will detect runs of homozygous segments in a VCF using a software called `plink`. We run a plink command as follows:
 ```{bash plink, eval=FALSE}
 plink --vcf babirusa_workshop_set.vcf.gz \
   --homozyg \
-  --out babirusa_workshop_set_PLINK_A \
+  --out babirusa_workshop_set_PLINK_A
 ```
-  
-The output files of the command will be a set of text files with the prefix declared in the `--out` argument ending with suffix "`.hom.*`". The "`.log`" file will contain all the options and the command 
+Note that the backslash (`\`) allows you to continue writing the commands and not considering your command is done after you type it. This is just one way of doing it that makes it easy to read or follow up. You can also run it as `plink --vcf babirusa_workshop_set.vcf.gz --homozyg --out babirusa_workshop_set_PLINK_A` and it will run the same, just in one line.
+
+The output files of the command will be a set of text files with the prefix declared in the `--out` argument ending with suffix "`.hom.*`". The "`.log`" file will contain all the options and the command.
   
 ```sh
 ls -lh babirusa_workshop_set_PLINK_A.*
-   539K Dec  4 13:43 babirusa_workshop_set_PLINK_A.hom
-    821 Dec  4 13:43 babirusa_workshop_set_PLINK_A.hom.indiv
-   161M Dec  4 13:43 babirusa_workshop_set_PLINK_A.hom.summary
-   1.2K Dec  4 13:43 babirusa_workshop_set_PLINK_A.log
-    170 Dec  4 13:43 babirusa_workshop_set_PLINK_A.nosex
+-rw-rw-r-- 1 sabhrina1 sabhrina1 687K Dec 13 08:03 babirusa_workshop_set_PLINK_A.hom
+-rw-rw-r-- 1 sabhrina1 sabhrina1  827 Dec 13 08:03 babirusa_workshop_set_PLINK_A.hom.indiv
+-rw-rw-r-- 1 sabhrina1 sabhrina1 161M Dec 13 08:03 babirusa_workshop_set_PLINK_A.hom.summary
+-rw-rw-r-- 1 sabhrina1 sabhrina1 1.2K Dec 13 08:03 babirusa_workshop_set_PLINK_A.log
+-rw-rw-r-- 1 sabhrina1 sabhrina1  170 Dec 13 08:03 babirusa_workshop_set_PLINK_A.nosex
 ```
   
-The detail of the ROH segments found can be found in the ".hom" file. (Read more about the output details in this [link](https://www.cog-genomics.org/plink/1.9/formats#hom)).
-  
-Let's have a look on the .hom.indiv to see the summary. Does all samples have ROH segment?
+Have a look on each of the files using `less` to see what each file contains. The `.hom` file contains detail of the ROH segments in the entire VCF. The `.hom.indiv` is the summary statistics of the ROH distribution per individual. Does all samples have ROH segment?
+
+Read more about the output details in this [link](https://www.cog-genomics.org/plink/1.9/formats#hom).
   
 The power of ROH is that the segment length is inversely correlated with the time of inbreeding event. The longer the segment is, the more recent is the inbreeding event. However, we cannot see this easily from the output file. We need to download the output files and plot the results. Before we do that, we need to prepare a R working directory in our local computer.
   
 ### Task 2: Plotting PLINK results in R
   
-We will use R in R Studio to visualise our ROH results. To make our working directory, open R Studio, choose File > New Project and in the `New Project Wizard` choose `Create New R Directory > New Project`. Type in your directory name, such as "Inbreeding_Analysis" and choose your preferred path within your local computer. If you are happy with the directory name and location, click `Create Project`. A new R Studio session will appear.
+We will use R in R Studio to visualise our ROH results. To make our working directory, open R Studio, choose `File > New Project` and in the `New Project Wizard` choose `Create New R Directory > New Project`. Type in your directory name, such as "`Inbreeding_Analysis`" and choose your preferred path within your local computer. If you are happy with the directory name and location, click `Create Project`. A new R Studio session will appear.
   
-To start our data visualization project, choose `File > New File > R Script`. Save the R Script from the start to avoid forgetting to save your commands. For example, save it as "`01_plot_PLINK.R`" in our R project working directory.
+To start our data visualization project, choose `File > New File > R Script`. Save the R Script from the start to avoid forgetting to save your commands. For example, save it as "`01_plot_ROH.R`" in our R project working directory.
   
-Then, go to your command line interface and **go to the directory of your newly made R project**. Make a new directory called "`input`" and download your PLINK results there by doing `sftp` here. Do not forget to also download the accompanying metadata.
+Then, go to your command line interface and **go to the directory of your newly made R project**. Make a new directory called "`input`" and download your PLINK results there by doing `sftp` in `input`. Do not forget to also download the accompanying metadata.
 ```sh
 mkdir input
 cd input
-sftp -i <path_to_identity_file> <username>@138.246.238.65
-> get babirusa_workshop_set_PLINK_A.hom* .
-> get babirusa_workshop_metadata.txt
+sftp -i <path_to_identity_file> <username>@16.171.154.110
+> get day_4_inbreeding/babirusa_workshop_set_PLINK_A.hom* .
+> get day_4_inbreeding/babirusa_workshop_metadata.txt .
 ```
-  
-> Quick question: how do you download the entire directory in one command?
   
 > Tips: You can check whether you are in the correct directory by looking at the content. If it contains a file with the directory name with .Rproj suffix, you are on the right place.
   
-Afterwards, we go back to our R Studio and open our "`01_plot_PLINK.R`" we just made a couple of paragraphs ago.
+Afterwards, we go back to our R Studio and open our "`01_plot_ROH.R`" we just made a couple of paragraphs ago.
 
 To plot the results, we need to first read the PLINK results and the accompanying metadata.
 ```{r readHom}
@@ -115,7 +114,7 @@ r %>%
   
 Which region has the highest ROH? Could you say it from the plot?
 
-> Tips: Along this exercise, feel free to change the arguments & exclude some lines to see what each part does. You can also do `?<function>` to see what a function does in R.
+> Tips: Along this exercise, feel free to change the arguments & exclude some lines to see what each part does. You can also do `?<function name>()` to see what a function does in R.
   
 Our eyes can only make an estimate. Let's try to do a more certain visualization to do answer this question. First, we need to summarise the ROH length per sample. This can be done with `tidyverse` functionality as follows.
 ```{r group}
@@ -124,8 +123,9 @@ rSROH <- r %>%
   summarise(SROH=sum(KB))
 ```
   
-Open rSROH and see what is inside. 
+Open `rSROH` and see what is inside. You can use `cat()` or `head()`.
 ```
+head(rSROH)
 # A tibble: 6 × 2
   Sample    SROH
   <chr>    <dbl>
@@ -136,19 +136,18 @@ Open rSROH and see what is inside.
 5 RD17   243026.
 6 RD2    179293.
 ```
-This is the summary of the total amount of ROH segment we obtained for each sample.
+This is the summary of the total amount of ROH segment we obtained for each sample. We have this summary on the `.hom.indiv.` Can you check whether we have the correct sum per sample? Use `head` or `less` command to peek on a handful of samples.
   
 > Exercise 2
 >
-> We have this summary on the `.hom.indiv.` Can you check whether we have the correct sum per sample?
-> Modify the above command to get the mean length and also check.
+> Modify the above command by changing `sum` to `mean` to get the mean length of ROH segments detected. Then, check the `KBAVG` column in `.hom.indiv` to see if we have it correct.
 
 To see which region has the most ROHs, we can merge `rSROH` with `r` and plot them as follows:
 ```{r}
 r2<-left_join(r,rSROH,by=c("Sample"="Sample"))
   
 ggplot(r2)+
-  geom_boxplot(aes(x=Region,y=SROH/1e6,color=Region))+
+  geom_boxplot(aes(x=Region,y=SROH/1e6,fill=Region))+
   labs(x="region",y="Total ROH amount (Mbp)")+
   theme_minimal()
 ```
@@ -197,7 +196,7 @@ Then, we merge `rNROH` with our previous data set
 r3<-left_join(r2,rNROH,by=c("Sample"="IID"))
 ```
 
-Then, we plot the spectrum of NROH and FROH using `geom_ppint()`
+Then, we plot the spectrum of NROH and FROH using `geom_point()`
 ```
 ggplot(r3)+
   geom_point(aes(x=FROH, y=NROH, color=Region), size=3)+
@@ -211,7 +210,7 @@ What can you conclude from these plots?
 > 
 > For now we have ran PLINK with default options. These parameters values in the detault option were fine tuned for ROH analyses of human genomes. Now lets try to run PLINK with more sensible parameters for our species of interest (i.e. babirusa).
 >
-> The command is `plink --homozyg --homozyg-snp 20 --homozyg-kb 10 --homozyg-density 1000 --homozyg-window-snp 20 --homozyg-window-threshold 0.25`. Do not forget to add the input VCF file in the `--vcf` argument and add the `--out` argument with a filename of your choice. To refer to the output on the tutorial, we will refer to this new PLINK output as `babirusa_workshop_set_PLINK_B`.
+> The command is `plink --homozyg --homozyg-snp 20 --homozyg-kb 10 --homozyg-density 1000 --homozyg-window-snp 20 --homozyg-window-threshold 0.25  --vcf babirusa_workshop_set.vcf.gz --out babirusa_workshop_set_PLINK_B`.
 >
 > To understand what each argument does, read the documentation for `PLINK --homozyg` [here](https://zzz.bwh.harvard.edu/plink/ibdibs.shtml#homo)
 >
