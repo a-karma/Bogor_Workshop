@@ -59,7 +59,7 @@ get [PATH/TO/REMOTE/FILE] [LOCATION/TO/PUT/FILE/IN/LOCAL]
 > 
 > If you are in the desired location on your local you can just use a `.` instead of `[LOCATION/TO/PUT/FILE/IN/LOCAL]`
 
-You will also need to download some files from the shared directory `/dev/workshop_DATA/Day_3_b/`
+You will also need to download some files from the shared directory `/home/DATA/Day_3_b/`
 - you need the `pop_file.txt`
 - and the rooted tree file `babirusa_rooted.treefile`
   
