@@ -1,7 +1,7 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
 
-## Day 5 - Session 1: Modelling gene flow 
+## Day 5 - Modelling gene flow 
 
 
 ### F-statistics
