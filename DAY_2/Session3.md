@@ -1,7 +1,7 @@
 3![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
 
-## Day 2 - NGS data procesing - Session 3
+## Day 2 - NGS data processing - Session 3
 In this section we will highlight the necessary steps to identify genetic variations from whole-genome-sequencing data.
 
 ### Variant Calling procedure
