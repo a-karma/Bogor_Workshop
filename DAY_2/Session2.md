@@ -1,7 +1,7 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
 
-## Day 2 - NGS data procesing - Session 2
+## Day 2 - NGS data processing - Session 2
 In this session you will learn how to align reads to a reference genome and how to manipulate bam files.
 
 #### The SAM and BAM format
