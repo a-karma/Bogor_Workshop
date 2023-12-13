@@ -14,6 +14,8 @@ We will further try to explore if a population is evolving or is neutral using t
 - There are other methods as well, for example, RTG tools (https://github.com/RealTimeGenomics/rtg-tools) and ANGSD (http://www.popgen.dk/angsd/index.php/Heterozygosity)
 
 First we will estimate the number of heterozygous genotypes at a locus. That is, the number of individuals that are heterozygous at a locus.
+ln -s /home/DATA/Day_3_a/babirusaMerge_scrofa_allChr.g_SNP_Q30_dpMin4_90p_workshopSamples_highCov.vcf.gz .
+
 ```sh
 conda activate Day_3
 # Calculate the number of heterozygous genotypes at a loci using vcftools
