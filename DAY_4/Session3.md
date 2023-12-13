@@ -78,7 +78,7 @@ OUTPUT=<sample name>.gpf
 python3 all_genotype_likelihoods_v3.py $INPUT $OUTPUT
 ```
 
-> Challenge: Write a bash script to run all files like in a loop what you did in Day 2.
+> Challenge: Write a bash script to obtain genotype posterior probabilities for all our samples using a loop like you did in Day 2.
 
 <details close>
 <summary>The loop to run the above can be found here</summary>
