@@ -1,6 +1,6 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
-## Day 1 - Session 2: Basic concepts of command line programming
+## Day 1 - Basic concepts of command line programming - Session 2
 
 ### 1. Shell Scripting
 In Session 1 we have seen how to navigate a Unix-like file system and how to manipulate text files. 
