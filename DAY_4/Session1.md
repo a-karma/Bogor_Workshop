@@ -130,11 +130,11 @@ An important thing here is to make sure we use the correct mutation rate and gen
 ```sh
 psmc_plot.pl -u 1.5e-09 -g 6 -s 100 -Y 25 -x 1000 -X 2000000 -m 5 -n 30 -p -M "WC, NW, SE, TO" babirusa_chr10_coarse babirusa_chr10_coarsePattern.psmc 2> psmc_plot_stderr.txt
 ```
-Note that "WC", "NW", "SE", and "TO" stands for the different population assignment of the babirusa samples used here. Read more on the metadata txt file.
+Note that "WC", "NW", "SE", and "TO" stands for the different population assignment of the babirusa samples used here. Read more on the `babirusa_workshop_metadata.txt` file.
 
 > Exercise 5
 >
-> Modify the -p option to have finer resolution of psmc on all four babirusa samples. Use “4+25*2+4+6” and name the resulting file with "_finePattern.psmc" suffix and run the same plotting script on the concatenated result as the previous tutorial. Note that this will take about 5-10 minutes to run.
+> Modify the `-p` option of the `psmc` to have finer resolution on all four babirusa samples. Use `“4+25*2+4+6”` and name the resulting file with "`_finePattern.psmc`" suffix and run the same plotting script on the concatenated result as the previous tutorial. Note that this will take about 5-10 minutes to run.
 
 By this stage, you should have two pdf files, each coming from different -p option. To see how they look like, we need to download the output into our local machine using sftp:
 ```sh
@@ -150,7 +150,7 @@ The plot should look somewhat like this:
 
 Babirusa PSMC with coarse parameter           |  Babirusa PSMC with fine parameter                |
 :--------------------------------------------:|:---------------------------------------------------:|
-![babirusa_coarse](../IM/babirusa_chr10_coarse.png)  |  ![babirusa_fine](../IM/babirusa_chr10_fine.png) 
+![babirusa_coarse](../IM/babirusa_chr10_coarse_Y25.png)  |  ![babirusa_fine](../IM/babirusa_chr10_fine_Y25.png) 
 
 ### Task 4: Looking at human population
 
