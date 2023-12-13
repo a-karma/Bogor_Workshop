@@ -134,7 +134,7 @@ smartPCA does not recognise vcfs as input files. Thus, in order to analyse our d
 If you list the content of the directory `/home/DATA/Day_3_b/` you will see a series of files termed `babirusa_panel` with various extensions: `.vcf` (which you already know) plus a `.ped` and `.map`. The latter represent a plink fileset i.e. pair of file that contain complementary information. These are tab (or space) separated files obtained by importing the vcf into `plink` and recoding the genotype information for each individuals in a slightly different way. This means that the first step has been already done for you but we have added the command below for full transparency and you can read more about plink here: (https://www.cog-genomics.org/plink/).
 
 ```sh
-insert the command here but start each line with #
+plink --vcf babirusa_panel.vcf --recode --out babirusa_panel
 ```
 Have a look for example at the `.map` file which contains all the info about our markers 
 ```sh
