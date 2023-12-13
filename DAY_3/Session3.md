@@ -393,13 +393,15 @@ Now we will check to see which value of K the cross validation suggests is best.
 
 ### 5. Extra exercises
 >
-> can you change the plots to be a better representation of the clusters? `Hint` - look at column `region2` in the metadata
-> 
-> can you use `scale_colour_manual()` to choose your own colour palette for both the PCA and ADMIXTURE?
+> - Can you change the plots to be a better representation of the clusters? `Hint` - look at column we made called `region2` in the metadata. If you use this variable in the plot instead what happens?
+>   
+> - You can try and the different PC axes along with there specific % contribution of variation for these axes
+>   
+> - Can you choose your own colour palette for both the PCA and ADMIXTURE? `Hint` - use the `colour=` option in `geom_point()` or the addition layers `scale_colour_manual()`
+>  http://www.sthda.com/english/wiki/ggplot2-colors-how-to-change-colors-automatically-and-manually
 >
-> plot on the different PC axes and calculate the contribution of variation for these axes
->
-> in the admixture - the colours of the clusters are not consistent across the values of k
-> take a look at the R package http://www.royfrancis.com/pophelper/articles/index.html for some ideas on how to fix this
-> or in your browser https://tau.evolseq.net/clumpak/index.html 
+> - in the admixture - the colours of the clusters are not consistent across the values of k
+> - there are programs that can be used to fix it - in your browser https://tau.evolseq.net/clumpak/index.html - you will also need to edit the population file to remove the `RD` sample names. > - Ask an instructor if you get to this point
+> - Or take a look at the R package http://www.royfrancis.com/pophelper/articles/index.html for some ideas on how to fix this
+
 
