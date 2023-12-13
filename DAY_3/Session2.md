@@ -131,8 +131,20 @@ cd ~/day3/smartpca
 #### Convert files to the correct format
 smartPCA does not recognise vcfs as input files. Thus, in order to analyse our dataset with this program, we need to perform a two-step file conversion (this is somehow very common in bioinformatics). First of all we need to convert our vcf file into a plink filest. Then we need use the `convertf` utility to transform these two tab separated files into a a format called eigenstrat that can be recognise by smartPCA. 
 
-If you list the content of the directory `/home/DATA/Day_3_b/` you will see a series of files termed `babirusa_panel` with various extensions: `.bed, .bim, .fam` and `.ped, .map`. These two groups of files are respectively the binary and the text version of a plink fileset which represent the native input/output format of this software. These have been obtained by importing the vcf into `plink` and recoding the genotype information for each individuals in a slightly different way. This means that the first step has been already done for you ;). 
- 
+If you list the content of the directory `/home/DATA/Day_3_b/` you will see a series of files termed `babirusa_panel` with various extensions: `.vcf` (which you already know) plus a `.ped` and .map`. The latter represent a plink fileset i.e. pair of file that contain complementary information. These are tab (or space) separated files obtained by importing the vcf into `plink` and recoding the genotype information for each individuals in a slightly different way. This means that the first step has been already done for you but we have added the command below for full transparency ;)
+
+```sh
+insert the command here but start each line with #
+```
+Have a look for example at the `.map` file which contains all the info about our markers 
+```sh
+head -5 babirusa_panel.map
+```
+or at the .ped file which instead contains genotype information:
+```sh
+cut -f1-9 -d" " babirusa_panel.ped
+```
+
 Let's focus on the second step. `convertf` requires a parameter file (a.k.a. par), which contains the information on where the files we want to convert are located. The program can change between several different formats, for example - the current files are in the .ped format and would like the EIGENSTRAT format as the output. 
 
 > `Hint` - take a look at the format and additional options here - https://github.com/chrchang/eigensoft/blob/master/CONVERTF/README
