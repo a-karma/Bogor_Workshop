@@ -126,7 +126,7 @@ To simplify the psmc results, we need to parse the .psmc file with `psmc_plot.pl
 psmc_plot.pl
 ```
 
-An important thing here is to make sure we use the correct mutation rate and generation time. Because there is no mutation rate estimates yet for babirusa, we used a mutation rate estimated for domestic pigs. We set the average generation time as expected for babirusa in captivity.
+An important thing here is to make sure we use the correct mutation rate and generation time. Because there is no mutation rate estimates yet for babirusa, we used a mutation rate estimated for domestic pigs (`-u`). We set the average generation time as expected for babirusa in captivity (`-g`).
 ```sh
 psmc_plot.pl -u 1.5e-09 -g 6 -s 100 -Y 25 -x 1000 -X 2000000 -m 5 -n 30 -p -M "WC, NW, SE, TO" babirusa_chr10_coarse babirusa_chr10_coarsePattern.psmc 2> psmc_plot_stderr.txt
 ```
