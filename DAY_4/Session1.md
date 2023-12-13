@@ -134,7 +134,7 @@ Note that "WC", "NW", "SE", and "TO" stands for the different population assignm
 
 > Exercise 5
 >
-> Modify the `-p` option of the `psmc` to have finer resolution on all four babirusa samples. Use `“4+25*2+4+6”` and name the resulting file with "`_finePattern.psmc`" suffix and run the same plotting script on the concatenated result as the previous tutorial. Note that this will take about 5-10 minutes to run.
+> Try to modify the `-Y` option of the `psmc_plot.pl` to be `-Y 100` and make the output to have `babirusa_chr10_coarse_Y100` as prefix. What happens to the plot? What can you conclude from the babirusa demographic history?
 
 By this stage, you should have two pdf files, each coming from different -p option. To see how they look like, we need to download the output into our local machine using sftp:
 ```sh
@@ -152,20 +152,28 @@ Babirusa PSMC with coarse parameter           |  Babirusa PSMC with fine paramet
 :--------------------------------------------:|:---------------------------------------------------:|
 ![babirusa_coarse](../IM/babirusa_chr10_coarse_Y25.png)  |  ![babirusa_fine](../IM/babirusa_chr10_fine_Y25.png) 
 
-### Task 4: Looking at human population
+> Exercise 6
+>
+> Modify the `-p` option of the `psmc` to have finer resolution on all four babirusa samples. Use `“4+25*2+4+6”` and name the resulting file with "`_finePattern.psmc`" suffix and run the same plotting script on the concatenated result as the previous tutorial. Note that this will take about 5-10 minutes to run. Plot it with the same command above (`psmc_plot.pl -u 1.5e-09 -g 6 -s 100 -Y 25 -x 1000 -X 2000000 -m 5 -n 30 -p -M "WC, NW, SE, TO"`). What is different?
+
+Making the resolution of the `psmc` higher means adding more parameters, and it can lead to overfitting. Depending on the history of the species, this might be different. We will discuss it more in the wrap up session.
+
+<!---
+### Looking at human population (Optional)
 
 We are now going to shift gears to estimate the effective population sizes from 2 samples in the 1000 human genomes consoritum. We will compare and contrast how the effective population sizes vary between these two populations.
 
 We will only be using data from chromosome 1 due to time constraints. Further, we have already run the commands that generate the psmcfa files using our custom script, so you do not need to do that.
 
-> Exercise 6
+> Exercise 7
 >
 > The psmcfa files are called `NA12718_chr1.psmcfa` and `NA19471_chr1.psmcfa` and you should find them in your `raw_data` directory. Using the same sets of commands we used in the previous section, run psmc on these 2 samples using the pattern "4+25*2+4+6". Note that this will take about 10 minutes to run.
 
-If you are short on time, or are tired of waiting, I have the psmc files for these samples already generated. They are called NA12718_chr1.psmc and NA19471_chr1.psmc. Use the plotting command - you might have to remove the -Y option from the command from the last section - to plot these.
+If you are short on time, or are tired of waiting, I have the psmc files for these samples already generated. They are called NA12718_chr1.psmc and NA19471_chr1.psmc. Use the plotting command - you might have to remove the `-Y` option from the command from the last section - to plot these.
 
-> Exercise 7
+> Exercise 8
 >
 > Remember that we now plot a different species, the human species. Consequently, the plotting parameters is different. Run `psmc_plot.pl -u 2.5e-08 -s 100 -m 5 -n 30 -p -M` followed by the `psmc` files to get the result.
 
 Based on what you see in the human population PSMC, what would you conclude regarding the population size history of the two populations of babirusa - did they have large or small populations, and were their population sizes similar over time?
+--->
