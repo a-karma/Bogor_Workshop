@@ -142,7 +142,7 @@ head -5 babirusa_panel.map
 ```
 or at the .ped file which instead contains genotype information:
 ```sh
-cut -f1-9 -d" " babirusa_panel.ped
+cut -f1-8 -d" " babirusa_panel.ped
 ```
 
 Let's focus on the second step. `convertf` requires a parameter file (a.k.a. par), which contains the information on where the files we want to convert are located. The program can change between several different formats, for example - the current files are in the .ped format and would like the EIGENSTRAT format as the output. 
