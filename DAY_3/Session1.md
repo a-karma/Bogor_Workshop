@@ -2,7 +2,7 @@
 # Applications of Genomics in Wildlife Conservation
 
 
-## Day 3 - Population genetic analysis - Session 2
+## Day 3 - Population genetic analysis - Session 1
 In this session you will learn how to measure genetic diversity and what can we learn from these metrics.
 ### Measuring Genetic Diversity 
 We are going to explore the observables of genetic data a.k.a genetic diversity. We are going to measure three metrics of genetic diversity: Observed heterozygosiy (Ho), number of seggregating sites (S) and the average number of pairwise difference between sequences (Pi).
