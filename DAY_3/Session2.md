@@ -179,7 +179,7 @@ Check the first few lines of the `.ind` file. What do you see?
 
 Column one is the sample name, column two is sex (U = unknown) and column three is population name.
 
-If you use the `head` command, you can see that the third colummn is filled with `???` This means that the individuals in our panel haven't been assigned to a specific populationis unknown but as we dont want to make prior assumptions about the population membership of the individuals, we want each individual to be treated as an individual not as part of a population. Therefore we want to change this third column so each individual is considered as a unique population before we run the pca. The easiest way is to copy the first column to the third. This can be done using `awk`
+If you use the `head` command, you can see that the third colummn is filled with `???` This means that the individuals in our panel have not been assigned to a specific population hence this field is set to unknown. At this stage, we do not want to make prior assumptions about the population membership of the individuals, we would rather treat each individual as a single sample not as part of a population. Therefore we want to change this third column and the easiest way to achieve this is to copy the first column to the third. This can be done using `awk`
 
 ```sh
 cat babirusa_panel.ind | awk 'BEGIN {OFS="\t"};{print $1,"U",$1}' > babirusa_panel.ind_new
