@@ -1,44 +1,80 @@
 
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
+<!---
 please do not modify these first two lines of the .md file
 
 use the same syntax to add pictures:
 
 placeholder name within square brackets and ../IM/file_name.png within parentheses
+--->
 
-## Session Title
-please add a few sentences here to introduce your session of the tutorial.
+## Day 5 - An interactive case study - Session 2
+This session is an “interactive case study” – we will try to see if we can interpret some advanced population genetic analyses! And hopefully see some interesting research.
 
-### Example of section title 
-##### Example of sub-section title 
-- this is how you define bullet point
-- in case you want to make more explicit 
-- the series of steps required to accomplish a task 
+Below you will find some questions and some images/plots to help you answer the questions. In parallel, we will be showing slides that introduce the background and explain what you see on the plots. For each question, you will get 5-10 minutes to discuss in pairs or small groups. After that, we will discuss the questions for 5-10 minutes in plenum. We hope you will not be shy about offering your opinion during the discussion!
 
-See example below on how to format commands that the participants will have to run
+If there is not enough time, e.g. if we get absorbed in some really interesting discussions along the way, don't fear. You can try to see if you can answer the remaining questions on your own time.
 
-```sh
-conda activate Day_1
-plink --bfile file_name --recode
-```
+<br>
 
-you can instead use `this syntax` to highlight an in-line command, software name or something you think it's important
+### Discussion questions 
+Please follow the slide show which will tell you when to discuss/answer the different questions. For each question, there will first be a plot, followed by the question for discussion.
 
-see below the syntax for tables:
+#### Demographic history and genetic diversity
+Cattle and banteng heterozygosity           |  Cattle and Bali cattle PSMC                |
+:--------------------------------------------:|:---------------------------------------------------:|
+![cattle_het](../IM/heterozygosity.png)   |    ![cattle_psmc](../IM/psmc.png)
 
-| column A | column B |
-| ------ | ------ |
-| row 1a | row 1b |
-| row 2a | row 2b |
-| you can also leave cells blank | |
+> Question 1 (5 minutes in pairs/groups):
+>
+> Which populations do you think have the highest genetic load?
 
-you can also use this env for exercises and tips:
-> Exercise 1 
+<br>
+
+#### ROHs and inbreeding
+
+![cattle_rohs](../IM/ROHs.png)
+
+> Question 2 (5 minutes in pairs/groups):
+>
+> What happened in samples N_19_RC and N_37_RC from Pasundan?
 > 
-> Modify the command above to ...
+> Question 3 (5 minutes in pairs/groups):
+>
+> What happened in Australian banteng?
 
-Or even:
-> Best practice: never use spaces in file names
+<br>
 
-note the empty line in the first quoted env (it seems to make it look nicer on github) 
+#### Genetic structure - PCA
+
+![cattle_pca](../IM/PCA.png)
+
+
+> 10 minutes discussion for the next three questions
+> 
+> Question 4:
+>
+> Why are taurine cattle so spread out?
+>
+> Question 5:
+>
+> Why is one Kupang Bali cattle in the middle?
+>
+> Question 6:
+>
+> Can you explain the Madura cattle?
+
+<br>
+
+#### Genetic admixture
+
+![cattle_admixture](../IM/haplonet.png)
+
+
+> Question 7 (5 minutes):
+>
+> Are cattle breeds genetically “pure”?
+> 
+
+<br>
