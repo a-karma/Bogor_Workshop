@@ -297,7 +297,7 @@ Reactivate the admixture screen. Is it still running?
 ```sh 
 screen -ls
 ```
-and then activate the one running IQtree
+and then activate the one running the admixture
 ```sh 
 screen -r admix
 ```
