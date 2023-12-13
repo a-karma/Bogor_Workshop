@@ -55,7 +55,7 @@ To get a .psmcfa file, we need to first generate the consensus sequence from a V
 REF=/home/DATA/Day_2/REF/Sus_scrofa.Sscrofa11.1.dna.toplevel.fa
 samtools faidx $REF 10 | bcftools consensus RD44.vcf.gz > RD44_chr10.fa &
 ```
-Note that we need the pig reference genome to do this, and a file with the autosomes list on `chr_autosomes.txt` to keep our analysis within the autosomal chromosomes. The '&' at the end allows us to run this command in the background while running another command. Whilr this command runs, do Exercise 1.
+Note that we need the pig reference genome to do this, and a file with the autosomes list on `chr_autosomes.txt` to keep our analysis within the autosomal chromosomes. The '&' at the end allows us to run this command in the background while running another command. While the example command runs, do Exercise 1.
 
 > Exercise 1
 >
