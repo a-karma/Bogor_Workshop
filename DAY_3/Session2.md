@@ -138,11 +138,11 @@ If you list the content of the directory `/home/DATA/Day_3_b/` you will see a se
 ```
 Have a look for example at the `.map` file which contains all the info about our markers 
 ```sh
-head -5 babirusa_panel.map
+head -5 /home/DATA/Day_3_b/Day_babirusa_panel.map
 ```
 or at the .ped file which instead contains genotype information:
 ```sh
-cut -f1-8 -d" " babirusa_panel.ped
+cut -f1-8 -d" " /home/DATA/Day_3_b/babirusa_panel.ped
 ```
 
 Let's focus on the second step. `convertf` requires a parameter file (a.k.a. par), which contains the information on where the files we want to convert are located. The program can change between several different formats, for example - the current files are in the .ped format and would like the EIGENSTRAT format as the output. 
