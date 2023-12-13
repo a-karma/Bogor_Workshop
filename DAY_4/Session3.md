@@ -7,7 +7,7 @@ use the same syntax to add pictures:
 placeholder name within square brackets and ../IM/file_name.png within parentheses
 --->
 
-## Calculating the burden of mutations using conservation scores
+## Day 4 - Calculating the burden of mutations using conservation scores - Session 3
 
 ### Introduction
 
@@ -41,7 +41,7 @@ Conservation scores such as SIFT is only one among the many ways of characterizi
 
 > Exercise 1
 >
-> Prepare your working directory for this session by following all the steps in Task 0 of Day 4 Session 1, but with data from /dev/workshop_DATA/Day_4/Session_3.
+> Prepare your working directory for this session by following all the steps in Task 0 of Day 4 Session 1, but with directory name `day_4_mutationLoad` data from `/home/DATA/Day_4/Session_3`. (You should be a wiz by now!)
 
 By the end of this exercise, you should have separate working directory for this session containing 18 files with .glf suffix, two python scripts, one bed file containing SIFT reference scores and one metadata file.
 ```
@@ -73,12 +73,24 @@ This is a tab separated file which give us the log likelihood of each 10 possibl
 To run this script type:
 
 ```{bash gpf, eval=FALSE}
-python3 all_genotype_likelihoods_v3.py $FILE.glf $FILE.gpf
+INPUT=<sample name>.glf
+OUTPUT=<sample name>.gpf
+python3 all_genotype_likelihoods_v3.py $INPUT $OUTPUT
 ```
 
-> Challenge: write a one line script to automate this for all 18 .glf files!
+> Challenge: Write a bash script to run all files like in a loop what you did in Day 2.
 
-Have a look at the resulting .gpf file using the `head` command. The resulting file should look like this:
+<details close>
+<summary>The loop to run the above can be found here</summary>
+<br>
+```
+for file in RD*glf; do python3 all_genotype_likelihoods_v3.py $file ${file%.glf}.gpf; done
+```
+</details>
+
+When you run the files, you will get a decimal numbers that tells you the time it takes to run the script in seconds.
+
+Have a look at the resulting `.gpf` file using the `head` command. The resulting file should look like this:
 ```{bash gpf_view, eval=FALSE}
 1   14851   14852   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   1.0
 1   15067   15068   0.0   0.0   0.0   0.0   1.0   0.0   0.0   0.0   0.0   0.0
@@ -114,10 +126,21 @@ This is again a `BED` file as in day one. You can see how we have customise this
 
 We would like to intersect this file with our .gpf files to merge both genotype probabilities and their deleterious (SIFT) score in the same file. To do this we will use `bedtools intersect` (on day 1)
 ```{bash bedtools, eval=FALSE}
-bedtools intersect -b $FILE -a SusScr11_107_sift_scores_chr1.bed -wb | cut -f 1-8,12-21 > ${FILE%.gpf}_sift.bed
+INPUT1=<sample name>.gpf
+INPUT2=SusScr11_107_sift_scores_chr1.bed
+bedtools intersect -b $INPUT1 -a $INPUT2 -wb | cut -f 1-8,12-21 > ${INPUT1%.gpf}_sift.bed
 ```
+Note the `%` part of the output. This is a bash syntax that allows us to skip all characters after the `%` (`.gpf`) and change it with another suffix (`_sift.bed`)
 
-The resulting *_sift.bed file should look as follows:
+<details close>
+<summary>The loop to run the above can be found here</summary>
+<br>
+```
+for file in RD*gpf; do bedtools intersect -b $file -a SusScr11_107_sift_scores_chr1.bed -wb | cut -f 1-8,12-21 > ${file%.gpf}_sift.bed; done
+```
+</details>
+
+The resulting `_sift.bed` files should look as follows:
 ```{bash bed_view, eval=FALSE}
 1	513572	513573	T   1   0.02    1   1   0.0   0.0   1e-05   0.0   0.0   1e-05   0.0   0.99998   1e-05   0.0
 1	513593	513594	T   0.02    1   1   1   0.0   0.0   0.0   4e-05   0.0   0.0    4e-05    0.0   4e-05   0.99988
@@ -133,33 +156,44 @@ The resulting *_sift.bed file should look as follows:
 Note that we have merged the content of the two files side by side here.
 
 Question: Why did we use a cut command after the intersect?
->Hint: run the same command as above without the `cut` part instead use `| less -S`
+> Hint: run the same command as above without the `cut` part instead use `| less -S`
 
 ### Task 3: Calculating mutational load using custom script
 
 The `_sift.bed` file is the input for another script that we will use to calculate the total load per sample. The python script as follows:
 ```{bash load, eval=FALSE}
-python mut_load_calculator_SIFT.py ${FILE%.gpf}_sift.bed ${FILE%.gpf}_0 0
+INPUT=<sample name>_sift.bed
+OUTPUT=<sample name>_0
+python mut_load_calculator_SIFT.py $INPUT $OUTPUT 0
 ```
+Note that we add a `0` after the output and named the output prefix with `_0`
+
+<details close>
+<summary>The loop to run the above can be found here</summary>
+<br>
+```
+for file in RD*_sift.bed; do python mut_load_calculator_SIFT.py $file ${file%_sift.bed}_0 0; done
+```
+</details>
 
 Question (Advanced): Have a look on the command we use to run `mut_load_calculator_SIFT.py` script above. What do you think the argument '0' means? Hint: have a look inside the python script.
 
-The script will output two files 1) `*_sift_scores.txt` and 2) `*_sift_het_scores.txt`. The first contain the homozygous load while the last contain the heterozygous load. We will discuss the content of these files later in the session when are plotting the results.
+The script will output two files 1) `*_0_sift_scores.txt` and 2) `*_0_sift_het_scores.txt`. The first contain the homozygous load while the last contain the heterozygous load. We will discuss the content of these files later in the session when are plotting the results.
 
 ### Task 4: Concatenating the results
 
 As we have one file for each sample, we would like to have them in one file to make it easier to plot the results with R. 
 
-What we will be doing is first concatenate the .txt file with same suffix in one file. For example, all files ending up with *_sift_scores.txt can be concatenated as follows.
+What we will be doing is first concatenate the .txt file with same suffix in one file. For example, all files ending up with `*_0_sift_scores.txt` can be concatenated as follows.
 ```{bash cat, eval=FALSE}
-cat $(ls result/RD*sift_scores.txt | sort -V) | sed 's/result\///' | sed 's/_chr1_sift.bed//' > babirusa_sift_scores.txt
+cat $(ls RD*_0_sift_scores.txt | sort -V) | sed 's/_chr1_sift.bed//' > babirusa_sift_scores.txt
 ```
 
 > Question: What do you think the `sed` command does? Have a look on the resulting file when you remove one of the sed command and compare it with a file which has the entire commands intact.
 
 > Exercise 2
 >
-> Create a new R project for plotting the result of the mutational load run and download the results into a 'input' directory using sftp.
+> Create a new R project for plotting the result of the mutational load run and download the results into a '`input`' directory using sftp as you have done in [last Session](https://github.com/a-karma/Bogor_Workshop/blob/main/DAY_4/Session2.md#task-2-plotting-plink-results-in-r).
 
 ### Task 5: Visualizing homozygous load per population
 
@@ -178,7 +212,7 @@ head(s)
 
 > Exercise 3
 >
-> Merge the metadata with left_join() as in with previous session.
+> Merge the metadata with `left_join()` as in with previous session.
 
 Then we plot a boxplot:
 ```{r plotLoad, eval=FALSE}
@@ -193,7 +227,7 @@ Question: Which population of babirusa has the highest homozygous load? Which ha
 
 Based on what you see with the PSMC and ROH distribution of the babirusa population from four different areas, would you think the abundance of homozygous load make sense here? 
 
-### Challenge (Optional)
+### Optional: Plot heterozygous load
 
 The other file, "`*sift_het_scores.txt`" contain more information on the heterozygous load. This file is automatically generated as part of the script `mut_load_calculator_SIFT.py` when we ran it on Task 3.
 
