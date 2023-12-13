@@ -1,15 +1,12 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
-please do not modify these first two lines of the .md file
 
-use the same syntax to add pictures:
+## Day 5 - Session 1: Modelling gene flow 
 
-placeholder name within square brackets and ../IM/file_name.png within parentheses
 
-## Session Title
-please add a few sentences here to introduce your session of the tutorial.
+### F-statistics
 
-### Example of section title 
+
 ##### Example of sub-section title 
 - this is how you define bullet point
 - in case you want to make more explicit 
