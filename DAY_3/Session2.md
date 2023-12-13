@@ -138,7 +138,7 @@ If you list the content of the directory `/home/DATA/Day_3_b/` you will see a se
 ```
 Have a look for example at the `.map` file which contains all the info about our markers 
 ```sh
-head -5 /home/DATA/Day_3_b/Day_babirusa_panel.map
+head -5 /home/DATA/Day_3_b/babirusa_panel.map
 ```
 or at the .ped file which instead contains genotype information:
 ```sh
