@@ -236,12 +236,15 @@ The final analysis we will run is ADMIXTURE. ADMIXTURE is a software program for
 
 Make a new directory within your project folder for session two and navigate to it
 
-The program `ADMIXTURE` runs directly from a `.bed` file. Great, we already have this in the right format. 
+The program `ADMIXTURE` runs directly from a binary plink fileset. This consists of three file, specifically a `.fam`,`.bim`, and `.bed` file. Note that the latter, although it has the same extension is a completely different file format compare to what you used in day 1 and day2 for `bedtools`. 
+
+have a look at the shared folder:
 ```sh
 ls /home/DATA/Day_3_b/babirusa_panel*
 ```
+you should see that all we need is already there. Great, this time we don't need to convert anything ;) 
 
-So the command is very simple.
+The command to run `ADMIXTURE` is very simple:
 ```sh 
 admixture [path_to_bed] --cv [number_of_ks]
 ```
