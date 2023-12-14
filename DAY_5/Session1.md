@@ -2,9 +2,11 @@
 # Applications of Genomics in Wildlife Conservation
 
 ## Day 5 - Modelling gene flow 
+In this session we will use f-statistics to formally test 
+
+### Introduction
 
 
-### F-statistics
 
 
 ##### Example of sub-section title 
