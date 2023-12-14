@@ -147,7 +147,7 @@ To see which region has the most ROHs, we can merge `rSROH` with `r` and plot th
 r2<-left_join(r,rSROH,by=c("Sample"="Sample"))
   
 ggplot(r2)+
-  geom_boxplot(aes(x=Region,y=SROH/1e6,fill=Region))+
+  geom_boxplot(aes(x=Region,y=SROH*1e3/1e6,fill=Region))+
   labs(x="region",y="Total ROH amount (Mbp)")+
   theme_minimal()
 ```
