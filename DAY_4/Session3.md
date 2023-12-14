@@ -80,13 +80,12 @@ python3 all_genotype_likelihoods_v3.py $INPUT $OUTPUT
 
 > Challenge: Write a bash script to obtain genotype posterior probabilities for all our samples using a loop like you did in Day 2.
 
-<details close>
-<summary>The loop to run the above can be found here</summary>
-<br>
+If you do not feel challenged, just run this loop code:
 ```
-for file in RD*glf; do python3 all_genotype_likelihoods_v3.py $file ${file%.glf}.gpf; done
+for file in RD*glf; do
+python3 all_genotype_likelihoods_v3.py $file ${file%.glf}.gpf;
+done
 ```
-</details>
 
 When you run the files, you will get a decimal numbers that tells you the time it takes to run the script in seconds.
 
@@ -132,13 +131,10 @@ bedtools intersect -b $INPUT1 -a $INPUT2 -wb | cut -f 1-8,12-21 > ${INPUT1%.gpf}
 ```
 Note the `%` part of the output. This is a bash syntax that allows us to skip all characters after the `%` (`.gpf`) and change it with another suffix (`_sift.bed`)
 
-<details close>
-<summary>The loop to run the above can be found here</summary>
-<br>
+This is the loop code:
 ```
 for file in RD*gpf; do bedtools intersect -b $file -a SusScr11_107_sift_scores_chr1.bed -wb | cut -f 1-8,12-21 > ${file%.gpf}_sift.bed; done
 ```
-</details>
 
 The resulting `_sift.bed` files should look as follows:
 ```{bash bed_view, eval=FALSE}
@@ -168,13 +164,10 @@ python mut_load_calculator_SIFT.py $INPUT $OUTPUT 0
 ```
 Note that we add a `0` after the output and named the output prefix with `_0`
 
-<details close>
-<summary>The loop to run the above can be found here</summary>
-<br>
+This is the loop code:
 ```
 for file in RD*_sift.bed; do python mut_load_calculator_SIFT.py $file ${file%_sift.bed}_0 0; done
 ```
-</details>
 
 Question (Advanced): Have a look on the command we use to run `mut_load_calculator_SIFT.py` script above. What do you think the argument '0' means? Hint: have a look inside the python script.
 
@@ -218,7 +211,8 @@ Then we plot a boxplot:
 ```{r plotLoad, eval=FALSE}
 library(ggplot2)
 ggplot(l)+
-  geom_boxplot(aes(x=Region,y=homLoad))+
+  geom_boxplot(aes(x=Region,y=homLoad, fill=Region))+
+  geom_point(aes(x=Region,y=homLoad),size=3)+
   labs(y="homozygous load")+
   theme_minimal()
 ```
