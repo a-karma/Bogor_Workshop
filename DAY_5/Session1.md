@@ -43,6 +43,7 @@ outputformat:    EIGENSTRAT
 genotypeoutname: ./chr10.eigenstratgeno
 snpoutname:      ./chr10.snp
 indivoutname:    ./chr10.ind
+familynames:	NO
 ```
 Now you are ready to convert your file, please run this from `day5_fstat`
 
