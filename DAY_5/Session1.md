@@ -61,10 +61,10 @@ mv chr10.ind_new chr10.ind
 
 In order to calculate our f4 statistics, we need to prepare a configuration file for the program `qpDstat`. Which we will call `dstat.null.par` and should contain:
 ```sh
-genotypeoutname: ./chr10.eigenstratgeno
-snpoutname:      ./chr10.snp
-indivoutname:    ./chr10.ind
-popfilename:     ./par/null_test.txt
+genotypename:  chr10.eigenstratgeno
+snpname:   ./chr10.snp
+indivname:   ./chr10.ind
+popfilename:  ./par/null_test.txt
 f4mode: YES
 ```
 
