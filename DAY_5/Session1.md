@@ -114,7 +114,7 @@ The figure below contains the hypotheses we are testing here and our expection a
 
 Finally to run the test, we simply use: 
 ```sh
-qpDstat -p ./par/dstat.admx.par
+qpDstat -p ./par/dstat.admix.par
 ```
 
 > Exercise two
