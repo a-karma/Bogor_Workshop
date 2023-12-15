@@ -83,6 +83,27 @@ To get the test results we just need to run
 ```sh
 qpDstat -p dstat.null.par
 ```
+> Exercise one
+>
+> Run the test above, do we get the results we were expecting?
+
+Now we are going to use the f4 statistic to test for admixture in RD7. 
+Again we need to prepare the parameter file for the `qpDstat` program and this time we will call it `dstat.admix.par` and should contain:
+```sh
+genotypeoutname: ~/day5_fstat/chr10.eigenstratgeno
+snpoutname:      ~/day5_fstat/chr10.snp
+indivoutname:    ~/day5_fstat/chr10.ind
+popfilename:  ./par/admixture_test.txt
+f4mode: YES
+```
+
+We need to make the par file containing the test again so inside a file called `./par/admixture_test.txt` file we need the following contents:
+```sh
+RD1 RD7 RD3 RD71
+RD56 RD7 RD8 RD17
+RD2 RD7 RD20 RD60
+```
+
 
 
 
