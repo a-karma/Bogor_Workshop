@@ -1,4 +1,4 @@
-![Workshop-logo](../IM/LOGO_new.png)
+d![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
 
 ## Day 5 - Modelling gene flow 
@@ -94,7 +94,7 @@ qpDstat -p dstat.null.par
 > Run the test above, do we get the results we were expecting?
 
 Now we are going to use the f4 statistic to test for admixture in RD7. 
-Again we need to prepare the parameter file for the `qpDstat` program and this time we will call it `d./par/stat.admix.par` and should contain:
+Again we need to prepare the parameter file for the `qpDstat` program and this time we will call it `/par/stat.admix.par` and should contain:
 ```sh
 genotypename: ./chr10.eigenstratgeno
 snpname:      ./chr10.snp
