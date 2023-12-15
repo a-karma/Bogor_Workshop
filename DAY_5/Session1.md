@@ -103,7 +103,13 @@ RD1 RD7 RD3 RD71
 RD56 RD7 RD8 RD17
 RD2 RD7 RD20 RD60
 ```
+The figure below contains the hypotheses we are testing here and our expection about these tests
+![ADMIX_TEST](../IM/admixture-test.png)
 
+Finally to run the test, we simply use: 
+```sh
+qpDstat -p ./par/dstat.admx.par
+```
 
 
 
