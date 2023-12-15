@@ -1,7 +1,13 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
-please do not modify these first two lines of the .md file
-This is the last workshop day
+
+```sh
+mkdir day5_fstatistic
+cd day5_fstatistic
+mkdir par;
+ln -s /home/DATA/Day_5_s1/PANEL/ raw_data
+```
+
 use the same syntax to add pictures:
 
 placeholder name within square brackets and ../IM/file_name.png within parentheses
