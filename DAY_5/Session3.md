@@ -1,7 +1,7 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
 please do not modify these first two lines of the .md file
-
+This is the last workshop day
 use the same syntax to add pictures:
 
 placeholder name within square brackets and ../IM/file_name.png within parentheses
