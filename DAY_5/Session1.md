@@ -36,15 +36,15 @@ cd ..
 
 Then inside the `convertf.par` file you need to include the following:
 ```sh
-genotypename:  ~/day5_fstat/raw_data/chr10.ped
-snpname:       ~/day5_fstat/raw_data/chr10.map 
-indivname:     ~/day5_fstat/raw_data/chr10.ped
+genotypename:  ./raw_data/chr10.ped
+snpname:       ./raw_data/chr10.map 
+indivname:     ./raw_data/chr10.ped
 outputformat:    EIGENSTRAT
-genotypeoutname: ~/day5_fstat/chr10.eigenstratgeno
-snpoutname:      ~/day5_fstat/chr10.snp
-indivoutname:    ~/day5_fstat/chr10.ind
+genotypeoutname: ./chr10.eigenstratgeno
+snpoutname:      ./chr10.snp
+indivoutname:    ./chr10.ind
 ```
-Now you are ready to convert your file 
+Now you are ready to convert your file, please run this from `day5_fstat`
 
 ```sh
 convertf -p ./par/convertf.par
