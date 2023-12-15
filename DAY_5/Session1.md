@@ -71,7 +71,7 @@ RD71 RD17 RD10 RD2
 RD44 RD2 RD20 RD17
 ```
 As you can see we are running three test (one per line) each involving 4 individuals (we are calculating f4s)
-
+![NULL](../IM/null-test.png)
 
 
 
