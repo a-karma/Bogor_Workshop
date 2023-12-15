@@ -17,7 +17,7 @@ Before we start we should create the directory structure:
 mkdir day5_fstat
 cd day5_fstat
 mkdir par;
-ln -s /home/DATA/Day_5_s1/PANEL/ ~/day5_fstat/raw_data
+ln -s /home/DATA/Day_5_s1/ ~/day5_fstat/raw_data
 ```
 In your `raw_data` folder you should see a plink file set consisting of two files, namely `chr10.ped` and `chr10.map`. In order to use them for our practical we need to convert them into eigenstrat format (like you did on day 3).
 
