@@ -71,13 +71,13 @@ RD71 RD17 RD10 RD2
 RD44 RD2 RD20 RD17
 ```
 As you can see we are running three test (one per line) each involving 4 individuals (we are calculating f4s). The figure below shows the three tests we are specifying in the `./par/null_test.txt` file for the program to run.
+The tests are:
+1. two individuals from Togean (RD17, RD16) and two individuals from southeast(RD1, RD2) 
+2. two individuals from Togean (RD71, RD17) and one north (RD10) and one southeast (RD2)
+3. two individuals from the southeast (RD44, RD2) and one north (RD20) and one togean (RD17)
+For each of the tests we assume that the topology obtained from iqtree is the correct one
+
 ![NULL](../IM/null-test.png)
-
-1. By taking two individuals from Togean (RD17, RD16) and two individuals from southeast(RD1, RD2) 
-2. By taking two individuals from Togean (RD71, RD17) and one north (RD10) and one southeast (RD2)
-3. By taking two individuals from the southeast (RD44, RD2) and one north (RD20) and one togean (RD17)
-For each of the null tests specified we assume that the topology obtained from iqtree is correct
-
 
 
 
