@@ -5,19 +5,15 @@
 In this session we will explore the `admixtool` suite and run some tests using f-statistics.
 
 ### Introduction
+
 ![Workshop-logo](../IM/day5_recap.png)
 
 
 
-##### Example of sub-section title 
-- this is how you define bullet point
-- in case you want to make more explicit 
-- the series of steps required to accomplish a task 
 
-See example below on how to format commands that the participants will have to run
-
+Before we start we should create the directory stracture:
 ```sh
-conda activate Day_1
+
 plink --bfile file_name --recode
 ```
 
