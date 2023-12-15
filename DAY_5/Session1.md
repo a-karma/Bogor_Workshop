@@ -79,6 +79,10 @@ For each of the tests we assume that the topology obtained from iqtree is the co
 
 ![NULL](../IM/null-test.png)
 
+To get the test results we just need to run
+```sh
+qpDstat -p dstat.null.par
+```
 
 
 
