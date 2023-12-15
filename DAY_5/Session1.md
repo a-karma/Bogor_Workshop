@@ -96,9 +96,9 @@ qpDstat -p dstat.null.par
 Now we are going to use the f4 statistic to test for admixture in RD7. 
 Again we need to prepare the parameter file for the `qpDstat` program and this time we will call it `dstat.admix.par` and should contain:
 ```sh
-genotypeoutname: ~/day5_fstat/chr10.eigenstratgeno
-snpoutname:      ~/day5_fstat/chr10.snp
-indivoutname:    ~/day5_fstat/chr10.ind
+genotypename: ./chr10.eigenstratgeno
+snpname:      ./chr10.snp
+indivname:    ./chr10.ind
 popfilename:  ./par/admixture_test.txt
 f4mode: YES
 ```
