@@ -111,5 +111,9 @@ Finally to run the test, we simply use:
 qpDstat -p ./par/dstat.admx.par
 ```
 
+> Exercise two
+>
+> Run the command above, do you think RD7 is really admixed?
+
 
 
