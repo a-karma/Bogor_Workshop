@@ -13,14 +13,17 @@ In this session we will explore the `admixtool` suite and run some tests using f
 
 Before we start we should create the directory stracture:
 ```sh
-
-plink --bfile file_name --recode
+mkdir day5_fstat
+cd day5_fstat
+mkdir par;
+ln -s /home/DATA/Day_5_s1/PANEL/ raw_data
 ```
+In your `raw_data` folder you should see a plink file set consisting of two files, namely `chr10.ped` and `chr10.map`. In order to use them for our practical we need to convert them into eigenstrat format (like you did on day 3).
 
-you can instead use `this syntax` to highlight an in-line command, software name or something you think it's important
-
-see below the syntax for tables:
-
+Let's start preparing the parameter file `~/day5_fstat/par/convertf.par` for conversion:
+```sh
+content here
+```
 | column A | column B |
 | ------ | ------ |
 | row 1a | row 1b |
