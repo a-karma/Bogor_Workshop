@@ -70,9 +70,11 @@ RD17 RD16 RD1 RD2
 RD71 RD17 RD10 RD2
 RD44 RD2 RD20 RD17
 ```
-As you can see we are running three test (one per line) each involving 4 individuals (we are calculating f4s)
+As you can see we are running three test (one per line) each involving 4 individuals (we are calculating f4s). The figure below shows the three tests we are specifying in the `./par/null_test.txt` file for the program to run.
 ![NULL](../IM/null-test.png)
-
+1. By taking two individuals from Togean (RD17, RD16) and two individuals from southeast(RD1, RD2) we expect that they form two clade
+2. By taking two individuals from Togean (RD71, RD17) and one north (RD10) and one southeast (RD2)
+3. By taking two individuals from the southeast (RD44, RD2) and one north (RD20) and one togean (RD17)
 
 
 
