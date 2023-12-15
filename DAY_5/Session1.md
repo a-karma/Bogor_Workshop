@@ -59,7 +59,7 @@ cat chr10.ind | awk 'BEGIN {OFS="\t"};{print $1,"U",$1}' > chr10.ind_new
 rm chr10.ind
 mv chr10.ind_new chr10.ind
 ```
-
+### Null Tests
 In order to calculate our f4 statistics, we need to prepare a configuration file for the program `qpDstat`. Which we will call `./par/dstat.null.par` and should contain:
 ```sh
 genotypename:  chr10.eigenstratgeno
@@ -93,6 +93,7 @@ qpDstat -p dstat.null.par
 >
 > Run the test above, do we get the results we were expecting?
 
+### Test for admixture 
 Now we are going to use the f4 statistic to test for admixture in RD7. 
 Again we need to prepare the parameter file for the `qpDstat` program and this time we will call it `./par/stat.admix.par` and should contain:
 ```sh
