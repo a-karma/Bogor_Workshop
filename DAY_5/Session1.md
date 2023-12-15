@@ -6,6 +6,9 @@ In this session we will explore the `admixtool` suite and run some tests using f
 
 ### Introduction
 
+In day three you should have obtained these results from the PCA, iqtree and admixture analysis
+
+
 ![Workshop-logo](../IM/day5_recap.png)
 
 
