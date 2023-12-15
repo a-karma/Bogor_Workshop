@@ -44,6 +44,11 @@ genotypeoutname: ~/day5_fstat/chr10.eigenstratgeno
 snpoutname:      ~/day5_fstat/chr10.snp
 indivoutname:    ~/day5_fstat/chr10.ind
 ```
+Now you are ready to convert your file 
+
+```sh
+convertf -p ./par/convertf.par
+```
 
 You should now see the standard eigenstrat file set in your day5_fstat directory - three files `.eigenstratgeno`, `.snp`, `.ind`
 Again, like day 3, we need to modify the `.ind` file  
