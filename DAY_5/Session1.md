@@ -71,9 +71,9 @@ f4mode: YES
 Finally we need to specify inside `./par/null_test.txt` file, which test we want to run. 
 Therefore create this file inside the par directory - with the following contents
 ```sh
-RD17 RD16 RD1 RD2
-RD71 RD17 RD10 RD2
-RD44 RD2 RD20 RD17
+RD17:RD17 RD16:RD16 RD1:RD1 RD2:RD2
+RD71:RD71 RD17:RD17 RD10:RD10 RD2:RD2
+RD44:RD44 RD2:RD2 RD20:RD20 RD17:RD17
 ```
 As you can see we are running three test (one per line) each involving 4 individuals (we are calculating f4s). The figure below shows the three tests we are specifying in the `./par/null_test.txt` file for the program to run.
 The tests are:
