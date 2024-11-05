@@ -79,15 +79,10 @@ Advanced population genetics & Metabarcoding for biodiversity.
 - Quatifying admixture proportions.
 
 #### Session 2
-- add some content here please
-- two or three bullet point will suffice
-- see my examples above
-
-#### Session 3
 - Overview of analysis of biodiversity with metabarcoding data
 - Run through of DADA2 pipeline in R
 
-#### Session 4
+#### Session 3
 - Calculating biodiversity metrics from OTU/ASVs in R
 
 
