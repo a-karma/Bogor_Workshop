@@ -8,9 +8,9 @@ Before we start, let's organize yesterday's material and prepare the directory s
 Please connect to the server either via `putty` or via the `ssh` command then run:
 
 ```sh
-cd; mkdir module1; mkdir module2;
-mv ~/session2 ./module1/
-mv ~/project_bash ./module1/
+cd; mkdir day1; mkdir day2;
+mv ~/session2 ./day1/
+mv ~/project_bash ./day1/
 cd day2
 mkdir qc; mkdir bams; mkdir vcfs; mkdir fastqs; mkdir scripts; mkdir lists
 touch what_i_did.txt
