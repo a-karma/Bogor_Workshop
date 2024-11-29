@@ -1,7 +1,7 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
 
-## Module 2 - NGS data processing - Session 1
+## Day 2 - NGS data processing - Session 1
 In this session you will learn how to process genomic data generated with high-throughput sequencing technologies.
 
 Before we start, let's organize yesterday's material and prepare the directory structure for today.
