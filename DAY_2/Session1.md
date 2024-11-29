@@ -1,16 +1,16 @@
 ![Workshop-logo](../IM/LOGO_new.png)
 # Applications of Genomics in Wildlife Conservation
 
-## Day 2 - NGS data processing - Session 1
+## Module 2 - NGS data processing - Session 1
 In this session you will learn how to process genomic data generated with high-throughput sequencing technologies.
 
 Before we start, let's organize yesterday's material and prepare the directory structure for today.
 Please connect to the server either via `putty` or via the `ssh` command then run:
 
 ```sh
-cd; mkdir day1; mkdir day2;
-mv ~/session2 ./day1/
-mv ~/project_bash ./day1/
+cd; mkdir module1; mkdir module2;
+mv ~/session2 ./module1/
+mv ~/project_bash ./module1/
 cd day2
 mkdir qc; mkdir bams; mkdir vcfs; mkdir fastqs; mkdir scripts; mkdir lists
 touch what_i_did.txt
@@ -20,7 +20,7 @@ You should now be in the `~/day2/` directory, run `ls -lh` to ensure that all su
 Let's now create a symbolik link to the directory containing the input data for the tutorial:
 
 ```sh
-ln -s /home/DATA/Day_2/ ./raw_data
+ln -s /home/DATA/module2/ ./raw_data
 ```
 
 Finally, we need to activate the conda environment to access all software we will need:
